@@ -30,6 +30,15 @@ Módulo 1
 - CardView
 - Picasso
 
+Assets
+===
+
+![](https://github.com/Pierry/vertuoguide/raw/main/art/label.png)
+![](https://github.com/Pierry/vertuoguide/raw/main/art/edittext.png)
+![](https://github.com/Pierry/vertuoguide/raw/main/art/button-normal.png)
+![](https://github.com/Pierry/vertuoguide/raw/main/art/button-dark.png)
+![](https://github.com/Pierry/vertuoguide/raw/main/art/card.png)
+
 Material de apoio
 ===
 
