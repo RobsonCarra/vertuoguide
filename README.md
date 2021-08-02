@@ -30,10 +30,15 @@ Módulo 1
 - CardView
 - Picasso
 
-Telas
+Home
 ===
 
 ![](https://github.com/Pierry/vertuoguide/raw/main/art/p1.png)
+
+Detalhes
+===
+
+![](https://github.com/Pierry/vertuoguide/blob/main/art/p2.png)
 
 Assets
 ===
