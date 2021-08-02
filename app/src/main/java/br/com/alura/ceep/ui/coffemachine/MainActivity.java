@@ -16,7 +16,9 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize (true);
         recyclerView.setLayoutManager (new LinearLayoutManager (this));
         CoffeMachineData[] coffeMachineData = new CoffeMachineData[]{
-                new CoffeMachineData ("Ristretto",
+
+                new CoffeMachineData (
+                        "Ristretto",
                         "10",
                         "Intensidade",
                         "É preparado de forma semelhante ao espresso," +
@@ -27,18 +29,21 @@ public class MainActivity extends AppCompatActivity {
                         "Quantidade",
                         "240 ml",
                         R.mipmap.coffe_foreground),
-                new CoffeMachineData ("Capuccino",
-                        "10",
+
+                new CoffeMachineData (
+                        "Capuccino",
+                        "6",
                         "Intensidade",
-                        "É preparado de forma semelhante ao espresso," +
-                                " mas com metade da água e, embora a quantidade de café seja a mesma," +
-                                " uma moagem mais fina é usada para retardar sua extração." +
-                                " A extração é geralmente interrompida por volta dos 15 segundos," +
-                                " em vez dos 25 a 30 segundos do espresso.",
+                        "Cappuccino, pronunciado capuchino," +
+                                " é uma bebida italiana preparada com café expresso e leite." +
+                                " Um cappuccino clássico, muito famoso no Brasil" +
+                                " e consiste em um terço de café expresso," +
+                                " um terço de leite vaporizado e um terço de espuma de leite vaporizado.",
                         "Quantidade",
                         "240 ml",
-                        R.mipmap.coffe_foreground)
+                        R.drawable.capuccino)
         };
+
         CoffeAdapter coffeAdapter = new CoffeAdapter (coffeMachineData, MainActivity.this);
         recyclerView.setAdapter (coffeAdapter);
         coffeAdapter.notifyDataSetChanged();

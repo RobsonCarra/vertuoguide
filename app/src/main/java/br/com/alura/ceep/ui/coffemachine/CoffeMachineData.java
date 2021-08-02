@@ -5,8 +5,12 @@ public class CoffeMachineData {
     private String CoffeIntensity;
     private String CoffeIntensityTitule;
     private String CoffeDescription;
+    private String CoffeSize;
+    private String CoffeSizeTitule;
 
-    public CoffeMachineData (String coffeType, String coffeIntensity, String coffeIntensityTitule, String coffeDescription, String coffeSizeTitule, String coffeSize, Integer coffeImage) {
+
+    public CoffeMachineData (String coffeType, String coffeIntensity, String coffeIntensityTitule,
+                             String coffeDescription, String coffeSizeTitule, String coffeSize, Integer coffeImage) {
         CoffeType = coffeType;
         CoffeIntensity = coffeIntensity;
         CoffeIntensityTitule = coffeIntensityTitule;
@@ -16,7 +20,6 @@ public class CoffeMachineData {
         CoffeImage = coffeImage;
     }
 
-    private String CoffeSizeTitule;
 
     public String getCoffeType () {
         return CoffeType;
@@ -74,6 +77,5 @@ public class CoffeMachineData {
         CoffeImage = coffeImage;
     }
 
-    private String CoffeSize;
     private Integer CoffeImage;
 }
