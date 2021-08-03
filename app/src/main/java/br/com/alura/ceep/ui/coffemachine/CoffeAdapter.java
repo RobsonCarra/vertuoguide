@@ -1,9 +1,12 @@
 package br.com.alura.ceep.ui.coffemachine;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,6 +19,7 @@ public class CoffeAdapter extends RecyclerView.Adapter<CoffeAdapter.ViewHolder> 
 
     CoffeMachineData[] coffeMachineData;
     Context context;
+
 
     public CoffeAdapter (CoffeMachineData[] coffeMachineData, MainActivity activity) {
         this.coffeMachineData = coffeMachineData;
@@ -32,7 +36,6 @@ public class CoffeAdapter extends RecyclerView.Adapter<CoffeAdapter.ViewHolder> 
         return viewHolder;
     }
 
-    @Override
     public void onBindViewHolder (@NonNull @NotNull ViewHolder holder, int position) {
 
         final CoffeMachineData coffeMachineDataList = coffeMachineData[position];
@@ -63,6 +66,12 @@ public class CoffeAdapter extends RecyclerView.Adapter<CoffeAdapter.ViewHolder> 
         public ViewHolder (@NonNull @NotNull View itemView) {
 
             super (itemView);
+            itemView.setOnClickListener (new View.OnClickListener () {
+                @Override
+                public void onClick (View v) {
+                    itemView.getContext ().startActivity (new Intent (itemView.getContext (), DetailActivity.class));
+                }
+            });
             coffeImage = itemView.findViewById (R.id.coffeImagetype);
             textViewDescription = itemView.findViewById (R.id.CoffeDescription);
             textViewType = itemView.findViewById (R.id.CoffeType);
@@ -72,4 +81,5 @@ public class CoffeAdapter extends RecyclerView.Adapter<CoffeAdapter.ViewHolder> 
             textInt = itemView.findViewById (R.id.CoffeIntensity);
         }
     }
+
 }
