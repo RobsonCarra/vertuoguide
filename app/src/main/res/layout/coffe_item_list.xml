@@ -39,7 +39,7 @@
           app:srcCompat="@mipmap/coffe_foreground" />
 
       <TextView
-          android:id="@+id/CoffeType"
+          android:id="@+id/coffeType"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
           android:layout_marginStart="16dp"
@@ -57,18 +57,18 @@
           app:layout_constraintTop_toBottomOf="@+id/coffeImagetype" />
 
       <TextView
-          android:id="@+id/CoffeAvailableQuantity"
+          android:id="@+id/coffeAvailableQuantity"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_marginTop="8dp"
           android:fontFamily="@font/nunito"
           android:text="Available Capsules"
           android:textSize="12sp"
-          app:layout_constraintStart_toStartOf="@+id/CoffeType"
-          app:layout_constraintTop_toBottomOf="@+id/CoffeType" />
+          app:layout_constraintStart_toStartOf="@+id/coffeType"
+          app:layout_constraintTop_toBottomOf="@+id/coffeType" />
 
       <TextView
-          android:id="@+id/CoffeDescription"
+          android:id="@+id/coffeDescription"
           android:layout_width="match_parent"
           android:layout_height="161dp"
           android:layout_marginStart="16dp"
@@ -80,10 +80,10 @@
           android:text="Coffe Description"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toBottomOf="@+id/CoffeAvailableQuantity" />
+          app:layout_constraintTop_toBottomOf="@+id/coffeAvailableQuantity" />
 
       <TextView
-          android:id="@+id/NumberIntensity"
+          android:id="@+id/numberIntensity"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_marginTop="8dp"
@@ -92,12 +92,12 @@
           android:textColor="#070707"
           android:textSize="20sp"
           android:textStyle="bold"
-          app:layout_constraintEnd_toEndOf="@+id/CoffeIntensity"
-          app:layout_constraintStart_toStartOf="@+id/CoffeIntensity"
-          app:layout_constraintTop_toBottomOf="@+id/CoffeDescription" />
+          app:layout_constraintEnd_toEndOf="@+id/coffeIntensityTitule"
+          app:layout_constraintStart_toStartOf="@+id/coffeIntensityTitule"
+          app:layout_constraintTop_toBottomOf="@+id/coffeDescription" />
 
       <TextView
-          android:id="@+id/QtdCoffe"
+          android:id="@+id/qtdCoffe"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_marginTop="8dp"
@@ -109,10 +109,10 @@
           android:textSize="20sp"
           android:textStyle="bold"
           app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintTop_toBottomOf="@+id/CoffeSize" />
+          app:layout_constraintTop_toBottomOf="@+id/coffeSize" />
 
       <TextView
-          android:id="@+id/CoffeIntensity"
+          android:id="@+id/coffeIntensityTitule"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_marginStart="16dp"
@@ -126,10 +126,10 @@
           android:textStyle="bold"
           app:layout_constraintBottom_toBottomOf="parent"
           app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toBottomOf="@+id/NumberIntensity" />
+          app:layout_constraintTop_toBottomOf="@+id/numberIntensity" />
 
       <TextView
-          android:id="@+id/CoffeSize"
+          android:id="@+id/coffeSize"
           android:layout_width="wrap_content"
           android:layout_height="match_parent"
           android:layout_marginTop="8dp"
@@ -138,9 +138,9 @@
           android:textColor="#040404"
           android:textSize="20sp"
           android:textStyle="bold"
-          app:layout_constraintEnd_toEndOf="@+id/QtdCoffe"
-          app:layout_constraintStart_toStartOf="@+id/QtdCoffe"
-          app:layout_constraintTop_toBottomOf="@+id/CoffeDescription" />
+          app:layout_constraintEnd_toEndOf="@+id/qtdCoffe"
+          app:layout_constraintStart_toStartOf="@+id/qtdCoffe"
+          app:layout_constraintTop_toBottomOf="@+id/coffeDescription" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

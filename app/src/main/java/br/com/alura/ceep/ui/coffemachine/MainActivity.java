@@ -1,13 +1,26 @@
 package br.com.alura.ceep.ui.coffemachine;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Parcelable;
+import android.view.View;
+
+import org.parceler.Parcels;
+
+import java.lang.invoke.MethodType;
 
 public class MainActivity extends AppCompatActivity {
 
+    private boolean parcelable;
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate (Bundle savedInstanceState) {
 
@@ -42,7 +55,8 @@ public class MainActivity extends AppCompatActivity {
                                 " um terço de leite vaporizado e um terço de espuma de leite vaporizado.",
                         "Quantidade",
                         "240 ml",
-                        R.drawable.capuccino)
+                        R.drawable.capuccino),
+
         };
 
         CoffeAdapter coffeAdapter = new CoffeAdapter (coffeMachineData, MainActivity.this);
