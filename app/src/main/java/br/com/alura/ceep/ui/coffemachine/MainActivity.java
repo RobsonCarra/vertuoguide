@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
                                 " em vez dos 25 a 30 segundos do espresso.",
                         "Quantidade",
                         "240 ml",
-                        R.mipmap.coffe_foreground),
+                        R.drawable.ristretto),
 
                 new CoffeMachineData (
                         "Capuccino",

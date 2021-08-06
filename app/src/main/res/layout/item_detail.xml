@@ -15,7 +15,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -26,14 +26,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:elevation="2dp"
-                arrow
-                android:navigationIcon="@drawable/whiteleftarrow"
-                app:title="drink"
-                android:titfontFamily="@font/nunito_extrabold"
-                app:titleTextColor="@color/white"
+                android:theme="@style/ToolbarTheme"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                app:navigationIcon="@drawable/whiteleftarrow"
+                app:title="drink"
+                app:titleTextAppearance="@style/TextAppearance.AppCompat.Large"
+                app:titleTextColor="@color/white"
                 tools:targetApi="lollipop" />
 
             <ImageView
@@ -52,9 +52,9 @@
                 android:id="@+id/coffeType"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginLeft="24dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
                 android:fontFamily="@font/nunito_extrabold"
                 android:text="CoffeType"
                 android:textColor="#000000"
@@ -66,9 +66,9 @@
                 android:id="@+id/coffeAvailableQuantity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
                 android:fontFamily="@font/nunito"
                 android:text="Available Capsules"
+                android:textSize="12sp"
                 app:layout_constraintStart_toStartOf="@+id/coffeType"
                 app:layout_constraintTop_toBottomOf="@+id/coffeType" />
 
@@ -76,8 +76,8 @@
                 android:id="@+id/coffeDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginLeft="24dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="24dp"
                 android:layout_marginRight="24dp"
@@ -92,7 +92,7 @@
                 android:id="@+id/numberIntensity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:fontFamily="@font/nunito_extrabold"
                 android:text="CoffeIntensity"
                 android:textColor="#000000"
@@ -137,6 +137,7 @@
                 android:text="Quantity"
                 android:textColor="#000000"
                 android:textSize="14sp"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/coffeSize" />
 
@@ -146,10 +147,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
-                android:layout_marginBottom="32dp"
+                android:layout_marginBottom="16dp"
                 android:fontFamily="@font/nunito_extrabold"
                 android:text="DRINK NOW"
                 android:textColor="#FFFFFF"
@@ -164,4 +165,3 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
