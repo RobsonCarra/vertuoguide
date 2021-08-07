@@ -1,36 +1,23 @@
 package br.com.alura.ceep.ui.coffemachine;
 
-import androidx.annotation.NonNull;
+import android.os.Build;
+import android.os.Bundle;
+
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
-import android.os.Build;
-import android.os.Bundle;
-import android.os.Parcelable;
-import android.view.View;
-
-import org.parceler.Parcels;
-
-import java.lang.invoke.MethodType;
-
 public class MainActivity extends AppCompatActivity {
-
-    private boolean parcelable;
-
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate (Bundle savedInstanceState) {
-
         super.onCreate (savedInstanceState);
         setContentView (R.layout.activity_main);
         RecyclerView recyclerView = findViewById (R.id.recyclerView);
         recyclerView.setHasFixedSize (true);
         recyclerView.setLayoutManager (new LinearLayoutManager (this));
         CoffeMachineData[] coffeMachineData = new CoffeMachineData[]{
-
                 new CoffeMachineData (
                         "Ristretto",
                         "10",
@@ -43,7 +30,6 @@ public class MainActivity extends AppCompatActivity {
                         "Quantidade",
                         "240 ml",
                         R.drawable.ristretto),
-
                 new CoffeMachineData (
                         "Capuccino",
                         "6",
@@ -56,11 +42,9 @@ public class MainActivity extends AppCompatActivity {
                         "Quantidade",
                         "240 ml",
                         R.drawable.capuccino),
-
         };
-
         CoffeAdapter coffeAdapter = new CoffeAdapter (coffeMachineData, MainActivity.this);
         recyclerView.setAdapter (coffeAdapter);
-        coffeAdapter.notifyDataSetChanged();
+        coffeAdapter.notifyDataSetChanged ();
     }
 }

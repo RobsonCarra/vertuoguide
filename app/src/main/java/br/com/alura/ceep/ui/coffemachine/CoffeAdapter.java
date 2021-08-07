@@ -68,11 +68,11 @@ public class CoffeAdapter extends RecyclerView.Adapter<CoffeAdapter.ViewHolder> 
                 public void onClick (View v) {
                     //itemView.getContext ().startActivity (new Intent (itemView.getContext (), DetailActivity.class));
                     int pos = getAdapterPosition ();
-                    if (pos != RecyclerView.NO_POSITION ) {
+                    if (pos != RecyclerView.NO_POSITION) {
                         Bundle bundle = new Bundle ();
                         bundle.putSerializable ("coffe", coffeMachineData[pos]);
                         bundle.putString ("nome", coffeMachineData[pos].getCoffeDescription ());
-                        Intent intent = new Intent (context, DetailActivity.class );
+                        Intent intent = new Intent (context, DetailActivity.class);
                         intent.putExtras (bundle);
                         context.startActivity (intent);
                     }

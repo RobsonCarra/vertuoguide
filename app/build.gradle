@@ -6,8 +6,10 @@ apply plugin: 'kotlin-android'
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
+    android.defaultConfig.vectorDrawables.useSupportLibrary = true in
 
-    defaultConfig {
+
+            defaultConfig {
         applicationId "br.com.alura.ceep.ui.coffemachine"
         minSdkVersion 16
         targetSdkVersion 30
@@ -39,9 +41,14 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     implementation "androidx.core:core-ktx:1.6.0"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-
     implementation 'org.parceler:parceler-api:1.1.12'
     annotationProcessor 'org.parceler:parceler-api:1.1.12'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    //The rest of the dependencies here
+    // Kotlin
+    implementation "androidx.navigation:navigation-fragment-ktx:2.3.5"
+    implementation "androidx.navigation:navigation-ui-ktx:2.3.5"
+
 }
 repositories {
     mavenCentral()
