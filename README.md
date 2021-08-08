@@ -40,6 +40,11 @@ Detalhes
 
 ![](https://github.com/Pierry/vertuoguide/blob/main/art/p2.png)
 
+Estoque
+===
+![](https://github.com/Pierry/vertuoguide/blob/main/art/p3.png)
+![](https://github.com/Pierry/vertuoguide/blob/main/art/p4.png)
+
 Assets
 ===
 
