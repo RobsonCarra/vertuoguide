@@ -42,8 +42,8 @@ Detalhes
 
 Estoque
 ===
-![](https://github.com/Pierry/vertuoguide/blob/main/art/p3.png)
-![](https://github.com/Pierry/vertuoguide/blob/main/art/p4.png)
+![](https://github.com/Pierry/vertuoguide/blob/main/art/p5.png)
+![](https://github.com/Pierry/vertuoguide/blob/main/art/p6.png)
 
 Assets
 ===
