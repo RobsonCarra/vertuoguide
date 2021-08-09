@@ -37,6 +37,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:fontFamily="@font/nunito_extrabold"
+        style="?android:attr/borderlessButtonStyle"
         android:text="Coffee now"
         android:textAllCaps="false"
         android:textColor="#000000"
@@ -57,7 +58,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:navGraph="@navigation/nav_graph" />
 
-
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigatin_view"
         android:layout_width="0dp"
@@ -69,5 +69,4 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:menu="@menu/bottom_nav" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
