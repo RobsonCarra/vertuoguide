@@ -26,7 +26,6 @@ public class CoffeMachineData implements Serializable {
         CoffeImage = coffeImage;
     }
 
-
     protected CoffeMachineData (Parcel in) {
         CoffeType = in.readString ();
         CoffeIntensity = in.readString ();
@@ -38,21 +37,6 @@ public class CoffeMachineData implements Serializable {
             CoffeImage = null;
         } else {
             CoffeImage = in.readInt ();
-        }
-    }
-
-    public void writeToParcel (Parcel dest, int flags) {
-        dest.writeString (CoffeType);
-        dest.writeString (CoffeIntensity);
-        dest.writeString (CoffeIntensityTitule);
-        dest.writeString (CoffeDescription);
-        dest.writeString (CoffeSize);
-        dest.writeString (CoffeSizeTitule);
-        if (CoffeImage == null) {
-            dest.writeByte ((byte) 0);
-        } else {
-            dest.writeByte ((byte) 1);
-            dest.writeInt (CoffeImage);
         }
     }
 

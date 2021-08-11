@@ -46,5 +46,5 @@ public class MainActivity extends AppCompatActivity {
         CoffeAdapter coffeAdapter = new CoffeAdapter (coffeMachineData, MainActivity.this);
         recyclerView.setAdapter (coffeAdapter);
         coffeAdapter.notifyDataSetChanged ();
-    }
-}
+} };
+

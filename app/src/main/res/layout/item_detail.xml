@@ -166,8 +166,7 @@
                 app:layout_constraintCircleRadius="40dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/quantityTitule"
-                app:layout_constraintVertical_bias="1.0" />
+                app:layout_constraintTop_toBottomOf="@+id/quantityTitule" />
 
             <ImageView
                 android:id="@+id/imageView3"

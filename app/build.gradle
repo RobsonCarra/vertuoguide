@@ -10,14 +10,14 @@ android {
 
 
             defaultConfig {
-        applicationId "br.com.alura.ceep.ui.coffemachine"
-        minSdkVersion 16
-        targetSdkVersion 30
-        versionCode 1
-        versionName "1.0"
+                applicationId "br.com.alura.ceep.ui.coffemachine"
+                minSdkVersion 16
+                targetSdkVersion 30
+                versionCode 1
+                versionName "1.0"
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-    }
+                testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+            }
 
     buildTypes {
         release {
@@ -48,6 +48,8 @@ dependencies {
     // Kotlin
     implementation "androidx.navigation:navigation-fragment-ktx:2.3.5"
     implementation "androidx.navigation:navigation-ui-ktx:2.3.5"
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+    implementation 'com.mikhaellopez:circularimageview:4.3.0'
 
 }
 repositories {

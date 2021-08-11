@@ -2,8 +2,6 @@ package br.com.alura.ceep.ui.coffemachine;
 
 import android.os.Build;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,12 +16,10 @@ public class DetailActivity extends AppCompatActivity {
     public void onCreate (Bundle savedInstanceState) {
         super.onCreate (savedInstanceState);
         setContentView (R.layout.item_detail);
-
         androidx.appcompat.widget.Toolbar coffeToolbar = (Toolbar) findViewById (R.id.coffeToolbar);
         setSupportActionBar (coffeToolbar);
         getSupportActionBar ().setDisplayHomeAsUpEnabled (true);
         coffeToolbar.setNavigationOnClickListener (arrow -> onBackPressed ());
-
         TextView coffeType = findViewById (R.id.coffeType);
         TextView coffeDescription = findViewById (R.id.coffeDescription);
         TextView coffeIntensity = findViewById (R.id.numberIntensity);
@@ -31,7 +27,6 @@ public class DetailActivity extends AppCompatActivity {
         TextView coffeIntensityTitule = findViewById (R.id.coffeIntensityTitule);
         TextView coffeQuantityTitule = findViewById (R.id.quantityTitule);
         ImageView coffeImage = findViewById (R.id.coffeImagetype);
-
         Bundle bundle = getIntent ().getExtras ();
         if (bundle != null) {
             CoffeMachineData coffeMachine = (CoffeMachineData) bundle.getSerializable ("coffe");
