@@ -1,6 +1,8 @@
 package br.com.alura.ceep.ui.coffemachine;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,7 +34,6 @@ public class CoffeAdapter extends RecyclerView.Adapter<CoffeAdapter.ViewHolder> 
         return viewHolder;
     }
 
-    @Override
     public void onBindViewHolder (@NonNull @NotNull ViewHolder holder, int position) {
 
         final CoffeMachineData coffeMachineDataList = coffeMachineData[position];
@@ -61,15 +62,30 @@ public class CoffeAdapter extends RecyclerView.Adapter<CoffeAdapter.ViewHolder> 
         TextView textInt;
 
         public ViewHolder (@NonNull @NotNull View itemView) {
-
             super (itemView);
+            itemView.setOnClickListener (new View.OnClickListener () {
+                @Override
+                public void onClick (View v) {
+                    //itemView.getContext ().startActivity (new Intent (itemView.getContext (), DetailActivity.class));
+                    int pos = getAdapterPosition ();
+                    if (pos != RecyclerView.NO_POSITION) {
+                        Bundle bundle = new Bundle ();
+                        bundle.putSerializable ("coffe", coffeMachineData[pos]);
+                        bundle.putString ("nome", coffeMachineData[pos].getCoffeDescription ());
+                        Intent intent = new Intent (context, DetailActivity.class);
+                        intent.putExtras (bundle);
+                        context.startActivity (intent);
+                    }
+                }
+            });
+
             coffeImage = itemView.findViewById (R.id.coffeImagetype);
-            textViewDescription = itemView.findViewById (R.id.CoffeDescription);
-            textViewType = itemView.findViewById (R.id.CoffeType);
-            textViewSize = itemView.findViewById (R.id.CoffeSize);
-            textViewIntensity = itemView.findViewById (R.id.NumberIntensity);
-            textQtd = itemView.findViewById (R.id.QtdCoffe);
-            textInt = itemView.findViewById (R.id.CoffeIntensity);
+            textViewDescription = itemView.findViewById (R.id.coffeDescription);
+            textViewType = itemView.findViewById (R.id.coffeType);
+            textViewSize = itemView.findViewById (R.id.coffeSize);
+            textViewIntensity = itemView.findViewById (R.id.numberIntensity);
+            textQtd = itemView.findViewById (R.id.qtdCoffe);
+            textInt = itemView.findViewById (R.id.coffeIntensityTitule);
         }
     }
 }

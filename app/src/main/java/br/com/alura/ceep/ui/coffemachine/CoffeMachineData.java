@@ -1,13 +1,19 @@
 package br.com.alura.ceep.ui.coffemachine;
 
-public class CoffeMachineData {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import java.io.Serializable;
+
+@org.parceler.Parcel
+
+public class CoffeMachineData implements Serializable {
     private String CoffeType;
     private String CoffeIntensity;
     private String CoffeIntensityTitule;
     private String CoffeDescription;
     private String CoffeSize;
     private String CoffeSizeTitule;
-
 
     public CoffeMachineData (String coffeType, String coffeIntensity, String coffeIntensityTitule,
                              String coffeDescription, String coffeSizeTitule, String coffeSize, Integer coffeImage) {
@@ -20,6 +26,35 @@ public class CoffeMachineData {
         CoffeImage = coffeImage;
     }
 
+    protected CoffeMachineData (Parcel in) {
+        CoffeType = in.readString ();
+        CoffeIntensity = in.readString ();
+        CoffeIntensityTitule = in.readString ();
+        CoffeDescription = in.readString ();
+        CoffeSize = in.readString ();
+        CoffeSizeTitule = in.readString ();
+        if (in.readByte () == 0) {
+            CoffeImage = null;
+        } else {
+            CoffeImage = in.readInt ();
+        }
+    }
+
+    public int describeContents () {
+        return 0;
+    }
+
+    public static final Parcelable.Creator<CoffeMachineData> CREATOR = new Parcelable.Creator<CoffeMachineData> () {
+        @Override
+        public CoffeMachineData createFromParcel (Parcel in) {
+            return new CoffeMachineData (in);
+        }
+
+        @Override
+        public CoffeMachineData[] newArray (int size) {
+            return new CoffeMachineData[size];
+        }
+    };
 
     public String getCoffeType () {
         return CoffeType;

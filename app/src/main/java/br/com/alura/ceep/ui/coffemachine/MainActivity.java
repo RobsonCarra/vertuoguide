@@ -1,14 +1,21 @@
 package br.com.alura.ceep.ui.coffemachine;
 
+import android.os.Build;
+import android.os.Bundle;
+
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.Bundle;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
+import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity {
-
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
+
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate (savedInstanceState);
         setContentView (R.layout.activity_main);
@@ -16,7 +23,6 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize (true);
         recyclerView.setLayoutManager (new LinearLayoutManager (this));
         CoffeMachineData[] coffeMachineData = new CoffeMachineData[]{
-
                 new CoffeMachineData (
                         "Ristretto",
                         "10",
@@ -28,8 +34,7 @@ public class MainActivity extends AppCompatActivity {
                                 " em vez dos 25 a 30 segundos do espresso.",
                         "Quantidade",
                         "240 ml",
-                        R.mipmap.coffe_foreground),
-
+                        R.drawable.ristretto),
                 new CoffeMachineData (
                         "Capuccino",
                         "6",
@@ -41,11 +46,10 @@ public class MainActivity extends AppCompatActivity {
                                 " um terço de leite vaporizado e um terço de espuma de leite vaporizado.",
                         "Quantidade",
                         "240 ml",
-                        R.drawable.capuccino)
+                        R.drawable.capuccino),
         };
-
         CoffeAdapter coffeAdapter = new CoffeAdapter (coffeMachineData, MainActivity.this);
         recyclerView.setAdapter (coffeAdapter);
-        coffeAdapter.notifyDataSetChanged();
-    }
-}
+        coffeAdapter.notifyDataSetChanged ();
+} };
+
