@@ -13,8 +13,8 @@
         <entry key="app/src/main/res/font/nunito.xml" value="0.1" />
         <entry key="app/src/main/res/font/nunito_bold.xml" value="0.1" />
         <entry key="app/src/main/res/font/nunito_extrabold.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/coffe_item_list.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/coffe_item_list.xml" value="0.375" />
       </map>
     </option>
   </component>
