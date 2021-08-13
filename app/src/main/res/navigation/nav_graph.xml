@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
     app:startDestination="@id/homeAction">
-
     <fragment
         android:id="@+id/homeAction"
         android:name="br.com.alura.ceep.ui.coffemachine.presentation.view.HomeFragment"
@@ -15,26 +14,26 @@
             app:destination="@id/favAction" />
     </fragment>
     <fragment
-        android:id="@+id/profileFragment"
-        android:name="br.com.alura.ceep.ui.coffemachine.presentation.view.ProfileFragment"
-        android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
-    <fragment
-        android:id="@+id/settingsFragment"
-        android:name="br.com.alura.ceep.ui.coffemachine.presentation.view.SettingsFragment"
-        android:label="fragment_settings"
-        tools:layout="@layout/fragment_settings">
-        <action
-            android:id="@+id/action_settingsFragment_to_profileFragment"
-            app:destination="@id/profileFragment" />
-    </fragment>
-    <fragment
         android:id="@+id/favAction"
         android:name="br.com.alura.ceep.ui.coffemachine.presentation.view.FavoriteFragment"
         android:label="fragment_favorite"
         tools:layout="@layout/fragment_favorite">
         <action
             android:id="@+id/action_favoriteFragment_to_settingsFragment"
-            app:destination="@id/settingsFragment" />
+            app:destination="@id/setAction" />
     </fragment>
+    <fragment
+        android:id="@+id/setAction"
+        android:name="br.com.alura.ceep.ui.coffemachine.presentation.view.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings">
+        <action
+            android:id="@+id/action_settingsFragment_to_profileFragment"
+            app:destination="@id/profAction" />
+    </fragment>
+    <fragment
+        android:id="@+id/profAction"
+        android:name="br.com.alura.ceep.ui.coffemachine.presentation.view.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile"></fragment>
 </navigation>

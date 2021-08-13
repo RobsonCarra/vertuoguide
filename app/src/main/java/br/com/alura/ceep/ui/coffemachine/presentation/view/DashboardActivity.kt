@@ -24,10 +24,18 @@ class DashboardActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
         supportFragmentManager.beginTransaction().replace(R.id.frame, HomeFragment()).commit()
       }
       R.id.favAction -> {
+        nav.menu.getItem(1).isChecked = true
+        supportFragmentManager.beginTransaction().replace(R.id.frame, FavoriteFragment()).commit()
+      }
+      R.id.setAction -> {
         nav.menu.getItem(2).isChecked = true
+        supportFragmentManager.beginTransaction().replace(R.id.frame, SettingsFragment()).commit()
+      }
+      R.id.profAction -> {
+        nav.menu.getItem(3).isChecked = true
         supportFragmentManager.beginTransaction().replace(R.id.frame, ProfileFragment()).commit()
       }
     }
-    return false
+    return false;
   }
-}
+  }

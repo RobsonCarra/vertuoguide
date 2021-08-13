@@ -9,11 +9,11 @@
         android:icon="@drawable/favorite"
         android:title="" />
     <item
-        android:id="@+id/settingsFragment"
+        android:id="@+id/setAction"
         android:icon="@drawable/plus"
         android:title="" />
     <item
-        android:id="@+id/profileFragment"
+        android:id="@+id/profAction"
         android:icon="@drawable/perfil"
         android:title="" />
 </menu>
