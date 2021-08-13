@@ -1,4 +1,4 @@
-package br.com.alura.ceep.ui.coffemachine;
+package br.com.alura.ceep.ui.coffemachine.presentation.view;
 
 import android.os.Build;
 import android.os.Bundle;
@@ -8,6 +8,8 @@ import android.widget.TextView;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import br.com.alura.ceep.ui.coffemachine.domain.CoffeMachineData;
+import br.com.alura.ceep.ui.coffemachine.R;
 
 public class DetailActivity extends AppCompatActivity {
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)

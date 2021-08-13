@@ -3,25 +3,25 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/homeAction">
 
     <fragment
-        android:id="@+id/homeFragment"
-        android:name="br.com.alura.ceep.ui.coffemachine.HomeFragment"
+        android:id="@+id/homeAction"
+        android:name="br.com.alura.ceep.ui.coffemachine.presentation.view.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home">
+        tools:layout="@layout/home_fragment">
         <action
             android:id="@+id/action_homeFragment_to_favoriteFragment"
-            app:destination="@id/favoriteFragment" />
+            app:destination="@id/favAction" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
-        android:name="br.com.alura.ceep.ui.coffemachine.ProfileFragment"
+        android:name="br.com.alura.ceep.ui.coffemachine.presentation.view.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="br.com.alura.ceep.ui.coffemachine.SettingsFragment"
+        android:name="br.com.alura.ceep.ui.coffemachine.presentation.view.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings">
         <action
@@ -29,8 +29,8 @@
             app:destination="@id/profileFragment" />
     </fragment>
     <fragment
-        android:id="@+id/favoriteFragment"
-        android:name="br.com.alura.ceep.ui.coffemachine.FavoriteFragment"
+        android:id="@+id/favAction"
+        android:name="br.com.alura.ceep.ui.coffemachine.presentation.view.FavoriteFragment"
         android:label="fragment_favorite"
         tools:layout="@layout/fragment_favorite">
         <action

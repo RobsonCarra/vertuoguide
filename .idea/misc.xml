@@ -13,8 +13,13 @@
         <entry key="app/src/main/res/font/nunito.xml" value="0.1" />
         <entry key="app/src/main/res/font/nunito_bold.xml" value="0.1" />
         <entry key="app/src/main/res/font/nunito_extrabold.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.375" />
         <entry key="app/src/main/res/layout/coffe_item_list.xml" value="0.375" />
+        <entry key="app/src/main/res/layout/dashboard_activity.xml" value="0.23703703703703705" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.23703703703703705" />
+        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.296875" />
+        <entry key="app/src/main/res/layout/inventory_activity.xml" value="0.296875" />
+        <entry key="app/src/main/res/menu/bottom_nav.xml" value="0.23703703703703705" />
       </map>
     </option>
   </component>
