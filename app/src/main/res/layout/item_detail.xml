@@ -25,86 +25,91 @@
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/coffeToolbar"
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="56dp"
                 android:elevation="2dp"
                 android:theme="@style/ToolbarTheme"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
-                app:title="drink"
-                app:titleTextAppearance="@style/TextAppearance.AppCompat.Large"
+                app:navigationIcon="@drawable/ic_back"
                 app:titleTextColor="@color/white"
-                tools:targetApi="lollipop" />
+                />
 
             <ImageView
                 android:id="@+id/coffeImagetype"
                 android:layout_width="match_parent"
-                android:layout_height="180dp"
+                android:layout_height="240dp"
                 android:layout_marginBottom="32dp"
                 android:scaleType="centerCrop"
                 app:layout_constraintBottom_toTopOf="@+id/coffeType"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/capuccino" />
+                app:srcCompat="@drawable/capuccino"
+                />
 
             <TextView
                 android:id="@+id/coffeType"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="128dp"
-                android:layout_marginRight="128dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginLeft="24dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="32dp"
                 android:fontFamily="@font/nunito_extrabold"
                 android:text="CoffeType"
                 android:textColor="#000000"
                 android:textSize="20sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintEnd_toStartOf="@+id/imageView3"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/coffeImagetype" />
+                app:layout_constraintTop_toBottomOf="@+id/coffeImagetype"
+                />
 
             <TextView
                 android:id="@+id/coffeAvailableQuantity"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
                 android:fontFamily="@font/nunito"
                 android:text="Available Capsules"
                 android:textSize="12sp"
+                app:layout_constraintEnd_toStartOf="@+id/imageView3"
                 app:layout_constraintStart_toStartOf="@+id/coffeType"
-                app:layout_constraintTop_toBottomOf="@+id/coffeType" />
+                app:layout_constraintTop_toBottomOf="@+id/coffeType"
+                />
 
             <TextView
                 android:id="@+id/coffeDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="16dp"
                 android:layout_marginEnd="24dp"
+                android:layout_marginLeft="24dp"
                 android:layout_marginRight="24dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
                 android:fontFamily="@font/nunito"
-                android:text="Description"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/coffeAvailableQuantity"
-                app:layout_constraintTop_toBottomOf="@+id/coffeAvailableQuantity" />
+                app:layout_constraintTop_toBottomOf="@+id/coffeAvailableQuantity"
+                tools:text="Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed posuere consectetur est at lobortis."
+                />
 
             <TextView
                 android:id="@+id/numberIntensity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="32dp"
                 android:fontFamily="@font/nunito_extrabold"
-                android:text="CoffeIntensity"
                 android:textColor="#000000"
                 android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="@+id/coffeIntensityTitule"
                 app:layout_constraintStart_toStartOf="@+id/coffeIntensityTitule"
-                app:layout_constraintTop_toBottomOf="@+id/coffeDescription" />
+                app:layout_constraintTop_toBottomOf="@+id/coffeDescription"
+                tools:text="8"
+                />
 
             <TextView
                 android:id="@+id/coffeIntensityTitule"
@@ -124,13 +129,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/nunito_extrabold"
-                android:text="CupSize"
                 android:textColor="#000000"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="@+id/numberIntensity"
                 app:layout_constraintEnd_toEndOf="@+id/quantityTitule"
                 app:layout_constraintStart_toStartOf="@+id/quantityTitule"
-                app:layout_constraintTop_toTopOf="@+id/numberIntensity" />
+                app:layout_constraintTop_toTopOf="@+id/numberIntensity"
+                tools:text="100ml"
+                />
 
             <TextView
                 android:id="@+id/quantityTitule"
@@ -148,38 +154,40 @@
 
             <Button
                 android:id="@+id/button2"
-                android:layout_width="300dp"
+                android:layout_width="0dp"
                 android:layout_height="60dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginBottom="8dp"
+                android:layout_marginBottom="24dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginLeft="24dp"
+                android:layout_marginRight="24dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="32dp"
                 android:fontFamily="@font/nunito_extrabold"
                 android:text="DRINK NOW"
                 android:textColor="#FFFFFF"
-                android:textSize="18sp"
-                app:backgroundTint="#58D697"
-                app:cornerRadius="40dp"
+                android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintCircleRadius="40dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/quantityTitule" />
+                app:layout_constraintTop_toBottomOf="@+id/quantityTitule"
+                app:backgroundTint="#58D697"
+                app:cornerRadius="40dp"
+                />
 
             <ImageView
                 android:id="@+id/imageView3"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginRight="16dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginRight="24dp"
                 android:background="@drawable/like_foreground"
                 android:scaleX="1"
                 android:scaleY="1"
                 app:layout_constraintBottom_toBottomOf="@+id/coffeAvailableQuantity"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/coffeType" />
+                app:layout_constraintTop_toTopOf="@+id/coffeType"
+                />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

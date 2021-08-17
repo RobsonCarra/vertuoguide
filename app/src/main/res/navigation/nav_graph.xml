@@ -24,9 +24,9 @@
     </fragment>
     <fragment
         android:id="@+id/setAction"
-        android:name="br.com.alura.ceep.ui.coffemachine.presentation.view.SettingsFragment"
+        android:name="br.com.alura.ceep.ui.coffemachine.presentation.view.InventoryFragment"
         android:label="fragment_settings"
-        tools:layout="@layout/fragment_settings">
+        tools:layout="@layout/inventory_fragment">
         <action
             android:id="@+id/action_settingsFragment_to_profileFragment"
             app:destination="@id/profAction" />

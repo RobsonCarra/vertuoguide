@@ -8,6 +8,7 @@
         <entry key="app/src/main/res/drawable/coffe_capuccino_background.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/coffecapu_background.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/coffecapuc_background.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_baseline_arrow_back_24.xml" value="0.20555555555555555" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/like_background.xml" value="0.127" />
         <entry key="app/src/main/res/font/nunito.xml" value="0.1" />
@@ -18,7 +19,11 @@
         <entry key="app/src/main/res/layout/dashboard_activity.xml" value="0.23703703703703705" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.23703703703703705" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.296875" />
+        <entry key="app/src/main/res/layout/fragment_settings.xml" value="0.296875" />
         <entry key="app/src/main/res/layout/inventory_activity.xml" value="0.296875" />
+        <entry key="app/src/main/res/layout/inventory_fragment.xml" value="0.45" />
+        <entry key="app/src/main/res/layout/inventory_item_list.xml" value="0.23703703703703705" />
+        <entry key="app/src/main/res/layout/item_detail.xml" value="0.375" />
         <entry key="app/src/main/res/menu/bottom_nav.xml" value="0.23703703703703705" />
       </map>
     </option>
