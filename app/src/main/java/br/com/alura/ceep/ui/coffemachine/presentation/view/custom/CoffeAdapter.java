@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import br.com.alura.ceep.ui.coffemachine.R;
 import br.com.alura.ceep.ui.coffemachine.domain.CoffeMachineData;
+import br.com.alura.ceep.ui.coffemachine.domain.CoffeMachineDataItem;
 import br.com.alura.ceep.ui.coffemachine.presentation.view.DetailActivity;
 import org.jetbrains.annotations.NotNull;
 
@@ -18,7 +19,7 @@ public class CoffeAdapter extends RecyclerView.Adapter<CoffeeViewHolder> {
   private Context context;
   CoffeMachineData[] coffeMachineData;
 
-  public CoffeAdapter(CoffeMachineData[] coffeMachineData) {
+  public CoffeAdapter(CoffeMachineDataItem[] coffeMachineData) {
     this.coffeMachineData = coffeMachineData;
   }
 

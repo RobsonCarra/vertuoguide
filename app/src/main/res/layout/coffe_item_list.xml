@@ -43,16 +43,15 @@
 
             <ImageView
                 android:id="@+id/imageView"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginRight="16dp"
-                android:background="@drawable/like_foreground"
+                android:layout_width="30dp"
+                android:layout_height="24dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginRight="24dp"
+                android:background="@drawable/liketest"
                 android:elevation="2dp"
                 app:layout_constraintBottom_toBottomOf="@+id/coffeAvailableQuantity"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/coffeType"
-                />
+                app:layout_constraintTop_toTopOf="@+id/coffeType" />
 
             <TextView
                 android:id="@+id/coffeAvailableQuantity"
