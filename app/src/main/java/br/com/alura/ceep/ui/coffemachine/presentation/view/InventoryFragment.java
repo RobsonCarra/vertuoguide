@@ -1,5 +1,6 @@
 package br.com.alura.ceep.ui.coffemachine.presentation.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,6 +28,8 @@ public class InventoryFragment extends Fragment {
   private Button less;
   private Button save;
   private RecyclerView recyclerView;
+  public static final String EXTRA_REPLY =
+          "com.example.android.Coffe_Machine.REPLY";
 
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -69,8 +72,11 @@ public class InventoryFragment extends Fragment {
     });
     save.setOnClickListener(v -> {
       Toast.makeText(requireContext(), "Salvo com sucesso", Toast.LENGTH_SHORT).show();
-    });
-  }
+        Intent Intent = new Intent();
+          String capsule = amount.getText ().toString();
+          Intent.putExtra (EXTRA_REPLY,capsule);
+        })
+    ;};
 
   private void initList() {
     recyclerView.setHasFixedSize(true);
