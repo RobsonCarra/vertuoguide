@@ -1,28 +1,45 @@
 package br.com.alura.ceep.ui.coffemachine.domain;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.io.Serializable;
+
+@org.parceler.Parcel
 
 public class CoffeMachineDataItem implements Serializable {
     private String CoffeType;
-    private String Capsules;
 
-    public CoffeMachineDataItem (String coffeType, String capsules, Integer coffeImage) {
+    public CoffeMachineDataItem (String coffeType, String coffeIntensity,
+                                 Integer coffeImage) {
         CoffeType = coffeType;
-        Capsules = capsules;
         CoffeImage = coffeImage;
     }
 
-    public void setCapsules (String capsules) {
-        Capsules = capsules;
-    }
-
-    public String getCapsules () {
-        return Capsules;
+    protected CoffeMachineDataItem (Parcel in) {
+        CoffeType = in.readString ();
+        if (in.readByte () == 0) {
+            CoffeImage = null;
+        } else {
+            CoffeImage = in.readInt ();
+        }
     }
 
     public int describeContents () {
         return 0;
     }
+
+    public static final Parcelable.Creator<CoffeMachineDataItem> CREATOR = new Parcelable.Creator<CoffeMachineDataItem> () {
+        @Override
+        public CoffeMachineDataItem createFromParcel (Parcel in) {
+            return new CoffeMachineDataItem (in);
+        }
+
+        @Override
+        public CoffeMachineDataItem[] newArray (int size) {
+            return new CoffeMachineDataItem[size];
+        }
+    };
 
     public String getCoffeType () {
         return CoffeType;
@@ -31,7 +48,6 @@ public class CoffeMachineDataItem implements Serializable {
     public void setCoffeType (String coffeType) {
         CoffeType = coffeType;
     }
-
 
     public Integer getCoffeImage () {
         return CoffeImage;
@@ -42,7 +58,4 @@ public class CoffeMachineDataItem implements Serializable {
     }
 
     private Integer CoffeImage;
-
-    public CoffeMachineDataItem[] newArray (int size) {
-        return new CoffeMachineDataItem[size];
-    }}
+}

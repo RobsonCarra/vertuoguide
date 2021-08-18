@@ -13,9 +13,10 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import br.com.alura.ceep.ui.coffemachine.R;
-import br.com.alura.ceep.ui.coffemachine.domain.CoffeMachineData;
 import br.com.alura.ceep.ui.coffemachine.domain.CoffeMachineDataItem;
 import br.com.alura.ceep.ui.coffemachine.presentation.view.custom.CoffeAdapter;
+import br.com.alura.ceep.ui.coffemachine.presentation.view.custom.ItemAdapter;
+
 import com.google.android.material.textfield.TextInputLayout;
 
 public class InventoryFragment extends Fragment {
@@ -74,18 +75,18 @@ public class InventoryFragment extends Fragment {
   private void initList() {
     recyclerView.setHasFixedSize(true);
     recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
-    CoffeMachineDataItem[] coffeMachineDataItem = new CoffeMachineDataItem[][] {
+    CoffeMachineDataItem[] coffeMachineDataItem = new CoffeMachineDataItem[] {
         new CoffeMachineDataItem(
                 "Ristretto",
                 "",
                 R.drawable.ristretto),
-        new CoffeMachineDataItem(
+        new CoffeMachineDataItem (
                 "Capuccino",
                 "",
-                R.drawable.capuccino)
+                R.drawable.capuccino),
     };
-    CoffeAdapter coffeAdapter = new CoffeAdapter(coffeMachineDataItem);
-    recyclerView.setAdapter(coffeAdapter);
-    coffeAdapter.notifyDataSetChanged();
+    ItemAdapter itemAdapter = new ItemAdapter (coffeMachineDataItem);
+    recyclerView.setAdapter(itemAdapter);
+    itemAdapter.notifyDataSetChanged();
   }
 }
