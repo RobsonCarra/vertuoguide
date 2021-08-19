@@ -1,14 +1,11 @@
 package br.com.alura.ceep.ui.coffemachine.presentation.view.custom;
 
-import android.content.Intent;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 import br.com.alura.ceep.ui.coffemachine.R;
-import br.com.alura.ceep.ui.coffemachine.domain.CoffeMachineData;
-import br.com.alura.ceep.ui.coffemachine.presentation.view.DetailActivity;
+
 import org.jetbrains.annotations.NotNull;
 
 public class CoffeeViewHolder extends RecyclerView.ViewHolder {

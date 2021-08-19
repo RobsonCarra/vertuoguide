@@ -43,14 +43,13 @@ public abstract class CoffeRoomDataBase extends RoomDatabase {
 
             };
 
-    @Override
     public void onOpen (@NonNull SupportSQLiteDatabase db) {
         super.isOpen (db);
         new PopulateDbAsync (INSTANCE).execute ();
     }
 };
 
-private static class PopulateDbAsync extends AsyncTask<Void, Void, Void> {
+private class PopulateDbAsync extends AsyncTask<Void, Void, Void> {
 
     private final CoffesDao mDao;
     String[] coffes = {"x", "y", "z"};

@@ -1,23 +1,37 @@
 package br.com.alura.ceep.ui.coffemachine.presentation.view
 
-import androidx.annotation.WorkerThread
-import java.util.concurrent.Flow
+import android.app.Application
+import android.os.AsyncTask
+import androidx.lifecycle.LiveData
 
-// Declares the DAO as a private property in the constructor. Pass in the DAO
-// instead of the whole database, because you only need access to the DAO
-class CoffesRepository(private val CoffesDao: CoffesDao) {
+class CoffesRepository internal constructor(application: Application?) {
+    private val mnamesDao: CoffesDao
+    private val mquantityDao: CoffesDao
+    val allNames: LiveData<List<Coffes>>
+    val allCapsules: LiveData<List<Coffes>>
 
-    // Room executes all queries on a separate thread.
-    // Observed Flow will notify the observer when the data has changed.
-    val allCaps: Flow<List<Coffes>> = CoffesDao.allCapsules();
-    val allNames: Flow<List<Coffes>> = CoffesDao.allNames();
+    fun insert(coffes: Coffes?) {
+        insertAsyncTask(mnamesDao).execute(coffes)
+    }
 
-    // By default Room runs suspend queries off the main thread, therefore, we don't need to
-    // implement anything else to ensure we're not doing long running database work
-    // off the main thread.
-    @Suppress("RedundantSuspendModifier")
-    @WorkerThread
-    suspend fun insert(coffes: Coffes) {
-        CoffesDao.insert(coffes)
+    fun insert(coffes: Coffes?) {
+        insertAsyncTask(mquantityDao).execute(coffes)
+    }
+
+    private class insertAsyncTask internal constructor(private val mAsyncTaskDao: CoffesDao) :
+        AsyncTask<Coffes?, Void?, Void?>() {
+        fun execute(coffes: Coffes?) {}
+        protected override fun doInBackground(vararg params: Coffes): Void? {
+            mAsyncTaskDao.insert(params[0])
+            return null
+        }
+    }
+
+    init {
+        val db = CoffeRoomDataBase.getDatabase(application)
+        mnamesDao = db.coffesDao()
+        mquantityDao = db.coffesDao()
+        allNames = mnamesDao.allNames
+        allCapsules = mquantityDao.allCapsules
     }
 }
