@@ -8,7 +8,6 @@ import androidx.room.PrimaryKey
 class Coffes (
     @PrimaryKey(autoGenerate = true) var id: Long,
     var name: String,
-    var description:
     var capsules: Long
 )
 //    @PrimaryKey var uid = 0

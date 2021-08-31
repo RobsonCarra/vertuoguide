@@ -30,13 +30,13 @@ class DetailActivity : AppCompatActivity() {
         val bundle = intent.extras
         if (bundle != null) {
             val coffeMachine = bundle.getSerializable("coffe") as CoffeMachineData?
-            coffeType.text = coffeMachine!!.coffeType
-            coffeDescription.text = coffeMachine.coffeDescription
-            coffeSize.text = coffeMachine.coffeSize
-            coffeIntensityTitule.text = coffeMachine.coffeIntensityTitule
-            coffeQuantityTitule.text = coffeMachine.coffeSizeTitule
-            coffeIntensity.text = coffeMachine.coffeIntensity
-            coffeImage.setImageResource(coffeMachine.coffeImage)
+            coffeType.text = coffeMachine!!.Coffetype
+            coffeDescription.text = coffeMachine.CoffeDescription
+            coffeSize.text = coffeMachine.CoffeSize
+            coffeIntensityTitule.text = coffeMachine.CoffeIntensityTitule
+            coffeQuantityTitule.text = coffeMachine.CoffeSizeTitule
+            coffeIntensity.text = coffeMachine.CoffeIntensity
+            coffeImage.setImageResource(coffeMachine.CoffeImage)
         }
     }
 }
