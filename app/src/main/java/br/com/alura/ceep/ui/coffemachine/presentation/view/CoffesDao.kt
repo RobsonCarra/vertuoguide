@@ -1,6 +1,5 @@
 package br.com.alura.ceep.ui.coffemachine.presentation.view
 
-import androidx.lifecycle.LiveData
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy

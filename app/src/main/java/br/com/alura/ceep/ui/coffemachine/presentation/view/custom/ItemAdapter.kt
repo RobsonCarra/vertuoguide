@@ -6,6 +6,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import br.com.alura.ceep.ui.coffemachine.R
 import br.com.alura.ceep.ui.coffemachine.domain.CoffeMachineDataItem
+import br.com.alura.ceep.ui.coffemachine.presentation.view.Coffes
+import java.nio.charset.Charset
 
 class ItemAdapter(var coffeMachineDataItem: Array<CoffeMachineDataItem>) :
     RecyclerView.Adapter<ItemViewHolder>() {
@@ -18,9 +20,9 @@ class ItemAdapter(var coffeMachineDataItem: Array<CoffeMachineDataItem>) :
     }
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-        val coffeMachineDataList = coffeMachineDataItem[position]
-        holder.textViewType.text = coffeMachineDataList.CoffeType
-        holder.coffeImage.setImageResource(coffeMachineDataList.CoffeImage)
+        val coffeMachineDataItem = CoffeMachineDataItem[position]
+        holder.textViewType.text = coffeMachineDataItem.name
+        holder.coffeImage.setImageResource(coffeMachineDataItem.image)
     }
 
     override fun getItemCount(): Int {

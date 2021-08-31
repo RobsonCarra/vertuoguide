@@ -80,12 +80,10 @@ class InventoryFragment : Fragment() {
         val coffeMachineDataItem = arrayOf(
             CoffeMachineDataItem(
                 "Ristretto",
-                "",
                 R.drawable.ristretto
             ),
             CoffeMachineDataItem(
                 "Capuccino",
-                "",
                 R.drawable.capuccino
             )
         )

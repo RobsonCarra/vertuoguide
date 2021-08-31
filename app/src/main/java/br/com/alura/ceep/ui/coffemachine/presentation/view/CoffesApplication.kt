@@ -7,8 +7,8 @@ class CoffesApplication : Application() {
     private val database by lazy {
         CoffesRoomDataBase.getDatabase(this)
     }
-     val coffesRepository by lazy {
-         CoffesRepository(database.coffesDao())
+    val coffesRepository by lazy {
+        CoffesRepository(database.coffesDao())
     }
 }
 

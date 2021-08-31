@@ -6,21 +6,17 @@ import java.io.Serializable
 class CoffeMachineData : Serializable {
     var Coffetype: String?
     var CoffeIntensity: String?
-    var CoffeIntensityTitule: String?
     var CoffeDescription: String?
     var CoffeSize: String?
-    var CoffeSizeTitule: String?
     var CoffeImage: Int
 
     constructor(
-        coffeType: String?, coffeIntensity: String?, coffeIntensityTitule: String?,
-        coffeDescription: String?, coffeSizeTitule: String?, coffeSize: String?, coffeImage: Int
+        coffeType: String?, coffeIntensity: String?,
+        coffeDescription: String?, coffeSize: String?, coffeImage: Int
     ) {
         Coffetype = coffeType
         CoffeIntensity = coffeIntensity
-        CoffeIntensityTitule = coffeIntensityTitule
         CoffeDescription = coffeDescription
-        CoffeSizeTitule = coffeSizeTitule
         CoffeSize = coffeSize
         CoffeImage = coffeImage
     }

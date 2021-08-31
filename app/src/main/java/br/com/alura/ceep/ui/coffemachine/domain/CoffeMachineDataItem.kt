@@ -3,17 +3,17 @@ package br.com.alura.ceep.ui.coffemachine.domain
 import android.widget.ImageView
 import java.io.Serializable
 
-class CoffeMachineDataItem : Serializable {
-    var CoffeType: String?
+class CoffeMachineDataItem  (
+    var CoffeType: String?,
     var CoffeImage: Int
-
-    constructor(
-        coffeType: String?, coffeIntensity: String?,
-        coffeImage: Int
-    ) {
-        CoffeType = coffeType
-        CoffeImage = coffeImage
-    }
+)
+//    constructor(
+//        coffeType: String?, coffeIntensity: String?,
+//        coffeImage: Int
+//    ) {
+//        CoffeType = coffeType
+//        CoffeImage = coffeImage
+//    }
 
 //    protected constructor(`in`: Parcel) {
 //        coffeType = `in`.readString()
@@ -40,4 +40,3 @@ class CoffeMachineDataItem : Serializable {
 //                }
 //            }
 //    }
-}

@@ -9,9 +9,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import br.com.alura.ceep.ui.coffemachine.R
 import br.com.alura.ceep.ui.coffemachine.domain.CoffeMachineData
+import br.com.alura.ceep.ui.coffemachine.presentation.view.Coffes
 import br.com.alura.ceep.ui.coffemachine.presentation.view.DetailActivity
 
-class CoffeAdapter(var coffeMachineData: Array<CoffeMachineData>) :
+class CoffeAdapter( var coffe: ArrayList<Coffes>) :
     RecyclerView.Adapter<CoffeeViewHolder>() {
     private var context: Context? = null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CoffeeViewHolder {
@@ -23,24 +24,24 @@ class CoffeAdapter(var coffeMachineData: Array<CoffeMachineData>) :
 
     override fun onBindViewHolder(holder: CoffeeViewHolder, position: Int) {
         holder.itemView.setOnClickListener { v: View? ->
-            val bundle = Bundle()
-            bundle.putSerializable("coffe", coffeMachineData[position])
-            bundle.putString("nome", coffeMachineData[position].CoffeDescription)
+//            val bundle = Bundle()
+//            bundle.putSerializable("coffe", coffeMachineData[position])
+//            bundle.putString("nome", coffeMachineData[position].CoffeDescription)
             val intent = Intent(context, DetailActivity::class.java)
-            intent.putExtras(bundle)
+//            intent.putExtras(bundle)
             context!!.startActivity(intent)
         }
-        val coffeMachineDataList = coffeMachineData[position]
-        holder.textViewDescription.text = coffeMachineDataList.CoffeDescription
-        holder.textViewSize.text = coffeMachineDataList.CoffeSize
-        holder.textQtd.text = coffeMachineDataList.CoffeSizeTitule
-        holder.textViewIntensity.text = coffeMachineDataList.CoffeIntensity
-        holder.textInt.text = coffeMachineDataList.CoffeIntensityTitule
-        holder.textViewType.text = coffeMachineDataList.Coffetype
-        holder.coffeImage.setImageResource(coffeMachineDataList.CoffeImage)
+        val coffeList = coffe[position]
+        holder.textViewDescription.text = coffeList.description
+        holder.textViewSize.text = coffeList.quantity
+//        holder.textQtd.text = c.CoffeSizeTitule
+        holder.textViewIntensity.text = coffeList.intensity
+//        holder.textInt.text = coffeMachineDataList.CoffeIntensityTitule
+        holder.textViewType.text = coffeList.name
+        holder.coffeImage.setImageResource(coffeList.image)
     }
 
     override fun getItemCount(): Int {
-        return coffeMachineData.size
+        return coffe.size
     }
 }
