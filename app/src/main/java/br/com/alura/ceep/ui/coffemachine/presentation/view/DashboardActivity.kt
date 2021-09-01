@@ -10,13 +10,14 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class DashboardActivity : AppCompatActivity(),
     BottomNavigationView.OnNavigationItemSelectedListener {
+//    private val viewModel: CoffesViewModel by viewModels {
+//        CoffesViewModel.CoffesViewModelFactory(
+//            (application as CoffesApplication).coffesRepository
+//        )
+//    }
 
-    private val nav: BottomNavigationView by lazy { findViewById(R.id.navigation) }
-
-    private val viewModel: CoffesViewModel by viewModels {
-        CoffesViewModel.CoffesViewModelFactory(
-            (application as CoffesApplication).coffesRepository
-        )
+    private val nav: BottomNavigationView by lazy {
+        findViewById(R.id.navigation)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,6 +25,10 @@ class DashboardActivity : AppCompatActivity(),
         setContentView(R.layout.dashboard_activity)
         nav.setOnNavigationItemSelectedListener(this)
         supportFragmentManager.beginTransaction().replace(R.id.frame, HomeFragment()).commit()
+
+//        viewModel.list.observe(this) { ok ->
+//            viewModel.getAllCoffes()
+//        }
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {

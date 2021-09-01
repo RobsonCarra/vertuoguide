@@ -25,5 +25,4 @@ class CoffeeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         textQtd = itemView.findViewById(R.id.qtdCoffe)
         textInt = itemView.findViewById(R.id.coffeIntensityTitule)
     }
-
 }

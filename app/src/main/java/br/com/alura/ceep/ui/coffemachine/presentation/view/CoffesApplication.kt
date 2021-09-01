@@ -4,7 +4,7 @@ import android.app.Application
 
 class CoffesApplication : Application() {
 
-    private val database by lazy {
+     val database by lazy {
         CoffesRoomDataBase.getDatabase(this)
     }
     val coffesRepository by lazy {

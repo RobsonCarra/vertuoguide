@@ -1,19 +1,18 @@
 package br.com.alura.ceep.ui.coffemachine.presentation.view
 
-import android.widget.ImageView
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 //@Entity(tableName = "coffes_table")
 @Entity
-class Coffes(
+class Coffes (
     @PrimaryKey(autoGenerate = true) var id: Long,
     var name: String,
     var capsules: Long,
-    var description: String,
-    var quantity: String,
+    var decription: String,
     var intensity: String,
-    var image: Int,
+    var quantity: String,
+    var image: Int
 )
 //    @PrimaryKey var uid = 0
 //    @ColumnInfo(name = "coffe_name")

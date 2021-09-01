@@ -9,10 +9,10 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import br.com.alura.ceep.ui.coffemachine.R
-import br.com.alura.ceep.ui.coffemachine.domain.CoffeMachineDataItem
 import br.com.alura.ceep.ui.coffemachine.presentation.view.custom.ItemAdapter
 import com.google.android.material.textfield.TextInputLayout
 
@@ -22,7 +22,9 @@ class InventoryFragment : Fragment() {
     private var plus: Button? = null
     private var less: Button? = null
     private var save: Button? = null
-    private var recyclerView: RecyclerView? = null
+    private lateinit var recyclerView: RecyclerView
+//    private val viewModel: CoffesViewModel by activityViewModels()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -75,23 +77,34 @@ class InventoryFragment : Fragment() {
     }
 
     private fun initList() {
-        recyclerView!!.setHasFixedSize(true)
-        recyclerView!!.layoutManager = LinearLayoutManager(requireContext())
-        val coffeMachineDataItem = arrayOf(
-            CoffeMachineDataItem(
-                "Ristretto",
-                R.drawable.ristretto
-            ),
-            CoffeMachineDataItem(
-                "Capuccino",
-                R.drawable.capuccino
-            )
-        )
-        val itemAdapter = ItemAdapter(coffeMachineDataItem)
-        recyclerView!!.adapter = itemAdapter
+        val itemAdapter = ItemAdapter()
+        viewModel.list.observe(viewLifecycleOwner) { coffes ->
+//            model.getAllCoffes()
+            itemAdapter.list.addAll(coffes)
+            itemAdapter.notifyDataSetChanged()
+        }
+//        recyclerView.setHasFixedSize(true)
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        recyclerView.adapter = itemAdapter
         itemAdapter.notifyDataSetChanged()
-    }
 
+//        lifecycleScope.launch {
+//            viewModel.getAllUsers()
+//        }
+//        val coffeMachineDataItem = arrayOf(
+//            CoffeMachineDataItem(
+//                "Ristretto",
+//                "",
+//                R.drawable.ristretto
+//            ),
+//            CoffeMachineDataItem(
+//                "Capuccino",
+//                "",
+//                R.drawable.capuccino
+//            )
+
+
+    }
     companion object {
         const val EXTRA_REPLY = "com.example.android.Coffe_Machine.REPLY"
     }
