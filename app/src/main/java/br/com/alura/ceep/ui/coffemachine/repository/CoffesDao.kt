@@ -12,10 +12,10 @@ interface CoffesDao {
     fun save(coffee: Coffee): Int
 
     @Delete
-    fun deleteCoffe(coffee: Coffee): Int
+    fun delete(coffee: Coffee): Int
 
     @Query("SELECT * from Coffee ORDER BY name ASC")
-    fun getAllCoffes(): List<Coffee>
+    fun getAll(): List<Coffee>
 
     @Query("SELECT* from Coffee WHERE id= :id ORDER BY name ASC")
     fun getById(id: Long): List<Coffee>

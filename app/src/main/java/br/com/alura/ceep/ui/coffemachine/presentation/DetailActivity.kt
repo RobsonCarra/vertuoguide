@@ -1,57 +1,90 @@
 package br.com.alura.ceep.ui.coffemachine.presentation
 
+import android.media.Image
 import android.os.Build
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.RecyclerView
 import br.com.alura.ceep.ui.coffemachine.CoffesApplication
 import br.com.alura.ceep.ui.coffemachine.R
+import br.com.alura.ceep.ui.coffemachine.domain.Coffee
+import br.com.alura.ceep.ui.coffemachine.presentation.custom.ItemAdapter
 import br.com.alura.ceep.ui.coffemachine.viewmodel.CoffesViewModel
 import br.com.alura.ceep.ui.coffemachine.viewmodel.CoffesViewModel.CoffesViewModelFactory
+import com.google.android.material.textfield.TextInputLayout
 import kotlinx.coroutines.launch
 
 class DetailActivity : AppCompatActivity() {
 
-  private val viewModel: CoffesViewModel by viewModels {
-    CoffesViewModel.CoffesViewModelFactory(CoffesApplication.repository(this))
-  }
-
-  @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-  public override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    setContentView(R.layout.item_detail)
-    val coffeToolbar = findViewById<View>(R.id.coffeToolbar) as Toolbar
-    setSupportActionBar(coffeToolbar)
-    supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-    coffeToolbar.setNavigationOnClickListener { arrow: View? -> onBackPressed() }
-
-    viewModel.list.observe(this) { users ->
+    private val viewModel: CoffesViewModel by viewModels {
+        CoffesViewModel.CoffesViewModelFactory(CoffesApplication.repository(this))
     }
-    lifecycleScope.launch {
-      viewModel.getAllCoffes()
+    private lateinit var name: TextView
+    private lateinit var description: TextView
+    private lateinit var intensity: TextView
+    private lateinit var size: TextView
+    private lateinit var image: ImageView
+    private lateinit var coffeToolbar: Toolbar
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    public override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.item_detail)
+        setup()
+        listeners()
+        initList()
+        observers()
+        lifecycleScope.launch {
+            viewModel.getAll()
+        }
     }
 
-//        val coffeType = findViewById<TextView>(R.id.coffeType)
-//        val coffeDescription = findViewById<TextView>(R.id.coffeDescription)
-//        val coffeIntensity = findViewById<TextView>(R.id.numberIntensity)
-//        val coffeSize = findViewById<TextView>(R.id.coffeSize)
-////        val coffeIntensityTitule = findViewById<TextView>(R.id.coffeIntensityTitule)
-////        val coffeQuantityTitule = findViewById<TextView>(R.id.quantityTitule)
-//        val coffeImage = findViewById<ImageView>(R.id.coffeImagetype)
-////        val bundle = intent.extras
-////        if (bundle != null) {
-////            val coffeMachine = bundle.getSerializable("coffe") as CoffeMachineData?
-//            coffeType.text = viewModel.
-//            coffeDescription.text = coffes.description
-//            coffeSize.text = coffes.quantity
-////            coffeIntensityTitule.text = coffeMachine.CoffeIntensityTitule
-////            coffeQuantityTitule.text = coffeMachine.CoffeSizeTitule
-//            coffeIntensity.text = coffes.intensity
-//            coffeImage.setImageResource(coffes.image)
-  }
+    private fun setup() {
+        name = findViewById(R.id.coffeType)
+        description = findViewById(R.id.coffeDescription)
+        intensity = findViewById(R.id.numberIntensity)
+        size = findViewById(R.id.coffeSize)
+//        val coffeIntensityTitule = findViewById<TextView>(R.id.coffeIntensityTitule)
+//        val coffeQuantityTitule = findViewById<TextView>(R.id.quantityTitule)
+        image = findViewById(R.id.coffeImagetype)
+        coffeToolbar = findViewById(R.id.coffeToolbar)
+        setSupportActionBar(coffeToolbar)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        val bundle = intent.extras
+        if (bundle != null) {
+            val coffee = bundle.getParcelable("coffe") as Coffee?
+            name.text = coffee?.name
+            description.text = coffee?.description
+            size.text = coffee?.quantity
+//            coffeIntensityTitule.text = coffeMachine.CoffeIntensityTitule
+//            coffeQuantityTitule.text = coffeMachine.CoffeSizeTitule
+            intensity.text = coffee?.intensity
+            image.setImageResource(coffee!!.image)
+        }
+    }
+
+    private fun listeners() {
+        coffeToolbar.setNavigationOnClickListener { arrow: View? ->
+            onBackPressed()
+        }
+    }
+
+    private fun initList() {
+
+    }
+
+    private fun observers() {
+        viewModel.list.observe(this) { coffes ->
+        }
+    }
+
 }

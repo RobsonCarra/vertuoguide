@@ -27,7 +27,11 @@ class CoffeeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         textInt = itemView.findViewById(R.id.coffeIntensityTitule)
     }
 
-    fun bind(coffee: Coffee){
-
+    fun bind(coffee: Coffee) {
+        coffeImage.setImageResource(coffee.image)
+        textViewDescription.text = coffee.description
+        textViewType.text = coffee.name
+        textViewSize.text = coffee.quantity
+        textViewIntensity.text = coffee.intensity
     }
 }

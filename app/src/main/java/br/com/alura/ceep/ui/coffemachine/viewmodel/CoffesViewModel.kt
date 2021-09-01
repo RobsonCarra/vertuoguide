@@ -20,21 +20,21 @@ class CoffesViewModel(
     val updated = MutableLiveData<Boolean>(true)
     val deleted = MutableLiveData<Coffee>()
 
-    fun getAllCoffes() {
+    fun getAll() {
         viewModelScope.launch(Dispatchers.IO) {
-            val coffes = coffesRepository.get()
+            val coffes = coffesRepository.getAll()
             list.postValue(coffes)
         }
     }
 
     fun getById(id: Long) {
         viewModelScope.launch(Dispatchers.IO) {
-            val coffes = coffesRepository.getSpecicCoffe(id)
+            val coffes = coffesRepository.getById(id)
             filteredById.postValue(coffes)
         }
     }
 
-    fun addCoffe(coffee: Coffee) {
+    fun add(coffee: Coffee) {
         viewModelScope.launch(Dispatchers.IO) {
             val saved = coffesRepository.save(coffee)
             if (saved) {
@@ -43,7 +43,7 @@ class CoffesViewModel(
         }
     }
 
-    fun updateCoffe(coffee: Coffee) {
+    fun update(coffee: Coffee) {
         viewModelScope.launch(Dispatchers.IO) {
             val update = coffesRepository.save(coffee)
             if (update) {
@@ -52,7 +52,7 @@ class CoffesViewModel(
         }
     }
 
-    fun deleteCoffe(coffee: Coffee) {
+    fun delete(coffee: Coffee) {
         viewModelScope.launch(Dispatchers.IO) {
             val excluded = coffesRepository.delete(coffee)
             if (excluded) {

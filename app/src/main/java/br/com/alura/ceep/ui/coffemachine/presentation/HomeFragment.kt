@@ -6,43 +6,68 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import br.com.alura.ceep.ui.coffemachine.CoffesApplication
 import br.com.alura.ceep.ui.coffemachine.R
+import br.com.alura.ceep.ui.coffemachine.presentation.custom.CoffeAdapter
+import br.com.alura.ceep.ui.coffemachine.presentation.custom.ItemAdapter
 import br.com.alura.ceep.ui.coffemachine.viewmodel.CoffesViewModel
+import kotlinx.coroutines.launch
+import java.lang.reflect.Type
+import java.nio.file.Files.list
+import java.util.Collections.list
 
 class HomeFragment() : Fragment() {
 
-  private lateinit var recyclerView: RecyclerView;
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var coffeAdapter: CoffeAdapter
 
-  private val viewModel: CoffesViewModel by viewModels {
-    CoffesViewModel.CoffesViewModelFactory(CoffesApplication.repository(requireContext()))
-  }
+    private val viewModel: CoffesViewModel by viewModels {
+        CoffesViewModel.CoffesViewModelFactory(CoffesApplication.repository(requireContext()))
+    }
 
-  override fun onCreateView(
-    inflater: LayoutInflater, container: ViewGroup?,
-    savedInstanceState: Bundle?
-  ): View? {
-    return inflater.inflate(R.layout.home_fragment, container, false)
-  }
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return inflater.inflate(R.layout.home_fragment, container, false)
+    }
 
-  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    super.onViewCreated(view, savedInstanceState)
-    setup(view)
-    recyclerView.setHasFixedSize(true)
-    recyclerView.layoutManager = LinearLayoutManager(requireContext())
-    listeners()
-    load()
-  }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setup(view)
+        listeners()
+        initList()
+        observers()
+        load()
+        lifecycleScope.launch {
+            viewModel.getAll()
+        }
+    }
 
-  private fun listeners() {
-  }
+    private fun listeners() {
+    }
 
-  private fun setup(view: View) {
-    recyclerView = view.findViewById(R.id.recyclerView)
-  }
+    private fun setup(view: View) {
+        recyclerView = view.findViewById(R.id.recyclerView)
 
-  private fun load() {
-  }
+    }
+
+    private fun observers() {
+        viewModel.list.observe(viewLifecycleOwner) { coffes ->
+            coffeAdapter.list.addAll(coffes)
+            coffeAdapter.notifyDataSetChanged()
+        }
+    }
+
+    private fun initList() {
+        recyclerView.setHasFixedSize(true)
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        recyclerView.adapter = coffeAdapter
+    }
+
+    private fun load() {
+    }
 }

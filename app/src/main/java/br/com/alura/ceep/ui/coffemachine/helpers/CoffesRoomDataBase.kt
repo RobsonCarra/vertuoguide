@@ -27,13 +27,15 @@ abstract class CoffesRoomDataBase : RoomDatabase() {
                     val coffesDao = database.coffesDao()
                     database.clearAllTables()
                     coffesDao.save(
-                      Coffee(11,
-                        "Cabloco",
-                        0,
-                        "xx",
-                        "10",
-                        "1",
-                        drawable.capuccino)
+                        Coffee(
+                            11,
+                            "Cabloco",
+                            0,
+                            "xx",
+                            "10",
+                            "1",
+                            drawable.capuccino
+                        )
                     )
                 }
             }
@@ -53,7 +55,7 @@ abstract class CoffesRoomDataBase : RoomDatabase() {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     CoffesRoomDataBase::class.java,
-                    "User_db1"
+                    "Coffe_db"
                 ).addCallback(CoffesRoomDataBaseCallBack()).build()
                 INSTANCE = instance
                 // return instance

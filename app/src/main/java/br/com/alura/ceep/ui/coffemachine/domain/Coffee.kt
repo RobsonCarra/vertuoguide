@@ -5,13 +5,14 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import kotlinx.parcelize.Parcelize
 
-@Entity @Parcelize
+@Entity
+@Parcelize
 class Coffee(
-  @PrimaryKey(autoGenerate = true) var id: Long,
-  var name: String,
-  var capsules: Long,
-  var decription: String,
-  var intensity: String,
-  var quantity: String,
-  var image: Int
+    @PrimaryKey(autoGenerate = true) var id: Long,
+    var name: String,
+    var capsules: Long,
+    var description: String,
+    var intensity: String,
+    var quantity: String,
+    var image: Int
 ) : Parcelable
