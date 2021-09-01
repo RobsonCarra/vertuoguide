@@ -23,9 +23,7 @@ import kotlinx.coroutines.launch
 class InventoryFragment : Fragment() {
 
   private val viewModel: CoffesViewModel by viewModels {
-    CoffesViewModel.CoffesViewModelFactory(
-      (context?.applicationContext as CoffesApplication).coffesRepository
-    )
+    CoffesViewModel.CoffesViewModelFactory(CoffesApplication.repository(requireContext()))
   }
 
   private lateinit var itemAdapter: ItemAdapter

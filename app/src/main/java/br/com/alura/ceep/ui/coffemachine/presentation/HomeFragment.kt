@@ -17,9 +17,7 @@ class HomeFragment() : Fragment() {
   private lateinit var recyclerView: RecyclerView;
 
   private val viewModel: CoffesViewModel by viewModels {
-    CoffesViewModel.CoffesViewModelFactory(
-      (context?.applicationContext as CoffesApplication).coffesRepository
-    )
+    CoffesViewModel.CoffesViewModelFactory(CoffesApplication.repository(requireContext()))
   }
 
   override fun onCreateView(

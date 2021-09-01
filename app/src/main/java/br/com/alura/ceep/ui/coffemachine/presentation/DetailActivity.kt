@@ -7,6 +7,7 @@ import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import br.com.alura.ceep.ui.coffemachine.CoffesApplication
 import br.com.alura.ceep.ui.coffemachine.R
@@ -15,26 +16,25 @@ import br.com.alura.ceep.ui.coffemachine.viewmodel.CoffesViewModel.CoffesViewMod
 import kotlinx.coroutines.launch
 
 class DetailActivity : AppCompatActivity() {
-    private val viewModel: CoffesViewModel by viewModels {
-        CoffesViewModelFactory(
-            (application as CoffesApplication).coffesRepository
-        )
+
+  private val viewModel: CoffesViewModel by viewModels {
+    CoffesViewModel.CoffesViewModelFactory(CoffesApplication.repository(this))
+  }
+
+  @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+  public override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    setContentView(R.layout.item_detail)
+    val coffeToolbar = findViewById<View>(R.id.coffeToolbar) as Toolbar
+    setSupportActionBar(coffeToolbar)
+    supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+    coffeToolbar.setNavigationOnClickListener { arrow: View? -> onBackPressed() }
+
+    viewModel.list.observe(this) { users ->
     }
-
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    public override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.item_detail)
-        val coffeToolbar = findViewById<View>(R.id.coffeToolbar) as Toolbar
-        setSupportActionBar(coffeToolbar)
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        coffeToolbar.setNavigationOnClickListener { arrow: View? -> onBackPressed() }
-
-        viewModel.list.observe(this) { users ->
-        }
-        lifecycleScope.launch {
-            viewModel.getAllCoffes()
-        }
+    lifecycleScope.launch {
+      viewModel.getAllCoffes()
+    }
 
 //        val coffeType = findViewById<TextView>(R.id.coffeType)
 //        val coffeDescription = findViewById<TextView>(R.id.coffeDescription)
@@ -53,5 +53,5 @@ class DetailActivity : AppCompatActivity() {
 ////            coffeQuantityTitule.text = coffeMachine.CoffeSizeTitule
 //            coffeIntensity.text = coffes.intensity
 //            coffeImage.setImageResource(coffes.image)
-        }
-    }
+  }
+}
