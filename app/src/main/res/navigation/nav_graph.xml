@@ -6,7 +6,7 @@
     app:startDestination="@id/homeAction">
     <fragment
         android:id="@+id/homeAction"
-        android:name="br.com.alura.ceep.ui.coffemachine.presentation.view.HomeFragment"
+        android:name="br.com.alura.ceep.ui.coffemachine.presentation.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/home_fragment">
         <action
@@ -15,7 +15,7 @@
     </fragment>
     <fragment
         android:id="@+id/favAction"
-        android:name="br.com.alura.ceep.ui.coffemachine.presentation.view.FavoriteFragment"
+        android:name="br.com.alura.ceep.ui.coffemachine.presentation.FavoriteFragment"
         android:label="fragment_favorite"
         tools:layout="@layout/fragment_favorite">
         <action
@@ -24,7 +24,7 @@
     </fragment>
     <fragment
         android:id="@+id/setAction"
-        android:name="br.com.alura.ceep.ui.coffemachine.presentation.view.InventoryFragment"
+        android:name="br.com.alura.ceep.ui.coffemachine.presentation.InventoryFragment"
         android:label="fragment_settings"
         tools:layout="@layout/inventory_fragment">
         <action
@@ -33,7 +33,7 @@
     </fragment>
     <fragment
         android:id="@+id/profAction"
-        android:name="br.com.alura.ceep.ui.coffemachine.presentation.view.ProfileFragment"
+        android:name="br.com.alura.ceep.ui.coffemachine.presentation.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile"></fragment>
 </navigation>

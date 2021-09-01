@@ -1,29 +1,24 @@
-package br.com.alura.ceep.ui.coffemachine.presentation.view
+package br.com.alura.ceep.ui.coffemachine.viewmodel
 
-import android.content.ClipData
-import android.os.Bundle
-import android.view.View
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import br.com.alura.ceep.ui.coffemachine.domain.Coffee
+import br.com.alura.ceep.ui.coffemachine.repository.CoffesRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.nio.channels.Selector
 
 class CoffesViewModel(
 
     private val coffesRepository: CoffesRepository
 
 ) : ViewModel() {
-    val list = MutableLiveData<List<Coffes>>()
-    val filteredById = MutableLiveData<List<Coffes>>()
+    val list = MutableLiveData<List<Coffee>>()
+    val filteredById = MutableLiveData<List<Coffee>>()
     val added = MutableLiveData<Boolean>(false)
     val updated = MutableLiveData<Boolean>(true)
-    val deleted = MutableLiveData<Coffes>()
+    val deleted = MutableLiveData<Coffee>()
 
     fun getAllCoffes() {
         viewModelScope.launch(Dispatchers.IO) {
@@ -39,29 +34,29 @@ class CoffesViewModel(
         }
     }
 
-    fun addCoffe(coffes: Coffes) {
+    fun addCoffe(coffee: Coffee) {
         viewModelScope.launch(Dispatchers.IO) {
-            val saved = coffesRepository.save(coffes)
+            val saved = coffesRepository.save(coffee)
             if (saved) {
                 added.postValue(true)
             }
         }
     }
 
-    fun updateCoffe(coffes: Coffes) {
+    fun updateCoffe(coffee: Coffee) {
         viewModelScope.launch(Dispatchers.IO) {
-            val update = coffesRepository.save(coffes)
+            val update = coffesRepository.save(coffee)
             if (update) {
                 updated.postValue(true)
             }
         }
     }
 
-    fun deleteCoffe(coffes: Coffes) {
+    fun deleteCoffe(coffee: Coffee) {
         viewModelScope.launch(Dispatchers.IO) {
-            val excluded = coffesRepository.delete(coffes)
+            val excluded = coffesRepository.delete(coffee)
             if (excluded) {
-                deleted.postValue(coffes)
+                deleted.postValue(coffee)
             }
         }
     }

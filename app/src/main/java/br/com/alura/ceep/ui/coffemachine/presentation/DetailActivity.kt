@@ -1,22 +1,22 @@
-package br.com.alura.ceep.ui.coffemachine.presentation.view
+package br.com.alura.ceep.ui.coffemachine.presentation
 
 import android.os.Build
 import android.os.Bundle
 import android.view.View
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.lifecycleScope
+import br.com.alura.ceep.ui.coffemachine.CoffesApplication
 import br.com.alura.ceep.ui.coffemachine.R
-import br.com.alura.ceep.ui.coffemachine.domain.CoffeMachineData
+import br.com.alura.ceep.ui.coffemachine.viewmodel.CoffesViewModel
+import br.com.alura.ceep.ui.coffemachine.viewmodel.CoffesViewModel.CoffesViewModelFactory
 import kotlinx.coroutines.launch
 
 class DetailActivity : AppCompatActivity() {
     private val viewModel: CoffesViewModel by viewModels {
-        CoffesViewModel.CoffesViewModelFactory(
+        CoffesViewModelFactory(
             (application as CoffesApplication).coffesRepository
         )
     }

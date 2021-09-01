@@ -1,10 +1,11 @@
-package br.com.alura.ceep.ui.coffemachine.presentation.view.custom
+package br.com.alura.ceep.ui.coffemachine.presentation.custom
 
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import br.com.alura.ceep.ui.coffemachine.R
+import br.com.alura.ceep.ui.coffemachine.domain.Coffee
 
 class CoffeeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
@@ -24,5 +25,9 @@ class CoffeeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         textViewIntensity = itemView.findViewById(R.id.numberIntensity)
         textQtd = itemView.findViewById(R.id.qtdCoffe)
         textInt = itemView.findViewById(R.id.coffeIntensityTitule)
+    }
+
+    fun bind(coffee: Coffee){
+
     }
 }

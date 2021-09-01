@@ -1,16 +1,18 @@
-package br.com.alura.ceep.ui.coffemachine.presentation.view
+package br.com.alura.ceep.ui.coffemachine.helpers
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
-import br.com.alura.ceep.ui.coffemachine.R
+import br.com.alura.ceep.ui.coffemachine.R.drawable
+import br.com.alura.ceep.ui.coffemachine.domain.Coffee
+import br.com.alura.ceep.ui.coffemachine.repository.CoffesDao
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-@Database(entities = [Coffes::class], version = 2, exportSchema = false)
+@Database(entities = [Coffee::class], version = 2, exportSchema = false)
 
 abstract class CoffesRoomDataBase : RoomDatabase() {
 
@@ -24,13 +26,15 @@ abstract class CoffesRoomDataBase : RoomDatabase() {
                 GlobalScope.launch(Dispatchers.IO) {
                     val coffesDao = database.coffesDao()
                     database.clearAllTables()
-                    coffesDao.save(Coffes(11,
+                    coffesDao.save(
+                      Coffee(11,
                         "Cabloco",
                         0,
                         "xx",
                         "10",
                         "1",
-                        R.drawable.capuccino))
+                        drawable.capuccino)
+                    )
                 }
             }
         }

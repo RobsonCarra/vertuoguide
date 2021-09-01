@@ -1,4 +1,6 @@
-package br.com.alura.ceep.ui.coffemachine.presentation.view
+package br.com.alura.ceep.ui.coffemachine.repository
+
+import br.com.alura.ceep.ui.coffemachine.domain.Coffee
 
 class CoffesRepository(private val coffesDao: CoffesDao) {
 
@@ -8,13 +10,13 @@ class CoffesRepository(private val coffesDao: CoffesDao) {
         coffesDao.getById(id)
 
 
-    fun delete(coffes: Coffes): Boolean {
-        val id = coffesDao.deleteCoffe(coffes)
+    fun delete(coffee: Coffee): Boolean {
+        val id = coffesDao.deleteCoffe(coffee)
         return id > 0
     }
 
-    fun save(coffes: Coffes): Boolean {
-        val id = coffesDao.save(coffes)
+    fun save(coffee: Coffee): Boolean {
+        val id = coffesDao.save(coffee)
         return id > 0
     }
 

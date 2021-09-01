@@ -1,10 +1,8 @@
-package br.com.alura.ceep.ui.coffemachine.presentation.view
+package br.com.alura.ceep.ui.coffemachine.presentation
 
 import android.os.Bundle
 import android.view.MenuItem
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.viewModels
 import br.com.alura.ceep.ui.coffemachine.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
 

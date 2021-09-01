@@ -1,16 +1,15 @@
-package br.com.alura.ceep.ui.coffemachine.presentation.view.custom
+package br.com.alura.ceep.ui.coffemachine.presentation.custom
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import br.com.alura.ceep.ui.coffemachine.R
-import br.com.alura.ceep.ui.coffemachine.domain.CoffeMachineDataItem
-import br.com.alura.ceep.ui.coffemachine.presentation.view.Coffes
+import br.com.alura.ceep.ui.coffemachine.domain.Coffee
 
 
 class ItemAdapter() :
     RecyclerView.Adapter<ItemViewHolder>() {
-    var list = ArrayList<Coffes>()
+    var list = ArrayList<Coffee>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
         val view =

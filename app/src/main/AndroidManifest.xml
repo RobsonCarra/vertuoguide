@@ -10,7 +10,7 @@
       android:roundIcon="@mipmap/ic_launcher_round"
       android:supportsRtl="true"
       android:theme="@style/Theme.CoffeMachine">
-    <activity android:name=".presentation.view.DashboardActivity">
+    <activity android:name=".presentation.DashboardActivity">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
 
