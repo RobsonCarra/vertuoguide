@@ -9,29 +9,30 @@ import br.com.alura.ceep.ui.coffemachine.domain.Coffee
 
 class CoffeeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-    var coffeImage: ImageView
-    var textViewDescription: TextView
-    var textViewType: TextView
-    var textViewSize: TextView
-    var textViewIntensity: TextView
-    var textQtd: TextView
-    var textInt: TextView
+    var image: ImageView
+    var description: TextView
+    var name: TextView
+    var size: TextView
+    var intensity: TextView
+//    var textQtd: TextView
+//    var textInt: TextView
+
 
     init {
-        coffeImage = itemView.findViewById(R.id.coffeImagetype)
-        textViewDescription = itemView.findViewById(R.id.coffeDescription)
-        textViewType = itemView.findViewById(R.id.coffeType)
-        textViewSize = itemView.findViewById(R.id.coffeSize)
-        textViewIntensity = itemView.findViewById(R.id.numberIntensity)
-        textQtd = itemView.findViewById(R.id.qtdCoffe)
-        textInt = itemView.findViewById(R.id.coffeIntensityTitule)
+        image = itemView.findViewById(R.id.image_coffe)
+        description = itemView.findViewById(R.id.description)
+        name = itemView.findViewById(R.id.name)
+        size = itemView.findViewById(R.id.size)
+        intensity = itemView.findViewById(R.id.intensity)
+//        textQtd = itemView.findViewById(R.id.qtdCoffe)
+//        textInt = itemView.findViewById(R.id.coffeIntensityTitule)
     }
 
     fun bind(coffee: Coffee) {
-        coffeImage.setImageResource(coffee.image)
-        textViewDescription.text = coffee.description
-        textViewType.text = coffee.name
-        textViewSize.text = coffee.quantity
-        textViewIntensity.text = coffee.intensity
+        image.setImageResource(coffee.image)
+        description.text = coffee.description
+        name.text = coffee.name
+        size.text = coffee.quantity
+        intensity.text = coffee.intensity
     }
 }

@@ -29,7 +29,7 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/coffeItemType"
+                android:id="@+id/name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
@@ -43,21 +43,21 @@
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/circularImageView"
+                app:layout_constraintStart_toEndOf="@+id/circular_image"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/coffeAvailableQuantity"
+                android:id="@+id/capsules"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/nunito"
                 android:text="Available Capsules"
                 android:textSize="12sp"
-                app:layout_constraintStart_toStartOf="@+id/coffeItemType"
-                app:layout_constraintTop_toBottomOf="@+id/coffeItemType" />
+                app:layout_constraintStart_toStartOf="@+id/name"
+                app:layout_constraintTop_toBottomOf="@+id/name" />
 
             <com.mikhaellopez.circularimageview.CircularImageView
-                android:id="@+id/circularImageView"
+                android:id="@+id/circular_image"
                 android:layout_width="90dp"
                 android:layout_height="90dp"
                 android:layout_marginStart="16dp"

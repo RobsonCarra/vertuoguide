@@ -57,8 +57,8 @@ class InventoryFragment : Fragment() {
         amount = view.findViewById(R.id.amount)
         plus = view.findViewById(R.id.plus)
         less = view.findViewById(R.id.less)
-        save = view.findViewById(R.id.save)
-        recyclerView = view.findViewById(R.id.recyclerView)
+        save = view.findViewById(R.id.save_button)
+        recyclerView = view.findViewById(R.id.coffe_recyclerview_inventory)
     }
 
     private fun observers() {

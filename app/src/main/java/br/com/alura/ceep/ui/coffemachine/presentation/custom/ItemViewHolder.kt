@@ -6,14 +6,17 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import br.com.alura.ceep.ui.coffemachine.R
 import br.com.alura.ceep.ui.coffemachine.domain.Coffee
+import org.w3c.dom.Text
 
 class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-    var coffeImage: ImageView = itemView.findViewById(R.id.circularImageView)
-    var textViewType: TextView = itemView.findViewById(R.id.coffeItemType)
+    var image: ImageView = itemView.findViewById(R.id.circular_image)
+    var name: TextView = itemView.findViewById(R.id.name)
+    var capsules: TextView = itemView.findViewById(R.id.capsules)
 
     fun bind(coffee: Coffee) {
-        coffeImage.setImageResource(coffee.image)
-        textViewType.text = coffee.name
+        image.setImageResource(coffee.image)
+        name.text = coffee.name
+        capsules.text = coffee.capsules.toString()
     }
 }

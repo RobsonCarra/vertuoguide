@@ -31,7 +31,7 @@
             >
 
             <ImageView
-                android:id="@+id/coffeImagetype"
+                android:id="@+id/image_coffe"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:scaleType="centerCrop"
@@ -42,31 +42,31 @@
                 />
 
             <ImageView
-                android:id="@+id/imageView"
+                android:id="@+id/like"
                 android:layout_width="30dp"
                 android:layout_height="24dp"
                 android:layout_marginEnd="24dp"
                 android:layout_marginRight="24dp"
                 android:background="@drawable/liketest"
                 android:elevation="2dp"
-                app:layout_constraintBottom_toBottomOf="@+id/coffeAvailableQuantity"
+                app:layout_constraintBottom_toBottomOf="@+id/capsules"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/coffeType" />
+                app:layout_constraintTop_toTopOf="@+id/name" />
 
             <TextView
-                android:id="@+id/coffeAvailableQuantity"
+                android:id="@+id/capsules"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/nunito"
                 android:text="Available Capsules"
                 android:textSize="12sp"
-                app:layout_constraintEnd_toStartOf="@+id/imageView"
-                app:layout_constraintStart_toStartOf="@+id/coffeType"
-                app:layout_constraintTop_toBottomOf="@+id/coffeType"
+                app:layout_constraintEnd_toStartOf="@+id/like"
+                app:layout_constraintStart_toStartOf="@+id/name"
+                app:layout_constraintTop_toBottomOf="@+id/name"
                 />
 
             <TextView
-                android:id="@+id/coffeDescription"
+                android:id="@+id/description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
@@ -75,14 +75,14 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/nunito"
-                android:text="Coffe Description"
+                android:text="Description"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/coffeAvailableQuantity"
+                app:layout_constraintTop_toBottomOf="@+id/capsules"
                 />
 
             <TextView
-                android:id="@+id/numberIntensity"
+                android:id="@+id/intensity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -91,61 +91,61 @@
                 android:textColor="#070707"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="@+id/coffeIntensityTitule"
-                app:layout_constraintStart_toStartOf="@+id/coffeIntensityTitule"
-                app:layout_constraintTop_toBottomOf="@+id/coffeDescription"
+                app:layout_constraintEnd_toEndOf="@+id/Intensity"
+                app:layout_constraintStart_toStartOf="@+id/Intensity"
+                app:layout_constraintTop_toBottomOf="@+id/description"
                 />
 
             <TextView
-                android:id="@+id/qtdCoffe"
+                android:id="@+id/Quantity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="32dp"
                 android:layout_marginRight="32dp"
                 android:fontFamily="@font/nunito_extrabold"
-                android:text="Quantidade"
+                android:text="Quantity"
                 android:textColor="#070707"
                 android:textSize="14sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/coffeIntensityTitule"
+                app:layout_constraintBottom_toBottomOf="@+id/Intensity"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/numberIntensity"
+                app:layout_constraintTop_toBottomOf="@+id/intensity"
                 />
 
             <TextView
-                android:id="@+id/coffeIntensityTitule"
+                android:id="@+id/Intensity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="24dp"
                 android:layout_marginLeft="32dp"
                 android:layout_marginStart="32dp"
                 android:fontFamily="@font/nunito_extrabold"
-                android:text="Intensidade"
+                android:text="Intensity"
                 android:textColor="#040404"
                 android:textSize="14sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/numberIntensity"
+                app:layout_constraintTop_toBottomOf="@+id/intensity"
                 />
 
             <TextView
-                android:id="@+id/coffeSize"
+                android:id="@+id/size"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/nunito_extrabold"
-                android:text="CoffeSize"
+                android:text="Size"
                 android:textColor="#040404"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="@+id/qtdCoffe"
-                app:layout_constraintStart_toStartOf="@+id/qtdCoffe"
-                app:layout_constraintTop_toBottomOf="@+id/coffeDescription"
+                app:layout_constraintEnd_toEndOf="@+id/Quantity"
+                app:layout_constraintStart_toStartOf="@+id/Quantity"
+                app:layout_constraintTop_toBottomOf="@+id/description"
                 />
 
             <TextView
-                android:id="@+id/coffeType"
+                android:id="@+id/name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
@@ -154,13 +154,13 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/nunito_extrabold"
-                android:text="CoffeType"
+                android:text="Name"
                 android:textColor="#000000"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toStartOf="@+id/imageView"
+                app:layout_constraintEnd_toStartOf="@+id/like"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/coffeImagetype"
+                app:layout_constraintTop_toBottomOf="@+id/image_coffe"
                 />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

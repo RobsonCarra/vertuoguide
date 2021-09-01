@@ -32,7 +32,7 @@ class CoffeAdapter() :
             intent.putExtras(bundle)
             context?.startActivity(intent)
         }
-        holder.bind(list[position])
+        holder.bind(list.get(position))
     }
 
     override fun getItemCount(): Int {

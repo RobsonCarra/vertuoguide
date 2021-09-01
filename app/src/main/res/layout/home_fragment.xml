@@ -8,7 +8,7 @@
     tools:context=".presentation.DashboardActivity">
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/add_coffe_button"
         style="?android:attr/borderlessButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -19,12 +19,12 @@
         android:textAllCaps="false"
         android:textColor="#000000"
         app:backgroundTint="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView2"
+        app:layout_constraintBottom_toBottomOf="@+id/app_name"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView2" />
+        app:layout_constraintTop_toTopOf="@+id/app_name" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/app_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -35,14 +35,14 @@
         app:srcCompat="@drawable/vertuoguidelogo" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+        android:id="@+id/coffe_list_recyclerview"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="2dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button"
+        app:layout_constraintTop_toBottomOf="@+id/add_coffe_button"
         tools:itemCount="3"
         tools:listitem="@layout/coffe_item_list" />
 

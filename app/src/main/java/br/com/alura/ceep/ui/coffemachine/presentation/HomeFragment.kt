@@ -33,13 +33,15 @@ class HomeFragment() : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.home_fragment, container, false)
+        initList()
+
     }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setup(view)
         listeners()
-        initList()
         observers()
         load()
         lifecycleScope.launch {
@@ -51,7 +53,7 @@ class HomeFragment() : Fragment() {
     }
 
     private fun setup(view: View) {
-        recyclerView = view.findViewById(R.id.recyclerView)
+        recyclerView = view.findViewById(R.id.coffe_list_recyclerview)
 
     }
 
@@ -62,7 +64,7 @@ class HomeFragment() : Fragment() {
         }
     }
 
-    private fun initList() {
+     fun initList() {
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.adapter = coffeAdapter

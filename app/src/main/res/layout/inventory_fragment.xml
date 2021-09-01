@@ -6,24 +6,23 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/inventory"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="24dp"
         android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
         android:layout_marginTop="32dp"
         android:fontFamily="@font/nunito_extrabold"
         android:text="inventory"
         android:textColor="#58D697"
         android:textSize="28sp"
-        app:layout_constraintEnd_toStartOf="@+id/button3"
+        app:layout_constraintEnd_toStartOf="@+id/new_coffe_button"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/new_coffe_button"
         style="?android:attr/borderlessButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -34,13 +33,13 @@
         android:textColor="#000000"
         android:textSize="14sp"
         app:backgroundTint="#00FFFFFF"
-        app:layout_constraintBottom_toBottomOf="@+id/textView"
+        app:layout_constraintBottom_toBottomOf="@+id/inventory"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView"
+        app:layout_constraintTop_toTopOf="@+id/inventory"
         app:layout_constraintVertical_bias="0.0" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/name"
+        android:id="@+id/search_name"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -55,7 +54,7 @@
         app:boxCornerRadiusTopStart="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button3">
+        app:layout_constraintTop_toBottomOf="@+id/new_coffe_button">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -81,7 +80,7 @@
         android:textSize="20sp"
         app:backgroundTint="#F0ECEC"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/name" />
+        app:layout_constraintTop_toBottomOf="@+id/search_name" />
 
     <Button
         android:id="@+id/less"
@@ -113,7 +112,7 @@
         app:layout_constraintTop_toTopOf="@+id/less" />
 
     <Button
-        android:id="@+id/save"
+        android:id="@+id/save_button"
         android:layout_width="380dp"
         android:layout_height="60dp"
         android:layout_marginStart="24dp"
@@ -125,13 +124,13 @@
         android:fontFamily="@font/nunito_extrabold"
         android:text="SAVE"
         app:cornerRadius="40dp"
-        app:layout_constraintBottom_toTopOf="@+id/recyclerView"
+        app:layout_constraintBottom_toTopOf="@+id/coffe_recyclerview_inventory"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/less" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+        android:id="@+id/coffe_recyclerview_inventory"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="2dp"
@@ -140,7 +139,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/save"
+        app:layout_constraintTop_toBottomOf="@+id/save_button"
         tools:itemCount="3"
         tools:listitem="@layout/inventory_item_list" />
 

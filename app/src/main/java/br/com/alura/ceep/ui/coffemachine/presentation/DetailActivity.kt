@@ -49,14 +49,14 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private fun setup() {
-        name = findViewById(R.id.coffeType)
-        description = findViewById(R.id.coffeDescription)
-        intensity = findViewById(R.id.numberIntensity)
-        size = findViewById(R.id.coffeSize)
+        name = findViewById(R.id.name)
+        description = findViewById(R.id.description)
+        intensity = findViewById(R.id.intensity)
+        size = findViewById(R.id.size)
 //        val coffeIntensityTitule = findViewById<TextView>(R.id.coffeIntensityTitule)
 //        val coffeQuantityTitule = findViewById<TextView>(R.id.quantityTitule)
-        image = findViewById(R.id.coffeImagetype)
-        coffeToolbar = findViewById(R.id.coffeToolbar)
+        image = findViewById(R.id.image_coffe)
+        coffeToolbar = findViewById(R.id.coffe_toolbar)
         setSupportActionBar(coffeToolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         val bundle = intent.extras

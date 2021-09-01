@@ -19,7 +19,6 @@ class ItemAdapter() :
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         holder.bind(list.get(position))
-
     }
 
     override fun getItemCount(): Int {

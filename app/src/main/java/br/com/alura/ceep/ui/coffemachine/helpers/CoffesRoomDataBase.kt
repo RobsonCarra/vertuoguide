@@ -17,7 +17,6 @@ import kotlinx.coroutines.launch
 abstract class CoffesRoomDataBase : RoomDatabase() {
 
     abstract fun coffesDao(): CoffesDao
-
     private class CoffesRoomDataBaseCallBack() : RoomDatabase.Callback() {
 
         override fun onCreate(db: SupportSQLiteDatabase) {
