@@ -23,10 +23,7 @@ class HomeFragment() : Fragment() {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var coffeAdapter: CoffeAdapter
-
-    private val viewModel: CoffesViewModel by viewModels {
-        CoffesViewModel.CoffesViewModelFactory(CoffesApplication.repository(requireContext()))
-    }
+    private lateinit var viewModel: CoffesViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,7 +31,6 @@ class HomeFragment() : Fragment() {
     ): View? {
         return inflater.inflate(R.layout.home_fragment, container, false)
         initList()
-
     }
 
 
@@ -64,12 +60,13 @@ class HomeFragment() : Fragment() {
         }
     }
 
-     fun initList() {
-        recyclerView.setHasFixedSize(true)
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+    fun initList() {
+        recyclerView.hasFixedSize()
+        recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = coffeAdapter
     }
 
     private fun load() {
     }
+
 }
