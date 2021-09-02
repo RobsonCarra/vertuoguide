@@ -39,7 +39,7 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/search_name"
+        android:id="@+id/name"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -57,10 +57,69 @@
         app:layout_constraintTop_toBottomOf="@+id/new_coffe_button">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/put_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/nunito"
-            android:hint="Search"
+            android:hint="Name"
+            android:textColor="#F3EFEF"
+            android:textColorHint="#F0ECEC"
+            android:textSize="16sp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/description"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
+        app:boxCornerRadiusBottomEnd="10dp"
+        app:boxCornerRadiusBottomStart="10dp"
+        app:boxCornerRadiusTopEnd="10dp"
+        app:boxCornerRadiusTopStart="10dp"
+        app:layout_constraintEnd_toEndOf="@+id/name"
+        app:layout_constraintStart_toStartOf="@+id/name"
+        app:layout_constraintTop_toBottomOf="@+id/name">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/put_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nunito"
+            android:hint="Description"
+            android:textColor="#F3EFEF"
+            android:textColorHint="#F0ECEC"
+            android:textSize="16sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/intensity"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
+        app:boxCornerRadiusBottomEnd="10dp"
+        app:boxCornerRadiusBottomStart="10dp"
+        app:boxCornerRadiusTopEnd="10dp"
+        app:boxCornerRadiusTopStart="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/less"
+        app:layout_constraintEnd_toStartOf="@+id/amount"
+        app:layout_constraintStart_toStartOf="@+id/description"
+        app:layout_constraintTop_toTopOf="@+id/less">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/put_intensity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nunito"
+            android:hint="Intensidade"
+            android:inputType="number"
             android:textColor="#F3EFEF"
             android:textColorHint="#F0ECEC"
             android:textSize="16sp" />
@@ -70,7 +129,7 @@
         android:id="@+id/plus"
         android:layout_width="55dp"
         android:layout_height="55dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="24dp"
         android:layout_marginRight="24dp"
         android:background="@drawable/round_button"
@@ -80,7 +139,7 @@
         android:textSize="20sp"
         app:backgroundTint="#F0ECEC"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/search_name" />
+        app:layout_constraintTop_toBottomOf="@+id/description" />
 
     <Button
         android:id="@+id/less"
@@ -95,7 +154,8 @@
         android:textSize="20sp"
         app:backgroundTint="#F0ECEC"
         app:layout_constraintBottom_toBottomOf="@+id/plus"
-        app:layout_constraintEnd_toStartOf="@+id/plus" />
+        app:layout_constraintEnd_toStartOf="@+id/plus"
+        app:layout_constraintTop_toTopOf="@+id/plus" />
 
     <TextView
         android:id="@+id/amount"
@@ -117,7 +177,7 @@
         android:layout_height="60dp"
         android:layout_marginStart="24dp"
         android:layout_marginLeft="24dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="24dp"
         android:layout_marginRight="24dp"
         android:layout_marginBottom="2dp"
@@ -127,13 +187,14 @@
         app:layout_constraintBottom_toTopOf="@+id/coffe_recyclerview_inventory"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/less" />
+        app:layout_constraintTop_toBottomOf="@+id/intensity" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/coffe_recyclerview_inventory"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="2dp"
+        android:layout_marginTop="24dp"
         android:elevation="2dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

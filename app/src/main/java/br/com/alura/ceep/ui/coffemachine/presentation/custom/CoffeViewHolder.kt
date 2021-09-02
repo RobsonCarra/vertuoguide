@@ -14,6 +14,7 @@ class CoffeeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     var name: TextView
     var size: TextView
     var intensity: TextView
+    var capsules: TextView
 //    var textQtd: TextView
 //    var textInt: TextView
 
@@ -24,6 +25,7 @@ class CoffeeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         name = itemView.findViewById(R.id.name)
         size = itemView.findViewById(R.id.size)
         intensity = itemView.findViewById(R.id.intensity)
+        capsules = itemView.findViewById(R.id.capsules)
 //        textQtd = itemView.findViewById(R.id.qtdCoffe)
 //        textInt = itemView.findViewById(R.id.coffeIntensityTitule)
     }
@@ -34,5 +36,6 @@ class CoffeeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         name.text = coffee.name
         size.text = coffee.quantity
         intensity.text = coffee.intensity
+        capsules.text = coffee.capsules.toString()
     }
 }

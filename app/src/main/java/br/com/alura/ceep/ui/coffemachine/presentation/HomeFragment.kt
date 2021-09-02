@@ -18,56 +18,59 @@ import kotlinx.coroutines.launch
 
 class HomeFragment() : Fragment() {
 
-  private lateinit var recyclerView: RecyclerView
-  private var coffeAdapter: CoffeAdapter = CoffeAdapter()
+    private lateinit var recyclerView: RecyclerView
+    private var coffeAdapter: CoffeAdapter = CoffeAdapter()
 
-  private val viewModel: CoffesViewModel by viewModels {
-    CoffesViewModel.CoffesViewModelFactory(
-      CoffesRepository(
-        CoffesRoomDataBase.getDatabase(requireContext()).coffesDao()
-      )
-    )
-  }
-
-  override fun onCreateView(
-    inflater: LayoutInflater, container: ViewGroup?,
-    savedInstanceState: Bundle?
-  ): View? {
-    return inflater.inflate(R.layout.home_fragment, container, false)
-  }
-
-  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    super.onViewCreated(view, savedInstanceState)
-    setup(view)
-    initList()
-    listeners()
-    observers()
-    load()
-    lifecycleScope.launch {
-      viewModel.getAll()
+    private val viewModel: CoffesViewModel by viewModels {
+        CoffesViewModel.CoffesViewModelFactory(
+            CoffesRepository(
+                CoffesRoomDataBase.getDatabase(requireContext()).coffesDao()
+            )
+        )
     }
-  }
 
-  private fun listeners() {
-  }
-
-  private fun setup(view: View) {
-    recyclerView = view.findViewById(R.id.coffe_list_recyclerview)
-  }
-
-  private fun observers() {
-    viewModel.list.observe(viewLifecycleOwner) { coffes ->
-      coffeAdapter.list.addAll(coffes)
-      coffeAdapter.notifyDataSetChanged()
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return inflater.inflate(R.layout.home_fragment, container, false)
     }
-  }
 
-  fun initList() {
-    recyclerView.hasFixedSize()
-    recyclerView.layoutManager = LinearLayoutManager(context)
-    recyclerView.adapter = coffeAdapter
-  }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setup(view)
+        initList()
+        listeners()
+        observers()
+        load()
+        lifecycleScope.launch {
+            viewModel.getAll()
+        }
+    }
 
-  private fun load() {
-  }
+    private fun listeners() {
+    }
+
+    private fun setup(view: View) {
+        recyclerView = view.findViewById(R.id.coffe_list_recyclerview)
+    }
+
+    private fun observers() {
+        viewModel.added.observe(viewLifecycleOwner) { coffes ->
+            viewModel.getAll()
+        }
+        viewModel.list.observe(viewLifecycleOwner) { coffes ->
+            coffeAdapter.list.addAll(coffes)
+            coffeAdapter.notifyDataSetChanged()
+        }
+    }
+
+    fun initList() {
+        recyclerView.hasFixedSize()
+        recyclerView.layoutManager = LinearLayoutManager(context)
+        recyclerView.adapter = coffeAdapter
+    }
+
+    private fun load() {
+    }
 }

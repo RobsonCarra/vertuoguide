@@ -18,27 +18,6 @@ abstract class CoffesRoomDataBase : RoomDatabase() {
 
     abstract fun coffesDao(): CoffesDao
     private class CoffesRoomDataBaseCallBack() : RoomDatabase.Callback() {
-
-        override fun onCreate(db: SupportSQLiteDatabase) {
-            super.onCreate(db)
-            INSTANCE?.let { database ->
-                GlobalScope.launch(Dispatchers.IO) {
-                    val coffesDao = database.coffesDao()
-                    database.clearAllTables()
-                    coffesDao.save(
-                        Coffee(
-                            11,
-                            "Cabloco",
-                            0,
-                            "xx",
-                            "10",
-                            "1",
-                            drawable.capuccino
-                        )
-                    )
-                }
-            }
-        }
     }
 
     companion object {
@@ -54,7 +33,7 @@ abstract class CoffesRoomDataBase : RoomDatabase() {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     CoffesRoomDataBase::class.java,
-                    "Coffe_db"
+                    "Coffee_db"
                 ).addCallback(CoffesRoomDataBaseCallBack()).build()
                 INSTANCE = instance
                 // return instance

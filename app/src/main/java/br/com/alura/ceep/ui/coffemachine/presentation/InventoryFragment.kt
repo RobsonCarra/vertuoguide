@@ -9,6 +9,8 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.core.view.isEmpty
+import androidx.core.view.isNotEmpty
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -16,10 +18,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import br.com.alura.ceep.ui.coffemachine.CoffesApplication
 import br.com.alura.ceep.ui.coffemachine.R
+import br.com.alura.ceep.ui.coffemachine.domain.Coffee
 import br.com.alura.ceep.ui.coffemachine.helpers.CoffesRoomDataBase
 import br.com.alura.ceep.ui.coffemachine.presentation.custom.ItemAdapter
 import br.com.alura.ceep.ui.coffemachine.repository.CoffesRepository
 import br.com.alura.ceep.ui.coffemachine.viewmodel.CoffesViewModel
+import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import kotlinx.coroutines.launch
 
@@ -34,7 +38,9 @@ class InventoryFragment : Fragment() {
     }
 
     private lateinit var itemAdapter: ItemAdapter
-    private lateinit var name: TextInputLayout
+    private lateinit var putName: TextInputEditText
+    private lateinit var putDescription: TextInputEditText
+    private lateinit var putIntensity: TextInputEditText
     private lateinit var amount: TextView
     private lateinit var plus: Button
     private lateinit var less: Button
@@ -60,7 +66,9 @@ class InventoryFragment : Fragment() {
     }
 
     private fun init(view: View) {
-        name = view.findViewById(R.id.search_name)
+        putName = view.findViewById(R.id.put_name)
+        putDescription = view.findViewById(R.id.put_description)
+        putIntensity = view.findViewById(R.id.put_intensity)
         amount = view.findViewById(R.id.amount)
         plus = view.findViewById(R.id.plus)
         less = view.findViewById(R.id.less)
@@ -72,6 +80,12 @@ class InventoryFragment : Fragment() {
         viewModel.list.observe(viewLifecycleOwner) { coffes ->
             itemAdapter.list.addAll(coffes)
             itemAdapter.notifyDataSetChanged()
+        }
+
+        viewModel.added.observe(viewLifecycleOwner) { saved ->
+            if (saved) {
+                Toast.makeText(requireContext(), "Salvo com sucesso", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
@@ -93,13 +107,46 @@ class InventoryFragment : Fragment() {
             }
         }
         save.setOnClickListener { v: View? ->
-            Toast.makeText(requireContext(), "Salvo com sucesso", Toast.LENGTH_SHORT).show()
-            val Intent = Intent()
-            val capsule = amount.text.toString()
-            Intent.putExtra(
-                EXTRA_REPLY,
-                capsule
-            )
+            val name = putName.text.toString()
+            val description = putDescription.text.toString()
+            val intensity = putIntensity.text.toString()
+            val amountConverted = amount.text.toString().toLong()
+            val quantity = "240 ml"
+            if (name.isNotEmpty() && description.isNotEmpty() && intensity.isNotEmpty()) {
+                val coffee = Coffee(
+                    0, name, amountConverted, description,
+                    intensity, quantity, R.drawable.capuccino
+                )
+                viewModel.add(coffee)
+            } else if (name.isNotEmpty() && description.isNotEmpty() && intensity.isEmpty()) {
+                Toast.makeText(
+                    requireContext(), "please enter the value of" +
+                            " the intensity of the coffee",
+                    Toast.LENGTH_SHORT
+                ).show()
+            } else if (name.isNotEmpty() && description.isEmpty() && intensity.isEmpty()) {
+                Toast.makeText(
+                    requireContext(), "please enter the value of" +
+                            " the intensity and the descripiton of the coffee",
+                    Toast.LENGTH_SHORT
+                ).show()
+            } else if (name.isEmpty() && description.isNotEmpty() && intensity.isNotEmpty()) {
+                Toast.makeText(
+                    requireContext(), "please enter the name of the coffee",
+                    Toast.LENGTH_SHORT
+                ).show()
+            } else if (name.isEmpty() && description.isEmpty() && intensity.isNotEmpty()) {
+                Toast.makeText(
+                    requireContext(), "please enter the name and the descripiton of the coffee",
+                    Toast.LENGTH_SHORT
+                ).show()
+            } else {
+                Toast.makeText(
+                    requireContext(), "please enter the descripiton of the coffee",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+
         }
     }
 
@@ -108,9 +155,5 @@ class InventoryFragment : Fragment() {
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.adapter = itemAdapter
-    }
-
-    companion object {
-        const val EXTRA_REPLY = "com.example.android.Coffe_Machine.REPLY"
     }
 }

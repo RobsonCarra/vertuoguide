@@ -12,32 +12,32 @@ import br.com.alura.ceep.ui.coffemachine.domain.Coffee
 import br.com.alura.ceep.ui.coffemachine.presentation.DetailActivity
 
 class CoffeAdapter() :
-  RecyclerView.Adapter<CoffeeViewHolder>() {
+    RecyclerView.Adapter<CoffeeViewHolder>() {
 
-  private var context: Context? = null
+    private var context: Context? = null
 
-  var list = ArrayList<Coffee>()
+    var list = ArrayList<Coffee>()
 
-  override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CoffeeViewHolder {
-    context = parent.context
-    val layoutInflater = LayoutInflater.from(context)
-    val view = layoutInflater.inflate(R.layout.coffe_item_list, parent, false)
-    return CoffeeViewHolder(view)
-  }
-
-  override fun onBindViewHolder(holder: CoffeeViewHolder, position: Int) {
-    holder.itemView.setOnClickListener { v: View? ->
-      val bundle = Bundle()
-      bundle.putParcelable("coffe", list[position])
-      bundle.putString("nome", list[position].description)
-      val intent = Intent(context, DetailActivity::class.java)
-      intent.putExtras(bundle)
-      context?.startActivity(intent)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CoffeeViewHolder {
+        context = parent.context
+        val layoutInflater = LayoutInflater.from(context)
+        val view = layoutInflater.inflate(R.layout.coffe_item_list, parent, false)
+        return CoffeeViewHolder(view)
     }
-    holder.bind(list.get(position))
-  }
 
-  override fun getItemCount(): Int {
-    return list.count()
-  }
+    override fun onBindViewHolder(holder: CoffeeViewHolder, position: Int) {
+        holder.itemView.setOnClickListener { v: View? ->
+            val bundle = Bundle()
+            bundle.putParcelable("coffe", list[position])
+            bundle.putString("nome", list[position].description)
+            val intent = Intent(context, DetailActivity::class.java)
+            intent.putExtras(bundle)
+            context?.startActivity(intent)
+        }
+        holder.bind(list.get(position))
+    }
+
+    override fun getItemCount(): Int {
+        return list.count()
+    }
 }
