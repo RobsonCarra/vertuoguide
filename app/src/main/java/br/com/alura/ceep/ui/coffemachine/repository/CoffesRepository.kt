@@ -4,20 +4,21 @@ import br.com.alura.ceep.ui.coffemachine.domain.Coffee
 
 class CoffesRepository(private val coffesDao: CoffesDao) {
 
-    fun getAll() = coffesDao.getAll()
+  fun getAll() = coffesDao.getAll()
 
-    fun getById(id: Long) =
-        coffesDao.getById(id)
+  fun getById(id: Long) = coffesDao.getById(id)
 
-
-    fun delete(coffee: Coffee): Boolean {
-        val id = coffesDao.delete(coffee)
-        return id > 0
+  fun delete(coffee: Coffee): Boolean {
+    try {
+      coffesDao.delete(coffee)
+      return true
+    } catch (exception: Exception) {
+      return false
     }
+  }
 
-    fun save(coffee: Coffee): Boolean {
-        val id = coffesDao.save(coffee)
-        return id > 0
-    }
-
+  fun save(coffee: Coffee): Boolean {
+    val id = coffesDao.save(coffee)
+    return id > 0
+  }
 }

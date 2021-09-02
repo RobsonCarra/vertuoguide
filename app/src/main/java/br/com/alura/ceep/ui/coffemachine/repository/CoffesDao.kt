@@ -7,10 +7,10 @@ import br.com.alura.ceep.ui.coffemachine.domain.Coffee
 interface CoffesDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun save(coffee: Coffee): Int
+    fun save(coffee: Coffee): Long
 
     @Delete
-    fun delete(coffee: Coffee): Int
+    fun delete(coffee: Coffee)
 
     @Query("SELECT * from Coffee ORDER BY name ASC")
     fun getAll(): List<Coffee>
