@@ -61,68 +61,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/nunito"
-            android:hint="Name"
+            android:hint="search"
             android:textColor="#F3EFEF"
             android:textColorHint="#F0ECEC"
             android:textSize="16sp" />
 
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/description"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginRight="24dp"
-        app:boxCornerRadiusBottomEnd="10dp"
-        app:boxCornerRadiusBottomStart="10dp"
-        app:boxCornerRadiusTopEnd="10dp"
-        app:boxCornerRadiusTopStart="10dp"
-        app:layout_constraintEnd_toEndOf="@+id/name"
-        app:layout_constraintStart_toStartOf="@+id/name"
-        app:layout_constraintTop_toBottomOf="@+id/name">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/put_description"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/nunito"
-            android:hint="Description"
-            android:textColor="#F3EFEF"
-            android:textColorHint="#F0ECEC"
-            android:textSize="16sp" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/intensity"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
-        android:layout_marginRight="24dp"
-        app:boxCornerRadiusBottomEnd="10dp"
-        app:boxCornerRadiusBottomStart="10dp"
-        app:boxCornerRadiusTopEnd="10dp"
-        app:boxCornerRadiusTopStart="10dp"
-        app:layout_constraintBottom_toBottomOf="@+id/less"
-        app:layout_constraintEnd_toStartOf="@+id/amount"
-        app:layout_constraintStart_toStartOf="@+id/description"
-        app:layout_constraintTop_toTopOf="@+id/less">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/put_intensity"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/nunito"
-            android:hint="Intensidade"
-            android:inputType="number"
-            android:textColor="#F3EFEF"
-            android:textColorHint="#F0ECEC"
-            android:textSize="16sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
@@ -139,7 +82,7 @@
         android:textSize="20sp"
         app:backgroundTint="#F0ECEC"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/description" />
+        app:layout_constraintTop_toBottomOf="@+id/name" />
 
     <Button
         android:id="@+id/less"
@@ -173,7 +116,7 @@
 
     <Button
         android:id="@+id/save_button"
-        android:layout_width="380dp"
+        android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginStart="24dp"
         android:layout_marginLeft="24dp"
@@ -187,7 +130,7 @@
         app:layout_constraintBottom_toTopOf="@+id/coffe_recyclerview_inventory"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/intensity" />
+        app:layout_constraintTop_toBottomOf="@+id/less" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/coffe_recyclerview_inventory"

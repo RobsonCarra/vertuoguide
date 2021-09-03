@@ -51,9 +51,7 @@ class DetailActivity : AppCompatActivity() {
         description = findViewById(R.id.description)
         intensity = findViewById(R.id.intensity)
         size = findViewById(R.id.size)
-//        val coffeIntensityTitule = findViewById<TextView>(R.id.coffeIntensityTitule)
-//        val coffeQuantityTitule = findViewById<TextView>(R.id.quantityTitule)
-        image = findViewById(R.id.image_coffe)
+        image = findViewById(R.id.image)
         coffeToolbar = findViewById(R.id.coffe_toolbar)
         setSupportActionBar(coffeToolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
@@ -63,8 +61,6 @@ class DetailActivity : AppCompatActivity() {
             name.text = coffee?.name
             description.text = coffee?.description
             size.text = coffee?.quantity
-//            coffeIntensityTitule.text = coffeMachine.CoffeIntensityTitule
-//            coffeQuantityTitule.text = coffeMachine.CoffeSizeTitule
             intensity.text = coffee?.intensity
             image.setImageResource(coffee!!.image)
         }

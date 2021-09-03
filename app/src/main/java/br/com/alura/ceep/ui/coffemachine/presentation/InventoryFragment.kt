@@ -39,12 +39,11 @@ class InventoryFragment : Fragment() {
 
     private lateinit var itemAdapter: ItemAdapter
     private lateinit var putName: TextInputEditText
-    private lateinit var putDescription: TextInputEditText
-    private lateinit var putIntensity: TextInputEditText
     private lateinit var amount: TextView
     private lateinit var plus: Button
     private lateinit var less: Button
     private lateinit var save: Button
+    private lateinit var new: Button
     private lateinit var recyclerView: RecyclerView
 
     override fun onCreateView(
@@ -56,7 +55,7 @@ class InventoryFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        init(view)
+        setup(view)
         listeners()
         initList()
         observers()
@@ -65,14 +64,13 @@ class InventoryFragment : Fragment() {
         }
     }
 
-    private fun init(view: View) {
+    private fun setup(view: View) {
         putName = view.findViewById(R.id.put_name)
-        putDescription = view.findViewById(R.id.put_description)
-        putIntensity = view.findViewById(R.id.put_intensity)
         amount = view.findViewById(R.id.amount)
         plus = view.findViewById(R.id.plus)
         less = view.findViewById(R.id.less)
         save = view.findViewById(R.id.save_button)
+        new = view.findViewById(R.id.new_coffe_button)
         recyclerView = view.findViewById(R.id.coffe_recyclerview_inventory)
     }
 
@@ -81,11 +79,11 @@ class InventoryFragment : Fragment() {
             itemAdapter.list.addAll(coffes)
             itemAdapter.notifyDataSetChanged()
         }
-
         viewModel.added.observe(viewLifecycleOwner) { saved ->
             if (saved) {
                 Toast.makeText(requireContext(), "Salvo com sucesso", Toast.LENGTH_SHORT).show()
             }
+            viewModel.getAll()
         }
     }
 
@@ -108,46 +106,23 @@ class InventoryFragment : Fragment() {
         }
         save.setOnClickListener { v: View? ->
             val name = putName.text.toString()
-            val description = putDescription.text.toString()
-            val intensity = putIntensity.text.toString()
             val amountConverted = amount.text.toString().toLong()
-            val quantity = "240 ml"
-            if (name.isNotEmpty() && description.isNotEmpty() && intensity.isNotEmpty()) {
-                val coffee = Coffee(
-                    0, name, amountConverted, description,
-                    intensity, quantity, R.drawable.capuccino
-                )
-                viewModel.add(coffee)
-            } else if (name.isNotEmpty() && description.isNotEmpty() && intensity.isEmpty()) {
-                Toast.makeText(
-                    requireContext(), "please enter the value of" +
-                            " the intensity of the coffee",
-                    Toast.LENGTH_SHORT
-                ).show()
-            } else if (name.isNotEmpty() && description.isEmpty() && intensity.isEmpty()) {
-                Toast.makeText(
-                    requireContext(), "please enter the value of" +
-                            " the intensity and the descripiton of the coffee",
-                    Toast.LENGTH_SHORT
-                ).show()
-            } else if (name.isEmpty() && description.isNotEmpty() && intensity.isNotEmpty()) {
-                Toast.makeText(
-                    requireContext(), "please enter the name of the coffee",
-                    Toast.LENGTH_SHORT
-                ).show()
-            } else if (name.isEmpty() && description.isEmpty() && intensity.isNotEmpty()) {
-                Toast.makeText(
-                    requireContext(), "please enter the name and the descripiton of the coffee",
-                    Toast.LENGTH_SHORT
-                ).show()
-            } else {
-                Toast.makeText(
-                    requireContext(), "please enter the descripiton of the coffee",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
+//            if (name.isNotEmpty()) {
+//
+//            } else () {
+//                Toast.makeText(
+//                    requireContext(), "adada",
+//                    Toast.LENGTH_SHORT
+//                ).show()
+//            }
+
 
         }
+        new.setOnClickListener { v: View? ->
+            val intent = Intent(context, NewCoffeeActivity::class.java)
+            context?.startActivity(intent)
+        }
+
     }
 
     private fun initList() {

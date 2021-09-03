@@ -63,14 +63,11 @@
 
             <TextView
                 android:id="@+id/capsules"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
                 android:fontFamily="@font/nunito"
-                android:text="Available Capsules"
+                android:text="Available Capsules: "
                 android:textSize="12sp"
-                app:layout_constraintEnd_toStartOf="@+id/like_button"
                 app:layout_constraintStart_toStartOf="@+id/name"
                 app:layout_constraintTop_toBottomOf="@+id/name" />
 
@@ -110,7 +107,7 @@
                 android:layout_marginStart="48dp"
                 android:layout_marginLeft="48dp"
                 android:fontFamily="@font/nunito_bold"
-                android:text="Intensidade"
+                android:text="Intensity"
                 android:textColor="#000000"
                 android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -136,7 +133,7 @@
                 android:layout_marginEnd="48dp"
                 android:layout_marginRight="48dp"
                 android:fontFamily="@font/nunito_bold"
-                android:text="Quantidade"
+                android:text="Quantity"
                 android:textColor="#000000"
                 android:textSize="14sp"
                 android:textStyle="bold"
@@ -177,6 +174,19 @@
                 app:layout_constraintBottom_toBottomOf="@+id/capsules"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/name" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nunito"
+                android:text="10"
+                android:textSize="12dp"
+                app:layout_constraintBottom_toBottomOf="@+id/capsules"
+                app:layout_constraintEnd_toStartOf="@+id/like_button"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/capsules"
+                app:layout_constraintTop_toBottomOf="@+id/name" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
