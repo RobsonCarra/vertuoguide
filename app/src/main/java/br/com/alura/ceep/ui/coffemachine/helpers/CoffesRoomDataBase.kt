@@ -12,7 +12,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-@Database(entities = [Coffee::class], version = 2, exportSchema = false)
+@Database(entities = [Coffee::class], version = 3, exportSchema = false)
 
 abstract class CoffesRoomDataBase : RoomDatabase() {
 
@@ -33,7 +33,7 @@ abstract class CoffesRoomDataBase : RoomDatabase() {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     CoffesRoomDataBase::class.java,
-                    "Coffee_db"
+                    "coffee_db"
                 ).addCallback(CoffesRoomDataBaseCallBack()).build()
                 INSTANCE = instance
                 // return instance

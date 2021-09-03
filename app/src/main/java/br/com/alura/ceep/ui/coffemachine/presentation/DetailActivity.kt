@@ -30,6 +30,7 @@ class DetailActivity : AppCompatActivity() {
     private lateinit var description: TextView
     private lateinit var intensity: TextView
     private lateinit var size: TextView
+    private lateinit var capsules: TextView
     private lateinit var image: ImageView
     private lateinit var coffeToolbar: Toolbar
 
@@ -52,6 +53,7 @@ class DetailActivity : AppCompatActivity() {
         intensity = findViewById(R.id.intensity)
         size = findViewById(R.id.size)
         image = findViewById(R.id.image)
+        capsules = findViewById(R.id.capsules)
         coffeToolbar = findViewById(R.id.coffe_toolbar)
         setSupportActionBar(coffeToolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
@@ -62,6 +64,7 @@ class DetailActivity : AppCompatActivity() {
             description.text = coffee?.description
             size.text = coffee?.quantity
             intensity.text = coffee?.intensity
+            capsules.text= coffee?.capsules.toString()
             image.setImageResource(coffee!!.image)
         }
     }
