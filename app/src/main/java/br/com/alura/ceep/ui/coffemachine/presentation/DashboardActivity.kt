@@ -24,9 +24,6 @@ class DashboardActivity : AppCompatActivity(),
         nav.setOnNavigationItemSelectedListener(this)
         supportFragmentManager.beginTransaction().replace(R.id.frame, HomeFragment()).commit()
 
-//        viewModel.list.observe(this) { ok ->
-//            viewModel.getAllCoffes()
-//        }
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {

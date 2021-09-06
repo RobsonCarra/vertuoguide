@@ -33,7 +33,7 @@ abstract class CoffesRoomDataBase : RoomDatabase() {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     CoffesRoomDataBase::class.java,
-                    "coffee_db"
+                    "coffee1"
                 ).addCallback(CoffesRoomDataBaseCallBack()).build()
                 INSTANCE = instance
                 // return instance

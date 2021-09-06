@@ -5,26 +5,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.TextView
-import android.widget.Toast
-import androidx.activity.viewModels
-import androidx.core.view.isEmpty
-import androidx.core.view.isNotEmpty
+import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import br.com.alura.ceep.ui.coffemachine.CoffesApplication
 import br.com.alura.ceep.ui.coffemachine.R
-import br.com.alura.ceep.ui.coffemachine.domain.Coffee
 import br.com.alura.ceep.ui.coffemachine.helpers.CoffesRoomDataBase
 import br.com.alura.ceep.ui.coffemachine.presentation.custom.ItemAdapter
 import br.com.alura.ceep.ui.coffemachine.repository.CoffesRepository
 import br.com.alura.ceep.ui.coffemachine.viewmodel.CoffesViewModel
-import com.google.android.material.textfield.TextInputEditText
-import com.google.android.material.textfield.TextInputLayout
 import kotlinx.coroutines.launch
 
 class InventoryFragment : Fragment() {
@@ -38,7 +30,7 @@ class InventoryFragment : Fragment() {
     }
 
     private lateinit var itemAdapter: ItemAdapter
-    private lateinit var putName: TextInputEditText
+    private lateinit var putName: AutoCompleteTextView
     private lateinit var amount: TextView
     private lateinit var plus: Button
     private lateinit var less: Button
@@ -72,6 +64,7 @@ class InventoryFragment : Fragment() {
         save = view.findViewById(R.id.save_button)
         new = view.findViewById(R.id.new_coffe_button)
         recyclerView = view.findViewById(R.id.coffe_recyclerview_inventory)
+
     }
 
     private fun observers() {
@@ -79,12 +72,20 @@ class InventoryFragment : Fragment() {
             itemAdapter.list.addAll(coffes)
             itemAdapter.notifyDataSetChanged()
         }
+        viewModel.coffee.observe(viewLifecycleOwner, Observer {
+            val adapter =
+                ArrayAdapter(requireContext(), R.layout.support_simple_spinner_dropdown_item, it)
+            putName.setAdapter(adapter)
+        })
+
         viewModel.added.observe(viewLifecycleOwner) { saved ->
             if (saved) {
                 Toast.makeText(requireContext(), "Salvo com sucesso", Toast.LENGTH_SHORT).show()
             }
             viewModel.getAll()
         }
+
+
     }
 
     private fun listeners() {
@@ -105,16 +106,16 @@ class InventoryFragment : Fragment() {
             }
         }
         save.setOnClickListener { v: View? ->
-            val name = putName.text.toString()
-            val amountConverted = amount.text.toString().toLong()
-//            if (name.isNotEmpty()) {
-//
-//            } else () {
-//                Toast.makeText(
-//                    requireContext(), "adada",
-//                    Toast.LENGTH_SHORT
-//                ).show()
-//            }
+////            val name = putName.text.toString()
+//            val amountConverted = amount.text.toString().toLong()
+////            if (name.isNotEmpty()) {
+////
+////            } else () {
+////                Toast.makeText(
+////                    requireContext(), "adada",
+////                    Toast.LENGTH_SHORT
+////                ).show()
+////            }
 
 
         }
@@ -122,7 +123,6 @@ class InventoryFragment : Fragment() {
             val intent = Intent(context, NewCoffeeActivity::class.java)
             context?.startActivity(intent)
         }
-
     }
 
     private fun initList() {

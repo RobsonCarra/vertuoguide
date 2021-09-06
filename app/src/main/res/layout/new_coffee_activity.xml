@@ -42,7 +42,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/nunito"
             android:hint="name"
-            android:textColor="#F3EFEF"
+            android:textColor="#000000"
             android:textColorHint="#F0ECEC"
             android:textSize="14sp" />
 
@@ -69,11 +69,11 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/put_description"
             android:layout_width="match_parent"
-            android:layout_height="148dp"
+            android:layout_height="120dp"
             android:fontFamily="@font/nunito"
             android:gravity="top"
             android:hint="description"
-            android:textColor="#F3EFEF"
+            android:textColor="#000000"
             android:textColorHint="#F0ECEC"
             android:textSize="14sp" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -81,7 +81,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/intensity"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="0dp"
+        android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         app:boxCornerRadiusBottomEnd="10dp"
@@ -93,12 +93,40 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/put_intensity"
-            android:layout_width="100dp"
-            android:layout_height="45dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:fontFamily="@font/nunito"
             android:hint="intensity"
             android:inputType="number"
-            android:textColor="#F3EFEF"
+            android:textColor="#000000"
+            android:textColorHint="#F0ECEC"
+            android:textSize="14sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/quantity"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
+        app:boxCornerRadiusBottomEnd="10dp"
+        app:boxCornerRadiusBottomStart="10dp"
+        app:boxCornerRadiusTopEnd="10dp"
+        app:boxCornerRadiusTopStart="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/intensity"
+        app:layout_constraintEnd_toEndOf="@+id/description"
+        app:layout_constraintStart_toEndOf="@+id/intensity"
+        app:layout_constraintTop_toTopOf="@+id/intensity">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/put_quantity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nunito"
+            android:hint="quantity in ml"
+            android:inputType="number"
+            android:textColor="#000000"
             android:textColorHint="#F0ECEC"
             android:textSize="14sp" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -118,19 +146,15 @@
 
     <Button
         android:id="@+id/save_button"
-        android:layout_width="160dp"
+        android:layout_width="0dp"
         android:layout_height="60dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginRight="24dp"
+        android:layout_marginTop="24dp"
         android:fontFamily="@font/nunito_extrabold"
         android:text="SAVE"
         app:cornerRadius="40dp"
-        app:layout_constraintBottom_toBottomOf="@+id/intensity"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/intensity"
-        app:layout_constraintTop_toTopOf="@+id/intensity" />
+        app:layout_constraintEnd_toEndOf="@+id/quantity"
+        app:layout_constraintStart_toStartOf="@+id/intensity"
+        app:layout_constraintTop_toBottomOf="@+id/intensity" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

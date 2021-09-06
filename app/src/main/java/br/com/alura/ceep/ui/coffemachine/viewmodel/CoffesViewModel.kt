@@ -1,13 +1,15 @@
 package br.com.alura.ceep.ui.coffemachine.viewmodel
 
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
+import androidx.room.RoomDatabase
 import br.com.alura.ceep.ui.coffemachine.domain.Coffee
+import br.com.alura.ceep.ui.coffemachine.helpers.CoffesRoomDataBase
+import br.com.alura.ceep.ui.coffemachine.repository.CoffesDao
 import br.com.alura.ceep.ui.coffemachine.repository.CoffesRepository
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlin.coroutines.coroutineContext
 
 class CoffesViewModel(
 
@@ -15,10 +17,19 @@ class CoffesViewModel(
 
 ) : ViewModel() {
     val list = MutableLiveData<List<Coffee>>()
+    var coffee: MutableLiveData<List<Coffee>> = MutableLiveData()
     val filteredById = MutableLiveData<List<Coffee>>()
     val added = MutableLiveData<Boolean>(false)
     val updated = MutableLiveData<Boolean>(true)
     val deleted = MutableLiveData<Coffee>()
+
+
+    fun getByName(name: String) {
+        CoroutineScope(Dispatchers.Main).launch {
+            val coffees = coffesRepository.getByName(name)
+            coffee.postValue(coffees)
+        }
+    }
 
     fun getAll() {
         viewModelScope.launch(Dispatchers.IO) {

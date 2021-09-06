@@ -32,6 +32,7 @@ class NewCoffeeActivity : AppCompatActivity() {
     private lateinit var putName: TextInputEditText
     private lateinit var putDescription: TextInputEditText
     private lateinit var putIntensity: TextInputEditText
+    private lateinit var putQuantity: TextInputEditText
     private lateinit var coffeToolbar: Toolbar
     private lateinit var save: Button
 
@@ -52,6 +53,7 @@ class NewCoffeeActivity : AppCompatActivity() {
         putName = findViewById(R.id.put_name)
         putDescription = findViewById(R.id.put_description)
         putIntensity = findViewById(R.id.put_intensity)
+        putQuantity = findViewById(R.id.put_quantity)
         save = findViewById(R.id.save_button)
         coffeToolbar = findViewById(R.id.coffe_toolbar)
         setSupportActionBar(coffeToolbar)
@@ -66,39 +68,77 @@ class NewCoffeeActivity : AppCompatActivity() {
             val name = putName.text.toString()
             val description = putDescription.text.toString()
             val intensity = putIntensity.text.toString()
-            val quantity = "240 ml"
+            val quantity = putQuantity.text.toString()
             val capsules = 0
-            if (name.isNotEmpty() && description.isNotEmpty() && intensity.isNotEmpty()) {
+            if (name.isNotEmpty() && description.isNotEmpty() && intensity.isNotEmpty() && quantity.isNotEmpty()) {
                 val coffee = Coffee(
                     0, name, capsules.toLong(), description,
-                    intensity, quantity, R.drawable.capuccino
+                    intensity, quantity + " ml", R.drawable.capuccino
                 )
                 viewModel.add(coffee)
-            } else if (name.isNotEmpty() && description.isNotEmpty() && intensity.isEmpty()) {
+            } else if (name.isEmpty() && description.isNotEmpty() && intensity.isNotEmpty() && quantity.isNotEmpty()) {
                 Toast.makeText(
-                    this, "please enter the value of" +
-                            " the intensity of the coffee",
+                    this, "please enter the name of the coffe",
                     Toast.LENGTH_SHORT
                 ).show()
-            } else if (name.isNotEmpty() && description.isEmpty() && intensity.isEmpty()) {
+            }else if (name.isNotEmpty() && description.isEmpty() && intensity.isNotEmpty() && quantity.isNotEmpty()) {
+                    Toast.makeText(
+                        this, "please enter the description of the coffe",
+                        Toast.LENGTH_SHORT
+                    ).show()
+            }else if (name.isNotEmpty() && description.isNotEmpty() && intensity.isEmpty() && quantity.isNotEmpty()) {
                 Toast.makeText(
-                    this, "please enter the value of" +
-                            " the description and the intensity of the coffee",
+                    this, "please enter the value of the coffee intensity",
                     Toast.LENGTH_SHORT
                 ).show()
-            } else if (name.isEmpty() && description.isNotEmpty() && intensity.isNotEmpty()) {
+            }else if (name.isNotEmpty() && description.isNotEmpty() && intensity.isNotEmpty() && quantity.isEmpty()) {
                 Toast.makeText(
-                    this, "please enter the name of the coffee",
+                    this, "please enter the value of the coffee quantity",
                     Toast.LENGTH_SHORT
                 ).show()
-            } else if (name.isEmpty() && description.isEmpty() && intensity.isNotEmpty()) {
+            } else if (name.isEmpty() && description.isNotEmpty() && intensity.isNotEmpty() && quantity.isNotEmpty()) {
                 Toast.makeText(
-                    this, "please enter the name and the descripiton of the coffee",
+                    this, "please enter the value of all itens",
                     Toast.LENGTH_SHORT
                 ).show()
-            } else if (name.isNotEmpty() && description.isEmpty() && intensity.isNotEmpty()) {
+            } else if (name.isEmpty() && description.isEmpty() && intensity.isNotEmpty() && quantity.isNotEmpty()) {
                 Toast.makeText(
-                    this, "please enter the descripiton of the coffee",
+                    this, "please enter the value of all itens",
+                    Toast.LENGTH_SHORT
+                ).show()
+            } else if (name.isEmpty() && description.isEmpty() && intensity.isEmpty() && quantity.isNotEmpty()) {
+                Toast.makeText(
+                    this, "please enter the value of all itens",
+                    Toast.LENGTH_SHORT
+                ).show()
+            } else if (name.isNotEmpty() && description.isEmpty() && intensity.isEmpty() && quantity.isEmpty()) {
+                Toast.makeText(
+                    this, "please enter the value of all itens",
+                    Toast.LENGTH_SHORT
+                ).show()
+            } else if (name.isNotEmpty() && description.isNotEmpty() && intensity.isNotEmpty() && quantity.isEmpty()) {
+                Toast.makeText(
+                    this, "please enter the value of all itens",
+                    Toast.LENGTH_SHORT
+                ).show()
+            } else if (name.isNotEmpty() && description.isNotEmpty() && intensity.isNotEmpty() && quantity.isEmpty()) {
+                Toast.makeText(
+                    this, "please enter the value of all itens",
+                    Toast.LENGTH_SHORT
+                ).show()
+            } else if (name.isNotEmpty() && description.isEmpty() && intensity.isNotEmpty() && quantity.isEmpty()) {
+                Toast.makeText(
+                    this, "please enter the value of all itens",
+                    Toast.LENGTH_SHORT
+                ).show()
+            } else if (name.isNotEmpty() && description.isEmpty() && intensity.isEmpty() && quantity.isNotEmpty()) {
+                Toast.makeText(
+                    this, "please enter the value of all itens",
+                    Toast.LENGTH_SHORT
+                ).show()
+            } else if (name.isNotEmpty() && description.isNotEmpty() && intensity.isEmpty() && quantity.isEmpty()) {
+                Toast.makeText(
+                    this, "please enter the value of all itens",
                     Toast.LENGTH_SHORT
                 ).show()
             } else {
