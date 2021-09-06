@@ -62,8 +62,8 @@ class DetailActivity : AppCompatActivity() {
             val coffee = bundle.getParcelable("coffe") as Coffee?
             name.text = coffee?.name
             description.text = coffee?.description
-            size.text = coffee?.quantity
-            intensity.text = coffee?.intensity
+            size.text = coffee?.quantity.toString()
+            intensity.text = coffee?.intensity.toString()
             capsules.text= coffee?.capsules.toString()
             image.setImageResource(coffee!!.image)
         }

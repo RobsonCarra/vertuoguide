@@ -17,17 +17,17 @@ class CoffesViewModel(
 
 ) : ViewModel() {
     val list = MutableLiveData<List<Coffee>>()
-    var coffee: MutableLiveData<List<Coffee>> = MutableLiveData()
+    var coffeeFiltered: MutableLiveData<List<Coffee>> = MutableLiveData()
     val filteredById = MutableLiveData<List<Coffee>>()
     val added = MutableLiveData<Boolean>(false)
     val updated = MutableLiveData<Boolean>(true)
     val deleted = MutableLiveData<Coffee>()
 
 
-    fun getByName(name: String) {
-        CoroutineScope(Dispatchers.Main).launch {
-            val coffees = coffesRepository.getByName(name)
-            coffee.postValue(coffees)
+    fun searchByName(name: String) {
+        CoroutineScope(Dispatchers.IO).launch {
+            val coffees = coffesRepository.searchByName(name)
+            coffeeFiltered.postValue(coffees)
         }
     }
 

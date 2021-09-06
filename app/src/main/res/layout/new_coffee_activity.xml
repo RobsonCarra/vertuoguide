@@ -80,16 +80,20 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/intensity"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="120dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
         android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintStart_toStartOf="@+id/description"
+        app:layout_constraintTop_toBottomOf="@+id/description"
         app:boxCornerRadiusBottomEnd="10dp"
         app:boxCornerRadiusBottomStart="10dp"
         app:boxCornerRadiusTopEnd="10dp"
         app:boxCornerRadiusTopStart="10dp"
-        app:layout_constraintStart_toStartOf="@+id/description"
-        app:layout_constraintTop_toBottomOf="@+id/description">
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        >
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/put_intensity"
@@ -98,26 +102,29 @@
             android:fontFamily="@font/nunito"
             android:hint="intensity"
             android:inputType="number"
+            android:text="4"
             android:textColor="#000000"
             android:textColorHint="#F0ECEC"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/quantity"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/intensity"
+        app:layout_constraintEnd_toEndOf="@+id/description"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toTopOf="@+id/intensity"
         app:boxCornerRadiusBottomEnd="10dp"
         app:boxCornerRadiusBottomStart="10dp"
         app:boxCornerRadiusTopEnd="10dp"
         app:boxCornerRadiusTopStart="10dp"
-        app:layout_constraintBottom_toBottomOf="@+id/intensity"
-        app:layout_constraintEnd_toEndOf="@+id/description"
-        app:layout_constraintStart_toEndOf="@+id/intensity"
-        app:layout_constraintTop_toTopOf="@+id/intensity">
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        >
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/put_quantity"
@@ -126,9 +133,11 @@
             android:fontFamily="@font/nunito"
             android:hint="quantity in ml"
             android:inputType="number"
+            android:text="150"
             android:textColor="#000000"
-            android:textColorHint="#F0ECEC"
-            android:textSize="14sp" />
+            android:textColorHint="#000000"
+            android:textSize="14sp"
+            />
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
@@ -155,6 +164,13 @@
         app:layout_constraintEnd_toEndOf="@+id/quantity"
         app:layout_constraintStart_toStartOf="@+id/intensity"
         app:layout_constraintTop_toBottomOf="@+id/intensity" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5"
+        />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

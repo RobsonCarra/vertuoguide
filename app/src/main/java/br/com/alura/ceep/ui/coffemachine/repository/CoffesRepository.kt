@@ -9,7 +9,11 @@ class CoffesRepository(private val coffesDao: CoffesDao) {
 
     fun getById(id: Long) = coffesDao.getById(id)
 
-    fun getByName(name: String) = coffesDao.getByName(name)
+    fun searchByName(name: String): List<Coffee> {
+        val all = getAll()
+        val filtered = all.filter { it.name.lowercase().contains(name.lowercase()) }
+        return filtered
+    }
 
     fun delete(coffee: Coffee): Boolean {
         try {

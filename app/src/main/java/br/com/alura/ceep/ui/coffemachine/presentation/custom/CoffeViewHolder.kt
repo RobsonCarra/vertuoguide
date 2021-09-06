@@ -34,8 +34,8 @@ class CoffeeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         image.setImageResource(coffee.image)
         description.text = coffee.description
         name.text = coffee.name
-        size.text = coffee.quantity
-        intensity.text = coffee.intensity
+        size.text = coffee.quantity.toString()
+        intensity.text = coffee.intensity.toString()
         capsules.text = coffee.capsules.toString()
     }
 }

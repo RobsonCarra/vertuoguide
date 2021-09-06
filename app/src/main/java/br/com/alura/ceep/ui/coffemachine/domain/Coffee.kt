@@ -8,11 +8,11 @@ import kotlinx.parcelize.Parcelize
 @Entity
 @Parcelize
 class Coffee(
-    @PrimaryKey(autoGenerate = true) var id: Long,
+    @PrimaryKey(autoGenerate = true) var id: Long? = 0L,
     var name: String,
-    var capsules: Long,
+    var capsules: Int,
     var description: String,
-    var intensity: String,
-    var quantity: String,
+    var intensity: Int,
+    var quantity: Int,
     var image: Int
 ) : Parcelable
