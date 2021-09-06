@@ -24,5 +24,4 @@ class ItemAdapter() :
     override fun getItemCount(): Int {
         return list.count()
     }
-
 }
