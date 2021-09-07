@@ -9,11 +9,11 @@ import android.widget.*
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import br.com.alura.ceep.ui.coffemachine.R
+import br.com.alura.ceep.ui.coffemachine.domain.Coffee
 import br.com.alura.ceep.ui.coffemachine.helpers.CoffesRoomDataBase
 import br.com.alura.ceep.ui.coffemachine.presentation.custom.ItemAdapter
 import br.com.alura.ceep.ui.coffemachine.repository.CoffesRepository
@@ -23,86 +23,97 @@ import kotlinx.coroutines.launch
 
 class InventoryFragment : Fragment() {
 
-  private val viewModel: CoffesViewModel by viewModels {
-    CoffesViewModel.CoffesViewModelFactory(
-      CoffesRepository(
-        CoffesRoomDataBase.getDatabase(requireContext()).coffesDao()
-      )
-    )
-  }
-
-  private lateinit var itemAdapter: ItemAdapter
-  private lateinit var putName: TextInputEditText
-  private lateinit var new: Button
-  private lateinit var recyclerView: RecyclerView
-
-  override fun onCreateView(
-    inflater: LayoutInflater, container: ViewGroup?,
-    savedInstanceState: Bundle?
-  ): View? {
-    return inflater.inflate(R.layout.inventory_fragment, container, false)
-  }
-
-  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    super.onViewCreated(view, savedInstanceState)
-    setup(view)
-    listeners()
-    initList()
-    observers()
-    watchers()
-    lifecycleScope.launch {
-      viewModel.getAll()
+    private val viewModel: CoffesViewModel by viewModels {
+        CoffesViewModel.CoffesViewModelFactory(
+            CoffesRepository(
+                CoffesRoomDataBase.getDatabase(requireContext()).coffesDao()
+            )
+        )
     }
-  }
 
-  private fun setup(view: View) {
-    putName = view.findViewById(R.id.put_name)
-    new = view.findViewById(R.id.new_coffe_button)
-    recyclerView = view.findViewById(R.id.coffe_recyclerview_inventory)
-  }
+    private lateinit var itemAdapter: ItemAdapter
+    private lateinit var putName: TextInputEditText
+    private lateinit var new: Button
+    private lateinit var recyclerView: RecyclerView
+    private var id: Long? = null
 
-  private fun observers() {
-    viewModel.list.observe(viewLifecycleOwner) { coffes ->
-      itemAdapter.list.clear()
-      itemAdapter.list.addAll(coffes)
-      itemAdapter.notifyDataSetChanged()
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return inflater.inflate(R.layout.inventory_fragment, container, false)
     }
-    viewModel.coffeeFiltered.observe(viewLifecycleOwner, { list ->
-      itemAdapter.list.clear()
-      itemAdapter.list.addAll(list)
-      itemAdapter.notifyDataSetChanged()
-    })
-    viewModel.added.observe(viewLifecycleOwner) { saved ->
-      if (saved) {
-        Toast.makeText(requireContext(), "Salvo com sucesso", Toast.LENGTH_SHORT).show()
-      }
-      viewModel.getAll()
-    }
-  }
 
-  private fun listeners() {
-    new.setOnClickListener { v: View? ->
-      val intent = Intent(context, NewCoffeeActivity::class.java)
-      context?.startActivity(intent)
-    }
-  }
-
-  private fun watchers() {
-    putName.doAfterTextChanged { typed ->
-      typed?.let {
-        if (it.count() >= 3) {
-          viewModel.searchByName(typed.toString())
-        } else if (it.count() == 0){
-          viewModel.getAll()
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setup(view)
+        listeners()
+        initList()
+        observers()
+        watchers()
+        lifecycleScope.launch {
+            viewModel.getAll()
         }
-      }
     }
-  }
 
-  private fun initList() {
-    itemAdapter = ItemAdapter()
-    recyclerView.setHasFixedSize(true)
-    recyclerView.layoutManager = LinearLayoutManager(requireContext())
-    recyclerView.adapter = itemAdapter
-  }
+    private fun onChangeCoffedata(selected: Coffee) {
+        val bundle = Bundle()
+        bundle.putParcelable("coffe", selected)
+        val intent = Intent(requireContext(), NewCoffeeActivity::class.java)
+        intent.putExtras(bundle)
+        requireContext().startActivity(intent)
+    }
+
+    private fun setup(view: View) {
+        putName = view.findViewById(R.id.put_name)
+        new = view.findViewById(R.id.new_coffe_button)
+        recyclerView = view.findViewById(R.id.coffe_recyclerview_inventory)
+    }
+
+    private fun observers() {
+        viewModel.list.observe(viewLifecycleOwner) { coffes ->
+            itemAdapter.list.clear()
+            itemAdapter.list.addAll(coffes)
+            itemAdapter.notifyDataSetChanged()
+        }
+        viewModel.coffeeFiltered.observe(viewLifecycleOwner, { list ->
+            itemAdapter.list.clear()
+            itemAdapter.list.addAll(list)
+            itemAdapter.notifyDataSetChanged()
+        })
+        viewModel.added.observe(viewLifecycleOwner) { saved ->
+            if (saved) {
+                Toast.makeText(requireContext(), "Salvo com sucesso", Toast.LENGTH_SHORT).show()
+            }
+            viewModel.getAll()
+        }
+    }
+
+    private fun listeners() {
+        new.setOnClickListener { v: View? ->
+            val intent = Intent(context, NewCoffeeActivity::class.java)
+            context?.startActivity(intent)
+        }
+    }
+
+    private fun watchers() {
+        putName.doAfterTextChanged { typed ->
+            typed?.let {
+                if (it.count() >= 3) {
+                    viewModel.searchByName(typed.toString())
+                } else if (it.count() == 0) {
+                    viewModel.getAll()
+                }
+            }
+        }
+    }
+
+    fun initList() {
+        itemAdapter = ItemAdapter(selected = { selected ->
+            onChangeCoffedata(selected)
+        })
+        recyclerView.setHasFixedSize(true)
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        recyclerView.adapter = itemAdapter
+    }
 }

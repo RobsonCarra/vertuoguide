@@ -1,5 +1,6 @@
 package br.com.alura.ceep.ui.coffemachine.presentation
 
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.View
@@ -36,6 +37,8 @@ class NewCoffeeActivity : AppCompatActivity() {
     private lateinit var putCapsules: TextInputEditText
     private lateinit var coffeToolbar: Toolbar
     private lateinit var save: Button
+    private var id: Long? = null
+
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,10 +48,36 @@ class NewCoffeeActivity : AppCompatActivity() {
         listeners()
         initList()
         observers()
-        lifecycleScope.launch {
-            viewModel.getAll()
-        }
+        verifyCoffeClicked()
+        load()
     }
+
+    private fun initList() {
+    }
+
+    //
+    private fun verifyCoffeClicked() {
+        val bundle = intent.extras
+        if (bundle != null) {
+            val coffee = bundle.getParcelable("coffe") as Coffee?
+            coffee?.let {
+                if (it.id != null) {
+                    id = it.id
+                }
+            }
+            putName.setText(coffee?.name)
+            putDescription.setText(coffee?.description)
+            putQuantity.setText(coffee?.quantity.toString())
+            putCapsules.setText(coffee?.capsules.toString())
+            putIntensity.setText(coffee?.intensity.toString())
+        }
+
+    }
+
+
+    private fun load() {
+    }
+
 
     private fun setup() {
         putName = findViewById(R.id.put_name)
@@ -108,6 +137,7 @@ class NewCoffeeActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
             val coffee = Coffee(
+                id = id,
                 name = name,
                 capsules = capsules,
                 description = description,
@@ -120,15 +150,14 @@ class NewCoffeeActivity : AppCompatActivity() {
 
     }
 
-    private fun initList() {
-    }
 
     private fun observers() {
         viewModel.added.observe(this) { saved ->
             if (saved) {
                 Toast.makeText(this, "Salvo com sucesso", Toast.LENGTH_SHORT).show()
+                val intent = Intent(this, HomeFragment::class.java)
+                this.startActivity(intent)
             }
-            viewModel.getAll()
         }
     }
 }
