@@ -64,7 +64,7 @@ class DetailActivity : AppCompatActivity() {
             description.text = coffee?.description
             size.text = coffee?.quantity.toString()
             intensity.text = coffee?.intensity.toString()
-            capsules.text= coffee?.capsules.toString()
+            capsules.text = coffee?.capsules.toString()
             image.setImageResource(coffee!!.image)
         }
     }

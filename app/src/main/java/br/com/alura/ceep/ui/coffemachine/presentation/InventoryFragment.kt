@@ -35,7 +35,6 @@ class InventoryFragment : Fragment() {
     private lateinit var putName: TextInputEditText
     private lateinit var new: Button
     private lateinit var recyclerView: RecyclerView
-    private var id: Long? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

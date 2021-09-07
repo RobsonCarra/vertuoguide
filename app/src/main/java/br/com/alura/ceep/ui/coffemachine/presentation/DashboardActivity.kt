@@ -8,11 +8,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class DashboardActivity : AppCompatActivity(),
     BottomNavigationView.OnNavigationItemSelectedListener {
-//    private val viewModel: CoffesViewModel by viewModels {
-//        CoffesViewModel.CoffesViewModelFactory(
-//            (application as CoffesApplication).coffesRepository
-//        )
-//    }
 
     private val nav: BottomNavigationView by lazy {
         findViewById(R.id.navigation)

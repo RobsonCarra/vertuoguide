@@ -155,7 +155,7 @@ class NewCoffeeActivity : AppCompatActivity() {
         viewModel.added.observe(this) { saved ->
             if (saved) {
                 Toast.makeText(this, "Salvo com sucesso", Toast.LENGTH_SHORT).show()
-                val intent = Intent(this, HomeFragment::class.java)
+                val intent = Intent(this, DashboardActivity::class.java)
                 this.startActivity(intent)
             }
         }
