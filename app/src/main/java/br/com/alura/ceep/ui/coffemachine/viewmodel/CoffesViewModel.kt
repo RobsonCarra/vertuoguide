@@ -27,9 +27,12 @@ class CoffesViewModel(
         viewModelScope.launch(Dispatchers.IO) {
             coffesRepository.getAll()
         }
-       coffesRepository.listCoffee.observe(owner) { coffees ->
-           list.postValue(coffees)/////
-       }
+    }
+
+    fun observerCoffees(owner: LifecycleOwner){
+        coffesRepository.listCoffee.observe(owner){coffees ->
+            list.postValue(coffees)
+        }
     }
 
 //    fun searchByName(name: String) {

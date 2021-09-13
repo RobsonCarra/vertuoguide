@@ -51,6 +51,7 @@ class InventoryFragment : Fragment() {
 //        watchers()
         lifecycleScope.launch {
             viewModel.getAll(viewLifecycleOwner)
+            viewModel.observerCoffees(viewLifecycleOwner)
         }
     }
 
