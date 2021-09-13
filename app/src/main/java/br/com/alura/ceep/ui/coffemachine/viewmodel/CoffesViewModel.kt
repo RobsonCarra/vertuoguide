@@ -24,6 +24,7 @@ class CoffesViewModel(
 
     fun getAll() {
         viewModelScope.launch(Dispatchers.IO) {
+            coffesRepository.getAll()
             val coffee = coffesRepository.listCoffee
             list.postValue(coffee.value)
         }
