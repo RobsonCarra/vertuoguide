@@ -5,8 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
-import androidx.core.widget.doAfterTextChanged
+import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -75,17 +74,17 @@ class InventoryFragment : Fragment() {
             itemAdapter.list.addAll(coffes)
             itemAdapter.notifyDataSetChanged()
         }
-        viewModel.coffeeFiltered.observe(viewLifecycleOwner, { list ->
-            itemAdapter.list.clear()
-            itemAdapter.list.addAll(list)
-            itemAdapter.notifyDataSetChanged()
-        })
-        viewModel.added.observe(viewLifecycleOwner) { saved ->
-            if (saved) {
-                Toast.makeText(requireContext(), "Salvo com sucesso", Toast.LENGTH_SHORT).show()
-            }
-            viewModel.getAll()
-        }
+//        viewModel.coffeeFiltered.observe(viewLifecycleOwner, { list ->
+//            itemAdapter.list.clear()
+//            itemAdapter.list.addAll(list)
+//            itemAdapter.notifyDataSetChanged()
+//        })
+//        viewModel.added.observe(viewLifecycleOwner) { saved ->
+//            if (saved) {
+//                Toast.makeText(requireContext(), "Salvo com sucesso", Toast.LENGTH_SHORT).show()
+//            }
+//            viewModel.getAll()
+//        }
     }
 
     private fun listeners() {

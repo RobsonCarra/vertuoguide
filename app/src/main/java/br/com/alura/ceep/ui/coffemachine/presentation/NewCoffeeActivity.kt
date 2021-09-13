@@ -1,25 +1,19 @@
 package br.com.alura.ceep.ui.coffemachine.presentation
 
-import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.view.View
 import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.lifecycle.lifecycleScope
 import br.com.alura.ceep.ui.coffemachine.R
 import br.com.alura.ceep.ui.coffemachine.domain.Coffee
 import br.com.alura.ceep.ui.coffemachine.helpers.CoffesRoomDataBase
 import br.com.alura.ceep.ui.coffemachine.repository.CoffesRepository
 import br.com.alura.ceep.ui.coffemachine.viewmodel.CoffesViewModel
 import com.google.android.material.textfield.TextInputEditText
-import kotlinx.coroutines.launch
 
 class NewCoffeeActivity : AppCompatActivity() {
 
@@ -145,20 +139,20 @@ class NewCoffeeActivity : AppCompatActivity() {
                 quantity = quantity.toString(),
                 image = R.drawable.capuccino.toString()
             )
-            viewModel.add(coffee)
+//            viewModel.add(coffee)
         }
 
     }
 
 
     private fun observers() {
-        viewModel.added.observe(this) { saved ->
-            if (saved) {
-                Toast.makeText(this, "Salvo com sucesso", Toast.LENGTH_SHORT).show()
-                val intent = Intent(this, DashboardActivity::class.java)
-                this.startActivity(intent)
-            }
-        }
+//        viewModel.added.observe(this) { saved ->
+//            if (saved) {
+//                Toast.makeText(this, "Salvo com sucesso", Toast.LENGTH_SHORT).show()
+//                val intent = Intent(this, DashboardActivity::class.java)
+//                this.startActivity(intent)
+//            }
+//        }
     }
 }
 

@@ -6,13 +6,11 @@ import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import br.com.alura.ceep.ui.coffemachine.R
-import org.w3c.dom.Text
 
 
 class ProfileFragment : Fragment() {
@@ -37,7 +35,6 @@ class ProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setup(view)
         listeners()
-
     }
 
     private fun setup(view: View) {

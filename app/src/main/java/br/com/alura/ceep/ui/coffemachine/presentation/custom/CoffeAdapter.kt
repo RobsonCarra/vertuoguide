@@ -13,9 +13,8 @@ import br.com.alura.ceep.ui.coffemachine.presentation.DetailActivity
 
 class CoffeAdapter() :
     RecyclerView.Adapter<CoffeeViewHolder>() {
-
-    private var context: Context? = null
     var list = ArrayList<Coffee>()
+    private var context: Context? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CoffeeViewHolder {
         context = parent.context

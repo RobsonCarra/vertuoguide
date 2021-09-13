@@ -1,22 +1,13 @@
 package br.com.alura.ceep.ui.coffemachine.viewmodel
 
-import android.util.Log
-import android.widget.Toast
-import androidx.lifecycle.*
-import androidx.room.RoomDatabase
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
 import br.com.alura.ceep.ui.coffemachine.domain.Coffee
-import br.com.alura.ceep.ui.coffemachine.helpers.CoffesRoomDataBase
-import br.com.alura.ceep.ui.coffemachine.presentation.custom.CoffeeInterface
-import br.com.alura.ceep.ui.coffemachine.presentation.custom.CoffeeViewHolder
-import br.com.alura.ceep.ui.coffemachine.repository.CoffesDao
 import br.com.alura.ceep.ui.coffemachine.repository.CoffesRepository
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import kotlin.coroutines.coroutineContext
 
 class CoffesViewModel(
 
@@ -24,11 +15,11 @@ class CoffesViewModel(
 
 ) : ViewModel() {
     val list = MutableLiveData<List<Coffee>>()
-    var coffeeFiltered: MutableLiveData<List<Coffee>> = MutableLiveData()
-    val filteredById = MutableLiveData<List<Coffee>>()
-    val added = MutableLiveData<Boolean>(false)
-    val updated = MutableLiveData<Boolean>(true)
-    val deleted = MutableLiveData<Coffee>()
+//    var coffeeFiltered: MutableLiveData<List<Coffee>> = MutableLiveData()
+//    val filteredById = MutableLiveData<List<Coffee>>()
+//    val added = MutableLiveData<Boolean>(false)
+//    val updated = MutableLiveData<Boolean>(true)
+//    val deleted = MutableLiveData<Coffee>()
 
 
     fun getAll() {
@@ -52,39 +43,39 @@ class CoffesViewModel(
 //        }
 //    }
 
-    fun getById(id: Long) {
-        viewModelScope.launch(Dispatchers.IO) {
-            val coffes = coffesRepository.getById(id)
-            filteredById.postValue(coffes)
-        }
-    }
-
-    fun add(coffee: Coffee) {
-        viewModelScope.launch(Dispatchers.IO) {
-            val saved = coffesRepository.save(coffee)
-            if (saved) {
-                added.postValue(true)
-            }
-        }
-    }
-
-    fun update(coffee: Coffee) {
-        viewModelScope.launch(Dispatchers.IO) {
-            val update = coffesRepository.save(coffee)
-            if (update) {
-                updated.postValue(true)
-            }
-        }
-    }
-
-    fun delete(coffee: Coffee) {
-        viewModelScope.launch(Dispatchers.IO) {
-            val excluded = coffesRepository.delete(coffee)
-            if (excluded) {
-                deleted.postValue(coffee)
-            }
-        }
-    }
+//    fun getById(id: Long) {
+//        viewModelScope.launch(Dispatchers.IO) {
+//            val coffes = coffesRepository.getById(id)
+//            filteredById.postValue(coffes)
+//        }
+//    }
+//
+//    fun add(coffee: Coffee) {
+//        viewModelScope.launch(Dispatchers.IO) {
+//            val saved = coffesRepository.save(coffee)
+//            if (saved) {
+//                added.postValue(true)
+//            }
+//        }
+//    }
+//
+//    fun update(coffee: Coffee) {
+//        viewModelScope.launch(Dispatchers.IO) {
+//            val update = coffesRepository.save(coffee)
+//            if (update) {
+//                updated.postValue(true)
+//            }
+//        }
+//    }
+//
+//    fun delete(coffee: Coffee) {
+//        viewModelScope.launch(Dispatchers.IO) {
+//            val excluded = coffesRepository.delete(coffee)
+//            if (excluded) {
+//                deleted.postValue(coffee)
+//            }
+//        }
+//    }
 
     class CoffesViewModelFactory(
         private val coffesRepository: CoffesRepository

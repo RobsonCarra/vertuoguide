@@ -8,7 +8,7 @@ import kotlinx.parcelize.Parcelize
 @Entity
 @Parcelize
 class Coffee(
-    @PrimaryKey(autoGenerate = true) var id: Long? = null,
+    @PrimaryKey var id: Long? = null,
     var name: String,
     var capsules: Int,
     var description: String,
