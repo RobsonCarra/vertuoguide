@@ -49,7 +49,7 @@ class InventoryFragment : Fragment() {
         listeners()
         initList()
         observers()
-        watchers()
+//        watchers()
         lifecycleScope.launch {
             viewModel.getAll()
         }
@@ -95,17 +95,17 @@ class InventoryFragment : Fragment() {
         }
     }
 
-    private fun watchers() {
-        putName.doAfterTextChanged { typed ->
-            typed?.let {
-                if (it.count() >= 3) {
-                    viewModel.searchByName(typed.toString())
-                } else if (it.count() == 0) {
-                    viewModel.getAll()
-                }
-            }
-        }
-    }
+//    private fun watchers() {
+//        putName.doAfterTextChanged { typed ->
+//            typed?.let {
+//                if (it.count() >= 3) {
+//                    viewModel.searchByName(typed.toString())
+//                } else if (it.count() == 0) {
+//                    viewModel.getAll()
+//                }
+//            }
+//        }
+//    }
 
     fun initList() {
         itemAdapter = ItemAdapter(selected = { selected ->

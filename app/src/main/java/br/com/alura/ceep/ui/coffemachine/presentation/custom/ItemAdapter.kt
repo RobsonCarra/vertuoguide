@@ -1,17 +1,12 @@
 package br.com.alura.ceep.ui.coffemachine.presentation.custom
 
 import android.content.Context
-import android.content.Intent
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import br.com.alura.ceep.ui.coffemachine.R
 import br.com.alura.ceep.ui.coffemachine.domain.Coffee
-import br.com.alura.ceep.ui.coffemachine.presentation.DetailActivity
-import br.com.alura.ceep.ui.coffemachine.presentation.NewCoffeeActivity
 
 
 class ItemAdapter(val selected: (coffee: Coffee) -> Unit) :

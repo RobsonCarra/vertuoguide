@@ -6,6 +6,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import br.com.alura.ceep.ui.coffemachine.R
 import br.com.alura.ceep.ui.coffemachine.domain.Coffee
+import com.squareup.picasso.Picasso
 
 class CoffeeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
@@ -26,11 +27,14 @@ class CoffeeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     }
 
     fun bind(coffee: Coffee) {
-        image.setImageResource(coffee.image)
         description.text = coffee.description
         name.text = coffee.name
-        size.text = coffee.quantity.toString()
-        intensity.text = coffee.intensity.toString()
+        size.text = coffee.quantity
+        intensity.text = coffee.intensity
         capsules.text = coffee.capsules.toString()
+
+        Picasso.get().load(coffee.image)
+            .placeholder(R.drawable.ic_launcher_background)
+            .into(image)
     }
 }

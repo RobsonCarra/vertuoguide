@@ -111,7 +111,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/my_data" />
 
             <TextView
-                android:id="@+id/ligado"
+                android:id="@+id/on"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="24dp"
@@ -120,12 +120,12 @@
                 android:text="LIGADO"
                 android:textColor="#58D697"
                 android:textSize="10sp"
-                app:layout_constraintBottom_toBottomOf="@+id/desligado"
+                app:layout_constraintBottom_toBottomOf="@+id/off"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/desligado" />
+                app:layout_constraintTop_toTopOf="@+id/off" />
 
             <TextView
-                android:id="@+id/desligado"
+                android:id="@+id/off"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
@@ -135,7 +135,7 @@
                 android:textColor="#e5e5e5"
                 android:textSize="10sp"
                 app:layout_constraintBottom_toBottomOf="@+id/notifications"
-                app:layout_constraintEnd_toStartOf="@+id/ligado"
+                app:layout_constraintEnd_toStartOf="@+id/on"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toEndOf="@+id/notifications"
                 app:layout_constraintTop_toTopOf="@+id/notifications" />

@@ -1,18 +1,49 @@
 package br.com.alura.ceep.ui.coffemachine.repository
 
+import android.util.Log
+import androidx.lifecycle.MutableLiveData
 import br.com.alura.ceep.ui.coffemachine.domain.Coffee
+import br.com.alura.ceep.ui.coffemachine.helpers.RetrofitConfig
+import br.com.alura.ceep.ui.coffemachine.presentation.custom.CoffeeInterface
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 
 class CoffesRepository(private val coffesDao: CoffesDao) {
 
-    fun getAll() = coffesDao.getAll()
+    val listCoffee = MutableLiveData<List<Coffee>>()
+
+    fun getAll() {
+        val retrofitClient = RetrofitConfig().getClient()
+        val endpoint = retrofitClient.create(CoffeeInterface::class.java)
+        val callback = endpoint.getAll()
+        callback.enqueue(object : Callback<List<Coffee>> {
+            override fun onResponse(
+                call: Call<List<Coffee>>,
+                response: Response<List<Coffee>>
+            ) {
+                response.body()?.let {
+                    listCoffee.postValue(it)
+                }
+            }
+            override fun onFailure(call: Call<List<Coffee>>, t: Throwable) {
+                Log.d("MainActivity", "onFailure: " + t.message)
+            }
+        })
+    }
+
+
+//    fun getAll() = coffesDao.getAll()
 
     fun getById(id: Long) = coffesDao.getById(id)
 
-    fun searchByName(name: String): List<Coffee> {
+    fun searchByName(name: String) {
         val all = getAll()
-        val filtered = all.filter { it.name.lowercase().contains(name.lowercase()) }
-        return filtered
+//        val filtered = all.filter { it.name.lowercase().contains(name.lowercase()) }
+//        return filtered
     }
 
     fun delete(coffee: Coffee): Boolean {

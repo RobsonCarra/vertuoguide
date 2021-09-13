@@ -1,6 +1,5 @@
 package br.com.alura.ceep.ui.coffemachine.repository
 
-import androidx.lifecycle.LiveData
 import androidx.room.*
 import br.com.alura.ceep.ui.coffemachine.domain.Coffee
 

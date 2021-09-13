@@ -15,7 +15,6 @@ class CoffeAdapter() :
     RecyclerView.Adapter<CoffeeViewHolder>() {
 
     private var context: Context? = null
-
     var list = ArrayList<Coffee>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CoffeeViewHolder {

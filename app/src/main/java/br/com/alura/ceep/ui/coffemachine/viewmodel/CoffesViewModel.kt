@@ -1,14 +1,21 @@
 package br.com.alura.ceep.ui.coffemachine.viewmodel
 
+import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.*
 import androidx.room.RoomDatabase
 import br.com.alura.ceep.ui.coffemachine.domain.Coffee
 import br.com.alura.ceep.ui.coffemachine.helpers.CoffesRoomDataBase
+import br.com.alura.ceep.ui.coffemachine.presentation.custom.CoffeeInterface
+import br.com.alura.ceep.ui.coffemachine.presentation.custom.CoffeeViewHolder
 import br.com.alura.ceep.ui.coffemachine.repository.CoffesDao
 import br.com.alura.ceep.ui.coffemachine.repository.CoffesRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import kotlin.coroutines.coroutineContext
 
 class CoffesViewModel(
@@ -24,19 +31,26 @@ class CoffesViewModel(
     val deleted = MutableLiveData<Coffee>()
 
 
-    fun searchByName(name: String) {
-        CoroutineScope(Dispatchers.IO).launch {
-            val coffees = coffesRepository.searchByName(name)
-            coffeeFiltered.postValue(coffees)
+    fun getAll() {
+        viewModelScope.launch(Dispatchers.IO) {
+            val coffee = coffesRepository.listCoffee
+            list.postValue(coffee.value)
         }
     }
 
-    fun getAll() {
-        viewModelScope.launch(Dispatchers.IO) {
-            val coffes = coffesRepository.getAll()
-            list.postValue(coffes)
-        }
-    }
+//    fun searchByName(name: String) {
+//        CoroutineScope(Dispatchers.IO).launch {
+//            val coffees = coffesRepository.searchByName(name)
+//            coffeeFiltered.postValue(coffees)
+//        }
+//    }
+
+//    fun getAll() {
+//        viewModelScope.launch(Dispatchers.IO) {
+//            val coffes = coffesRepository.getAll()
+//            list.postValue(coffes)
+//        }
+//    }
 
     fun getById(id: Long) {
         viewModelScope.launch(Dispatchers.IO) {

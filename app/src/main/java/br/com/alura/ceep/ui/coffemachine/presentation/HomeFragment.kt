@@ -56,12 +56,12 @@ class HomeFragment() : Fragment() {
     }
 
     private fun observers() {
-        viewModel.added.observe(viewLifecycleOwner) { coffes ->
+        viewModel.added.observe(viewLifecycleOwner) { coffee ->
             viewModel.getAll()
         }
-        viewModel.list.observe(viewLifecycleOwner) { coffes ->
-            coffeAdapter.list.addAll(coffes)
-            coffeAdapter.notifyDataSetChanged()
+        viewModel.list.observe(viewLifecycleOwner) { coffee ->
+                coffeAdapter.list.addAll(coffee)
+                coffeAdapter.notifyDataSetChanged()
         }
     }
 

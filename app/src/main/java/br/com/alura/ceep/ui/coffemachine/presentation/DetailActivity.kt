@@ -15,6 +15,7 @@ import br.com.alura.ceep.ui.coffemachine.domain.Coffee
 import br.com.alura.ceep.ui.coffemachine.helpers.CoffesRoomDataBase
 import br.com.alura.ceep.ui.coffemachine.repository.CoffesRepository
 import br.com.alura.ceep.ui.coffemachine.viewmodel.CoffesViewModel
+import com.squareup.picasso.Picasso
 import kotlinx.coroutines.launch
 
 class DetailActivity : AppCompatActivity() {
@@ -65,7 +66,9 @@ class DetailActivity : AppCompatActivity() {
             size.text = coffee?.quantity.toString()
             intensity.text = coffee?.intensity.toString()
             capsules.text = coffee?.capsules.toString()
-            image.setImageResource(coffee!!.image)
+            Picasso.get().load(coffee?.image)
+                .placeholder(R.drawable.ic_launcher_background)
+                .into(image)
         }
     }
 

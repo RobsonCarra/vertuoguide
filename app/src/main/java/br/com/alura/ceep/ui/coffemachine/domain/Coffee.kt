@@ -12,7 +12,7 @@ class Coffee(
     var name: String,
     var capsules: Int,
     var description: String,
-    var intensity: Int,
-    var quantity: Int,
-    var image: Int
+    var intensity: String,
+    var quantity: String,
+    var image: String
 ) : Parcelable

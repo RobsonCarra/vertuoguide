@@ -9,8 +9,10 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import br.com.alura.ceep.ui.coffemachine.R
+import org.w3c.dom.Text
 
 
 class ProfileFragment : Fragment() {
@@ -21,12 +23,13 @@ class ProfileFragment : Fragment() {
     private lateinit var terms: TextView
     private lateinit var myData: TextView
     private lateinit var exit: TextView
+    private lateinit var on: TextView
+    private lateinit var off: TextView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_profile, container, false)
     }
 
@@ -45,6 +48,8 @@ class ProfileFragment : Fragment() {
         terms = view.findViewById(R.id.terms_of_use)
         myData = view.findViewById(R.id.my_data)
         exit = view.findViewById(R.id.exit)
+        on = view.findViewById(R.id.on)
+        off = view.findViewById(R.id.off)
     }
 
     private fun listeners() {
@@ -55,8 +60,14 @@ class ProfileFragment : Fragment() {
             startActivity(intent)
 
         }
-
-
+        on.setOnClickListener { v: View? ->
+            Toast.makeText(context, "hello", Toast.LENGTH_SHORT).show()
+        }
+        off.setOnClickListener { v: View? ->
+        }
     }
 }
+
+
+
 
