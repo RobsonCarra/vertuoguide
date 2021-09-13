@@ -44,7 +44,7 @@ class HomeFragment() : Fragment() {
         observers()
         load()
         lifecycleScope.launch {
-            viewModel.getAll()
+            viewModel.getAll(viewLifecycleOwner)
         }
     }
 

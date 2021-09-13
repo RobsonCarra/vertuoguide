@@ -1,5 +1,6 @@
 package br.com.alura.ceep.ui.coffemachine.viewmodel
 
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -22,11 +23,13 @@ class CoffesViewModel(
 //    val deleted = MutableLiveData<Coffee>()
 
 
-    fun getAll() {
+    fun getAll(owner: LifecycleOwner) {
         viewModelScope.launch(Dispatchers.IO) {
-            val coffee = coffesRepository.listCoffee
-            list.postValue(coffee.value)
+            coffesRepository.getAll()
         }
+       coffesRepository.listCoffee.observe(owner) { coffees ->
+           list.postValue(coffees)/////
+       }
     }
 
 //    fun searchByName(name: String) {
