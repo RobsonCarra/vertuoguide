@@ -44,7 +44,7 @@ class DetailActivity : AppCompatActivity() {
         initList()
         observers()
         lifecycleScope.launch {
-            viewModel.getAll(this@DetailActivity)
+            viewModel.getAll()
         }
     }
 

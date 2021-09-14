@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import br.com.alura.ceep.ui.coffemachine.domain.Coffee
 import br.com.alura.ceep.ui.coffemachine.repository.CoffesRepository
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class CoffesViewModel(
@@ -23,15 +24,11 @@ class CoffesViewModel(
 //    val deleted = MutableLiveData<Coffee>()
 
 
-    fun getAll(owner: LifecycleOwner) {
-        viewModelScope.launch(Dispatchers.IO) {
-            coffesRepository.getAll()
-        }
-    }
-
-    fun observerCoffees(owner: LifecycleOwner){
-        coffesRepository.listCoffee.observe(owner){coffees ->
-            list.postValue(coffees)
+    fun getAll() {
+        viewModelScope.launch {
+            coffesRepository.getAll().collect { result ->
+                list.postValue(result)
+            }
         }
     }
 
