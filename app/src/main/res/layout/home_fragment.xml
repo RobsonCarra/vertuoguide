@@ -8,7 +8,7 @@
     tools:context=".presentation.DashboardActivity">
 
     <Button
-        android:id="@+id/add_coffe_button"
+        android:id="@+id/coffe_now_button"
         style="?android:attr/borderlessButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -42,7 +42,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/add_coffe_button"
+        app:layout_constraintTop_toBottomOf="@+id/coffe_now_button"
         tools:itemCount="3"
         tools:listitem="@layout/coffe_item_list" />
 

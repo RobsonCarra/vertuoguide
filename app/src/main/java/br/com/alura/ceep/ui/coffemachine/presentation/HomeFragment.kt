@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.LifecycleOwner
@@ -21,6 +22,7 @@ class HomeFragment() : Fragment() {
 
     private lateinit var recyclerView: RecyclerView
     private var coffeAdapter: CoffeAdapter = CoffeAdapter()
+    private lateinit var crashButton: Button
 
     private val viewModel: CoffesViewModel by viewModels {
         CoffesViewModel.CoffesViewModelFactory(
@@ -50,10 +52,16 @@ class HomeFragment() : Fragment() {
     }
 
     private fun listeners() {
+        crashButton.text = "Test Crash"
+        crashButton.setOnClickListener {
+            throw RuntimeException("Test Crash") // Force a crash
+        }
+
     }
 
     private fun setup(view: View) {
         recyclerView = view.findViewById(R.id.coffe_list_recyclerview)
+        crashButton = view.findViewById(R.id.coffe_now_button)
     }
 
     private fun observers() {
