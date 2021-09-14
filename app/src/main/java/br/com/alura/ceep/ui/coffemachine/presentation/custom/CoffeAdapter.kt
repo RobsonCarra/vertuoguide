@@ -25,11 +25,7 @@ class CoffeAdapter() :
 
     override fun onBindViewHolder(holder: CoffeeViewHolder, position: Int) {
         holder.itemView.setOnClickListener { v: View? ->
-            val bundle = Bundle()
-            bundle.putParcelable("coffe", list[position])
-            bundle.putString("nome", list[position].description)
             val intent = Intent(context, DetailActivity::class.java)
-            intent.putExtras(bundle)
             context?.startActivity(intent)
         }
         holder.bind(list.get(position))

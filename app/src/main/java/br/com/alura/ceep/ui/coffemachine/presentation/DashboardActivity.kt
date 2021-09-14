@@ -18,7 +18,6 @@ class DashboardActivity : AppCompatActivity(),
         setContentView(R.layout.dashboard_activity)
         nav.setOnNavigationItemSelectedListener(this)
         supportFragmentManager.beginTransaction().replace(R.id.frame, HomeFragment()).commit()
-
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {

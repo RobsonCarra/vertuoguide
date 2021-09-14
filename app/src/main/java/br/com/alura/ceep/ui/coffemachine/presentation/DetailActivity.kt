@@ -44,7 +44,7 @@ class DetailActivity : AppCompatActivity() {
         initList()
         observers()
         lifecycleScope.launch {
-            viewModel.getAll()
+            viewModel.getById()
         }
     }
 
@@ -58,18 +58,6 @@ class DetailActivity : AppCompatActivity() {
         coffeToolbar = findViewById(R.id.coffe_toolbar)
         setSupportActionBar(coffeToolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        val bundle = intent.extras
-        if (bundle != null) {
-            val coffee = bundle.getParcelable("coffe") as Coffee?
-            name.text = coffee?.name
-            description.text = coffee?.description
-            size.text = coffee?.quantity.toString()
-            intensity.text = coffee?.intensity.toString()
-            capsules.text = coffee?.capsules.toString()
-            Picasso.get().load(coffee?.image)
-                .placeholder(R.drawable.ic_launcher_background)
-                .into(image)
-        }
     }
 
     private fun listeners() {
@@ -82,7 +70,15 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private fun observers() {
-        viewModel.list.observe(this) { coffes ->
+        viewModel.coffeeById.observe(this) { coffe ->
+            name.text = coffe.name
+            description.text = coffe.description
+            size.text = coffe.quantity
+            intensity.text = coffe.intensity
+            capsules.text = coffe.capsules.toString()
+            Picasso.get().load(coffe.image)
+                .placeholder(R.drawable.ic_launcher_background)
+                .into(image)
         }
     }
 }

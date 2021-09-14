@@ -8,16 +8,27 @@ import java.net.HttpURLConnection
 
 class CoffesRepository(private val coffesDao: CoffesDao) {
 
-  suspend fun getAll() = flow {
-    val client = RetrofitConfig().getClient()
-    val api = client.create(CoffeeInterface::class.java)
-    val req = api.getAll()
-    val res = req.await()
-    when (res.code()) {
-      HttpURLConnection.HTTP_OK -> emit(res.body())
-      else -> Log.e("Repositorio", "Erro ao buscar os dados do GetAll ")
+    suspend fun getAll() = flow {
+        val client = RetrofitConfig().getClient()
+        val api = client.create(CoffeeInterface::class.java)
+        val req = api.getAll()
+        val res = req.await()
+        when (res.code()) {
+            HttpURLConnection.HTTP_OK -> emit(res.body())
+            else -> Log.e("Repositorio", "Erro ao buscar os dados do GetAll ")
+        }
     }
-  }
+
+    suspend fun getById() = flow {
+        val client = RetrofitConfig().getClient()
+        val api = client.create(CoffeeInterface::class.java)
+        val req = api.getById()
+        val res = req.await()
+        when (res.code()) {
+            HttpURLConnection.HTTP_OK -> emit(res.body())
+            else -> Log.e("Repositorio", "Erro ao buscar os dados do GetById ")
+        }
+    }
 
 //    fun getAll() = coffesDao.getAll()
 

@@ -17,6 +17,7 @@ class CoffesViewModel(
 
 ) : ViewModel() {
     val list = MutableLiveData<List<Coffee>>()
+    val coffeeById = MutableLiveData<Coffee>()
 //    var coffeeFiltered: MutableLiveData<List<Coffee>> = MutableLiveData()
 //    val filteredById = MutableLiveData<List<Coffee>>()
 //    val added = MutableLiveData<Boolean>(false)
@@ -31,6 +32,15 @@ class CoffesViewModel(
             }
         }
     }
+
+    fun getById() {
+        viewModelScope.launch {
+            coffesRepository.getById().collect { result ->
+                coffeeById.postValue(result)
+            }
+        }
+    }
+
 
 //    fun searchByName(name: String) {
 //        CoroutineScope(Dispatchers.IO).launch {
