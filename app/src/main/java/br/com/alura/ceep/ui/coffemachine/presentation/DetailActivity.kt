@@ -73,7 +73,7 @@ class DetailActivity : AppCompatActivity() {
         viewModel.coffeeById.observe(this) { coffe ->
             name.text = coffe.name
             description.text = coffe.description
-            size.text = coffe.quantity
+            size.text = coffe.quantity + " ml"
             intensity.text = coffe.intensity
             capsules.text = coffe.capsules.toString()
             Picasso.get().load(coffe.image)
