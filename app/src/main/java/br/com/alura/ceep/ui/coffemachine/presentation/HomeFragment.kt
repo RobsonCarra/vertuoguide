@@ -1,6 +1,8 @@
 package br.com.alura.ceep.ui.coffemachine.presentation
 
+import android.content.ContentValues.TAG
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,10 +14,15 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import br.com.alura.ceep.ui.coffemachine.R
+import br.com.alura.ceep.ui.coffemachine.domain.Coffee
 import br.com.alura.ceep.ui.coffemachine.helpers.CoffesRoomDataBase
 import br.com.alura.ceep.ui.coffemachine.presentation.custom.CoffeAdapter
 import br.com.alura.ceep.ui.coffemachine.repository.CoffesRepository
 import br.com.alura.ceep.ui.coffemachine.viewmodel.CoffesViewModel
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.firestore.SetOptions
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.launch
 
 class HomeFragment() : Fragment() {
@@ -52,12 +59,33 @@ class HomeFragment() : Fragment() {
     }
 
     private fun listeners() {
-        crashButton.text = "Test Crash"
-        crashButton.setOnClickListener {
-            throw RuntimeException("Test Crash") // Force a crash
-        }
 
+        val db = Firebase.firestore
+        // Update one field, creating the document if it does not already exist.
+//        val data = hashMapOf("capital" to true)
+//
+//        db.collection("cities").document("BJ")
+//            .set(data, SetOptions.merge())
+//        val city = hashMapOf(
+//            "name" to "Los Angeles",
+//            "state" to "CA",
+//            "country" to "USA"
+//        )
+//
+//        db.collection("cities").document("LA")
+//            .set(city)
+//            .addOnSuccessListener { Log.d(TAG, "DocumentSnapshot successfully written!") }
+//            .addOnFailureListener { e -> Log.w(TAG, "Error writing document", e) }
+
+//        var database = FirebaseDatabase.getInstance().reference
+//        database.setValue("Itajaí")
+
+        val coffee = Coffee(id = 10, "expresso", 10,
+            "duplo", "10", "200", "URL")
+
+        db.collection("cities").document("LA").set(coffee)
     }
+
 
     private fun setup(view: View) {
         recyclerView = view.findViewById(R.id.coffe_list_recyclerview)

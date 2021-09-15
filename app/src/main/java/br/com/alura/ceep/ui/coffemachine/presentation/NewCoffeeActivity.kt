@@ -1,5 +1,6 @@
 package br.com.alura.ceep.ui.coffemachine.presentation
 
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.widget.Button
@@ -13,7 +14,14 @@ import br.com.alura.ceep.ui.coffemachine.domain.Coffee
 import br.com.alura.ceep.ui.coffemachine.helpers.CoffesRoomDataBase
 import br.com.alura.ceep.ui.coffemachine.repository.CoffesRepository
 import br.com.alura.ceep.ui.coffemachine.viewmodel.CoffesViewModel
+import com.google.android.gms.tasks.OnFailureListener
+import com.google.android.gms.tasks.OnSuccessListener
 import com.google.android.material.textfield.TextInputEditText
+import com.google.firebase.firestore.DocumentReference
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
+import java.lang.Exception
 
 class NewCoffeeActivity : AppCompatActivity() {
 
@@ -29,6 +37,7 @@ class NewCoffeeActivity : AppCompatActivity() {
     private lateinit var putIntensity: TextInputEditText
     private lateinit var putQuantity: TextInputEditText
     private lateinit var putCapsules: TextInputEditText
+    private lateinit var dataBase: FirebaseFirestore
     private lateinit var coffeToolbar: Toolbar
     private lateinit var save: Button
     private var id: Long? = null
@@ -130,16 +139,28 @@ class NewCoffeeActivity : AppCompatActivity() {
                 ).show()
                 return@setOnClickListener
             }
+//            val coffee = Coffee(
+//                id = id,
+//                name = name,
+//                capsules = capsules,
+//                description = description,
+//                intensity = intensity.toString(),
+//                quantity = quantity.toString(),
+//                image = R.drawable.capuccino.toString()
+//            )
             val coffee = Coffee(
-                id = id,
-                name = name,
-                capsules = capsules,
-                description = description,
-                intensity = intensity.toString(),
-                quantity = quantity.toString(),
+                id,
+                name,
+                capsules,
+                description,
+                intensity.toString(),
+                quantity.toString(),
                 image = R.drawable.capuccino.toString()
             )
+            save(coffee)
 //            viewModel.add(coffee)
+            val intent = Intent(this, DashboardActivity::class.java)
+            this.startActivity(intent)
         }
 
     }
@@ -154,5 +175,11 @@ class NewCoffeeActivity : AppCompatActivity() {
 //            }
 //        }
     }
-}
+
+    private fun save(coffee: Coffee) {
+        dataBase.collection("coffees")
+            .add(coffee)
+            }
+    }
+
 
