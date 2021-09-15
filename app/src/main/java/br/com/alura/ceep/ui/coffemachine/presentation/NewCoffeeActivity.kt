@@ -1,8 +1,10 @@
 package br.com.alura.ceep.ui.coffemachine.presentation
 
+import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -19,6 +21,7 @@ import com.google.android.gms.tasks.OnSuccessListener
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Source
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import java.lang.Exception
@@ -37,7 +40,6 @@ class NewCoffeeActivity : AppCompatActivity() {
     private lateinit var putIntensity: TextInputEditText
     private lateinit var putQuantity: TextInputEditText
     private lateinit var putCapsules: TextInputEditText
-    private lateinit var dataBase: FirebaseFirestore
     private lateinit var coffeToolbar: Toolbar
     private lateinit var save: Button
     private var id: Long? = null
@@ -56,7 +58,8 @@ class NewCoffeeActivity : AppCompatActivity() {
     }
 
     private fun initList() {
-    }
+        }
+
 
     //
     private fun verifyCoffeClicked() {
@@ -77,10 +80,8 @@ class NewCoffeeActivity : AppCompatActivity() {
 
     }
 
-
     private fun load() {
     }
-
 
     private fun setup() {
         putName = findViewById(R.id.put_name)
@@ -95,6 +96,8 @@ class NewCoffeeActivity : AppCompatActivity() {
     }
 
     private fun listeners() {
+//        db = FirebaseFirestore.getInstance()
+//            .document("IceCreams/Flavours")
         coffeToolbar.setNavigationOnClickListener {
             onBackPressed()
         }
@@ -139,6 +142,23 @@ class NewCoffeeActivity : AppCompatActivity() {
                 ).show()
                 return@setOnClickListener
             }
+//            try {
+//                val items = HashMap<String, Any>()
+//                    items.put("Ingrediant-1", name)
+//                    items.put("Ingrediant-2", description)
+//                    items.put("Ingrediant-3", intensity)
+//                db.collection("flavour").document("Ingrediants").set(items).addOnSuccessListener {
+//                    void: Void? -> Toast.makeText(this,
+//                    "Sucessfully uploaded to the database",
+//                    Toast.LENGTH_SHORT).show()
+//                }.addOnFailureListener {
+//                    exception: java.lang.Exception -> Toast.makeText(this,
+//                    exception.toString(),
+//                    Toast.LENGTH_SHORT).show()
+//                }
+//            }catch (e:Exception){
+//                Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show()
+//            }
 //            val coffee = Coffee(
 //                id = id,
 //                name = name,
@@ -157,7 +177,6 @@ class NewCoffeeActivity : AppCompatActivity() {
                 quantity.toString(),
                 image = R.drawable.capuccino.toString()
             )
-            save(coffee)
 //            viewModel.add(coffee)
             val intent = Intent(this, DashboardActivity::class.java)
             this.startActivity(intent)
@@ -176,10 +195,6 @@ class NewCoffeeActivity : AppCompatActivity() {
 //        }
     }
 
-    private fun save(coffee: Coffee) {
-        dataBase.collection("coffees")
-            .add(coffee)
-            }
     }
 
 
