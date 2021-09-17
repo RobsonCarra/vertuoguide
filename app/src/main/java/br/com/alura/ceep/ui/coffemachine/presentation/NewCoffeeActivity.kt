@@ -58,7 +58,7 @@ class NewCoffeeActivity : AppCompatActivity() {
     }
 
     private fun initList() {
-        }
+    }
 
 
     //
@@ -158,15 +158,14 @@ class NewCoffeeActivity : AppCompatActivity() {
 
 
     private fun observers() {
-//        viewModel.added.observe(this) { saved ->
-//            if (saved) {
-//                Toast.makeText(this, "Salvo com sucesso", Toast.LENGTH_SHORT).show()
-//                val intent = Intent(this, DashboardActivity::class.java)
-//                this.startActivity(intent)
-//            }
-//        }
+        viewModel.added.observe(this) { saved ->
+            if (saved) {
+                Toast.makeText(this, "Salvo com sucesso", Toast.LENGTH_SHORT).show()
+                val intent = Intent(this, DashboardActivity::class.java)
+                this.startActivity(intent)
+            }
+        }
     }
-
-    }
+}
 
 
