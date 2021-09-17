@@ -43,9 +43,9 @@ class DetailActivity : AppCompatActivity() {
         listeners()
         initList()
         observers()
-        lifecycleScope.launch {
-            viewModel.getById()
-        }
+//        lifecycleScope.launch {
+//            viewModel.getById()
+//        }
     }
 
     private fun setup() {

@@ -7,21 +7,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import br.com.alura.ceep.ui.coffemachine.R
-import br.com.alura.ceep.ui.coffemachine.domain.Coffees
 import br.com.alura.ceep.ui.coffemachine.helpers.CoffesRoomDataBase
 import br.com.alura.ceep.ui.coffemachine.presentation.custom.CoffeAdapter
 import br.com.alura.ceep.ui.coffemachine.repository.CoffesRepository
 import br.com.alura.ceep.ui.coffemachine.viewmodel.CoffesViewModel
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.ktx.toObject
-import com.google.firebase.firestore.ktx.toObjects
 import kotlinx.coroutines.launch
 
 class HomeFragment() : Fragment() {
@@ -29,7 +25,6 @@ class HomeFragment() : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private var coffeAdapter: CoffeAdapter = CoffeAdapter()
     private lateinit var crashButton: Button
-    private lateinit var resultView: TextView
 
     private val viewModel: CoffesViewModel by viewModels {
         CoffesViewModel.CoffesViewModelFactory(
@@ -38,7 +33,6 @@ class HomeFragment() : Fragment() {
             )
         )
     }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -54,26 +48,26 @@ class HomeFragment() : Fragment() {
         observers()
         load()
         lifecycleScope.launch {
-            viewModel.getAll()
+            viewModel.getAll(viewLifecycleOwner)
         }
     }
 
     private fun listeners() {
-        val coffeesList = ArrayList<Coffees>()
-        val db = FirebaseFirestore.getInstance()
-        db.collection("coffees")
-            .get()
-            .addOnSuccessListener { result ->
-                for (document in result) {
-                    val myObjects = result.toObjects(Coffees::class.java)
-                    coffeesList.addAll(myObjects)
-                    Log.e(TAG,document.data.get("name").toString())
-                    Log.d(TAG, "${document.id} => ${document.data}")
-                }
-            }
-            .addOnFailureListener { exception ->
-                Log.w(TAG, "Error getting documents.", exception)
-            }
+//        val coffeesList = ArrayList<Coffees>()
+//        val db = FirebaseFirestore.getInstance()
+//        db.collection("coffees")
+//            .get()
+//            .addOnSuccessListener { result ->
+//                for (document in result) {
+//                    val myObjects = result.toObjects(Coffees::class.java)
+//                    coffeesList.addAll(myObjects)
+//                    Log.e(TAG,document.data.get("name").toString())
+//                    Log.d(TAG, "${document.id} => ${document.data}")
+//                }
+//            }
+//            .addOnFailureListener { exception ->
+//                Log.w(TAG, "Error getting documents.", exception)
+//            }
     }
 
     // Update one field, creating the document if it does not already exist.
@@ -104,7 +98,6 @@ class HomeFragment() : Fragment() {
     private fun setup(view: View) {
         recyclerView = view.findViewById(R.id.coffe_list_recyclerview)
         crashButton = view.findViewById(R.id.coffe_now_button)
-        resultView = view.findViewById(R.id.textViewResult)
     }
 
     private fun observers() {

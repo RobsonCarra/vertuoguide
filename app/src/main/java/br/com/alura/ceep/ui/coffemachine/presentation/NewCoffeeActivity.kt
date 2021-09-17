@@ -96,8 +96,6 @@ class NewCoffeeActivity : AppCompatActivity() {
     }
 
     private fun listeners() {
-//        db = FirebaseFirestore.getInstance()
-//            .document("IceCreams/Flavours")
         coffeToolbar.setNavigationOnClickListener {
             onBackPressed()
         }
@@ -177,7 +175,7 @@ class NewCoffeeActivity : AppCompatActivity() {
                 quantity.toString(),
                 image = R.drawable.capuccino.toString()
             )
-//            viewModel.add(coffee)
+            viewModel.add(coffee)
             val intent = Intent(this, DashboardActivity::class.java)
             this.startActivity(intent)
         }

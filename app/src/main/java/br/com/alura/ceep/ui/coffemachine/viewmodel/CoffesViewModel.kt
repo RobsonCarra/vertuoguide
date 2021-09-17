@@ -18,28 +18,38 @@ class CoffesViewModel(
 ) : ViewModel() {
     val list = MutableLiveData<List<Coffee>>()
     val coffeeById = MutableLiveData<Coffee>()
-//    var coffeeFiltered: MutableLiveData<List<Coffee>> = MutableLiveData()
+
+    //    var coffeeFiltered: MutableLiveData<List<Coffee>> = MutableLiveData()
 //    val filteredById = MutableLiveData<List<Coffee>>()
-//    val added = MutableLiveData<Boolean>(false)
+    val added = MutableLiveData<Boolean>(false)
 //    val updated = MutableLiveData<Boolean>(true)
 //    val deleted = MutableLiveData<Coffee>()
 
 
-    fun getAll() {
+    fun getAll(lifecycleOwner: LifecycleOwner) {
         viewModelScope.launch {
-            coffesRepository.getAll().collect { result ->
+            coffesRepository.getAll().observe(lifecycleOwner) { result ->
                 list.postValue(result)
             }
         }
     }
 
-    fun getById() {
-        viewModelScope.launch {
-            coffesRepository.getById().collect { result ->
-                coffeeById.postValue(result)
-            }
+    fun add(coffee: Coffee) {
+        viewModelScope.launch(Dispatchers.IO) {
+           val saved = coffesRepository.save(coffee)
+            if (saved==saved) {
+                added.postValue(true)
+        }
         }
     }
+//
+//    fun getById() {
+//        viewModelScope.launch {
+//            coffesRepository.getById().collect { result ->
+//                coffeeById.postValue(result)
+//            }
+//        }
+//    }
 
 
 //    fun searchByName(name: String) {
@@ -90,16 +100,18 @@ class CoffesViewModel(
 //        }
 //    }
 
-    class CoffesViewModelFactory(
-        private val coffesRepository: CoffesRepository
-    ) :
-        ViewModelProvider.Factory {
-        override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            if (modelClass.isAssignableFrom(CoffesViewModel::class.java)) {
-                @Suppress("UNCHECKED_CAST")
-                return CoffesViewModel(coffesRepository) as T
+        class CoffesViewModelFactory(
+            private val coffesRepository: CoffesRepository
+        ) :
+            ViewModelProvider.Factory {
+            override fun <T : ViewModel> create(modelClass: Class<T>): T {
+                if (modelClass.isAssignableFrom(CoffesViewModel::class.java)) {
+                    @Suppress("UNCHECKED_CAST")
+                    return CoffesViewModel(coffesRepository) as T
+                }
+                throw IllegalArgumentException("Unknown ViewModel class")
             }
-            throw IllegalArgumentException("Unknown ViewModel class")
         }
-    }
 }
+
+

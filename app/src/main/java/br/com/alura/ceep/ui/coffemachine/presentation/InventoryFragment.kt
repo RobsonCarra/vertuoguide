@@ -50,7 +50,7 @@ class InventoryFragment : Fragment() {
         observers()
 //        watchers()
         lifecycleScope.launch {
-            viewModel.getAll()
+            viewModel.getAll(viewLifecycleOwner)
         }
     }
 
