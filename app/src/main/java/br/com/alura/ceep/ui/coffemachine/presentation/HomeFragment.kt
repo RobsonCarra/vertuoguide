@@ -1,6 +1,7 @@
 package br.com.alura.ceep.ui.coffemachine.presentation
 
 import android.content.ContentValues.TAG
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -13,6 +14,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import br.com.alura.ceep.ui.coffemachine.R
+import br.com.alura.ceep.ui.coffemachine.domain.Coffee
 import br.com.alura.ceep.ui.coffemachine.helpers.CoffesRoomDataBase
 import br.com.alura.ceep.ui.coffemachine.presentation.custom.CoffeAdapter
 import br.com.alura.ceep.ui.coffemachine.repository.CoffesRepository
@@ -22,9 +24,11 @@ import kotlinx.coroutines.launch
 
 class HomeFragment() : Fragment() {
 
-    private lateinit var recyclerView: RecyclerView
-    private var coffeAdapter: CoffeAdapter = CoffeAdapter()
     private lateinit var crashButton: Button
+    private lateinit var recyclerView: RecyclerView
+    private var coffeAdapter: CoffeAdapter = CoffeAdapter(selected = { selected ->
+        (selected)
+    })
 
     private val viewModel: CoffesViewModel by viewModels {
         CoffesViewModel.CoffesViewModelFactory(
@@ -33,6 +37,7 @@ class HomeFragment() : Fragment() {
             )
         )
     }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -53,47 +58,7 @@ class HomeFragment() : Fragment() {
     }
 
     private fun listeners() {
-//        val coffeesList = ArrayList<Coffees>()
-//        val db = FirebaseFirestore.getInstance()
-//        db.collection("coffees")
-//            .get()
-//            .addOnSuccessListener { result ->
-//                for (document in result) {
-//                    val myObjects = result.toObjects(Coffees::class.java)
-//                    coffeesList.addAll(myObjects)
-//                    Log.e(TAG,document.data.get("name").toString())
-//                    Log.d(TAG, "${document.id} => ${document.data}")
-//                }
-//            }
-//            .addOnFailureListener { exception ->
-//                Log.w(TAG, "Error getting documents.", exception)
-//            }
     }
-
-    // Update one field, creating the document if it does not already exist.
-//        val data = hashMapOf("capital" to true)
-//
-//        db.collection("cities").document("BJ")
-//            .set(data, SetOptions.merge())
-//        val city = hashMapOf(
-//            "name" to "Los Angeles",
-//            "state" to "CA",
-//            "country" to "USA"
-//        )
-//
-//        db.collection("cities").document("LA")
-//            .set(city)
-//            .addOnSuccessListener { Log.d(TAG, "DocumentSnapshot successfully written!") }
-//            .addOnFailureListener { e -> Log.w(TAG, "Error writing document", e) }
-
-//        var database = FirebaseDatabase.getInstance().reference
-//        database.setValue("Itajaí")
-
-//        val coffee = Coffee(id = 10, "expresso", 10,
-//            "duplo", "10", "200", "URL")
-//
-//        db.collection("cities").document("LA").set(coffee)
-
 
     private fun setup(view: View) {
         recyclerView = view.findViewById(R.id.coffe_list_recyclerview)
@@ -101,9 +66,9 @@ class HomeFragment() : Fragment() {
     }
 
     private fun observers() {
-//        viewModel.added.observe(viewLifecycleOwner) { coffee ->
-//            viewModel.getAll()
-//        }
+        viewModel.added.observe(viewLifecycleOwner) { coffee ->
+            viewModel.getAll(viewLifecycleOwner)
+        }
         viewModel.list.observe(viewLifecycleOwner) { coffee ->
             coffeAdapter.list.addAll(coffee)
             coffeAdapter.notifyDataSetChanged()

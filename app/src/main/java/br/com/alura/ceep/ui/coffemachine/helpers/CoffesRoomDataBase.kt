@@ -16,10 +16,9 @@ abstract class CoffesRoomDataBase : RoomDatabase() {
     }
 
     companion object {
-
         @Volatile
         private var INSTANCE: CoffesRoomDataBase? = null
-        fun getDatabase(
+        fun getDatabase (
             context: Context
         ): CoffesRoomDataBase {
             // if the INSTANCE is not null, then return it,

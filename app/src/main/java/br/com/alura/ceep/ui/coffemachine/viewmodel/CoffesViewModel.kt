@@ -8,7 +8,6 @@ import androidx.lifecycle.viewModelScope
 import br.com.alura.ceep.ui.coffemachine.domain.Coffee
 import br.com.alura.ceep.ui.coffemachine.repository.CoffesRepository
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class CoffesViewModel(
@@ -18,9 +17,9 @@ class CoffesViewModel(
 ) : ViewModel() {
     val list = MutableLiveData<List<Coffee>>()
     val coffeeById = MutableLiveData<Coffee>()
+    var coffeeFiltered = MutableLiveData<Coffee>()
 
-    //    var coffeeFiltered: MutableLiveData<List<Coffee>> = MutableLiveData()
-//    val filteredById = MutableLiveData<List<Coffee>>()
+    //    val filteredById = MutableLiveData<List<Coffee>>()
     val added = MutableLiveData<Boolean>(false)
 //    val updated = MutableLiveData<Boolean>(true)
 //    val deleted = MutableLiveData<Coffee>()
@@ -34,9 +33,19 @@ class CoffesViewModel(
         }
     }
 
-    fun searchById(lifecycleOwner: LifecycleOwner) {
-        coffesRepository.getById().observe(lifecycleOwner) { result ->
-            list.postValue(result)
+    fun searchByName(name: String, lifecycleOwner: LifecycleOwner) {
+        viewModelScope.launch(Dispatchers.IO) {
+            coffesRepository.getByName(name).observe(lifecycleOwner) { result ->
+                coffeeFiltered.postValue(result)
+            }
+        }
+    }
+
+    fun searchById(id: Long, lifecycleOwner: LifecycleOwner) {
+        viewModelScope.launch(Dispatchers.IO) {
+            coffesRepository.getById(id).observe(lifecycleOwner) { result ->
+                coffeeById.postValue(result)
+            }
         }
     }
 

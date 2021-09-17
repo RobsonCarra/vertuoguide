@@ -9,10 +9,12 @@ import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.lifecycleScope
 import br.com.alura.ceep.ui.coffemachine.R
 import br.com.alura.ceep.ui.coffemachine.domain.Coffee
 import br.com.alura.ceep.ui.coffemachine.helpers.CoffesRoomDataBase
+import br.com.alura.ceep.ui.coffemachine.presentation.custom.CoffeAdapter
 import br.com.alura.ceep.ui.coffemachine.repository.CoffesRepository
 import br.com.alura.ceep.ui.coffemachine.viewmodel.CoffesViewModel
 import com.squareup.picasso.Picasso
@@ -34,6 +36,9 @@ class DetailActivity : AppCompatActivity() {
     private lateinit var capsules: TextView
     private lateinit var image: ImageView
     private lateinit var coffeToolbar: Toolbar
+    private var coffeAdapter: CoffeAdapter = CoffeAdapter(selected = { selected ->
+        onChangeCoffedata(selected)
+    })
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,9 +48,6 @@ class DetailActivity : AppCompatActivity() {
         listeners()
         initList()
         observers()
-//        lifecycleScope.launch {
-//            viewModel.getById()
-//        }
     }
 
     private fun setup() {
@@ -67,6 +69,13 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private fun initList() {
+        coffeAdapter
+    }
+
+    private fun onChangeCoffedata(selected: Coffee) {
+            selected.id?.let { coffee ->
+                viewModel.searchById(coffee, this)
+            }
     }
 
     private fun observers() {

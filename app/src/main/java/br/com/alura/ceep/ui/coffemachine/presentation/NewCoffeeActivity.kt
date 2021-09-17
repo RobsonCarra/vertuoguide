@@ -35,6 +35,7 @@ class NewCoffeeActivity : AppCompatActivity() {
             )
         )
     }
+
     private lateinit var putName: TextInputEditText
     private lateinit var putDescription: TextInputEditText
     private lateinit var putIntensity: TextInputEditText
@@ -99,6 +100,7 @@ class NewCoffeeActivity : AppCompatActivity() {
         coffeToolbar.setNavigationOnClickListener {
             onBackPressed()
         }
+
         save.setOnClickListener {
             val name = putName.text.toString()
             val description = putDescription.text.toString()
@@ -149,13 +151,13 @@ class NewCoffeeActivity : AppCompatActivity() {
                 quantity.toString(),
                 image = R.drawable.capuccino.toString()
             )
+
             viewModel.add(coffee)
             val intent = Intent(this, DashboardActivity::class.java)
             this.startActivity(intent)
         }
 
     }
-
 
     private fun observers() {
         viewModel.added.observe(this) { saved ->
@@ -166,6 +168,7 @@ class NewCoffeeActivity : AppCompatActivity() {
             }
         }
     }
+
 }
 
 

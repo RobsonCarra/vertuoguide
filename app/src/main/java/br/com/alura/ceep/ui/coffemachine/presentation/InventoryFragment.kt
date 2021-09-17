@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
+import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -49,7 +50,7 @@ class InventoryFragment : Fragment() {
         listeners()
         initList()
         observers()
-//        watchers()
+        watchers()
         lifecycleScope.launch {
             viewModel.getAll(viewLifecycleOwner)
         }
@@ -95,17 +96,17 @@ class InventoryFragment : Fragment() {
         }
     }
 
-//    private fun watchers() {
-//        putName.doAfterTextChanged { typed ->
-//            typed?.let {
-//                if (it.count() >= 3) {
-//                    viewModel.searchByName(typed.toString())
-//                } else if (it.count() == 0) {
-//                    viewModel.getAll()
-//                }
-//            }
-//        }
-//    }
+    private fun watchers() {
+        putName.doAfterTextChanged { typed ->
+            typed?.let {
+                if (it.count() >= 3) {
+                    viewModel.searchByName(typed.toString(), viewLifecycleOwner)
+                } else if (it.count() == 0) {
+                    viewModel.getAll(viewLifecycleOwner)
+                }
+            }
+        }
+    }
 
     fun initList() {
         itemAdapter = ItemAdapter(selected = { selected ->

@@ -1,20 +1,13 @@
 package br.com.alura.ceep.ui.coffemachine.repository
 
-import android.content.ContentValues
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import br.com.alura.ceep.ui.coffemachine.domain.Coffee
-import br.com.alura.ceep.ui.coffemachine.helpers.RetrofitConfig
-import br.com.alura.ceep.ui.coffemachine.presentation.custom.CoffeeInterface
 import com.google.common.reflect.TypeToken
 import com.google.firebase.firestore.*
 import com.google.gson.Gson
-import kotlinx.coroutines.flow.emitAll
-import kotlinx.coroutines.flow.flow
-import java.net.HttpURLConnection
 
 class CoffesRepository(private val coffesDao: CoffesDao) {
-    
+
     fun getAll(): MutableLiveData<List<Coffee>> {
         val data = MutableLiveData<List<Coffee>>()
         val coffeeList = ArrayList<Coffee>()
@@ -36,21 +29,36 @@ class CoffesRepository(private val coffesDao: CoffesDao) {
         return data
     }
 
-    fun getById(): MutableLiveData<List<Coffee>> {
-        val data = MutableLiveData<List<Coffee>>()
-        val coffeeList = ArrayList<Coffee>()
+    fun getByName(name: String): MutableLiveData<Coffee> {
+        val data = MutableLiveData<Coffee>()
         val db = FirebaseFirestore.getInstance()
-        db.collection("coffees").document()
+        db.collection("coffees").whereEqualTo("name", name)
             .addSnapshotListener { snapshot, exception ->
                 snapshot?.let { doc ->
                     val type = object : TypeToken<Coffee>() {}.type
-                    val json = Gson().toJson(doc.data)
+                    val json = Gson().toJson(doc)
                     val coffee = Gson().fromJson<Coffee>(json, type)
                     coffee?.let { cf ->
-                        coffeeList.add(cf)
+                        data.postValue(cf)
                     }
                 }
-                data.postValue(coffeeList)
+            }
+        return data
+    }
+
+    fun getById(id: Long): MutableLiveData<Coffee> {
+        val data = MutableLiveData<Coffee>()
+        val db = FirebaseFirestore.getInstance()
+        db.collection("coffees").whereEqualTo("name", id)
+            .addSnapshotListener { snapshot, exception ->
+                snapshot?.let { doc ->
+                    val type = object : TypeToken<Coffee>() {}.type
+                    val json = Gson().toJson(doc)
+                    val coffee = Gson().fromJson<Coffee>(json, type)
+                    coffee?.let { cf ->
+                        data.postValue(cf)
+                    }
+                }
             }
         return data
     }
