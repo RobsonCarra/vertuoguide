@@ -49,7 +49,7 @@ class CoffesRepository(private val coffesDao: CoffesDao) {
     fun getById(id: Long): MutableLiveData<Coffee> {
         val data = MutableLiveData<Coffee>()
         val db = FirebaseFirestore.getInstance()
-        db.collection("coffees").whereEqualTo("name", id)
+        db.collection("coffees").whereEqualTo("id", id)
             .addSnapshotListener { snapshot, exception ->
                 snapshot?.let { doc ->
                     val type = object : TypeToken<Coffee>() {}.type
