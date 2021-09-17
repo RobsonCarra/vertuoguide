@@ -34,14 +34,21 @@ class CoffesViewModel(
         }
     }
 
-    fun add(coffee: Coffee) {
-        viewModelScope.launch(Dispatchers.IO) {
-           val saved = coffesRepository.save(coffee)
-            if (saved==saved) {
-                added.postValue(true)
-        }
+    fun searchById(lifecycleOwner: LifecycleOwner) {
+        coffesRepository.getById().observe(lifecycleOwner) { result ->
+            list.postValue(result)
         }
     }
+
+    fun add(coffee: Coffee) {
+        viewModelScope.launch(Dispatchers.IO) {
+            val saved = coffesRepository.save(coffee)
+            if (saved == saved) {
+                added.postValue(true)
+            }
+        }
+    }
+
 //
 //    fun getById() {
 //        viewModelScope.launch {
@@ -100,18 +107,18 @@ class CoffesViewModel(
 //        }
 //    }
 
-        class CoffesViewModelFactory(
-            private val coffesRepository: CoffesRepository
-        ) :
-            ViewModelProvider.Factory {
-            override fun <T : ViewModel> create(modelClass: Class<T>): T {
-                if (modelClass.isAssignableFrom(CoffesViewModel::class.java)) {
-                    @Suppress("UNCHECKED_CAST")
-                    return CoffesViewModel(coffesRepository) as T
-                }
-                throw IllegalArgumentException("Unknown ViewModel class")
+    class CoffesViewModelFactory(
+        private val coffesRepository: CoffesRepository
+    ) :
+        ViewModelProvider.Factory {
+        override fun <T : ViewModel> create(modelClass: Class<T>): T {
+            if (modelClass.isAssignableFrom(CoffesViewModel::class.java)) {
+                @Suppress("UNCHECKED_CAST")
+                return CoffesViewModel(coffesRepository) as T
             }
+            throw IllegalArgumentException("Unknown ViewModel class")
         }
+    }
 }
 
 

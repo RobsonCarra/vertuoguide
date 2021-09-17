@@ -140,32 +140,6 @@ class NewCoffeeActivity : AppCompatActivity() {
                 ).show()
                 return@setOnClickListener
             }
-//            try {
-//                val items = HashMap<String, Any>()
-//                    items.put("Ingrediant-1", name)
-//                    items.put("Ingrediant-2", description)
-//                    items.put("Ingrediant-3", intensity)
-//                db.collection("flavour").document("Ingrediants").set(items).addOnSuccessListener {
-//                    void: Void? -> Toast.makeText(this,
-//                    "Sucessfully uploaded to the database",
-//                    Toast.LENGTH_SHORT).show()
-//                }.addOnFailureListener {
-//                    exception: java.lang.Exception -> Toast.makeText(this,
-//                    exception.toString(),
-//                    Toast.LENGTH_SHORT).show()
-//                }
-//            }catch (e:Exception){
-//                Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show()
-//            }
-//            val coffee = Coffee(
-//                id = id,
-//                name = name,
-//                capsules = capsules,
-//                description = description,
-//                intensity = intensity.toString(),
-//                quantity = quantity.toString(),
-//                image = R.drawable.capuccino.toString()
-//            )
             val coffee = Coffee(
                 id,
                 name,

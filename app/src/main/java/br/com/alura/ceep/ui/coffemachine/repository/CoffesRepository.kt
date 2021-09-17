@@ -36,7 +36,7 @@ class CoffesRepository(private val coffesDao: CoffesDao) {
         return data
     }
 
-    fun getById(id: Int): MutableLiveData<List<Coffee>> {
+    fun getById(): MutableLiveData<List<Coffee>> {
         val data = MutableLiveData<List<Coffee>>()
         val coffeeList = ArrayList<Coffee>()
         val db = FirebaseFirestore.getInstance()
