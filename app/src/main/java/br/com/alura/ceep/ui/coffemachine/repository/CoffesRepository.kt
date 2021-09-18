@@ -30,10 +30,11 @@ class CoffesRepository(private val coffesDao: CoffesDao) {
     return data
   }
 
-  fun getByName(name: String): MutableLiveData<Coffee> {
-    val data = MutableLiveData<Coffee>()
+  fun getByName(name: String): MutableLiveData<List<Coffee>> {
+    val data = MutableLiveData<List<Coffee>>()
+    val list = ArrayList<Coffee>()
     val db = FirebaseFirestore.getInstance()
-    db.collection("coffees").whereEqualTo("name", name)
+    db.collection("coffees")
       .addSnapshotListener { snapshot, exception ->
         snapshot?.documents?.let { docs ->
           docs.forEach { doc ->
@@ -41,9 +42,12 @@ class CoffesRepository(private val coffesDao: CoffesDao) {
             val json = Gson().toJson(doc.data)
             val coffee = Gson().fromJson<Coffee>(json, type)
             coffee?.let { cf ->
-              data.postValue(cf)
+              list.add(cf)
             }
           }
+          val filtered =
+            list.filter { coffee -> coffee.name.lowercase().contains(name.lowercase()) }
+          data.postValue(filtered)
         }
       }
     return data
