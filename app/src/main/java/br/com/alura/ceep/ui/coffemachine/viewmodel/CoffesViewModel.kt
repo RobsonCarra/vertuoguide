@@ -17,8 +17,7 @@ class CoffesViewModel(
 ) : ViewModel() {
   val list = MutableLiveData<List<Coffee>>()
   val coffeeById = MutableLiveData<Coffee>()
-  var coffeeFiltered = MutableLiveData<Coffee>()
-
+  var coffeeFiltered = MutableLiveData<List<Coffee>>()
   //    val filteredById = MutableLiveData<List<Coffee>>()
   val added = MutableLiveData<Boolean>(false)
 //    val updated = MutableLiveData<Boolean>(true)
