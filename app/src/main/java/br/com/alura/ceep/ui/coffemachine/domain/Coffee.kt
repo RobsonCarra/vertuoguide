@@ -4,6 +4,7 @@ import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import kotlinx.parcelize.Parcelize
+import java.util.UUID
 
 @Entity
 @Parcelize
@@ -14,5 +15,6 @@ class Coffee(
     var description: String,
     var intensity: String,
     var quantity: String,
-    var image: String
+    var image: String,
+    var uid: String = UUID.randomUUID().toString()
 ) : Parcelable

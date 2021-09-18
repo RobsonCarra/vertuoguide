@@ -36,9 +36,6 @@ class DetailActivity : AppCompatActivity() {
     private lateinit var capsules: TextView
     private lateinit var image: ImageView
     private lateinit var coffeToolbar: Toolbar
-    private var coffeAdapter: CoffeAdapter = CoffeAdapter(selected = { selected ->
-        onChangeCoffedata(selected)
-    })
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,8 +43,10 @@ class DetailActivity : AppCompatActivity() {
         setContentView(R.layout.item_detail)
         setup()
         listeners()
-        initList()
         observers()
+        intent.extras?.getString("uid")?.let { uid ->
+            viewModel.searchByUid(uid, this)
+        }
     }
 
     private fun setup() {
@@ -66,16 +65,6 @@ class DetailActivity : AppCompatActivity() {
         coffeToolbar.setNavigationOnClickListener { arrow: View? ->
             onBackPressed()
         }
-    }
-
-    private fun initList() {
-        coffeAdapter
-    }
-
-    private fun onChangeCoffedata(selected: Coffee) {
-            selected.id?.let { coffee ->
-                viewModel.searchById(coffee, this)
-            }
     }
 
     private fun observers() {

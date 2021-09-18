@@ -26,8 +26,13 @@ class HomeFragment() : Fragment() {
 
     private lateinit var crashButton: Button
     private lateinit var recyclerView: RecyclerView
-    private var coffeAdapter: CoffeAdapter = CoffeAdapter(selected = { selected ->
-        (selected)
+
+    private var coffeAdapter: CoffeAdapter = CoffeAdapter(selected = { coffee ->
+        val bundle = Bundle()
+        bundle.putString("uid", coffee.uid)
+        val intent = Intent(context, DetailActivity::class.java)
+        intent.putExtras(bundle)
+        context?.startActivity(intent)
     })
 
     private val viewModel: CoffesViewModel by viewModels {

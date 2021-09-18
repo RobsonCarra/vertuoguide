@@ -34,8 +34,6 @@ class CoffeAdapter(val selected: (coffee: Coffee) -> Unit) :
         holder.bind(list.get(position))
         holder.itemView.setOnClickListener { v: View? ->
             selected(list.get(position))
-            val intent = Intent(context, DetailActivity::class.java)
-            context?.startActivity(intent)
         }
 
     }
