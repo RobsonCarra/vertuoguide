@@ -148,8 +148,7 @@ class NewCoffeeActivity : AppCompatActivity() {
                 capsules,
                 description,
                 intensity.toString(),
-                quantity.toString(),
-                image = R.drawable.capuccino.toString()
+                quantity.toString()
             )
 
             viewModel.add(coffee)
