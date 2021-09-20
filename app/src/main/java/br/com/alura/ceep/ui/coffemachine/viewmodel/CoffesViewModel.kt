@@ -12,46 +12,52 @@ import kotlinx.coroutines.launch
 
 class CoffesViewModel(
 
-  private val coffesRepository: CoffesRepository
+    private val coffesRepository: CoffesRepository
 
 ) : ViewModel() {
-  val list = MutableLiveData<List<Coffee>>()
-  val coffeeById = MutableLiveData<Coffee>()
-  var coffeeFiltered = MutableLiveData<List<Coffee>>()
-  //    val filteredById = MutableLiveData<List<Coffee>>()
-  val added = MutableLiveData<Boolean>(false)
+    val list = MutableLiveData<List<Coffee>>()
+    val coffeeById = MutableLiveData<Coffee>()
+    var coffeeFiltered = MutableLiveData<List<Coffee>>()
+    val added = MutableLiveData<Boolean>(false)
 //    val updated = MutableLiveData<Boolean>(true)
 //    val deleted = MutableLiveData<Coffee>()
+//    val filteredById = MutableLiveData<List<Coffee>>()
 
-  fun getAll(lifecycleOwner: LifecycleOwner) {
-    viewModelScope.launch {
-      coffesRepository.getAll().observe(lifecycleOwner) { result ->
-        list.postValue(result)
-      }
+    fun getAll(lifecycleOwner: LifecycleOwner) {
+        viewModelScope.launch {
+            coffesRepository.getAll().observe(lifecycleOwner) { result ->
+                list.postValue(result)
+            }
+        }
     }
-  }
 
-  fun searchByName(name: String, lifecycleOwner: LifecycleOwner) {
-    viewModelScope.launch {
-      coffesRepository.getByName(name).observe(lifecycleOwner) { result ->
-        coffeeFiltered.postValue(result)
-      }
+    fun searchByName(name: String, lifecycleOwner: LifecycleOwner) {
+        viewModelScope.launch {
+            coffesRepository.getByName(name).observe(lifecycleOwner) { result ->
+                coffeeFiltered.postValue(result)
+            }
+        }
     }
-  }
 
-  // observar coffee filtered e popular em details
-
-  fun searchByUid(uid: String, lifecycleOwner: LifecycleOwner) {
-    viewModelScope.launch {
-      coffesRepository.getByUid(uid).observe(lifecycleOwner) { result ->
-        coffeeById.postValue(result)
-      }
+    fun searchByUid(uid: String, lifecycleOwner: LifecycleOwner) {
+        viewModelScope.launch {
+            coffesRepository.getByUid(uid).observe(lifecycleOwner) { result ->
+                coffeeById.postValue(result)
+            }
+        }
     }
-  }
 
-  fun add(coffee: Coffee) {
+    fun add(coffee: Coffee) {
+        viewModelScope.launch(Dispatchers.IO) {
+            val saved = coffesRepository.save(coffee)
+            if (saved == saved) {
+                added.postValue(true)
+            }
+        }
+    }
+  fun update(coffee: Coffee) {
     viewModelScope.launch(Dispatchers.IO) {
-      val saved = coffesRepository.save(coffee)
+      val saved = coffesRepository.update(coffee)
       if (saved == saved) {
         added.postValue(true)
       }
@@ -115,18 +121,18 @@ class CoffesViewModel(
 //        }
 //    }
 
-  class CoffesViewModelFactory(
-    private val coffesRepository: CoffesRepository
-  ) :
-    ViewModelProvider.Factory {
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-      if (modelClass.isAssignableFrom(CoffesViewModel::class.java)) {
-        @Suppress("UNCHECKED_CAST")
-        return CoffesViewModel(coffesRepository) as T
-      }
-      throw IllegalArgumentException("Unknown ViewModel class")
+    class CoffesViewModelFactory(
+        private val coffesRepository: CoffesRepository
+    ) :
+        ViewModelProvider.Factory {
+        override fun <T : ViewModel> create(modelClass: Class<T>): T {
+            if (modelClass.isAssignableFrom(CoffesViewModel::class.java)) {
+                @Suppress("UNCHECKED_CAST")
+                return CoffesViewModel(coffesRepository) as T
+            }
+            throw IllegalArgumentException("Unknown ViewModel class")
+        }
     }
-  }
 }
 
 

@@ -31,7 +31,7 @@ class CoffesRepository(private val coffesDao: CoffesDao) {
   }
 
   fun getByName(name: String): MutableLiveData<List<Coffee>> {
-    val data = MutableLiveData<List<Coffee>>()
+    val datas = MutableLiveData<List<Coffee>>()
     val list = ArrayList<Coffee>()
     val db = FirebaseFirestore.getInstance()
     db.collection("coffees")
@@ -47,10 +47,10 @@ class CoffesRepository(private val coffesDao: CoffesDao) {
           }
           val filtered =
             list.filter { coffee -> coffee.name.lowercase().contains(name.lowercase()) }
-          data.postValue(filtered)
+          datas.postValue(filtered)
         }
       }
-    return data
+    return datas
   }
 
   fun getByUid(uid: String): MutableLiveData<Coffee> {
@@ -70,6 +70,11 @@ class CoffesRepository(private val coffesDao: CoffesDao) {
         }
       }
     return data
+  }
+
+  fun update(coffee: Coffee){
+      val db = FirebaseFirestore.getInstance()
+      db.collection("coffees").document(coffee.uid).set(coffee)
   }
 
   fun save(coffee: Coffee) {

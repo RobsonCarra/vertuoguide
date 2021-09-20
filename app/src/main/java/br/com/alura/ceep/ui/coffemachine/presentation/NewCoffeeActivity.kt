@@ -11,6 +11,7 @@ import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.lifecycle.lifecycleScope
 import br.com.alura.ceep.ui.coffemachine.R
 import br.com.alura.ceep.ui.coffemachine.domain.Coffee
 import br.com.alura.ceep.ui.coffemachine.helpers.CoffesRoomDataBase
@@ -45,7 +46,6 @@ class NewCoffeeActivity : AppCompatActivity() {
     private lateinit var save: Button
     private var id: Long? = null
 
-
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,7 +68,7 @@ class NewCoffeeActivity : AppCompatActivity() {
         if (bundle != null) {
             val coffee = bundle.getParcelable("coffe") as Coffee?
             coffee?.let {
-                if (it.id != null) {
+                if (it.id!= null) {
                     id = it.id
                 }
             }
@@ -100,7 +100,6 @@ class NewCoffeeActivity : AppCompatActivity() {
         coffeToolbar.setNavigationOnClickListener {
             onBackPressed()
         }
-
         save.setOnClickListener {
             val name = putName.text.toString()
             val description = putDescription.text.toString()
@@ -152,6 +151,7 @@ class NewCoffeeActivity : AppCompatActivity() {
             )
 
             viewModel.add(coffee)
+
             val intent = Intent(this, DashboardActivity::class.java)
             this.startActivity(intent)
         }
@@ -166,8 +166,8 @@ class NewCoffeeActivity : AppCompatActivity() {
                 this.startActivity(intent)
             }
         }
-    }
 
+    }
 }
 
 
