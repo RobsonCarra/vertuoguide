@@ -9,78 +9,73 @@ import com.google.gson.Gson
 
 class CoffesRepository(private val coffesDao: CoffesDao) {
 
-  fun getAll(): MutableLiveData<List<Coffee>> {
-    val data = MutableLiveData<List<Coffee>>()
-    val coffeeList = ArrayList<Coffee>()
-    val db = FirebaseFirestore.getInstance()
-    db.collection("coffees")
-      .addSnapshotListener { snapshot, exception ->
-        snapshot?.documents?.let { docs ->
-          docs.forEach { doc ->
-            val type = object : TypeToken<Coffee>() {}.type
-            val json = Gson().toJson(doc.data)
-            val coffee = Gson().fromJson<Coffee>(json, type)
-            coffee?.let { cf ->
-              coffeeList.add(cf)
+    fun getAll(): MutableLiveData<List<Coffee>> {
+        val data = MutableLiveData<List<Coffee>>()
+        val coffeeList = ArrayList<Coffee>()
+        val db = FirebaseFirestore.getInstance()
+        db.collection("coffees")
+            .addSnapshotListener { snapshot, exception ->
+                snapshot?.documents?.let { docs ->
+                    docs.forEach { doc ->
+                        val type = object : TypeToken<Coffee>() {}.type
+                        val json = Gson().toJson(doc.data)
+                        val coffee = Gson().fromJson<Coffee>(json, type)
+                        coffee?.let { cf ->
+                            coffeeList.add(cf)
+                        }
+                    }
+                    data.postValue(coffeeList)
+                }
             }
-          }
-          data.postValue(coffeeList)
-        }
-      }
-    return data
-  }
+        return data
+    }
 
-  fun getByName(name: String): MutableLiveData<List<Coffee>> {
-    val datas = MutableLiveData<List<Coffee>>()
-    val list = ArrayList<Coffee>()
-    val db = FirebaseFirestore.getInstance()
-    db.collection("coffees")
-      .addSnapshotListener { snapshot, exception ->
-        snapshot?.documents?.let { docs ->
-          docs.forEach { doc ->
-            val type = object : TypeToken<Coffee>() {}.type
-            val json = Gson().toJson(doc.data)
-            val coffee = Gson().fromJson<Coffee>(json, type)
-            coffee?.let { cf ->
-              list.add(cf)
+    fun getByName(name: String): MutableLiveData<List<Coffee>> {
+        val datas = MutableLiveData<List<Coffee>>()
+        val list = ArrayList<Coffee>()
+        val db = FirebaseFirestore.getInstance()
+        db.collection("coffees")
+            .addSnapshotListener { snapshot, exception ->
+                snapshot?.documents?.let { docs ->
+                    docs.forEach { doc ->
+                        val type = object : TypeToken<Coffee>() {}.type
+                        val json = Gson().toJson(doc.data)
+                        val coffee = Gson().fromJson<Coffee>(json, type)
+                        coffee?.let { cf ->
+                            list.add(cf)
+                        }
+                    }
+                    val filtered =
+                        list.filter { coffee -> coffee.name.lowercase().contains(name.lowercase()) }
+                    datas.postValue(filtered)
+                }
             }
-          }
-          val filtered =
-            list.filter { coffee -> coffee.name.lowercase().contains(name.lowercase()) }
-          datas.postValue(filtered)
-        }
-      }
-    return datas
-  }
+        return datas
+    }
 
-  fun getByUid(uid: String): MutableLiveData<Coffee> {
-    val data = MutableLiveData<Coffee>()
-    val db = FirebaseFirestore.getInstance()
-    db.collection("coffees").whereEqualTo("uid", uid)
-      .addSnapshotListener { snapshot, exception ->
-        snapshot?.documents?.let { docs ->
-          docs.forEach { doc ->
-            val type = object : TypeToken<Coffee>() {}.type
-            val json = Gson().toJson(doc.data)
-            val coffee = Gson().fromJson<Coffee>(json, type)
-            coffee?.let { cf ->
-              data.postValue(cf)
+    fun getByUid(uid: String): MutableLiveData<Coffee> {
+        val data = MutableLiveData<Coffee>()
+        val db = FirebaseFirestore.getInstance()
+        db.collection("coffees").whereEqualTo("uid", uid)
+            .addSnapshotListener { snapshot, exception ->
+                snapshot?.documents?.let { docs ->
+                    docs.forEach { doc ->
+                        val type = object : TypeToken<Coffee>() {}.type
+                        val json = Gson().toJson(doc.data)
+                        val coffee = Gson().fromJson<Coffee>(json, type)
+                        coffee?.let { cf ->
+                            data.postValue(cf)
+                        }
+                    }
+                }
             }
-          }
-        }
-      }
-    return data
-  }
+        return data
+    }
 
-  fun update(coffee: Coffee){
-      val db = FirebaseFirestore.getInstance()
-      db.collection("coffees").document(coffee.uid).set(coffee)
-  }
-
-  fun save(coffee: Coffee) {
-    val db = FirebaseFirestore.getInstance()
-    db.collection("coffees").document().set(coffee)
-  }
+    fun save(coffee: Coffee) {
+        val db = FirebaseFirestore.getInstance()
+        db.collection("coffees").document(coffee.uid).set(coffee)
+    }
 }
 
 //        fun getAll() = flow {

@@ -68,7 +68,7 @@ class NewCoffeeActivity : AppCompatActivity() {
         if (bundle != null) {
             val coffee = bundle.getParcelable("coffe") as Coffee?
             coffee?.let {
-                if (it.id!= null) {
+                if (it.id != null) {
                     id = it.id
                 }
             }
@@ -77,6 +77,9 @@ class NewCoffeeActivity : AppCompatActivity() {
             putQuantity.setText(coffee?.quantity.toString())
             putCapsules.setText(coffee?.capsules.toString())
             putIntensity.setText(coffee?.intensity.toString())
+            coffee?.uid?.let { uid ->
+                viewModel.searchByUid(uid, this)
+            }
         }
 
     }
@@ -99,6 +102,63 @@ class NewCoffeeActivity : AppCompatActivity() {
     private fun listeners() {
         coffeToolbar.setNavigationOnClickListener {
             onBackPressed()
+        }
+        viewModel.coffeeById.observe(this) { coffee ->
+            save.setOnClickListener {
+                val name = putName.text.toString()
+                val description = putDescription.text.toString()
+                val intensity = putIntensity.text.toString().toInt()
+                val quantity = putQuantity.text.toString().toInt()
+                val capsules = putCapsules.text.toString().toInt()
+                if (name.isEmpty()) {
+                    Toast.makeText(
+                        this, "Please enter the name of the coffee",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    return@setOnClickListener
+                }
+                if (description.isEmpty()) {
+                    Toast.makeText(
+                        this, "please enter the description of the coffe",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    return@setOnClickListener
+                }
+                if (intensity <= 0) {
+                    Toast.makeText(
+                        this, "please enter the value of the coffee intensity",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    return@setOnClickListener
+                }
+                if (quantity <= 0) {
+                    Toast.makeText(
+                        this, "please enter the value of the coffee quantity",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    return@setOnClickListener
+                }
+                if (capsules <= 0) {
+                    Toast.makeText(
+                        this, "please enter the value of quantity of capsules",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    return@setOnClickListener
+                }
+                val uid = coffee.uid
+                val coffee = Coffee(
+                    id,
+                    name,
+                    capsules,
+                    description,
+                    intensity.toString(),
+                    quantity.toString(),
+                    uid
+                )
+                viewModel.save(coffee)
+                val intent = Intent(this, DashboardActivity::class.java)
+                this.startActivity(intent)
+            }
         }
         save.setOnClickListener {
             val name = putName.text.toString()
@@ -147,15 +207,12 @@ class NewCoffeeActivity : AppCompatActivity() {
                 capsules,
                 description,
                 intensity.toString(),
-                quantity.toString()
+                quantity.toString(),
             )
-
-            viewModel.add(coffee)
-
+            viewModel.save(coffee)
             val intent = Intent(this, DashboardActivity::class.java)
             this.startActivity(intent)
         }
-
     }
 
     private fun observers() {
@@ -169,5 +226,10 @@ class NewCoffeeActivity : AppCompatActivity() {
 
     }
 }
+
+
+
+
+
 
 

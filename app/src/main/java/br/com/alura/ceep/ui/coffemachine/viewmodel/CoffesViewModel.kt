@@ -47,7 +47,7 @@ class CoffesViewModel(
         }
     }
 
-    fun add(coffee: Coffee) {
+    fun save(coffee: Coffee) {
         viewModelScope.launch(Dispatchers.IO) {
             val saved = coffesRepository.save(coffee)
             if (saved == saved) {
@@ -55,14 +55,6 @@ class CoffesViewModel(
             }
         }
     }
-  fun update(coffee: Coffee) {
-    viewModelScope.launch(Dispatchers.IO) {
-      val saved = coffesRepository.update(coffee)
-      if (saved == saved) {
-        added.postValue(true)
-      }
-    }
-  }
 
 //
 //    fun getById() {

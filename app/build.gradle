@@ -84,8 +84,7 @@ dependencies {
     implementation 'com.jakewharton.retrofit:retrofit2-kotlin-coroutines-experimental-adapter:1.0.0'
     implementation 'com.google.firebase:firebase-messaging-ktx'
     implementation 'com.google.firebase:firebase-storage-ktx'
-
-
+    implementation 'com.google.firebase:firebase-analytics-ktx'
 }
 repositories {
     mavenCentral()

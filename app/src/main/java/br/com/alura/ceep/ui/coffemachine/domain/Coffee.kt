@@ -15,8 +15,8 @@ class Coffee(
     var description: String,
     var intensity: String,
     var quantity: String,
+    var uid: String = UUID.randomUUID().toString(),
     var image: String = "https://www.nespresso.com/shared_res/" +
             "agility/n-components/connoisseurship/" +
             "capsule/vl/colombia_S.png",
-    var uid: String = UUID.randomUUID().toString()
 ) : Parcelable
