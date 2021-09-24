@@ -1,31 +1,20 @@
 package br.com.alura.ceep.ui.coffemachine.presentation
 
-import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.lifecycle.lifecycleScope
 import br.com.alura.ceep.ui.coffemachine.R
 import br.com.alura.ceep.ui.coffemachine.domain.Coffee
 import br.com.alura.ceep.ui.coffemachine.helpers.CoffesRoomDataBase
 import br.com.alura.ceep.ui.coffemachine.repository.CoffesRepository
 import br.com.alura.ceep.ui.coffemachine.viewmodel.CoffesViewModel
-import com.google.android.gms.tasks.OnFailureListener
-import com.google.android.gms.tasks.OnSuccessListener
 import com.google.android.material.textfield.TextInputEditText
-import com.google.firebase.firestore.DocumentReference
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.Source
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
-import java.lang.Exception
 
 class NewCoffeeActivity : AppCompatActivity() {
 
@@ -88,7 +77,7 @@ class NewCoffeeActivity : AppCompatActivity() {
     }
 
     private fun setup() {
-        putName = findViewById(R.id.put_name)
+        putName = findViewById(R.id.put_password)
         putDescription = findViewById(R.id.put_description)
         putIntensity = findViewById(R.id.put_intensity)
         putQuantity = findViewById(R.id.put_quantity)
@@ -175,7 +164,7 @@ class NewCoffeeActivity : AppCompatActivity() {
             }
             if (description.isEmpty()) {
                 Toast.makeText(
-                    this, "please enter the description of the coffe",
+                    this, "please enter the description of the coffee",
                     Toast.LENGTH_SHORT
                 ).show()
                 return@setOnClickListener
