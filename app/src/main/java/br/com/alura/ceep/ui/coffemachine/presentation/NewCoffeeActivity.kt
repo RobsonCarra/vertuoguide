@@ -41,7 +41,7 @@ class NewCoffeeActivity : AppCompatActivity() {
     private var REQUEST_CODE_PHOTO = 10
     private var id: Long? = null
     private var uid: String? = null
-    private lateinit var image: Bitmap
+    private var image: Bitmap? = null
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public override fun onCreate(savedInstanceState: Bundle?) {
@@ -143,14 +143,16 @@ class NewCoffeeActivity : AppCompatActivity() {
                 coffee.uid = uidNotNull
                 coffee.image = uidNotNull + ".jpg"
             }
-            PhotoHelper.save(
-                image = image.toByteArray(),
-                fileName = coffee.image,
-                storagePath = "Coffees/photos",
-                isSuccess = {
-                    Toast.makeText(this@NewCoffeeActivity, "Saved", Toast.LENGTH_SHORT).show()
-                }
-            )
+            image?.let { bitmapNotNull ->
+                PhotoHelper.save(
+                    image = bitmapNotNull.toByteArray(),
+                    fileName = coffee.image,
+                    storagePath = "Coffees/photos",
+                    isSuccess = {
+                        Toast.makeText(this@NewCoffeeActivity, "Saved", Toast.LENGTH_SHORT).show()
+                    }
+                )
+            }
             viewModel.save(coffee)
             val intent = Intent(this, DashboardActivity::class.java)
             this.startActivity(intent)
