@@ -35,7 +35,6 @@ class CoffeAdapter(val selected: (coffee: Coffee) -> Unit) :
         holder.itemView.setOnClickListener { v: View? ->
             selected(list.get(position))
         }
-
     }
 
     override fun getItemCount(): Int {

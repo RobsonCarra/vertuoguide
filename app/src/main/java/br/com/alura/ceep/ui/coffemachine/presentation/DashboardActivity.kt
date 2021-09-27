@@ -25,7 +25,6 @@ class DashboardActivity : AppCompatActivity(),
         setContentView(R.layout.dashboard_activity)
         nav.setOnNavigationItemSelectedListener(this)
         supportFragmentManager.beginTransaction().replace(R.id.frame, HomeFragment()).commit()
-        testing()
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
@@ -54,23 +53,5 @@ class DashboardActivity : AppCompatActivity(),
             }
         }
         return false;
-    }
-
-    private fun testing() {
-//        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
-//            if (!task.isSuccessful) {
-//                Log.w(TAG, "Fetching FCM registration token failed", task.exception)
-//                return@OnCompleteListener
-//            }
-//
-//            // Get new FCM registration token
-//            val token = task.result
-//
-//            // Log and toast
-//            if (token != null) {
-//                Log.d(TAG, token)
-//            }
-//            Toast.makeText(baseContext, token, Toast.LENGTH_SHORT).show()
-//        })
     }
 }

@@ -6,6 +6,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import br.com.alura.ceep.ui.coffemachine.R
 import br.com.alura.ceep.ui.coffemachine.domain.Coffee
+import br.com.alura.ceep.ui.coffemachine.helpers.PhotoHelper
 import com.squareup.picasso.Picasso
 import org.w3c.dom.Text
 
@@ -18,8 +19,12 @@ class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     fun bind(coffee: Coffee) {
         name.text = coffee.name
         capsules.text = coffee.capsules.toString()
-        Picasso.get().load(coffee.image)
-            .placeholder(R.drawable.ic_launcher_background)
-            .into(image)
+        PhotoHelper.loadStorageImage("/Coffes/photos", coffee.image) { url ->
+            if (url.isNotEmpty()) {
+                Picasso.get().load(url)
+                    .placeholder(R.drawable.ic_launcher_background)
+                    .into(image)
+            }
+        }
     }
 }

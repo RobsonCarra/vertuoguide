@@ -21,6 +21,7 @@ import br.com.alura.ceep.ui.coffemachine.helpers.toByteArray
 import br.com.alura.ceep.ui.coffemachine.repository.CoffesRepository
 import br.com.alura.ceep.ui.coffemachine.viewmodel.CoffesViewModel
 import com.google.android.material.textfield.TextInputEditText
+import com.squareup.picasso.Picasso
 
 class NewCoffeeActivity : AppCompatActivity() {
     private val viewModel: CoffesViewModel by viewModels {
@@ -64,6 +65,13 @@ class NewCoffeeActivity : AppCompatActivity() {
             putQuantity.setText(coffee.quantity)
             putCapsules.setText(coffee.capsules.toString())
             putIntensity.setText(coffee.intensity)
+            PhotoHelper.loadStorageImage("Coffes/photos",coffee.image) { url ->
+                if (url.isNotEmpty()){
+                    Picasso.get().load(url)
+                        .placeholder(R.drawable.ic_launcher_background)
+                        .into(camera)
+                }
+            }
         }
     }
 
