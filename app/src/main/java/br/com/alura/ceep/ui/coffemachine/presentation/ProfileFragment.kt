@@ -16,82 +16,81 @@ import androidx.fragment.app.Fragment
 import br.com.alura.ceep.ui.coffemachine.R
 import br.com.alura.ceep.ui.coffemachine.helpers.PhotoHelper
 import br.com.alura.ceep.ui.coffemachine.helpers.toByteArray
-import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.StorageReference
 
 class ProfileFragment : Fragment() {
 
-  private lateinit var camera: ImageView
-  private lateinit var notifications: TextView
-  private lateinit var share: TextView
-  private lateinit var rate: TextView
-  private lateinit var terms: TextView
-  private lateinit var myData: TextView
-  private lateinit var exit: TextView
-  private lateinit var on: TextView
-  private lateinit var off: TextView
-  private val REQUEST_CODE_PHOTO = 10
+    private lateinit var camera: ImageView
+    private lateinit var notifications: TextView
+    private lateinit var share: TextView
+    private lateinit var rate: TextView
+    private lateinit var terms: TextView
+    private lateinit var myData: TextView
+    private lateinit var exit: TextView
+    private lateinit var on: TextView
+    private lateinit var off: TextView
+    private val REQUEST_CODE_PHOTO = 10
 
-  override fun onCreateView(
-    inflater: LayoutInflater, container: ViewGroup?,
-    savedInstanceState: Bundle?
-  ): View? {
-    return inflater.inflate(R.layout.fragment_profile, container, false)
-  }
-
-  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    super.onViewCreated(view, savedInstanceState)
-    setup(view)
-    listeners()
-  }
-
-  private fun setup(view: View) {
-    camera = view.findViewById(R.id.camera_button)
-    notifications = view.findViewById(R.id.notifications)
-    share = view.findViewById(R.id.share)
-    rate = view.findViewById(R.id.rate)
-    terms = view.findViewById(R.id.terms_of_use)
-    myData = view.findViewById(R.id.my_data)
-    exit = view.findViewById(R.id.exit)
-    on = view.findViewById(R.id.on)
-    off = view.findViewById(R.id.off)
-  }
-
-  private fun listeners() {
-    camera.setOnClickListener { v: View? ->
-      val intent = Intent()
-      intent.action = MediaStore.ACTION_IMAGE_CAPTURE
-      startActivityForResult(intent, REQUEST_CODE_PHOTO)
-      intent.type = "image/*"
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return inflater.inflate(R.layout.fragment_profile, container, false)
     }
-    on.setOnClickListener { v: View? ->
-      Toast.makeText(context, "hello", Toast.LENGTH_SHORT).show()
-    }
-    off.setOnClickListener { v: View? ->
-    }
-  }
 
-  @Override
-  override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-    super.onActivityResult(requestCode, resultCode, data)
-    when (resultCode) {
-      RESULT_OK -> data?.extras?.let { response -> photoHandler(response) }
-      RESULT_CANCELED -> Toast.makeText(requireContext(), "Canceled", Toast.LENGTH_SHORT).show()
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setup(view)
+        listeners()
     }
-  }
 
-  private fun photoHandler(data: Bundle) {
-    val bitmap = data.get("data") as Bitmap
-    camera.setImageBitmap(bitmap)
-    PhotoHelper.save(
-      image = bitmap.toByteArray(),
-      fileName = "perfil.jpg",
-      storagePath = "users/photos",
-      isSuccess = {
-        Toast.makeText(requireContext(), "Saved", Toast.LENGTH_SHORT).show()
-      }
-    )
-  }
+    private fun setup(view: View) {
+        camera = view.findViewById(R.id.camera_button)
+        notifications = view.findViewById(R.id.notifications)
+        share = view.findViewById(R.id.share)
+        rate = view.findViewById(R.id.rate)
+        terms = view.findViewById(R.id.terms_of_use)
+        myData = view.findViewById(R.id.my_data)
+        exit = view.findViewById(R.id.exit)
+        on = view.findViewById(R.id.on)
+        off = view.findViewById(R.id.off)
+    }
+
+    private fun listeners() {
+        camera.setOnClickListener { v: View? ->
+            val intent = Intent()
+            intent.action = MediaStore.ACTION_IMAGE_CAPTURE
+            startActivityForResult(intent, REQUEST_CODE_PHOTO)
+            intent.type = "image/*"
+        }
+        on.setOnClickListener { v: View? ->
+            Toast.makeText(context, "hello", Toast.LENGTH_SHORT).show()
+        }
+        off.setOnClickListener { v: View? ->
+        }
+    }
+
+    @Override
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        when (resultCode) {
+            RESULT_OK -> data?.extras?.let { response -> photoHandler(response) }
+            RESULT_CANCELED -> Toast.makeText(requireContext(), "Canceled", Toast.LENGTH_SHORT)
+                .show()
+        }
+    }
+
+    private fun photoHandler(data: Bundle) {
+        val bitmap = data.get("data") as Bitmap
+        camera.setImageBitmap(bitmap)
+        PhotoHelper.save(
+            image = bitmap.toByteArray(),
+            fileName = "perfil.jpg",
+            storagePath = "users/photos",
+            isSuccess = {
+                Toast.makeText(requireContext(), "Saved", Toast.LENGTH_SHORT).show()
+            }
+        )
+    }
 }
 
 

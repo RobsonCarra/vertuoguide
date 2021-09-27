@@ -9,12 +9,12 @@ import java.util.UUID
 @Entity
 @Parcelize
 class Coffee(
-  @PrimaryKey var id: Long? = null,
-  var name: String,
-  var capsules: Int,
-  var description: String,
-  var intensity: String,
-  var quantity: String,
-  var uid: String = UUID.randomUUID().toString(),
-  var image: String = "${uid}.jpg",
+    @PrimaryKey var id: Long? = null,
+    var name: String,
+    var capsules: Int,
+    var description: String,
+    var intensity: String,
+    var quantity: String,
+    var uid: String = UUID.randomUUID().toString(),
+    var image: String = "${uid}.jpg",
 ) : Parcelable
