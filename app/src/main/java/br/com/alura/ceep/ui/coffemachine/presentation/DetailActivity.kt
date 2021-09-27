@@ -14,6 +14,7 @@ import androidx.lifecycle.lifecycleScope
 import br.com.alura.ceep.ui.coffemachine.R
 import br.com.alura.ceep.ui.coffemachine.domain.Coffee
 import br.com.alura.ceep.ui.coffemachine.helpers.CoffesRoomDataBase
+import br.com.alura.ceep.ui.coffemachine.helpers.PhotoHelper
 import br.com.alura.ceep.ui.coffemachine.presentation.custom.CoffeAdapter
 import br.com.alura.ceep.ui.coffemachine.repository.CoffesRepository
 import br.com.alura.ceep.ui.coffemachine.viewmodel.CoffesViewModel
@@ -68,15 +69,19 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private fun observers() {
-        viewModel.coffeeById.observe(this) { coffe ->
-            name.text = coffe.name
-            description.text = coffe.description
-            size.text = coffe.quantity + " ml"
-            intensity.text = coffe.intensity
-            capsules.text = coffe.capsules.toString()
-            Picasso.get().load(coffe.image)
-                .placeholder(R.drawable.ic_launcher_background)
-                .into(image)
+        viewModel.coffeeById.observe(this) { coffee ->
+            name.text = coffee.name
+            description.text = coffee.description
+            size.text = coffee.quantity + " ml"
+            intensity.text = coffee.intensity
+            capsules.text = coffee.capsules.toString()
+            PhotoHelper.loadStorageImage("Coffees/photos",coffee.image) { url ->
+                if (url.isNotEmpty()){
+                    Picasso.get().load(url)
+                        .placeholder(R.drawable.ic_launcher_background)
+                        .into(image)
+                }
+            }
         }
     }
 }

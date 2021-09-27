@@ -19,7 +19,7 @@ class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     fun bind(coffee: Coffee) {
         name.text = coffee.name
         capsules.text = coffee.capsules.toString()
-        PhotoHelper.loadStorageImage("/Coffes/photos", coffee.image) { url ->
+        PhotoHelper.loadStorageImage("Coffees/photos", coffee.image) { url ->
             if (url.isNotEmpty()) {
                 Picasso.get().load(url)
                     .placeholder(R.drawable.ic_launcher_background)

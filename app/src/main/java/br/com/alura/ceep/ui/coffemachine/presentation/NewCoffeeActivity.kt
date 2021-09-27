@@ -65,8 +65,8 @@ class NewCoffeeActivity : AppCompatActivity() {
             putQuantity.setText(coffee.quantity)
             putCapsules.setText(coffee.capsules.toString())
             putIntensity.setText(coffee.intensity)
-            PhotoHelper.loadStorageImage("Coffes/photos",coffee.image) { url ->
-                if (url.isNotEmpty()){
+            PhotoHelper.loadStorageImage("Coffees/photos", coffee.image) { url ->
+                if (url.isNotEmpty()) {
                     Picasso.get().load(url)
                         .placeholder(R.drawable.ic_launcher_background)
                         .into(camera)
