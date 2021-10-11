@@ -50,13 +50,13 @@ class CoffesViewModel(
         }
     }
 
-//    fun searchByUid(uid: String, lifecycleOwner: LifecycleOwner) {
-//        viewModelScope.launch {
-//            coffesRepository.getByUid(uid).observe(lifecycleOwner) { result ->
-//                coffeeById.postValue(result)
-//            }
-//        }
-//    }
+    fun searchByUid(uid: String, lifecycleOwner: LifecycleOwner) {
+        viewModelScope.launch {
+            coffesRepository.getByUid(uid).collect { result ->
+                coffeeById.postValue(result)
+            }
+        }
+    }
 
 //    fun save(coffee: Coffee) {
 //        viewModelScope.launch(Dispatchers.IO) {

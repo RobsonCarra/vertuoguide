@@ -14,7 +14,7 @@ import java.net.HttpURLConnection
 
 class CoffesRepository(private val coffesDao: CoffesDao) {
 
-//    fun getAll(): MutableLiveData<List<Coffee>> {
+    //    fun getAll(): MutableLiveData<List<Coffee>> {
 //        val data = MutableLiveData<List<Coffee>>()
 //        val coffeeList = ArrayList<Coffee>()
 //        val db = FirebaseFirestore.getInstance()
@@ -111,10 +111,10 @@ class CoffesRepository(private val coffesDao: CoffesDao) {
     }
 
     //
-    suspend fun getByUid() = flow {
+    suspend fun getByUid(uid: String) = flow {
         val client = RetrofitConfig().getClient()
         val api = client.create(CoffeeInterface::class.java)
-        val req = api.getById()
+        val req = api.getByUid(uid)
         val res = req.await()
         when (res.code()) {
             HttpURLConnection.HTTP_CREATED -> emit(res.body())

@@ -45,9 +45,9 @@ class DetailActivity : AppCompatActivity() {
         setup()
         listeners()
         observers()
-//        intent.extras?.getString("uid")?.let { uid ->
-//            viewModel.searchByUid(uid, this)
-//        }
+        intent.extras?.getString("uid")?.let { uid ->
+            viewModel.searchByUid(uid, this)
+        }
     }
 
     private fun setup() {
