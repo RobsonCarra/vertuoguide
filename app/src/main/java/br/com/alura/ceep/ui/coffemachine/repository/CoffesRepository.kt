@@ -117,8 +117,19 @@ class CoffesRepository(private val coffesDao: CoffesDao) {
         val req = api.getByUid(uid)
         val res = req.await()
         when (res.code()) {
-            HttpURLConnection.HTTP_CREATED -> emit(res.body()?.first())
+            HttpURLConnection.HTTP_OK -> emit(res.body()?.first())
             else -> Log.e("Repositorio", "Erro ao buscar os dados do GetById ")
+        }
+    }
+
+    suspend fun save(coffee: Coffee) = flow {
+        val client = RetrofitConfig().getClient()
+        val api = client.create(CoffeeInterface::class.java)
+        val req = api.save(coffee)
+        val res = req.await()
+        when (res.code()) {
+            HttpURLConnection.HTTP_CREATED -> emit(res.body())
+            else -> Log.e("Repositorio", "Erro ao salvar o café ")
         }
     }
 //    fun getAll() = coffesDao.getAll()

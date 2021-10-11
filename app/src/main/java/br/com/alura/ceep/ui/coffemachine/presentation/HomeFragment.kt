@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import br.com.alura.ceep.ui.coffemachine.R
 import br.com.alura.ceep.ui.coffemachine.domain.Coffee
 import br.com.alura.ceep.ui.coffemachine.helpers.CoffesRoomDataBase
+import br.com.alura.ceep.ui.coffemachine.presentation.Login.view.LoginActivity
 import br.com.alura.ceep.ui.coffemachine.presentation.custom.CoffeAdapter
 import br.com.alura.ceep.ui.coffemachine.repository.CoffesRepository
 import br.com.alura.ceep.ui.coffemachine.viewmodel.CoffesViewModel
@@ -63,6 +64,10 @@ class HomeFragment() : Fragment() {
     }
 
     private fun listeners() {
+//        crashButton.setOnClickListener {
+//            val intent = Intent(requireContext(), LoginActivity::class.java)
+//            this.startActivity(intent)
+//        }
     }
 
     private fun setup(view: View) {

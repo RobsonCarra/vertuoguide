@@ -58,14 +58,14 @@ class CoffesViewModel(
         }
     }
 
-//    fun save(coffee: Coffee) {
-//        viewModelScope.launch(Dispatchers.IO) {
-//            val saved = coffesRepository.save(coffee)
-//            if (saved == saved) {
-//                added.postValue(true)
-//            }
-//        }
-//    }
+    fun save(coffee: Coffee) {
+        viewModelScope.launch(Dispatchers.IO) {
+            val saved = coffesRepository.save(coffee)
+            if (saved == saved) {
+                added.postValue(true)
+            }
+        }
+    }
 
 //
 //    fun getById() {

@@ -5,6 +5,7 @@ import kotlinx.coroutines.Deferred
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.GET
+import retrofit2.http.PUT
 import retrofit2.http.Path
 
 interface CoffeeInterface {
@@ -18,4 +19,8 @@ interface CoffeeInterface {
     fun getByUid(
         @Path("uid") uid: String
     ): Deferred<Response<List<Coffee>>>
+
+    @PUT("coffees")
+    fun save(coffee: Coffee): Deferred<Response<Coffee>>
+
 }
