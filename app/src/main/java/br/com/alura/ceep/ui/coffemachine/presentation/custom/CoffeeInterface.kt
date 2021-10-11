@@ -10,9 +10,9 @@ interface CoffeeInterface {
 
     // code = identificar se deu certo ou nao
     // body = nossa resposta com os itens ou o item
-    @GET("2f832f7a-7788-4236-8634-a7f62aa5595c")
+    @GET("coffees")
     fun getAll(): Deferred<Response<List<Coffee>>>
 
-    @GET("443d670e-0c54-47f4-bcbc-84509998e283")
+    @GET("coffee/uid")
     fun getById(): Deferred<Response<Coffee>>
 }

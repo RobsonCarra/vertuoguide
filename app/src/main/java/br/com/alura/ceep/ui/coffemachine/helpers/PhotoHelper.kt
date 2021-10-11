@@ -23,6 +23,7 @@ object PhotoHelper {
             isSuccess.invoke(it.isSuccessful)
         }
     }
+
     fun loadStorageImage(collection: String, image: String, loaded: (url: String) -> Unit) {
         FirebaseStorage.getInstance().reference.child(collection).child(image)
             .downloadUrl.addOnCompleteListener { complete ->

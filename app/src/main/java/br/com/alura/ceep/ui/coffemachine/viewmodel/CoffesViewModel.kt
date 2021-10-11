@@ -9,6 +9,8 @@ import br.com.alura.ceep.ui.coffemachine.domain.Coffee
 import br.com.alura.ceep.ui.coffemachine.helpers.PhotoHelper
 import br.com.alura.ceep.ui.coffemachine.repository.CoffesRepository
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.InternalCoroutinesApi
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class CoffesViewModel(
@@ -24,13 +26,21 @@ class CoffesViewModel(
 //    val deleted = MutableLiveData<Coffee>()
 //    val filteredById = MutableLiveData<List<Coffee>>()
 
+    //    fun getAll(lifecycleOwner: LifecycleOwner) {
+//        viewModelScope.launch {
+//            coffesRepository.getAll().observe(lifecycleOwner) { result ->
+//                list.postValue(result)
+//            }
+//        }
+//    }
     fun getAll(lifecycleOwner: LifecycleOwner) {
         viewModelScope.launch {
-            coffesRepository.getAll().observe(lifecycleOwner) { result ->
+            coffesRepository.getAll().collect { result ->
                 list.postValue(result)
             }
         }
     }
+
 
     fun searchByName(name: String, lifecycleOwner: LifecycleOwner) {
         viewModelScope.launch {
@@ -40,22 +50,22 @@ class CoffesViewModel(
         }
     }
 
-    fun searchByUid(uid: String, lifecycleOwner: LifecycleOwner) {
-        viewModelScope.launch {
-            coffesRepository.getByUid(uid).observe(lifecycleOwner) { result ->
-                coffeeById.postValue(result)
-            }
-        }
-    }
+//    fun searchByUid(uid: String, lifecycleOwner: LifecycleOwner) {
+//        viewModelScope.launch {
+//            coffesRepository.getByUid(uid).observe(lifecycleOwner) { result ->
+//                coffeeById.postValue(result)
+//            }
+//        }
+//    }
 
-    fun save(coffee: Coffee) {
-        viewModelScope.launch(Dispatchers.IO) {
-            val saved = coffesRepository.save(coffee)
-            if (saved == saved) {
-                added.postValue(true)
-            }
-        }
-    }
+//    fun save(coffee: Coffee) {
+//        viewModelScope.launch(Dispatchers.IO) {
+//            val saved = coffesRepository.save(coffee)
+//            if (saved == saved) {
+//                added.postValue(true)
+//            }
+//        }
+//    }
 
 //
 //    fun getById() {

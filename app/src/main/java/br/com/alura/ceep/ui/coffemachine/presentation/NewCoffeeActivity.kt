@@ -161,9 +161,9 @@ class NewCoffeeActivity : AppCompatActivity() {
                     }
                 )
             }
-            viewModel.save(coffee)
-            val intent = Intent(this, DashboardActivity::class.java)
-            this.startActivity(intent)
+//            viewModel.save(coffee)
+//            val intent = Intent(this, DashboardActivity::class.java)
+//            this.startActivity(intent)
         }
     }
 

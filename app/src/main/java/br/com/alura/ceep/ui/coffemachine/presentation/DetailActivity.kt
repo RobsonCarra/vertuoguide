@@ -45,9 +45,9 @@ class DetailActivity : AppCompatActivity() {
         setup()
         listeners()
         observers()
-        intent.extras?.getString("uid")?.let { uid ->
-            viewModel.searchByUid(uid, this)
-        }
+//        intent.extras?.getString("uid")?.let { uid ->
+//            viewModel.searchByUid(uid, this)
+//        }
     }
 
     private fun setup() {
@@ -75,8 +75,8 @@ class DetailActivity : AppCompatActivity() {
             size.text = coffee.quantity + " ml"
             intensity.text = coffee.intensity
             capsules.text = coffee.capsules.toString()
-            PhotoHelper.loadStorageImage("Coffees/photos",coffee.image) { url ->
-                if (url.isNotEmpty()){
+            PhotoHelper.loadStorageImage("Coffees/photos", coffee.image) { url ->
+                if (url.isNotEmpty()) {
                     Picasso.get().load(url)
                         .placeholder(R.drawable.ic_launcher_background)
                         .into(image)

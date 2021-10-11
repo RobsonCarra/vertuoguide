@@ -95,6 +95,3 @@ class ProfileFragment : Fragment() {
 
 
 
-
-
-
