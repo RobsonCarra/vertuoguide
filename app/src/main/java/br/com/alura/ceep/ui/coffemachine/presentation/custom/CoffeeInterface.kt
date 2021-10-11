@@ -14,8 +14,8 @@ interface CoffeeInterface {
     @GET("coffees")
     fun getAll(): Deferred<Response<List<Coffee>>>
 
-    @GET("coffees/{uid}")
+    @GET("coffee/{uid}")
     fun getByUid(
         @Path("uid") uid: String
-    ): Deferred<Response<Coffee>>
+    ): Deferred<Response<List<Coffee>>>
 }

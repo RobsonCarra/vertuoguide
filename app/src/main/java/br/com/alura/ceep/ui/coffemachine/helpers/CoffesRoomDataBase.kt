@@ -14,7 +14,6 @@ abstract class CoffesRoomDataBase : RoomDatabase() {
     abstract fun coffesDao(): CoffesDao
     private class CoffesRoomDataBaseCallBack() : RoomDatabase.Callback() {
     }
-
     companion object {
         @Volatile
         private var INSTANCE: CoffesRoomDataBase? = null

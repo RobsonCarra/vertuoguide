@@ -117,7 +117,7 @@ class CoffesRepository(private val coffesDao: CoffesDao) {
         val req = api.getByUid(uid)
         val res = req.await()
         when (res.code()) {
-            HttpURLConnection.HTTP_CREATED -> emit(res.body())
+            HttpURLConnection.HTTP_CREATED -> emit(res.body()?.first())
             else -> Log.e("Repositorio", "Erro ao buscar os dados do GetById ")
         }
     }
