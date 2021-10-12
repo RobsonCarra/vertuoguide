@@ -7,7 +7,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 class RetrofitConfig {
     fun getClient(): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("http://api.vertuoguide.click/")
+            .baseUrl("https://api.vertuoguide.click/")
             .addCallAdapterFactory(CoroutineCallAdapterFactory())
             .addConverterFactory(GsonConverterFactory.create())
             .build()
