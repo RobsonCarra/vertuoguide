@@ -65,7 +65,7 @@ class InventoryFragment : Fragment() {
     }
 
     private fun setup(view: View) {
-        putName = view.findViewById(R.id.put_password)
+        putName = view.findViewById(R.id.confirm_password)
         new = view.findViewById(R.id.new_coffe_button)
         recyclerView = view.findViewById(R.id.coffe_recyclerview_inventory)
     }

@@ -77,7 +77,7 @@ class NewCoffeeActivity : AppCompatActivity() {
 
     private fun setup() {
         camera = findViewById(R.id.camera_button)
-        putName = findViewById(R.id.put_password)
+        putName = findViewById(R.id.confirm_password)
         putDescription = findViewById(R.id.put_description)
         putIntensity = findViewById(R.id.put_intensity)
         putQuantity = findViewById(R.id.put_quantity)

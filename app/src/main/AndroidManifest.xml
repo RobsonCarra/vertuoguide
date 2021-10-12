@@ -20,6 +20,7 @@
         </activity>
         <activity android:name=".presentation.NewCoffeeActivity"></activity>
         <activity android:name=".presentation.DetailActivity"></activity>
+        <activity android:name=".presentation.RegisterActivity"></activity>
         <activity android:name=".presentation.Login.view.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
