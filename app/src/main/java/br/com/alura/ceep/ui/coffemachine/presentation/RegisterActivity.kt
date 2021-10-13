@@ -82,7 +82,7 @@ class RegisterActivity : AppCompatActivity() {
                                 Toast.LENGTH_SHORT
                             )
                                 .show()
-                            goToLoginActivity()
+//                            goToLoginActivity()
 
                         } else {
                             Toast.makeText(
