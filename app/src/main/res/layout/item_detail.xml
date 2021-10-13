@@ -189,6 +189,17 @@
                 app:layout_constraintStart_toEndOf="@+id/available_capsules"
                 app:layout_constraintTop_toBottomOf="@+id/name" />
 
+            <ProgressBar
+                android:id="@+id/progress_bar_detail_activity"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="@+id/coffe_toolbar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.95"
+                app:layout_constraintStart_toStartOf="@+id/coffe_toolbar"
+                app:layout_constraintTop_toTopOf="@+id/coffe_toolbar" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

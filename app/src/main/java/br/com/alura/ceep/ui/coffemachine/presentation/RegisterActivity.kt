@@ -26,6 +26,7 @@ class RegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.register_activity)
         setup()
+        auth = FirebaseAuth.getInstance()
         listeners()
     }
 
@@ -82,7 +83,7 @@ class RegisterActivity : AppCompatActivity() {
                                 Toast.LENGTH_SHORT
                             )
                                 .show()
-//                            goToLoginActivity()
+                            goToLoginActivity()
 
                         } else {
                             Toast.makeText(

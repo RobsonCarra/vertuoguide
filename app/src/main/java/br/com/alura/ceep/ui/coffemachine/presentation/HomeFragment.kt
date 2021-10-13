@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ProgressBar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -27,6 +28,7 @@ class HomeFragment() : Fragment() {
 
     private lateinit var crashButton: Button
     private lateinit var recyclerView: RecyclerView
+    private lateinit var progressBar: ProgressBar
 
     private var coffeAdapter: CoffeAdapter = CoffeAdapter(selected = { coffee ->
         val bundle = Bundle()
@@ -73,6 +75,7 @@ class HomeFragment() : Fragment() {
     private fun setup(view: View) {
         recyclerView = view.findViewById(R.id.coffe_list_recyclerview)
         crashButton = view.findViewById(R.id.coffe_now_button)
+        progressBar = view.findViewById(R.id.progress)
     }
 
     private fun observers() {
@@ -82,10 +85,12 @@ class HomeFragment() : Fragment() {
         viewModel.list.observe(viewLifecycleOwner) { coffee ->
             coffeAdapter.list.addAll(coffee)
             coffeAdapter.notifyDataSetChanged()
+            progressBar.visibility = View.INVISIBLE
         }
     }
 
     fun initList() {
+        progressBar.visibility = View.VISIBLE
         recyclerView.hasFixedSize()
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = coffeAdapter

@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
@@ -36,6 +37,7 @@ class InventoryFragment : Fragment() {
     private lateinit var putName: TextInputEditText
     private lateinit var new: Button
     private lateinit var recyclerView: RecyclerView
+    private lateinit var progressBar: ProgressBar
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -68,6 +70,7 @@ class InventoryFragment : Fragment() {
         putName = view.findViewById(R.id.confirm_password)
         new = view.findViewById(R.id.new_coffe_button)
         recyclerView = view.findViewById(R.id.coffe_recyclerview_inventory)
+        progressBar = view.findViewById(R.id.progress_bar_inventory)
     }
 
     private fun observers() {
@@ -80,6 +83,7 @@ class InventoryFragment : Fragment() {
             itemAdapter.list.clear()
             itemAdapter.list.addAll(list)
             itemAdapter.notifyDataSetChanged()
+            progressBar.visibility = View.INVISIBLE
         })
         viewModel.added.observe(viewLifecycleOwner) { saved ->
             if (saved) {
@@ -109,6 +113,7 @@ class InventoryFragment : Fragment() {
     }
 
     fun initList() {
+        progressBar.visibility = View.VISIBLE
         itemAdapter = ItemAdapter(selected = { selected ->
             onChangeCoffedata(selected)
         })

@@ -4,6 +4,7 @@ import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
@@ -37,6 +38,7 @@ class DetailActivity : AppCompatActivity() {
     private lateinit var capsules: TextView
     private lateinit var image: ImageView
     private lateinit var coffeToolbar: Toolbar
+    private lateinit var progressBar: ProgressBar
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,6 +47,7 @@ class DetailActivity : AppCompatActivity() {
         setup()
         listeners()
         observers()
+        progressBar.visibility = View.VISIBLE
         intent.extras?.getString("uid")?.let { uid ->
             viewModel.searchByUid(uid, this)
         }
@@ -58,6 +61,7 @@ class DetailActivity : AppCompatActivity() {
         image = findViewById(R.id.image)
         capsules = findViewById(R.id.capsules)
         coffeToolbar = findViewById(R.id.coffe_toolbar)
+        progressBar = findViewById(R.id.progress_bar_detail_activity)
         setSupportActionBar(coffeToolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
     }
@@ -82,6 +86,7 @@ class DetailActivity : AppCompatActivity() {
                         .into(image)
                 }
             }
+            progressBar.visibility = View.GONE
         }
     }
 }

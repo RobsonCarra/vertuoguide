@@ -8,6 +8,7 @@ import android.provider.MediaStore
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
@@ -37,6 +38,8 @@ class NewCoffeeActivity : AppCompatActivity() {
     private lateinit var putIntensity: TextInputEditText
     private lateinit var putQuantity: TextInputEditText
     private lateinit var putCapsules: TextInputEditText
+
+    //    private lateinit var progressBar: ProgressBar
     private lateinit var coffeToolbar: Toolbar
     private lateinit var save: Button
     private var REQUEST_CODE_PHOTO = 10
@@ -49,6 +52,7 @@ class NewCoffeeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.new_coffee_activity)
         setup()
+//        progressBar.visibility = View.VISIBLE
         listeners()
         observers()
         load()
@@ -73,6 +77,7 @@ class NewCoffeeActivity : AppCompatActivity() {
                 }
             }
         }
+//        progressBar.visibility = View.GONE
     }
 
     private fun setup() {
@@ -83,6 +88,7 @@ class NewCoffeeActivity : AppCompatActivity() {
         putQuantity = findViewById(R.id.put_quantity)
         putCapsules = findViewById(R.id.put_capsules)
         save = findViewById(R.id.save_button)
+//        progressBar = findViewById(R.id.progress_bar_new_coffee_activity)
         coffeToolbar = findViewById(R.id.coffe_toolbar)
         setSupportActionBar(coffeToolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
