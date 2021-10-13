@@ -18,6 +18,7 @@ import br.com.alura.ceep.ui.coffemachine.R
 import br.com.alura.ceep.ui.coffemachine.domain.Coffee
 import br.com.alura.ceep.ui.coffemachine.helpers.CoffesRoomDataBase
 import br.com.alura.ceep.ui.coffemachine.helpers.PhotoHelper
+import br.com.alura.ceep.ui.coffemachine.helpers.SharedPref
 import br.com.alura.ceep.ui.coffemachine.helpers.toByteArray
 import br.com.alura.ceep.ui.coffemachine.repository.CoffesRepository
 import br.com.alura.ceep.ui.coffemachine.viewmodel.CoffesViewModel
@@ -60,9 +61,6 @@ class NewCoffeeActivity : AppCompatActivity() {
 
     private fun load() {
         (intent.extras?.getParcelable("coffe") as Coffee?)?.let { coffee ->
-            coffee.id?.let { coffeeId ->
-                id = coffeeId
-            }
             uid = coffee.uid
             putName.setText(coffee.name)
             putDescription.setText(coffee.description)
@@ -146,7 +144,6 @@ class NewCoffeeActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
             val coffee = Coffee(
-                id = id,
                 name = name,
                 capsules = capsules,
                 description = description,
@@ -167,7 +164,10 @@ class NewCoffeeActivity : AppCompatActivity() {
                     }
                 )
             }
-            viewModel.save(coffee)
+            val token = SharedPref(this).getString(SharedPref.TOKEN)
+            token?.let {
+                viewModel.save(coffee, token)
+            }
             val intent = Intent(this, DashboardActivity::class.java)
             this.startActivity(intent)
         }

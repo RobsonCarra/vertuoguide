@@ -16,6 +16,7 @@ import br.com.alura.ceep.ui.coffemachine.R
 import br.com.alura.ceep.ui.coffemachine.domain.Coffee
 import br.com.alura.ceep.ui.coffemachine.helpers.CoffesRoomDataBase
 import br.com.alura.ceep.ui.coffemachine.helpers.PhotoHelper
+import br.com.alura.ceep.ui.coffemachine.helpers.SharedPref
 import br.com.alura.ceep.ui.coffemachine.presentation.custom.CoffeAdapter
 import br.com.alura.ceep.ui.coffemachine.repository.CoffesRepository
 import br.com.alura.ceep.ui.coffemachine.viewmodel.CoffesViewModel
@@ -48,8 +49,11 @@ class DetailActivity : AppCompatActivity() {
         listeners()
         observers()
         progressBar.visibility = View.VISIBLE
-        intent.extras?.getString("uid")?.let { uid ->
-            viewModel.searchByUid(uid, this)
+        val token = SharedPref(this).getString(SharedPref.TOKEN)
+        token?.let {
+            intent.extras?.getString("uid")?.let { uid ->
+                viewModel.searchByUid(uid, this, token)
+            }
         }
     }
 

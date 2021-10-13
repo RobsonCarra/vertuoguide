@@ -1,9 +1,11 @@
 package br.com.alura.ceep.ui.coffemachine.repository
 
+import android.content.Context
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import br.com.alura.ceep.ui.coffemachine.domain.Coffee
 import br.com.alura.ceep.ui.coffemachine.helpers.RetrofitConfig
+import br.com.alura.ceep.ui.coffemachine.helpers.SharedPref
 import br.com.alura.ceep.ui.coffemachine.presentation.custom.CoffeeInterface
 import com.google.common.reflect.TypeToken
 import com.google.firebase.firestore.*
@@ -35,6 +37,9 @@ class CoffesRepository(private val coffesDao: CoffesDao) {
 //        return data
 //    }
 //
+    fun getToken(token: String) {
+    }
+
     fun getByName(name: String): MutableLiveData<List<Coffee>> {
         val datas = MutableLiveData<List<Coffee>>()
         val list = ArrayList<Coffee>()
@@ -98,11 +103,10 @@ class CoffesRepository(private val coffesDao: CoffesDao) {
 //                }
 //        }
 
-    //
-    suspend fun getAll() = flow {
+    suspend fun getAll(token: String) = flow {
         val client = RetrofitConfig().getClient()
         val api = client.create(CoffeeInterface::class.java)
-        val req = api.getAll()
+        val req = api.getAll(token)
         val res = req.await()
         when (res.code()) {
             HttpURLConnection.HTTP_OK -> emit(res.body())
@@ -110,11 +114,10 @@ class CoffesRepository(private val coffesDao: CoffesDao) {
         }
     }
 
-    //
-    suspend fun getByUid(uid: String) = flow {
+    suspend fun getByUid(uid: String, token: String) = flow {
         val client = RetrofitConfig().getClient()
         val api = client.create(CoffeeInterface::class.java)
-        val req = api.getByUid(uid)
+        val req = api.getByUid(token, uid)
         val res = req.await()
         when (res.code()) {
             HttpURLConnection.HTTP_OK -> emit(res.body()?.first())
@@ -122,16 +125,17 @@ class CoffesRepository(private val coffesDao: CoffesDao) {
         }
     }
 
-    suspend fun save(coffee: Coffee) = flow {
+    suspend fun save(coffee: Coffee, token: String) = flow {
         val client = RetrofitConfig().getClient()
         val api = client.create(CoffeeInterface::class.java)
-        val req = api.save(coffee)
+        val req = api.save(token, coffee)
         val res = req.await()
         when (res.code()) {
             HttpURLConnection.HTTP_CREATED -> emit(res.body())
             else -> Log.e("Repositorio", "Erro ao salvar o café ")
         }
     }
+
 //    fun getAll() = coffesDao.getAll()
 
 //    fun getById(id: Long) = coffesDao.getById(id)

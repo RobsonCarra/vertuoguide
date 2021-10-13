@@ -7,12 +7,18 @@ import android.view.View
 import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.view.isVisible
+import androidx.fragment.app.viewModels
 import br.com.alura.ceep.ui.coffemachine.R
+import br.com.alura.ceep.ui.coffemachine.helpers.CoffesRoomDataBase
 import br.com.alura.ceep.ui.coffemachine.helpers.SharedPref
 import br.com.alura.ceep.ui.coffemachine.presentation.DashboardActivity
 import br.com.alura.ceep.ui.coffemachine.presentation.RegisterActivity
+import br.com.alura.ceep.ui.coffemachine.repository.CoffesRepository
+import br.com.alura.ceep.ui.coffemachine.viewmodel.CoffesViewModel
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 
@@ -23,7 +29,15 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private lateinit var loginButton: Button
     private lateinit var createAccount: Button
-//    private lateinit var progressBar: ProgressBar
+
+    //    private lateinit var progressBar: ProgressBar
+    private val viewModel: CoffesViewModel by viewModels {
+        CoffesViewModel.CoffesViewModelFactory(
+            CoffesRepository(
+                CoffesRoomDataBase.getDatabase(this).coffesDao()
+            )
+        )
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

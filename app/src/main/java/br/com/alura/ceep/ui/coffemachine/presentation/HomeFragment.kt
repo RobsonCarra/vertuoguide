@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView
 import br.com.alura.ceep.ui.coffemachine.R
 import br.com.alura.ceep.ui.coffemachine.domain.Coffee
 import br.com.alura.ceep.ui.coffemachine.helpers.CoffesRoomDataBase
+import br.com.alura.ceep.ui.coffemachine.helpers.SharedPref
 import br.com.alura.ceep.ui.coffemachine.presentation.Login.view.LoginActivity
 import br.com.alura.ceep.ui.coffemachine.presentation.custom.CoffeAdapter
 import br.com.alura.ceep.ui.coffemachine.repository.CoffesRepository
@@ -60,9 +61,13 @@ class HomeFragment() : Fragment() {
         listeners()
         observers()
         load()
-        lifecycleScope.launch {
-            viewModel.getAll(viewLifecycleOwner)
+        val token = SharedPref(requireContext()).getString(SharedPref.TOKEN)
+        token?.let {
+            lifecycleScope.launch {
+                viewModel.getAll(viewLifecycleOwner, token)
+            }
         }
+
     }
 
     private fun listeners() {
@@ -79,8 +84,11 @@ class HomeFragment() : Fragment() {
     }
 
     private fun observers() {
-        viewModel.added.observe(viewLifecycleOwner) { coffee ->
-            viewModel.getAll(viewLifecycleOwner)
+        val token = SharedPref(requireContext()).getString(SharedPref.TOKEN)
+        token?.let {
+            viewModel.added.observe(viewLifecycleOwner) { coffee ->
+                viewModel.getAll(viewLifecycleOwner, token)
+            }
         }
         viewModel.list.observe(viewLifecycleOwner) { coffee ->
             coffeAdapter.list.addAll(coffee)

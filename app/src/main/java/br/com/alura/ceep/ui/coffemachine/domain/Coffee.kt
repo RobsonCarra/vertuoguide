@@ -9,7 +9,7 @@ import java.util.UUID
 @Entity
 @Parcelize
 class Coffee(
-    @PrimaryKey var id: Long? = null,
+    @PrimaryKey
     var name: String,
     var capsules: Int,
     var description: String,

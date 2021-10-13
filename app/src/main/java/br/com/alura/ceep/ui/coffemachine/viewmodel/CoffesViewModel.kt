@@ -1,5 +1,6 @@
 package br.com.alura.ceep.ui.coffemachine.viewmodel
 
+import android.content.Context
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -7,6 +8,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import br.com.alura.ceep.ui.coffemachine.domain.Coffee
 import br.com.alura.ceep.ui.coffemachine.helpers.PhotoHelper
+import br.com.alura.ceep.ui.coffemachine.helpers.SharedPref
 import br.com.alura.ceep.ui.coffemachine.repository.CoffesRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.InternalCoroutinesApi
@@ -25,22 +27,27 @@ class CoffesViewModel(
 //    val updated = MutableLiveData<Boolean>(true)
 //    val deleted = MutableLiveData<Coffee>()
 //    val filteredById = MutableLiveData<List<Coffee>>()
-
-    //    fun getAll(lifecycleOwner: LifecycleOwner) {
+//        fun getAll(lifecycleOwner: LifecycleOwner) {
 //        viewModelScope.launch {
 //            coffesRepository.getAll().observe(lifecycleOwner) { result ->
 //                list.postValue(result)
 //            }
 //        }
 //    }
-    fun getAll(lifecycleOwner: LifecycleOwner) {
+
+    fun getToken(token: String) {
         viewModelScope.launch {
-            coffesRepository.getAll().collect { result ->
+            coffesRepository.getToken(token)
+        }
+    }
+
+    fun getAll(lifecycleOwner: LifecycleOwner, token: String) {
+        viewModelScope.launch {
+            coffesRepository.getAll(token).collect { result ->
                 list.postValue(result)
             }
         }
     }
-
 
     fun searchByName(name: String, lifecycleOwner: LifecycleOwner) {
         viewModelScope.launch {
@@ -50,17 +57,17 @@ class CoffesViewModel(
         }
     }
 
-    fun searchByUid(uid: String, lifecycleOwner: LifecycleOwner) {
+    fun searchByUid(uid: String, lifecycleOwner: LifecycleOwner, token: String) {
         viewModelScope.launch {
-            coffesRepository.getByUid(uid).collect { result ->
+            coffesRepository.getByUid(uid, token).collect { result ->
                 coffeeById.postValue(result)
             }
         }
     }
 
-    fun save(coffee: Coffee) {
+    fun save(coffee: Coffee, token: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            val saved = coffesRepository.save(coffee)
+            val saved = coffesRepository.save(coffee, token)
             if (saved == saved) {
                 added.postValue(true)
             }
