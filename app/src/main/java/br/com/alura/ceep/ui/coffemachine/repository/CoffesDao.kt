@@ -15,7 +15,7 @@ interface CoffesDao {
     @Query("SELECT * from Coffee ORDER BY name ASC")
     fun getAll(): List<Coffee>
 
-    @Query("SELECT* from Coffee WHERE id= :id ORDER BY name ASC")
-    fun getById(id: Long): List<Coffee>
+//    @Query("SELECT* from Coffee ORDER BY name ASC")
+//    fun getById(id: Long): List<Coffee>
 
 }

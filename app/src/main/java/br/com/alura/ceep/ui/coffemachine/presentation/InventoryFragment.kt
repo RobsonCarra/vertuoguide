@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView
 import br.com.alura.ceep.ui.coffemachine.R
 import br.com.alura.ceep.ui.coffemachine.domain.Coffee
 import br.com.alura.ceep.ui.coffemachine.helpers.CoffesRoomDataBase
+import br.com.alura.ceep.ui.coffemachine.helpers.SharedPref
 import br.com.alura.ceep.ui.coffemachine.presentation.custom.ItemAdapter
 import br.com.alura.ceep.ui.coffemachine.repository.CoffesRepository
 import br.com.alura.ceep.ui.coffemachine.viewmodel.CoffesViewModel
@@ -53,8 +54,11 @@ class InventoryFragment : Fragment() {
         initList()
         observers()
         watchers()
-        lifecycleScope.launch {
-            viewModel.getAll(viewLifecycleOwner)
+        val token = SharedPref(requireContext()).getString(SharedPref.TOKEN)
+        token?.let {
+            lifecycleScope.launch {
+                viewModel.getAll(viewLifecycleOwner, token)
+            }
         }
     }
 
@@ -89,7 +93,10 @@ class InventoryFragment : Fragment() {
             if (saved) {
                 Toast.makeText(requireContext(), "Salvo com sucesso", Toast.LENGTH_SHORT).show()
             }
-            viewModel.getAll(viewLifecycleOwner)
+            val token = SharedPref(requireContext()).getString(SharedPref.TOKEN)
+            token?.let {
+                viewModel.getAll(viewLifecycleOwner, token)
+            }
         }
     }
 
@@ -106,7 +113,10 @@ class InventoryFragment : Fragment() {
                 if (it.count() >= 3) {
                     viewModel.searchByName(typed.toString(), viewLifecycleOwner)
                 } else if (it.count() == 0) {
-                    viewModel.getAll(viewLifecycleOwner)
+                    val token = SharedPref(requireContext()).getString(SharedPref.TOKEN)
+                    token?.let {
+                        viewModel.getAll(viewLifecycleOwner, token)
+                    }
                 }
             }
         }
