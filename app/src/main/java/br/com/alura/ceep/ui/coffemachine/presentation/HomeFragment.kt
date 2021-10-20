@@ -86,6 +86,7 @@ class HomeFragment() : Fragment() {
             }
         }
         viewModel.list.observe(viewLifecycleOwner) { coffee ->
+            coffeAdapter.list.clear()
             coffeAdapter.list.addAll(coffee)
             coffeAdapter.notifyDataSetChanged()
             progressBar.visibility = View.INVISIBLE

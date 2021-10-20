@@ -131,8 +131,8 @@ class CoffesRepository(private val coffesDao: CoffesDao) {
         val req = api.save(token, coffee)
         val res = req.await()
         when (res.code()) {
-            HttpURLConnection.HTTP_CREATED -> emit(res.body())
-            else -> Log.e("Repositorio", "Erro ao salvar o café ")
+            HttpURLConnection.HTTP_CREATED -> emit(true)
+            else -> emit(false)
         }
     }
 

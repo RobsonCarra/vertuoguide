@@ -167,8 +167,6 @@ class NewCoffeeActivity : AppCompatActivity() {
             val token = SharedPref(this).getString(SharedPref.TOKEN)
             token?.let {
                 viewModel.save(coffee, token)
-                val intent = Intent(this, DashboardActivity::class.java)
-                this.startActivity(intent)
             }
         }
     }

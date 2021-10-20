@@ -22,6 +22,6 @@ interface CoffeeInterface {
     fun save(
         @Header("Authorization") authorization: String,
         @Body coffee: Coffee
-    ): Deferred<Response<Any>>
+    ): Deferred<Response<Void>>
 
 }
