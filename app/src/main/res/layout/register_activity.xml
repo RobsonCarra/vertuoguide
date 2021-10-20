@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/coffe_toolbar"
         android:layout_width="match_parent"
@@ -87,7 +88,7 @@
             android:autofillHints="search"
             android:fontFamily="@font/nunito"
             android:hint="confirm password"
-            android:inputType="textPassword|numberPassword"
+            android:inputType="textPassword"
             android:padding="10dp"
             android:textColor="#000000"
             android:textColorHint="#000000"
@@ -118,9 +119,9 @@
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:autofillHints="search"
-            android:inputType="textPassword"
             android:fontFamily="@font/nunito"
             android:hint="password"
+            android:inputType="textPassword"
             android:padding="10dp"
             android:textColor="#000000"
             android:textColorHint="#000000"
@@ -140,5 +141,15 @@
         app:layout_constraintEnd_toEndOf="@+id/textInputLayout2"
         app:layout_constraintStart_toStartOf="@+id/textInputLayout2"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout2" />
+
+    <ProgressBar
+        android:id="@+id/progress_bar_register_activity"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="32dp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/create_account_button" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -27,4 +27,5 @@ class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             }
         }
     }
+    
 }

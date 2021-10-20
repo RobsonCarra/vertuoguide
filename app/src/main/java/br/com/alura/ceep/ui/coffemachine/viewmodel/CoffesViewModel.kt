@@ -68,8 +68,10 @@ class CoffesViewModel(
     fun save(coffee: Coffee, token: String) {
         viewModelScope.launch(Dispatchers.IO) {
             val saved = coffesRepository.save(coffee, token)
-            if (saved == saved) {
+            if (saved != null) {
                 added.postValue(true)
+            } else {
+                added.postValue(false)
             }
         }
     }

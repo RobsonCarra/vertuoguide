@@ -29,8 +29,8 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private lateinit var loginButton: Button
     private lateinit var createAccount: Button
+//    private lateinit var progressBar: ProgressBar
 
-    //    private lateinit var progressBar: ProgressBar
     private val viewModel: CoffesViewModel by viewModels {
         CoffesViewModel.CoffesViewModelFactory(
             CoffesRepository(

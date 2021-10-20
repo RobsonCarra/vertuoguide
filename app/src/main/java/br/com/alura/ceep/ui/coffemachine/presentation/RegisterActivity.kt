@@ -6,6 +6,7 @@ import android.os.PersistableBundle
 import android.util.Patterns
 import android.view.View
 import android.widget.Button
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -21,6 +22,7 @@ class RegisterActivity : AppCompatActivity() {
     private lateinit var putEmail: TextInputEditText
     private lateinit var auth: FirebaseAuth
     private lateinit var createAccount: Button
+    private lateinit var progressBar: ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,6 +40,7 @@ class RegisterActivity : AppCompatActivity() {
         putPassword = findViewById(R.id.put_password)
         putEmail = findViewById(R.id.confirm_email)
         createAccount = findViewById(R.id.create_account_button)
+        progressBar = findViewById(R.id.progress_bar_register_activity)
     }
 
     private fun goToLoginActivity() {
@@ -59,7 +62,7 @@ class RegisterActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
             putEmail.requestFocus()
-            if (!Patterns.EMAIL_ADDRESS.matcher(putEmail.text.toString()).matches()) {
+            if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
                 putEmail.error = "Please enter valid email"
                 putEmail.requestFocus()
                 return@setOnClickListener
@@ -73,8 +76,10 @@ class RegisterActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
             if (password == confirmPassword) {
+                progressBar.visibility = View.VISIBLE
                 auth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this) { task ->
+                        progressBar.visibility = View.INVISIBLE
                         if (task.isSuccessful) {
                             val user = auth.currentUser
                             Toast.makeText(
@@ -95,6 +100,7 @@ class RegisterActivity : AppCompatActivity() {
                         }
                     }
             } else {
+                progressBar.visibility = View.INVISIBLE
                 Toast.makeText(
                     this@RegisterActivity,
                     "The passwords are different, please enter correctly",
@@ -104,4 +110,5 @@ class RegisterActivity : AppCompatActivity() {
             }
         }
     }
+
 }
