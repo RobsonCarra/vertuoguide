@@ -12,10 +12,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.LifecycleOwner
 import br.com.alura.ceep.ui.coffemachine.R
 import br.com.alura.ceep.ui.coffemachine.helpers.CoffesRoomDataBase
 import br.com.alura.ceep.ui.coffemachine.helpers.SharedPref
 import br.com.alura.ceep.ui.coffemachine.presentation.DashboardActivity
+import br.com.alura.ceep.ui.coffemachine.presentation.HomeFragment
 import br.com.alura.ceep.ui.coffemachine.presentation.RegisterActivity
 import br.com.alura.ceep.ui.coffemachine.repository.CoffesRepository
 import br.com.alura.ceep.ui.coffemachine.viewmodel.CoffesViewModel
@@ -42,9 +44,17 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.login_activity)
+        val token = SharedPref(this).getString(SharedPref.TOKEN)
+        token?.let {
+            if (it.isNotEmpty()){
+                val intent = Intent(this@LoginActivity, HomeFragment::class.java)
+                this.startActivity(intent)
+            }
+        }
         setup()
         auth = FirebaseAuth.getInstance()
         listeners()
+        observers()
     }
 
     public override fun onStart() {
@@ -67,6 +77,21 @@ class LoginActivity : AppCompatActivity() {
         loginButton = findViewById(R.id.login_button)
         createAccount = findViewById(R.id.create_account_button)
 //        progressBar = findViewById(R.id.progress_bar_login_activity)
+    }
+
+    private fun observers() {
+        viewModel.error.observe(this) {
+            if (it) {
+                auth.currentUser?.getIdToken(true)?.addOnCompleteListener { result ->
+                    if (result.isSuccessful) {
+                        result.result?.token?.let { token ->
+                            SharedPref(this).put(SharedPref.TOKEN, token)
+                        }
+                    }
+
+                }
+            }
+        }
     }
 
     private fun listeners() {

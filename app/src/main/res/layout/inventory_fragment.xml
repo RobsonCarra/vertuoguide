@@ -28,7 +28,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/nunito_extrabold"
         android:gravity="top"
-        android:text="New coffe"
+        android:text="New coffee"
         android:textAllCaps="false"
         android:textColor="#000000"
         android:textSize="14sp"

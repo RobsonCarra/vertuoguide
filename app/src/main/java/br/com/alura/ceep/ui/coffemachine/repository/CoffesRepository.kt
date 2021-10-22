@@ -86,8 +86,6 @@ class CoffesRepository(private val coffesDao: CoffesDao) {
 //        val db = FirebaseFirestore.getInstance()
 //        db.collection("coffees").document(coffee.uid).set(coffee)
 //    }
-
-
 //        fun getAll() = flow {
 //            val db = FirebaseFirestore.getInstance()
 //            db.collection("coffees")
@@ -108,8 +106,10 @@ class CoffesRepository(private val coffesDao: CoffesDao) {
         val api = client.create(CoffeeInterface::class.java)
         val req = api.getAll(token)
         val res = req.await()
+        val listaEmpty = ArrayList<Coffee>()
         when (res.code()) {
             HttpURLConnection.HTTP_OK -> emit(res.body())
+            HttpURLConnection.HTTP_UNAUTHORIZED -> emit(listaEmpty)
             else -> Log.e("Repositorio", "Erro ao buscar os dados do GetAll ")
         }
     }
@@ -131,21 +131,17 @@ class CoffesRepository(private val coffesDao: CoffesDao) {
         val req = api.save(token, coffee)
         val res = req.await()
         when (res.code()) {
-            HttpURLConnection.HTTP_CREATED -> emit(true)
+            HttpURLConnection.HTTP_OK -> emit(true)
             else -> emit(false)
         }
     }
-
 //    fun getAll() = coffesDao.getAll()
-
 //    fun getById(id: Long) = coffesDao.getById(id)
-//
 //    fun searchByName(name: String) {
 //        val all = getAll()
 ////        val filtered = all.filter { it.name.lowercase().contains(name.lowercase()) }
 ////        return filtered
 //    }
-//
 //    fun delete(coffee: Coffee): Boolean {
 //        try {
 //            coffesDao.delete(coffee)
@@ -154,7 +150,6 @@ class CoffesRepository(private val coffesDao: CoffesDao) {
 //            return false
 //        }
 //    }
-//
 //    fun save(coffee: Coffee): Boolean {
 //        val id = coffesDao.save(coffee)
 //        return id > 0

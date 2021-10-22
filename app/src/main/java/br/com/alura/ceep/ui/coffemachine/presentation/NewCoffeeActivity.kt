@@ -4,6 +4,7 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Build
 import android.os.Bundle
+import android.os.SystemClock
 import android.provider.MediaStore
 import android.view.View
 import android.widget.Button
@@ -39,8 +40,9 @@ class NewCoffeeActivity : AppCompatActivity() {
     private lateinit var putIntensity: TextInputEditText
     private lateinit var putQuantity: TextInputEditText
     private lateinit var putCapsules: TextInputEditText
-
-    //    private lateinit var progressBar: ProgressBar
+    private var mLastClickTime: Long = 0
+    private lateinit var progressBar: ProgressBar
+    private lateinit var progressBar2: ProgressBar
     private lateinit var coffeToolbar: Toolbar
     private lateinit var save: Button
     private var REQUEST_CODE_PHOTO = 10
@@ -53,10 +55,11 @@ class NewCoffeeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.new_coffee_activity)
         setup()
-//        progressBar.visibility = View.VISIBLE
         listeners()
         observers()
+        progressBar2.visibility = View.VISIBLE
         load()
+        progressBar2.visibility = View.INVISIBLE
     }
 
     private fun load() {
@@ -75,7 +78,6 @@ class NewCoffeeActivity : AppCompatActivity() {
                 }
             }
         }
-//        progressBar.visibility = View.GONE
     }
 
     private fun setup() {
@@ -86,7 +88,8 @@ class NewCoffeeActivity : AppCompatActivity() {
         putQuantity = findViewById(R.id.put_quantity)
         putCapsules = findViewById(R.id.put_capsules)
         save = findViewById(R.id.save_button)
-//        progressBar = findViewById(R.id.progress_bar_new_coffee_activity)
+        progressBar = findViewById(R.id.progress_bar_new_coffee_activity)
+        progressBar2 = findViewById(R.id.progress_bar_new_coffee_activity2)
         coffeToolbar = findViewById(R.id.coffe_toolbar)
         setSupportActionBar(coffeToolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -103,6 +106,11 @@ class NewCoffeeActivity : AppCompatActivity() {
             onBackPressed()
         }
         save.setOnClickListener {
+            progressBar.visibility = View.VISIBLE
+            if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
+                return@setOnClickListener
+            }
+            mLastClickTime = SystemClock.elapsedRealtime();
             val name = putName.text.toString()
             val description = putDescription.text.toString()
             val intensity = putIntensity.text.toString().toInt()
@@ -177,6 +185,7 @@ class NewCoffeeActivity : AppCompatActivity() {
                 Toast.makeText(this, "Salvo com sucesso", Toast.LENGTH_SHORT).show()
                 val intent = Intent(this, DashboardActivity::class.java)
                 this.startActivity(intent)
+                progressBar.visibility = View.GONE
             }
         }
     }

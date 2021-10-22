@@ -19,6 +19,7 @@ class CoffesViewModel(
   val coffeeById = MutableLiveData<Coffee>()
   var coffeeFiltered = MutableLiveData<List<Coffee>>()
   val added = MutableLiveData<Boolean>(false)
+  val error = MutableLiveData<Boolean>(false)
 //    val updated = MutableLiveData<Boolean>(true)
 //    val deleted = MutableLiveData<Coffee>()
 //    val filteredById = MutableLiveData<List<Coffee>>()
@@ -39,7 +40,11 @@ class CoffesViewModel(
   fun getAll(lifecycleOwner: LifecycleOwner, token: String) {
     viewModelScope.launch {
       coffesRepository.getAll(token).collect { result ->
-        list.postValue(result)
+        if (result?.isEmpty() == true){
+          error.postValue(true)
+        } else {
+          list.postValue(result)
+        }
       }
     }
   }
