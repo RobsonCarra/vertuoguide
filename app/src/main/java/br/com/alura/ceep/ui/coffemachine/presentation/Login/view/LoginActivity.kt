@@ -46,7 +46,7 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.login_activity)
         val token = SharedPref(this).getString(SharedPref.TOKEN)
         token?.let {
-            if (it.isNotEmpty()){
+            if (it.isNotEmpty()) {
                 val intent = Intent(this@LoginActivity, HomeFragment::class.java)
                 this.startActivity(intent)
             }
@@ -86,9 +86,10 @@ class LoginActivity : AppCompatActivity() {
                     if (result.isSuccessful) {
                         result.result?.token?.let { token ->
                             SharedPref(this).put(SharedPref.TOKEN, token)
+                            val intent = Intent(this@LoginActivity, HomeFragment::class.java)
+                            this.startActivity(intent)
                         }
                     }
-
                 }
             }
         }
