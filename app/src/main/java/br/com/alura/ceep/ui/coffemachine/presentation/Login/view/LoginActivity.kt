@@ -9,6 +9,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import br.com.alura.ceep.ui.coffemachine.R
 import br.com.alura.ceep.ui.coffemachine.helpers.CoffesRoomDataBase
+import br.com.alura.ceep.ui.coffemachine.helpers.RetrofitConfig
 import br.com.alura.ceep.ui.coffemachine.helpers.SharedPref
 import br.com.alura.ceep.ui.coffemachine.presentation.DashboardActivity
 import br.com.alura.ceep.ui.coffemachine.presentation.HomeFragment
@@ -30,7 +31,8 @@ class LoginActivity : AppCompatActivity() {
   private val viewModel: CoffesViewModel by viewModels {
     CoffesViewModel.CoffesViewModelFactory(
       CoffesRepository(
-        CoffesRoomDataBase.getDatabase(this).coffesDao()
+        CoffesRoomDataBase.getDatabase(this).coffesDao(),
+        RetrofitConfig().getClient(this)
       )
     )
   }

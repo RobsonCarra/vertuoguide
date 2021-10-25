@@ -12,9 +12,10 @@ import com.google.firebase.firestore.*
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.gson.Gson
 import kotlinx.coroutines.flow.flow
+import retrofit2.Retrofit
 import java.net.HttpURLConnection
 
-class CoffesRepository(private val coffesDao: CoffesDao) {
+class CoffesRepository(private val coffesDao: CoffesDao, private val client: Retrofit) {
 
     //    fun getAll(): MutableLiveData<List<Coffee>> {
 //        val data = MutableLiveData<List<Coffee>>()
@@ -102,7 +103,6 @@ class CoffesRepository(private val coffesDao: CoffesDao) {
 //        }
 
     suspend fun getAll(token: String) = flow {
-        val client = RetrofitConfig().getClient()
         val api = client.create(CoffeeInterface::class.java)
         val req = api.getAll(token)
         val res = req.await()
@@ -115,7 +115,6 @@ class CoffesRepository(private val coffesDao: CoffesDao) {
     }
 
     suspend fun getByUid(uid: String, token: String) = flow {
-        val client = RetrofitConfig().getClient()
         val api = client.create(CoffeeInterface::class.java)
         val req = api.getByUid(token, uid)
         val res = req.await()
@@ -126,7 +125,6 @@ class CoffesRepository(private val coffesDao: CoffesDao) {
     }
 
     suspend fun save(coffee: Coffee, token: String) = flow {
-        val client = RetrofitConfig().getClient()
         val api = client.create(CoffeeInterface::class.java)
         val req = api.save(token, coffee)
         val res = req.await()
