@@ -19,6 +19,7 @@ import br.com.alura.ceep.ui.coffemachine.R
 import br.com.alura.ceep.ui.coffemachine.domain.Coffee
 import br.com.alura.ceep.ui.coffemachine.helpers.CoffesRoomDataBase
 import br.com.alura.ceep.ui.coffemachine.helpers.PhotoHelper
+import br.com.alura.ceep.ui.coffemachine.helpers.RetrofitConfig
 import br.com.alura.ceep.ui.coffemachine.helpers.SharedPref
 import br.com.alura.ceep.ui.coffemachine.helpers.toByteArray
 import br.com.alura.ceep.ui.coffemachine.repository.CoffesRepository
@@ -30,7 +31,8 @@ class NewCoffeeActivity : AppCompatActivity() {
     private val viewModel: CoffesViewModel by viewModels {
         CoffesViewModel.CoffesViewModelFactory(
             CoffesRepository(
-                CoffesRoomDataBase.getDatabase(this).coffesDao()
+                CoffesRoomDataBase.getDatabase(this).coffesDao(),
+                RetrofitConfig().getClient(this)
             )
         )
     }

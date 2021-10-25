@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -17,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView
 import br.com.alura.ceep.ui.coffemachine.R
 import br.com.alura.ceep.ui.coffemachine.domain.Coffee
 import br.com.alura.ceep.ui.coffemachine.helpers.CoffesRoomDataBase
+import br.com.alura.ceep.ui.coffemachine.helpers.RetrofitConfig
 import br.com.alura.ceep.ui.coffemachine.helpers.SharedPref
 import br.com.alura.ceep.ui.coffemachine.presentation.custom.ItemAdapter
 import br.com.alura.ceep.ui.coffemachine.repository.CoffesRepository
@@ -29,7 +31,8 @@ class InventoryFragment : Fragment() {
     private val viewModel: CoffesViewModel by viewModels {
         CoffesViewModel.CoffesViewModelFactory(
             CoffesRepository(
-                CoffesRoomDataBase.getDatabase(requireContext()).coffesDao()
+                CoffesRoomDataBase.getDatabase(requireContext()).coffesDao(),
+                RetrofitConfig().getClient(requireContext())
             )
         )
     }
