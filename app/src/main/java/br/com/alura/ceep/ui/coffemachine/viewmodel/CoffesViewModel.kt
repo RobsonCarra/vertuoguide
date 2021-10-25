@@ -37,9 +37,9 @@ class CoffesViewModel(
     }
   }
 
-  fun getAll(lifecycleOwner: LifecycleOwner, token: String) {
+  fun getAll() {
     viewModelScope.launch {
-      coffesRepository.getAll(token).collect { result ->
+      coffesRepository.getAll().collect { result ->
         if (result?.isEmpty() == true){
           error.postValue(true)
         } else {

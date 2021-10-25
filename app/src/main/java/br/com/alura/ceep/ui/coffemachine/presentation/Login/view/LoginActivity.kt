@@ -43,7 +43,7 @@ class LoginActivity : AppCompatActivity() {
     val token = SharedPref(this).getString(SharedPref.TOKEN)
     token?.let {
       if (it.isNotEmpty()) {
-        val intent = Intent(this@LoginActivity, HomeFragment::class.java)
+        val intent = Intent(this@LoginActivity, DashboardActivity::class.java)
         this.startActivity(intent)
       }
     }

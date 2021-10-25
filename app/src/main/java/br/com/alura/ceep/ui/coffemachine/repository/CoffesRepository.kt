@@ -17,7 +17,7 @@ import java.net.HttpURLConnection
 
 class CoffesRepository(private val coffesDao: CoffesDao, private val client: Retrofit) {
 
-    //    fun getAll(): MutableLiveData<List<Coffee>> {
+  //    fun getAll(): MutableLiveData<List<Coffee>> {
 //        val data = MutableLiveData<List<Coffee>>()
 //        val coffeeList = ArrayList<Coffee>()
 //        val db = FirebaseFirestore.getInstance()
@@ -38,31 +38,31 @@ class CoffesRepository(private val coffesDao: CoffesDao, private val client: Ret
 //        return data
 //    }
 //
-    fun getToken(token: String) {
-    }
+  fun getToken(token: String) {
+  }
 
-    fun getByName(name: String): MutableLiveData<List<Coffee>> {
-        val datas = MutableLiveData<List<Coffee>>()
-        val list = ArrayList<Coffee>()
-        val db = FirebaseFirestore.getInstance()
-        db.collection("coffees")
-            .addSnapshotListener { snapshot, exception ->
-                snapshot?.documents?.let { docs ->
-                    docs.forEach { doc ->
-                        val type = object : TypeToken<Coffee>() {}.type
-                        val json = Gson().toJson(doc.data)
-                        val coffee = Gson().fromJson<Coffee>(json, type)
-                        coffee?.let { cf ->
-                            list.add(cf)
-                        }
-                    }
-                    val filtered =
-                        list.filter { coffee -> coffee.name.lowercase().contains(name.lowercase()) }
-                    datas.postValue(filtered)
-                }
+  fun getByName(name: String): MutableLiveData<List<Coffee>> {
+    val datas = MutableLiveData<List<Coffee>>()
+    val list = ArrayList<Coffee>()
+    val db = FirebaseFirestore.getInstance()
+    db.collection("coffees")
+      .addSnapshotListener { snapshot, exception ->
+        snapshot?.documents?.let { docs ->
+          docs.forEach { doc ->
+            val type = object : TypeToken<Coffee>() {}.type
+            val json = Gson().toJson(doc.data)
+            val coffee = Gson().fromJson<Coffee>(json, type)
+            coffee?.let { cf ->
+              list.add(cf)
             }
-        return datas
-    }
+          }
+          val filtered =
+            list.filter { coffee -> coffee.name.lowercase().contains(name.lowercase()) }
+          datas.postValue(filtered)
+        }
+      }
+    return datas
+  }
 //
 //    fun getByUid(uid: String): MutableLiveData<Coffee> {
 //        val data = MutableLiveData<Coffee>()
@@ -102,37 +102,37 @@ class CoffesRepository(private val coffesDao: CoffesDao, private val client: Ret
 //                }
 //        }
 
-    suspend fun getAll(token: String) = flow {
-        val api = client.create(CoffeeInterface::class.java)
-        val req = api.getAll(token)
-        val res = req.await()
-        val listaEmpty = ArrayList<Coffee>()
-        when (res.code()) {
-            HttpURLConnection.HTTP_OK -> emit(res.body())
-            HttpURLConnection.HTTP_UNAUTHORIZED -> emit(listaEmpty)
-            else -> Log.e("Repositorio", "Erro ao buscar os dados do GetAll ")
-        }
+  suspend fun getAll() = flow {
+    val api = client.create(CoffeeInterface::class.java)
+    val req = api.getAll()
+    val res = req.await()
+    val listaEmpty = ArrayList<Coffee>()
+    when (res.code()) {
+      HttpURLConnection.HTTP_OK -> emit(res.body())
+      HttpURLConnection.HTTP_UNAUTHORIZED -> emit(listaEmpty)
+      else -> Log.e("Repositorio", "Erro ao buscar os dados do GetAll ")
     }
+  }
 
-    suspend fun getByUid(uid: String, token: String) = flow {
-        val api = client.create(CoffeeInterface::class.java)
-        val req = api.getByUid(token, uid)
-        val res = req.await()
-        when (res.code()) {
-            HttpURLConnection.HTTP_OK -> emit(res.body()?.first())
-            else -> Log.e("Repositorio", "Erro ao buscar os dados do GetById ")
-        }
+  suspend fun getByUid(uid: String, token: String) = flow {
+    val api = client.create(CoffeeInterface::class.java)
+    val req = api.getByUid(token, uid)
+    val res = req.await()
+    when (res.code()) {
+      HttpURLConnection.HTTP_OK -> emit(res.body()?.first())
+      else -> Log.e("Repositorio", "Erro ao buscar os dados do GetById ")
     }
+  }
 
-    suspend fun save(coffee: Coffee, token: String) = flow {
-        val api = client.create(CoffeeInterface::class.java)
-        val req = api.save(token, coffee)
-        val res = req.await()
-        when (res.code()) {
-            HttpURLConnection.HTTP_OK -> emit(true)
-            else -> emit(false)
-        }
+  suspend fun save(coffee: Coffee, token: String) = flow {
+    val api = client.create(CoffeeInterface::class.java)
+    val req = api.save(token, coffee)
+    val res = req.await()
+    when (res.code()) {
+      HttpURLConnection.HTTP_OK -> emit(true)
+      else -> emit(false)
     }
+  }
 //    fun getAll() = coffesDao.getAll()
 //    fun getById(id: Long) = coffesDao.getById(id)
 //    fun searchByName(name: String) {

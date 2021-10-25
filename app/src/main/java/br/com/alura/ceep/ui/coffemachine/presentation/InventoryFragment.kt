@@ -60,7 +60,7 @@ class InventoryFragment : Fragment() {
         val token = SharedPref(requireContext()).getString(SharedPref.TOKEN)
         token?.let {
             lifecycleScope.launch {
-                viewModel.getAll(viewLifecycleOwner, token)
+                // viewModel.getAll(viewLifecycleOwner, token)
             }
         }
     }
@@ -98,7 +98,7 @@ class InventoryFragment : Fragment() {
             }
             val token = SharedPref(requireContext()).getString(SharedPref.TOKEN)
             token?.let {
-                viewModel.getAll(viewLifecycleOwner, token)
+                // viewModel.getAll(viewLifecycleOwner, token)
             }
         }
     }
@@ -118,7 +118,7 @@ class InventoryFragment : Fragment() {
                 } else if (it.count() == 0) {
                     val token = SharedPref(requireContext()).getString(SharedPref.TOKEN)
                     token?.let {
-                        viewModel.getAll(viewLifecycleOwner, token)
+                        // viewModel.getAll(viewLifecycleOwner, token)
                     }
                 }
             }

@@ -11,7 +11,7 @@ interface CoffeeInterface {
     // code = identificar se deu certo ou nao
     // body = nossa resposta com os itens ou o item
     @GET("coffees")
-    fun getAll(@Header("Authorization") authorization: String): Deferred<Response<List<Coffee>>>
+    fun getAll(): Deferred<Response<List<Coffee>>>
 
     @GET("coffee/{uid}")
     fun getByUid(
