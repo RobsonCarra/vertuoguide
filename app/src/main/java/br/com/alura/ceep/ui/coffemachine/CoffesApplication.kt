@@ -5,9 +5,9 @@ import androidx.multidex.MultiDex
 
 class CoffesApplication : Application() {
 
-    override fun onCreate() {
-        super.onCreate()
-        MultiDex.install(this)
-    }
+  override fun onCreate() {
+    super.onCreate()
+    MultiDex.install(this)
+  }
 }
 
