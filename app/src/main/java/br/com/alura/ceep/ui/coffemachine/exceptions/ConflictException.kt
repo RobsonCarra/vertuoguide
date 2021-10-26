@@ -1,6 +1,6 @@
 package br.com.alura.ceep.ui.coffemachine.exceptions
 
-class BadGatewayException(msg: String = "Erro de servidor") : Exception() {
+class ConflictException (msg: String = "Dados duplicados") : Exception() {
 
   override val message: String = msg
 

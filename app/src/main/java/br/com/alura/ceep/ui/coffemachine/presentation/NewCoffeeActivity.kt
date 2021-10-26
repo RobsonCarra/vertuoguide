@@ -176,7 +176,7 @@ class NewCoffeeActivity : AppCompatActivity() {
             }
             val token = SharedPref(this).getString(SharedPref.TOKEN)
             token?.let {
-                viewModel.save(coffee, token)
+                viewModel.save(coffee)
             }
         }
     }
