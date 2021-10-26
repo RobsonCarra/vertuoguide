@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import br.com.alura.ceep.ui.coffemachine.domain.Coffee
 import br.com.alura.ceep.ui.coffemachine.helpers.Res
+import br.com.alura.ceep.ui.coffemachine.presentation.DetailActivity
 import br.com.alura.ceep.ui.coffemachine.repository.CoffesRepository
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -21,6 +22,7 @@ class CoffesViewModel(
   var coffeeFiltered = MutableLiveData<List<Coffee>>()
   val added = MutableLiveData<Boolean>(false)
   val error = MutableLiveData<Exception>()
+  val errorById = MutableLiveData<Exception>()
 //    val updated = MutableLiveData<Boolean>(true)
 //    val deleted = MutableLiveData<Coffee>()
 //    val filteredById = MutableLiveData<List<Coffee>>()
@@ -59,7 +61,10 @@ class CoffesViewModel(
   fun searchByUid(uid: String) {
     viewModelScope.launch {
       coffesRepository.getByUid(uid).collect { result ->
-        coffeeById.postValue(result)
+        when (result) {
+          is Res.Success -> coffeeById.postValue(result.items as Coffee)
+          is Res.Failure -> errorById.postValue(result.exception)
+        }
       }
     }
   }
@@ -67,10 +72,9 @@ class CoffesViewModel(
   fun save(coffee: Coffee) {
     viewModelScope.launch {
       coffesRepository.save(coffee).collect { saved ->
-        if (saved) {
-          added.postValue(true)
-        } else {
-          added.postValue(false)
+        when (saved) {
+          is Res.Success -> added.postValue(saved.items as Boolean)
+          is Res.Failure -> added.postValue(saved as Boolean)
         }
       }
     }

@@ -6,14 +6,17 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.lifecycleScope
 import br.com.alura.ceep.ui.coffemachine.R
 import br.com.alura.ceep.ui.coffemachine.domain.Coffee
+import br.com.alura.ceep.ui.coffemachine.exceptions.BadGatewayException
+import br.com.alura.ceep.ui.coffemachine.exceptions.BadRequestException
+import br.com.alura.ceep.ui.coffemachine.exceptions.NoContentException
+import br.com.alura.ceep.ui.coffemachine.exceptions.NotFoundException
 import br.com.alura.ceep.ui.coffemachine.helpers.CoffesRoomDataBase
 import br.com.alura.ceep.ui.coffemachine.helpers.PhotoHelper
 import br.com.alura.ceep.ui.coffemachine.helpers.RetrofitConfig
@@ -26,73 +29,94 @@ import kotlinx.coroutines.launch
 
 class DetailActivity : AppCompatActivity() {
 
-    private val viewModel: CoffesViewModel by viewModels {
-        CoffesViewModel.CoffesViewModelFactory(
-            CoffesRepository(
-                CoffesRoomDataBase.getDatabase(this).coffesDao(),
-                RetrofitConfig().getClient(this)
-            )
-        )
-    }
-    private lateinit var name: TextView
-    private lateinit var description: TextView
-    private lateinit var intensity: TextView
-    private lateinit var size: TextView
-    private lateinit var capsules: TextView
-    private lateinit var image: ImageView
-    private lateinit var coffeToolbar: Toolbar
-    private lateinit var progressBar: ProgressBar
+  private val viewModel: CoffesViewModel by viewModels {
+    CoffesViewModel.CoffesViewModelFactory(
+      CoffesRepository(
+        CoffesRoomDataBase.getDatabase(this).coffesDao(),
+        RetrofitConfig().getClient(this)
+      )
+    )
+  }
+  private lateinit var name: TextView
+  private lateinit var description: TextView
+  private lateinit var intensity: TextView
+  private lateinit var size: TextView
+  private lateinit var capsules: TextView
+  private lateinit var image: ImageView
+  private lateinit var coffeToolbar: Toolbar
+  private lateinit var progressBar: ProgressBar
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    public override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.item_detail)
-        setup()
-        listeners()
-        observers()
-        progressBar.visibility = View.VISIBLE
-        val token = SharedPref(this).getString(SharedPref.TOKEN)
-        token?.let {
-            intent.extras?.getString("uid")?.let { uid ->
-                viewModel.searchByUid(uid, this, token)
-            }
+  @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+  public override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    setContentView(R.layout.item_detail)
+    setup()
+    listeners()
+    observers()
+    progressBar.visibility = View.VISIBLE
+    val token = SharedPref(this).getString(SharedPref.TOKEN)
+    token?.let {
+      intent.extras?.getString("uid")?.let { uid ->
+        viewModel.searchByUid(uid)
+      }
+    }
+  }
+
+  private fun setup() {
+    name = findViewById(R.id.name)
+    description = findViewById(R.id.description)
+    intensity = findViewById(R.id.intensity)
+    size = findViewById(R.id.size)
+    image = findViewById(R.id.image)
+    capsules = findViewById(R.id.capsules)
+    coffeToolbar = findViewById(R.id.coffe_toolbar)
+    progressBar = findViewById(R.id.progress_bar_detail_activity)
+    setSupportActionBar(coffeToolbar)
+    supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+  }
+
+  private fun listeners() {
+    coffeToolbar.setNavigationOnClickListener { arrow: View? ->
+      onBackPressed()
+    }
+  }
+
+  private fun observers() {
+    viewModel.coffeeById.observe(this) { coffee ->
+      name.text = coffee.name
+      description.text = coffee.description
+      size.text = coffee.quantity + " ml"
+      intensity.text = coffee.intensity
+      capsules.text = coffee.capsules.toString()
+      PhotoHelper.loadStorageImage("Coffees/photos", coffee.image) { url ->
+        if (url.isNotEmpty()) {
+          Picasso.get().load(url)
+            .placeholder(R.drawable.ic_launcher_background)
+            .into(image)
         }
+      }
+      progressBar.visibility = View.GONE
     }
-
-    private fun setup() {
-        name = findViewById(R.id.name)
-        description = findViewById(R.id.description)
-        intensity = findViewById(R.id.intensity)
-        size = findViewById(R.id.size)
-        image = findViewById(R.id.image)
-        capsules = findViewById(R.id.capsules)
-        coffeToolbar = findViewById(R.id.coffe_toolbar)
-        progressBar = findViewById(R.id.progress_bar_detail_activity)
-        setSupportActionBar(coffeToolbar)
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-    }
-
-    private fun listeners() {
-        coffeToolbar.setNavigationOnClickListener { arrow: View? ->
-            onBackPressed()
+    viewModel.errorById.observe(this) { exception ->
+      when (exception) {
+        is NoContentException -> {
         }
+        is BadRequestException -> Toast.makeText(
+          this,
+          exception.message,
+          Toast.LENGTH_SHORT
+        ).show()
+        is NotFoundException -> Toast.makeText(
+          this,
+          exception.message,
+          Toast.LENGTH_SHORT
+        ).show()
+          is BadGatewayException -> Toast.makeText(
+              this,
+              exception.message,
+              Toast.LENGTH_SHORT
+          ).show()
+      }
     }
-
-    private fun observers() {
-        viewModel.coffeeById.observe(this) { coffee ->
-            name.text = coffee.name
-            description.text = coffee.description
-            size.text = coffee.quantity + " ml"
-            intensity.text = coffee.intensity
-            capsules.text = coffee.capsules.toString()
-            PhotoHelper.loadStorageImage("Coffees/photos", coffee.image) { url ->
-                if (url.isNotEmpty()) {
-                    Picasso.get().load(url)
-                        .placeholder(R.drawable.ic_launcher_background)
-                        .into(image)
-                }
-            }
-            progressBar.visibility = View.GONE
-        }
-    }
+  }
 }

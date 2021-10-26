@@ -13,8 +13,10 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import br.com.alura.ceep.ui.coffemachine.R
+import br.com.alura.ceep.ui.coffemachine.exceptions.BadGatewayException
 import br.com.alura.ceep.ui.coffemachine.exceptions.BadRequestException
 import br.com.alura.ceep.ui.coffemachine.exceptions.NoContentException
+import br.com.alura.ceep.ui.coffemachine.exceptions.NotFoundException
 import br.com.alura.ceep.ui.coffemachine.helpers.CoffesRoomDataBase
 import br.com.alura.ceep.ui.coffemachine.helpers.RetrofitConfig
 import br.com.alura.ceep.ui.coffemachine.presentation.custom.CoffeAdapter
@@ -87,6 +89,16 @@ class HomeFragment() : Fragment() {
           recyclerView.visibility = View.GONE
         }
         is BadRequestException -> Toast.makeText(
+          requireContext(),
+          exception.message,
+          Toast.LENGTH_SHORT
+        ).show()
+        is NotFoundException -> Toast.makeText(
+          requireContext(),
+          exception.message,
+          Toast.LENGTH_SHORT
+        ).show()
+        is BadGatewayException -> Toast.makeText(
           requireContext(),
           exception.message,
           Toast.LENGTH_SHORT

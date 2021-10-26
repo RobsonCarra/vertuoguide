@@ -4,8 +4,10 @@ import android.content.Context
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import br.com.alura.ceep.ui.coffemachine.domain.Coffee
+import br.com.alura.ceep.ui.coffemachine.exceptions.BadGatewayException
 import br.com.alura.ceep.ui.coffemachine.exceptions.BadRequestException
 import br.com.alura.ceep.ui.coffemachine.exceptions.NoContentException
+import br.com.alura.ceep.ui.coffemachine.exceptions.NotFoundException
 import br.com.alura.ceep.ui.coffemachine.helpers.Res
 import br.com.alura.ceep.ui.coffemachine.helpers.RetrofitConfig
 import br.com.alura.ceep.ui.coffemachine.helpers.SharedPref
@@ -112,9 +114,9 @@ class CoffesRepository(private val coffesDao: CoffesDao, private val client: Ret
     val res = req.await()
     when (res.code()) {
       HttpURLConnection.HTTP_OK -> emit(Res.Success(res.body() as List<Coffee>))
-      HttpURLConnection.HTTP_NOT_FOUND -> emit(Res.Failure(Exception("Usuario nao encontrado")))
+      HttpURLConnection.HTTP_NOT_FOUND -> emit(Res.Failure(NotFoundException()))
       HttpURLConnection.HTTP_BAD_REQUEST -> emit(Res.Failure(BadRequestException()))
-      HttpURLConnection.HTTP_BAD_GATEWAY -> emit(Res.Failure(Exception("Erro de servidor")))
+      HttpURLConnection.HTTP_BAD_GATEWAY -> emit(Res.Failure(BadGatewayException()))
       HttpURLConnection.HTTP_NO_CONTENT -> emit(Res.Failure(NoContentException()))
       else ->  emit(Res.Failure(Exception("Erro Generico")))
     }
@@ -133,8 +135,12 @@ class CoffesRepository(private val coffesDao: CoffesDao, private val client: Ret
     val req = api.getByUid(uid)
     val res = req.await()
     when (res.code()) {
-      HttpURLConnection.HTTP_OK -> emit(res.body()?.first())
-      else -> Log.e("Repositorio", "Erro ao buscar os dados do GetById ")
+      HttpURLConnection.HTTP_OK -> emit(Res.Success(res.body()?.first()))
+      HttpURLConnection.HTTP_NOT_FOUND -> emit(Res.Failure(NotFoundException()))
+      HttpURLConnection.HTTP_BAD_REQUEST -> emit(Res.Failure(BadRequestException()))
+      HttpURLConnection.HTTP_BAD_GATEWAY -> emit(Res.Failure(BadGatewayException()))
+      HttpURLConnection.HTTP_NO_CONTENT -> emit(Res.Failure(NoContentException()))
+      else ->  emit(Res.Failure(Exception("Erro Generico")))
     }
   }
 
@@ -143,7 +149,11 @@ class CoffesRepository(private val coffesDao: CoffesDao, private val client: Ret
     val req = api.save(coffee)
     val res = req.await()
     when (res.code()) {
-      HttpURLConnection.HTTP_OK -> emit(true)
+      HttpURLConnection.HTTP_OK -> emit(Res.Success(true))
+      HttpURLConnection.HTTP_NOT_FOUND -> emit(false)
+      HttpURLConnection.HTTP_BAD_REQUEST -> emit(false)
+      HttpURLConnection.HTTP_BAD_GATEWAY -> emit(false)
+      HttpURLConnection.HTTP_NO_CONTENT -> emit(false)
       else -> emit(false)
     }
   }
