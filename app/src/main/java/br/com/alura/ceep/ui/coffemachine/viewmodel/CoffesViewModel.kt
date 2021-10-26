@@ -23,6 +23,7 @@ class CoffesViewModel(
   val added = MutableLiveData<Boolean>(false)
   val error = MutableLiveData<Exception>()
   val errorById = MutableLiveData<Exception>()
+  val errorSave = MutableLiveData<Exception>()
 //    val updated = MutableLiveData<Boolean>(true)
 //    val deleted = MutableLiveData<Coffee>()
 //    val filteredById = MutableLiveData<List<Coffee>>()
@@ -74,7 +75,7 @@ class CoffesViewModel(
       coffesRepository.save(coffee).collect { saved ->
         when (saved) {
           is Res.Success -> added.postValue(saved.items as Boolean)
-          is Res.Failure -> added.postValue(saved as Boolean)
+          is Res.Failure -> errorSave.postValue(saved.exception)
         }
       }
     }

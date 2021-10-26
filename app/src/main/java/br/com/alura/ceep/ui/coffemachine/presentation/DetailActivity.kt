@@ -37,6 +37,7 @@ class DetailActivity : AppCompatActivity() {
       )
     )
   }
+
   private lateinit var name: TextView
   private lateinit var description: TextView
   private lateinit var intensity: TextView
