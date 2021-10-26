@@ -4,6 +4,9 @@ import android.content.Context
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import br.com.alura.ceep.ui.coffemachine.domain.Coffee
+import br.com.alura.ceep.ui.coffemachine.exceptions.BadRequestException
+import br.com.alura.ceep.ui.coffemachine.exceptions.NoContentException
+import br.com.alura.ceep.ui.coffemachine.helpers.Res
 import br.com.alura.ceep.ui.coffemachine.helpers.RetrofitConfig
 import br.com.alura.ceep.ui.coffemachine.helpers.SharedPref
 import br.com.alura.ceep.ui.coffemachine.presentation.custom.CoffeeInterface
@@ -13,6 +16,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.gson.Gson
 import kotlinx.coroutines.flow.flow
 import retrofit2.Retrofit
+import java.lang.Exception
 import java.net.HttpURLConnection
 
 class CoffesRepository(private val coffesDao: CoffesDao, private val client: Retrofit) {
@@ -106,17 +110,27 @@ class CoffesRepository(private val coffesDao: CoffesDao, private val client: Ret
     val api = client.create(CoffeeInterface::class.java)
     val req = api.getAll()
     val res = req.await()
-    val listaEmpty = ArrayList<Coffee>()
     when (res.code()) {
-      HttpURLConnection.HTTP_OK -> emit(res.body())
-      HttpURLConnection.HTTP_UNAUTHORIZED -> emit(listaEmpty)
-      else -> Log.e("Repositorio", "Erro ao buscar os dados do GetAll ")
+      HttpURLConnection.HTTP_OK -> emit(Res.Success(res.body() as List<Coffee>))
+      HttpURLConnection.HTTP_NOT_FOUND -> emit(Res.Failure(Exception("Usuario nao encontrado")))
+      HttpURLConnection.HTTP_BAD_REQUEST -> emit(Res.Failure(BadRequestException()))
+      HttpURLConnection.HTTP_BAD_GATEWAY -> emit(Res.Failure(Exception("Erro de servidor")))
+      HttpURLConnection.HTTP_NO_CONTENT -> emit(Res.Failure(NoContentException()))
+      else ->  emit(Res.Failure(Exception("Erro Generico")))
     }
+    // when (res.code()) {
+    //   HttpURLConnection.HTTP_OK -> emit(res.body())
+    //   HttpURLConnection.HTTP_NOT_FOUND -> emit("Usuario nao encontrado")
+    //   HttpURLConnection.HTTP_BAD_REQUEST -> emit("Erro de request")
+    //   HttpURLConnection.HTTP_BAD_GATEWAY -> emit("Erro de servidor")
+    //   HttpURLConnection.HTTP_NO_CONTENT -> emit("Dados nao encontrados")
+    //   else -> emit("Erro Generico")
+    // }
   }
 
-  suspend fun getByUid(uid: String, token: String) = flow {
+  suspend fun getByUid(uid: String) = flow {
     val api = client.create(CoffeeInterface::class.java)
-    val req = api.getByUid(token, uid)
+    val req = api.getByUid(uid)
     val res = req.await()
     when (res.code()) {
       HttpURLConnection.HTTP_OK -> emit(res.body()?.first())
@@ -124,9 +138,9 @@ class CoffesRepository(private val coffesDao: CoffesDao, private val client: Ret
     }
   }
 
-  suspend fun save(coffee: Coffee, token: String) = flow {
+  suspend fun save(coffee: Coffee) = flow {
     val api = client.create(CoffeeInterface::class.java)
-    val req = api.save(token, coffee)
+    val req = api.save(coffee)
     val res = req.await()
     when (res.code()) {
       HttpURLConnection.HTTP_OK -> emit(true)

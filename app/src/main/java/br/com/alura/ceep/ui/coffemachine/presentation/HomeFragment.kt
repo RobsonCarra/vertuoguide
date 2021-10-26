@@ -7,11 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ProgressBar
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import br.com.alura.ceep.ui.coffemachine.R
+import br.com.alura.ceep.ui.coffemachine.exceptions.BadRequestException
+import br.com.alura.ceep.ui.coffemachine.exceptions.NoContentException
 import br.com.alura.ceep.ui.coffemachine.helpers.CoffesRoomDataBase
 import br.com.alura.ceep.ui.coffemachine.helpers.RetrofitConfig
 import br.com.alura.ceep.ui.coffemachine.presentation.custom.CoffeAdapter
@@ -54,7 +57,6 @@ class HomeFragment() : Fragment() {
     initList()
     listeners()
     observers()
-    load()
     viewModel.getAll()
   }
 
@@ -73,10 +75,23 @@ class HomeFragment() : Fragment() {
 
   private fun observers() {
     viewModel.list.observe(viewLifecycleOwner) { coffee ->
+      recyclerView.visibility = View.VISIBLE
       coffeAdapter.list.clear()
       coffeAdapter.list.addAll(coffee)
       coffeAdapter.notifyDataSetChanged()
       progressBar.visibility = View.INVISIBLE
+    }
+    viewModel.error.observe(requireActivity()) { exception ->
+      when (exception) {
+        is NoContentException -> {
+          recyclerView.visibility = View.GONE
+        }
+        is BadRequestException -> Toast.makeText(
+          requireContext(),
+          exception.message,
+          Toast.LENGTH_SHORT
+        ).show()
+      }
     }
   }
 
@@ -85,9 +100,6 @@ class HomeFragment() : Fragment() {
     recyclerView.hasFixedSize()
     recyclerView.layoutManager = LinearLayoutManager(context)
     recyclerView.adapter = coffeAdapter
-  }
-
-  private fun load() {
   }
 }
 

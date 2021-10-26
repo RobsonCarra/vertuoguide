@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import br.com.alura.ceep.ui.coffemachine.domain.Coffee
+import br.com.alura.ceep.ui.coffemachine.helpers.Res
 import br.com.alura.ceep.ui.coffemachine.repository.CoffesRepository
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -19,7 +20,7 @@ class CoffesViewModel(
   val coffeeById = MutableLiveData<Coffee>()
   var coffeeFiltered = MutableLiveData<List<Coffee>>()
   val added = MutableLiveData<Boolean>(false)
-  val error = MutableLiveData<Boolean>(false)
+  val error = MutableLiveData<Exception>()
 //    val updated = MutableLiveData<Boolean>(true)
 //    val deleted = MutableLiveData<Coffee>()
 //    val filteredById = MutableLiveData<List<Coffee>>()
@@ -31,20 +32,18 @@ class CoffesViewModel(
 //        }
 //    }
 
-  fun getToken(token: String) {
-    viewModelScope.launch {
-      coffesRepository.getToken(token)
-    }
-  }
-
   fun getAll() {
     viewModelScope.launch {
       coffesRepository.getAll().collect { result ->
-        if (result?.isEmpty() == true){
-          error.postValue(true)
-        } else {
-          list.postValue(result)
+        when (result) {
+          is Res.Success -> list.postValue(result.items as List<Coffee>)
+          is Res.Failure -> error.postValue(result.exception)
         }
+        // if (result is List<*>){
+        //   list.postValue(result as List<Coffee>)
+        // } else {
+        //   error.postValue(result as Boolean)
+        // }
       }
     }
   }
@@ -57,17 +56,17 @@ class CoffesViewModel(
     }
   }
 
-  fun searchByUid(uid: String, lifecycleOwner: LifecycleOwner, token: String) {
+  fun searchByUid(uid: String) {
     viewModelScope.launch {
-      coffesRepository.getByUid(uid, token).collect { result ->
+      coffesRepository.getByUid(uid).collect { result ->
         coffeeById.postValue(result)
       }
     }
   }
 
-  fun save(coffee: Coffee, token: String) {
+  fun save(coffee: Coffee) {
     viewModelScope.launch {
-      coffesRepository.save(coffee, token).collect { saved ->
+      coffesRepository.save(coffee).collect { saved ->
         if (saved) {
           added.postValue(true)
         } else {

@@ -8,6 +8,8 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import br.com.alura.ceep.ui.coffemachine.R
+import br.com.alura.ceep.ui.coffemachine.exceptions.BadRequestException
+import br.com.alura.ceep.ui.coffemachine.exceptions.NoContentException
 import br.com.alura.ceep.ui.coffemachine.helpers.CoffesRoomDataBase
 import br.com.alura.ceep.ui.coffemachine.helpers.RetrofitConfig
 import br.com.alura.ceep.ui.coffemachine.helpers.SharedPref
@@ -73,22 +75,6 @@ class LoginActivity : AppCompatActivity() {
     loginButton = findViewById(R.id.login_button)
     createAccount = findViewById(R.id.create_account_button)
 //        progressBar = findViewById(R.id.progress_bar_login_activity)
-  }
-
-  private fun observers() {
-    viewModel.error.observe(this) {
-      if (it) {
-        auth.currentUser?.getIdToken(true)?.addOnCompleteListener { result ->
-          if (result.isSuccessful) {
-            result.result?.token?.let { token ->
-              SharedPref(this).put(SharedPref.TOKEN, token)
-              val intent = Intent(this@LoginActivity, HomeFragment::class.java)
-              this.startActivity(intent)
-            }
-          }
-        }
-      }
-    }
   }
 
   private fun listeners() {
