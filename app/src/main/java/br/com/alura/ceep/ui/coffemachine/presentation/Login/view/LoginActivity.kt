@@ -52,7 +52,6 @@ class LoginActivity : AppCompatActivity() {
     setup()
     auth = FirebaseAuth.getInstance()
     listeners()
-    observers()
   }
 
   public override fun onStart() {
