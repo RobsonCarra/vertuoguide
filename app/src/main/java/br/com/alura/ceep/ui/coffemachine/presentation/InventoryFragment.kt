@@ -85,17 +85,19 @@ class InventoryFragment : Fragment() {
       itemAdapter.list.clear()
       itemAdapter.list.addAll(coffes)
       itemAdapter.notifyDataSetChanged()
+      progressBar.visibility = View.INVISIBLE
+
     }
     viewModel.coffeeFiltered.observe(viewLifecycleOwner, { list ->
       itemAdapter.list.clear()
       itemAdapter.list.addAll(list)
       itemAdapter.notifyDataSetChanged()
-      progressBar.visibility = View.INVISIBLE
     })
     viewModel.added.observe(viewLifecycleOwner) { saved ->
       if (saved) {
         Toast.makeText(requireContext(), "Salvo com sucesso", Toast.LENGTH_SHORT).show()
       }
+      viewModel.getAll()
       val token = SharedPref(requireContext()).getString(SharedPref.TOKEN)
       token?.let {
         // viewModel.getAll(viewLifecycleOwner, token)

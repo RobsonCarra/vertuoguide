@@ -5,7 +5,8 @@ import android.content.SharedPreferences
 
 class SharedPref(val context: Context) {
 
-  var sharedPreferences: SharedPreferences = context.getSharedPreferences("SharedPrefVertuoguide", Context.MODE_PRIVATE)
+  var sharedPreferences: SharedPreferences =
+    context.getSharedPreferences("SharedPrefVertuoguide", Context.MODE_PRIVATE)
 
   fun getBoolean(key: String) = sharedPreferences.getBoolean(key, false)
 
@@ -24,7 +25,8 @@ class SharedPref(val context: Context) {
 
   fun put(key: String, text: String) = sharedPreferences.edit().putString(key, text).apply()
 
-  fun put(key: String, text: Double) = sharedPreferences.edit().putFloat(key, text.toFloat()).apply()
+  fun put(key: String, text: Double) =
+    sharedPreferences.edit().putFloat(key, text.toFloat()).apply()
 
   fun put(key: String, text: Int) = sharedPreferences.edit().putInt(key, text).apply()
 

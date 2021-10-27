@@ -28,6 +28,7 @@ class HomeFragment() : Fragment() {
   private lateinit var crashButton: Button
   private lateinit var recyclerView: RecyclerView
   private lateinit var progressBar: ProgressBar
+  private lateinit var addCoffeesButton: Button
 
   private var coffeAdapter: CoffeAdapter = CoffeAdapter(selected = { coffee ->
     val bundle = Bundle()
@@ -58,8 +59,8 @@ class HomeFragment() : Fragment() {
     setup(view)
     initList()
     listeners()
-    observers()
     viewModel.getAll()
+    observers()
   }
 
   private fun listeners() {
@@ -67,12 +68,18 @@ class HomeFragment() : Fragment() {
 //            val intent = Intent(requireContext(), LoginActivity::class.java)
 //            this.startActivity(intent)
 //        }
+    addCoffeesButton.setOnClickListener {
+      val intent = Intent(context, NewCoffeeActivity::class.java)
+      context?.startActivity(intent)
+    }
   }
 
   private fun setup(view: View) {
     recyclerView = view.findViewById(R.id.coffe_list_recyclerview)
     crashButton = view.findViewById(R.id.coffe_now_button)
     progressBar = view.findViewById(R.id.progress)
+    addCoffeesButton = view.findViewById(R.id.add_coffees_btn)
+    addCoffeesButton.visibility = View.INVISIBLE
   }
 
   private fun observers() {
@@ -87,6 +94,8 @@ class HomeFragment() : Fragment() {
       when (exception) {
         is NoContentException -> {
           recyclerView.visibility = View.GONE
+          progressBar.visibility = View.INVISIBLE
+          addCoffeesButton.visibility = View.VISIBLE
         }
         is BadRequestException -> Toast.makeText(
           requireContext(),

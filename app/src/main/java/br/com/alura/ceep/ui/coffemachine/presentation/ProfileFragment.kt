@@ -15,7 +15,9 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import br.com.alura.ceep.ui.coffemachine.R
 import br.com.alura.ceep.ui.coffemachine.helpers.PhotoHelper
+import br.com.alura.ceep.ui.coffemachine.helpers.SharedPref
 import br.com.alura.ceep.ui.coffemachine.helpers.toByteArray
+import br.com.alura.ceep.ui.coffemachine.presentation.Login.view.LoginActivity
 
 class ProfileFragment : Fragment() {
 
@@ -66,6 +68,11 @@ class ProfileFragment : Fragment() {
       Toast.makeText(context, "hello", Toast.LENGTH_SHORT).show()
     }
     off.setOnClickListener { v: View? ->
+    }
+    exit.setOnClickListener {
+      SharedPref(requireContext()).clear()
+      val intent = Intent(context, LoginActivity::class.java)
+      context?.startActivity(intent)
     }
   }
 
