@@ -132,7 +132,7 @@ class CoffesRepository(private val coffesDao: CoffesDao, private val client: Ret
     val req = api.getByUid(uid)
     val res = req.await()
     when (res.code()) {
-      HttpURLConnection.HTTP_OK -> emit(Res.Success(res.body()?.first()))
+      HttpURLConnection.HTTP_OK -> emit(Res.Success(res.body()))
       HttpURLConnection.HTTP_NOT_FOUND -> emit(Res.Failure(NotFoundException("Usuário não encontrado")))
       HttpURLConnection.HTTP_BAD_REQUEST -> emit(Res.Failure(BadRequestException()))
       HttpURLConnection.HTTP_BAD_GATEWAY -> emit(Res.Failure(BadGatewayException()))

@@ -12,20 +12,19 @@ import org.w3c.dom.Text
 
 class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-    var image: ImageView = itemView.findViewById(R.id.circular_image)
-    var name: TextView = itemView.findViewById(R.id.name)
-    var capsules: TextView = itemView.findViewById(R.id.capsules)
+  var image: ImageView = itemView.findViewById(R.id.circular_image)
+  var name: TextView = itemView.findViewById(R.id.name)
+  var capsules: TextView = itemView.findViewById(R.id.capsules)
 
-    fun bind(coffee: Coffee) {
-        name.text = coffee.name
-        capsules.text = coffee.capsules.toString()
-        PhotoHelper.loadStorageImage("Coffees/photos", coffee.image) { url ->
-            if (url.isNotEmpty()) {
-                Picasso.get().load(url)
-                    .placeholder(R.drawable.ic_launcher_background)
-                    .into(image)
-            }
-        }
+  fun bind(coffee: Coffee) {
+    name.text = coffee.name
+    capsules.text = coffee.capsules.toString()
+    PhotoHelper.loadStorageImage("Coffees/photos", coffee.image) { url ->
+      if (url.isNotEmpty()) {
+        Picasso.get().load(url)
+          .placeholder(R.drawable.ic_launcher_background)
+          .into(image)
+      }
     }
-    
+  }
 }

@@ -14,44 +14,44 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.messaging.FirebaseMessaging
 
 class DashboardActivity : AppCompatActivity(),
-    BottomNavigationView.OnNavigationItemSelectedListener {
+  BottomNavigationView.OnNavigationItemSelectedListener {
 
-    private val nav: BottomNavigationView by lazy {
-        findViewById(R.id.navigation)
-    }
+  private val nav: BottomNavigationView by lazy {
+    findViewById(R.id.navigation)
+  }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.dashboard_activity)
-        nav.setOnNavigationItemSelectedListener(this)
-        supportFragmentManager.beginTransaction().replace(R.id.frame, HomeFragment()).commit()
-    }
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    setContentView(R.layout.dashboard_activity)
+    nav.setOnNavigationItemSelectedListener(this)
+    supportFragmentManager.beginTransaction().replace(R.id.frame, HomeFragment()).commit()
+  }
 
-    override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.homeAction -> {
-                nav.menu.getItem(0).isChecked = true
-                supportFragmentManager.beginTransaction().replace(R.id.frame, HomeFragment())
-                    .commit()
-            }
-            R.id.favAction -> {
-                nav.menu.getItem(1).isChecked = true
-                supportFragmentManager.beginTransaction().replace(R.id.frame, FavoriteFragment())
-                    .commit()
-            }
-            R.id.setAction -> {
-                nav.menu.getItem(2).isChecked = true
-                supportFragmentManager.beginTransaction().replace(
-                    R.id.frame,
-                    InventoryFragment()
-                ).commit()
-            }
-            R.id.profAction -> {
-                nav.menu.getItem(3).isChecked = true
-                supportFragmentManager.beginTransaction().replace(R.id.frame, ProfileFragment())
-                    .commit()
-            }
-        }
-        return false;
+  override fun onNavigationItemSelected(item: MenuItem): Boolean {
+    when (item.itemId) {
+      R.id.homeAction -> {
+        nav.menu.getItem(0).isChecked = true
+        supportFragmentManager.beginTransaction().replace(R.id.frame, HomeFragment())
+          .commit()
+      }
+      R.id.favAction -> {
+        nav.menu.getItem(1).isChecked = true
+        supportFragmentManager.beginTransaction().replace(R.id.frame, FavoriteFragment())
+          .commit()
+      }
+      R.id.setAction -> {
+        nav.menu.getItem(2).isChecked = true
+        supportFragmentManager.beginTransaction().replace(
+          R.id.frame,
+          InventoryFragment()
+        ).commit()
+      }
+      R.id.profAction -> {
+        nav.menu.getItem(3).isChecked = true
+        supportFragmentManager.beginTransaction().replace(R.id.frame, ProfileFragment())
+          .commit()
+      }
     }
+    return false;
+  }
 }

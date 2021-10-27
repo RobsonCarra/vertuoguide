@@ -112,11 +112,11 @@ class DetailActivity : AppCompatActivity() {
           exception.message,
           Toast.LENGTH_SHORT
         ).show()
-          is BadGatewayException -> Toast.makeText(
-              this,
-              exception.message,
-              Toast.LENGTH_SHORT
-          ).show()
+        is BadGatewayException -> Toast.makeText(
+          this,
+          exception.message,
+          Toast.LENGTH_SHORT
+        ).show()
       }
     }
   }

@@ -28,110 +28,110 @@ import kotlinx.coroutines.launch
 
 class InventoryFragment : Fragment() {
 
-    private val viewModel: CoffesViewModel by viewModels {
-        CoffesViewModel.CoffesViewModelFactory(
-            CoffesRepository(
-                CoffesRoomDataBase.getDatabase(requireContext()).coffesDao(),
-                RetrofitConfig().getClient(requireContext())
-            )
-        )
+  private val viewModel: CoffesViewModel by viewModels {
+    CoffesViewModel.CoffesViewModelFactory(
+      CoffesRepository(
+        CoffesRoomDataBase.getDatabase(requireContext()).coffesDao(),
+        RetrofitConfig().getClient(requireContext())
+      )
+    )
+  }
+
+  private lateinit var itemAdapter: ItemAdapter
+  private lateinit var putName: TextInputEditText
+  private lateinit var new: Button
+  private lateinit var recyclerView: RecyclerView
+  private lateinit var progressBar: ProgressBar
+
+  override fun onCreateView(
+    inflater: LayoutInflater, container: ViewGroup?,
+    savedInstanceState: Bundle?
+  ): View? {
+    return inflater.inflate(R.layout.inventory_fragment, container, false)
+  }
+
+  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    super.onViewCreated(view, savedInstanceState)
+    setup(view)
+    listeners()
+    initList()
+    observers()
+    watchers()
+    val token = SharedPref(requireContext()).getString(SharedPref.TOKEN)
+    token?.let {
+      lifecycleScope.launch {
+        // viewModel.getAll(viewLifecycleOwner, token)
+      }
     }
+  }
 
-    private lateinit var itemAdapter: ItemAdapter
-    private lateinit var putName: TextInputEditText
-    private lateinit var new: Button
-    private lateinit var recyclerView: RecyclerView
-    private lateinit var progressBar: ProgressBar
+  private fun onChangeCoffedata(selected: Coffee) {
+    val bundle = Bundle()
+    bundle.putParcelable("coffe", selected)
+    val intent = Intent(requireContext(), NewCoffeeActivity::class.java)
+    intent.putExtras(bundle)
+    requireContext().startActivity(intent)
+  }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.inventory_fragment, container, false)
+  private fun setup(view: View) {
+    putName = view.findViewById(R.id.confirm_password)
+    new = view.findViewById(R.id.new_coffe_button)
+    recyclerView = view.findViewById(R.id.coffe_recyclerview_inventory)
+    progressBar = view.findViewById(R.id.progress_bar_inventory)
+  }
+
+  private fun observers() {
+    viewModel.list.observe(viewLifecycleOwner) { coffes ->
+      itemAdapter.list.clear()
+      itemAdapter.list.addAll(coffes)
+      itemAdapter.notifyDataSetChanged()
     }
+    viewModel.coffeeFiltered.observe(viewLifecycleOwner, { list ->
+      itemAdapter.list.clear()
+      itemAdapter.list.addAll(list)
+      itemAdapter.notifyDataSetChanged()
+      progressBar.visibility = View.INVISIBLE
+    })
+    viewModel.added.observe(viewLifecycleOwner) { saved ->
+      if (saved) {
+        Toast.makeText(requireContext(), "Salvo com sucesso", Toast.LENGTH_SHORT).show()
+      }
+      val token = SharedPref(requireContext()).getString(SharedPref.TOKEN)
+      token?.let {
+        // viewModel.getAll(viewLifecycleOwner, token)
+      }
+    }
+  }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        setup(view)
-        listeners()
-        initList()
-        observers()
-        watchers()
-        val token = SharedPref(requireContext()).getString(SharedPref.TOKEN)
-        token?.let {
-            lifecycleScope.launch {
-                // viewModel.getAll(viewLifecycleOwner, token)
-            }
+  private fun listeners() {
+    new.setOnClickListener { v: View? ->
+      val intent = Intent(context, NewCoffeeActivity::class.java)
+      context?.startActivity(intent)
+    }
+  }
+
+  private fun watchers() {
+    putName.doAfterTextChanged { typed ->
+      typed?.let {
+        if (it.count() >= 3) {
+          viewModel.searchByName(typed.toString(), viewLifecycleOwner)
+        } else if (it.count() == 0) {
+          val token = SharedPref(requireContext()).getString(SharedPref.TOKEN)
+          token?.let {
+            // viewModel.getAll(viewLifecycleOwner, token)
+          }
         }
+      }
     }
+  }
 
-    private fun onChangeCoffedata(selected: Coffee) {
-        val bundle = Bundle()
-        bundle.putParcelable("coffe", selected)
-        val intent = Intent(requireContext(), NewCoffeeActivity::class.java)
-        intent.putExtras(bundle)
-        requireContext().startActivity(intent)
-    }
-
-    private fun setup(view: View) {
-        putName = view.findViewById(R.id.confirm_password)
-        new = view.findViewById(R.id.new_coffe_button)
-        recyclerView = view.findViewById(R.id.coffe_recyclerview_inventory)
-        progressBar = view.findViewById(R.id.progress_bar_inventory)
-    }
-
-    private fun observers() {
-        viewModel.list.observe(viewLifecycleOwner) { coffes ->
-            itemAdapter.list.clear()
-            itemAdapter.list.addAll(coffes)
-            itemAdapter.notifyDataSetChanged()
-        }
-        viewModel.coffeeFiltered.observe(viewLifecycleOwner, { list ->
-            itemAdapter.list.clear()
-            itemAdapter.list.addAll(list)
-            itemAdapter.notifyDataSetChanged()
-            progressBar.visibility = View.INVISIBLE
-        })
-        viewModel.added.observe(viewLifecycleOwner) { saved ->
-            if (saved) {
-                Toast.makeText(requireContext(), "Salvo com sucesso", Toast.LENGTH_SHORT).show()
-            }
-            val token = SharedPref(requireContext()).getString(SharedPref.TOKEN)
-            token?.let {
-                // viewModel.getAll(viewLifecycleOwner, token)
-            }
-        }
-    }
-
-    private fun listeners() {
-        new.setOnClickListener { v: View? ->
-            val intent = Intent(context, NewCoffeeActivity::class.java)
-            context?.startActivity(intent)
-        }
-    }
-
-    private fun watchers() {
-        putName.doAfterTextChanged { typed ->
-            typed?.let {
-                if (it.count() >= 3) {
-                    viewModel.searchByName(typed.toString(), viewLifecycleOwner)
-                } else if (it.count() == 0) {
-                    val token = SharedPref(requireContext()).getString(SharedPref.TOKEN)
-                    token?.let {
-                        // viewModel.getAll(viewLifecycleOwner, token)
-                    }
-                }
-            }
-        }
-    }
-
-    fun initList() {
-        progressBar.visibility = View.VISIBLE
-        itemAdapter = ItemAdapter(selected = { selected ->
-            onChangeCoffedata(selected)
-        })
-        recyclerView.setHasFixedSize(true)
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        recyclerView.adapter = itemAdapter
-    }
+  fun initList() {
+    progressBar.visibility = View.VISIBLE
+    itemAdapter = ItemAdapter(selected = { selected ->
+      onChangeCoffedata(selected)
+    })
+    recyclerView.setHasFixedSize(true)
+    recyclerView.layoutManager = LinearLayoutManager(requireContext())
+    recyclerView.adapter = itemAdapter
+  }
 }

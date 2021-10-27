@@ -11,34 +11,34 @@ import com.squareup.picasso.Picasso
 
 class CoffeeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-    var image: ImageView
-    var description: TextView
-    var name: TextView
-    var size: TextView
-    var intensity: TextView
-    var capsules: TextView
+  var image: ImageView
+  var description: TextView
+  var name: TextView
+  var size: TextView
+  var intensity: TextView
+  var capsules: TextView
 
-    init {
-        image = itemView.findViewById(R.id.image_coffe)
-        description = itemView.findViewById(R.id.description)
-        name = itemView.findViewById(R.id.name)
-        size = itemView.findViewById(R.id.size)
-        intensity = itemView.findViewById(R.id.intensity)
-        capsules = itemView.findViewById(R.id.capsules)
-    }
+  init {
+    image = itemView.findViewById(R.id.image_coffe)
+    description = itemView.findViewById(R.id.description)
+    name = itemView.findViewById(R.id.name)
+    size = itemView.findViewById(R.id.size)
+    intensity = itemView.findViewById(R.id.intensity)
+    capsules = itemView.findViewById(R.id.capsules)
+  }
 
-    fun bind(coffee: Coffee) {
-        description.text = coffee.description
-        name.text = coffee.name
-        size.text = coffee.quantity
-        intensity.text = coffee.intensity
-        capsules.text = coffee.capsules.toString()
-        PhotoHelper.loadStorageImage("Coffees/photos", coffee.image) { url ->
-            if (url.isNotEmpty()) {
-                Picasso.get().load(url)
-                    .placeholder(R.drawable.ic_launcher_background)
-                    .into(image)
-            }
-        }
+  fun bind(coffee: Coffee) {
+    description.text = coffee.description
+    name.text = coffee.name
+    size.text = coffee.quantity
+    intensity.text = coffee.intensity
+    capsules.text = coffee.capsules.toString()
+    PhotoHelper.loadStorageImage("Coffees/photos", coffee.image) { url ->
+      if (url.isNotEmpty()) {
+        Picasso.get().load(url)
+          .placeholder(R.drawable.ic_launcher_background)
+          .into(image)
+      }
     }
+  }
 }
