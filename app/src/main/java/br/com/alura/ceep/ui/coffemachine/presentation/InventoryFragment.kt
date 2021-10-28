@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.Toast
-import androidx.activity.viewModels
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -23,17 +22,21 @@ import br.com.alura.ceep.ui.coffemachine.helpers.SharedPref
 import br.com.alura.ceep.ui.coffemachine.presentation.custom.ItemAdapter
 import br.com.alura.ceep.ui.coffemachine.repository.CoffesRepository
 import br.com.alura.ceep.ui.coffemachine.viewmodel.CoffesViewModel
+import br.com.alura.ceep.ui.coffemachine.viewmodel.config.CoffesViewModelFactory
 import com.google.android.material.textfield.TextInputEditText
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.launch
 
 class InventoryFragment : Fragment() {
 
   private val viewModel: CoffesViewModel by viewModels {
-    CoffesViewModel.CoffesViewModelFactory(
+    CoffesViewModelFactory(
       CoffesRepository(
         CoffesRoomDataBase.getDatabase(requireContext()).coffesDao(),
         RetrofitConfig().getClient(requireContext())
-      )
+      ),
+      FirebaseAuth.getInstance(),
+      SharedPref(requireContext())
     )
   }
 

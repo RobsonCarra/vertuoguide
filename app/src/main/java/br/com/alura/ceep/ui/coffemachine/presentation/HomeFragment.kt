@@ -7,7 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ProgressBar
+import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,9 +21,12 @@ import br.com.alura.ceep.ui.coffemachine.exceptions.NoContentException
 import br.com.alura.ceep.ui.coffemachine.exceptions.NotFoundException
 import br.com.alura.ceep.ui.coffemachine.helpers.CoffesRoomDataBase
 import br.com.alura.ceep.ui.coffemachine.helpers.RetrofitConfig
+import br.com.alura.ceep.ui.coffemachine.helpers.SharedPref
 import br.com.alura.ceep.ui.coffemachine.presentation.custom.CoffeAdapter
 import br.com.alura.ceep.ui.coffemachine.repository.CoffesRepository
 import br.com.alura.ceep.ui.coffemachine.viewmodel.CoffesViewModel
+import br.com.alura.ceep.ui.coffemachine.viewmodel.config.CoffesViewModelFactory
+import com.google.firebase.auth.FirebaseAuth
 
 class HomeFragment() : Fragment() {
 
@@ -29,6 +34,7 @@ class HomeFragment() : Fragment() {
   private lateinit var recyclerView: RecyclerView
   private lateinit var progressBar: ProgressBar
   private lateinit var addCoffeesButton: Button
+  private lateinit var addCoffeesMsg: TextView
 
   private var coffeAdapter: CoffeAdapter = CoffeAdapter(selected = { coffee ->
     val bundle = Bundle()
@@ -39,11 +45,13 @@ class HomeFragment() : Fragment() {
   })
 
   private val viewModel: CoffesViewModel by viewModels {
-    CoffesViewModel.CoffesViewModelFactory(
+    CoffesViewModelFactory(
       CoffesRepository(
         CoffesRoomDataBase.getDatabase(requireContext()).coffesDao(),
         RetrofitConfig().getClient(requireContext())
-      )
+      ),
+      FirebaseAuth.getInstance(),
+      SharedPref(requireContext())
     )
   }
 
@@ -64,10 +72,6 @@ class HomeFragment() : Fragment() {
   }
 
   private fun listeners() {
-//        crashButton.setOnClickListener {
-//            val intent = Intent(requireContext(), LoginActivity::class.java)
-//            this.startActivity(intent)
-//        }
     addCoffeesButton.setOnClickListener {
       val intent = Intent(context, NewCoffeeActivity::class.java)
       context?.startActivity(intent)
@@ -79,7 +83,7 @@ class HomeFragment() : Fragment() {
     crashButton = view.findViewById(R.id.coffe_now_button)
     progressBar = view.findViewById(R.id.progress)
     addCoffeesButton = view.findViewById(R.id.add_coffees_btn)
-    addCoffeesButton.visibility = View.INVISIBLE
+    addCoffeesMsg = view.findViewById(R.id.add_coffee_msg)
   }
 
   private fun observers() {
@@ -88,14 +92,17 @@ class HomeFragment() : Fragment() {
       coffeAdapter.list.clear()
       coffeAdapter.list.addAll(coffee)
       coffeAdapter.notifyDataSetChanged()
-      progressBar.visibility = View.INVISIBLE
+      progressBar.visibility = View.GONE
+      addCoffeesButton.visibility = View.GONE
+      addCoffeesMsg.visibility = View.GONE
     }
     viewModel.error.observe(requireActivity()) { exception ->
       when (exception) {
         is NoContentException -> {
           recyclerView.visibility = View.GONE
-          progressBar.visibility = View.INVISIBLE
+          progressBar.visibility = View.GONE
           addCoffeesButton.visibility = View.VISIBLE
+          addCoffeesMsg.visibility = View.VISIBLE
         }
         is BadRequestException -> Toast.makeText(
           requireContext(),

@@ -15,7 +15,7 @@ android {
         noCompress "pdf"
       }
   defaultConfig {
-    applicationId "br.com.alura.ceep.ui.coffemachine"
+    applicationId "com.vertuoguide.app"
     minSdkVersion 16
     targetSdkVersion 30
     versionCode 1

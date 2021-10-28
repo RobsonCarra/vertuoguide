@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="app_name">vertuoguide</string>
+  <string name="email">E-mail</string>
+  <string name="start_sesssion">Getting started</string>
+  <string name="email_required">E-mail required</string>
+  <string name="invalid_email">E-mail must be valid</string>
+  <string name="password_required">Password required</string>
+  <string name="unauthorized">Account unauthorized</string>
+  <string name="sign_in">Access my account</string>
+  <string name="create_account">New account</string>
+
+</resources>

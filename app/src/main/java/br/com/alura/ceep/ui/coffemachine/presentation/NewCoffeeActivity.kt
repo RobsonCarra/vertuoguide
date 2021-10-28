@@ -22,7 +22,6 @@ import br.com.alura.ceep.ui.coffemachine.exceptions.BadRequestException
 import br.com.alura.ceep.ui.coffemachine.exceptions.ConflictException
 import br.com.alura.ceep.ui.coffemachine.exceptions.InternalException
 import br.com.alura.ceep.ui.coffemachine.exceptions.NoContentException
-import br.com.alura.ceep.ui.coffemachine.exceptions.NotFoundException
 import br.com.alura.ceep.ui.coffemachine.helpers.CoffesRoomDataBase
 import br.com.alura.ceep.ui.coffemachine.helpers.PhotoHelper
 import br.com.alura.ceep.ui.coffemachine.helpers.RetrofitConfig
@@ -30,18 +29,24 @@ import br.com.alura.ceep.ui.coffemachine.helpers.SharedPref
 import br.com.alura.ceep.ui.coffemachine.helpers.toByteArray
 import br.com.alura.ceep.ui.coffemachine.repository.CoffesRepository
 import br.com.alura.ceep.ui.coffemachine.viewmodel.CoffesViewModel
+import br.com.alura.ceep.ui.coffemachine.viewmodel.config.CoffesViewModelFactory
 import com.google.android.material.textfield.TextInputEditText
+import com.google.firebase.auth.FirebaseAuth
 import com.squareup.picasso.Picasso
 
 class NewCoffeeActivity : AppCompatActivity() {
+
   private val viewModel: CoffesViewModel by viewModels {
-    CoffesViewModel.CoffesViewModelFactory(
+    CoffesViewModelFactory(
       CoffesRepository(
         CoffesRoomDataBase.getDatabase(this).coffesDao(),
         RetrofitConfig().getClient(this)
-      )
+      ),
+      FirebaseAuth.getInstance(),
+      SharedPref(this)
     )
   }
+
   private lateinit var camera: ImageView
   private lateinit var putName: TextInputEditText
   private lateinit var putDescription: TextInputEditText
