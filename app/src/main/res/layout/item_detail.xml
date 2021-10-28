@@ -54,7 +54,7 @@
                 android:layout_marginLeft="32dp"
                 android:layout_marginTop="32dp"
                 android:fontFamily="@font/nunito_extrabold"
-                android:text="name"
+                android:text="@string/name"
                 android:textColor="#000000"
                 android:textSize="20sp"
                 app:layout_constraintEnd_toStartOf="@+id/like_button"
@@ -66,7 +66,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/nunito"
-                android:text="Available Capsules: "
+                android:text="@string/available_capsules"
                 android:textSize="12sp"
                 app:layout_constraintStart_toStartOf="@+id/name"
                 app:layout_constraintTop_toBottomOf="@+id/name" />
@@ -108,7 +108,7 @@
                 android:layout_marginStart="48dp"
                 android:layout_marginLeft="48dp"
                 android:fontFamily="@font/nunito_bold"
-                android:text="Intensity"
+                android:text="@string/intensity"
                 android:textColor="#000000"
                 android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -134,7 +134,7 @@
                 android:layout_marginEnd="48dp"
                 android:layout_marginRight="48dp"
                 android:fontFamily="@font/nunito_bold"
-                android:text="Quantity"
+                android:text="@string/quantity"
                 android:textColor="#000000"
                 android:textSize="14sp"
                 android:textStyle="bold"
@@ -152,7 +152,7 @@
                 android:layout_marginRight="32dp"
                 android:layout_marginBottom="32dp"
                 android:fontFamily="@font/nunito_extrabold"
-                android:text="DRINK NOW"
+                android:text="@string/drink_now"
                 android:textColor="#FFFFFF"
                 android:textSize="16sp"
                 app:backgroundTint="#58D697"
@@ -161,7 +161,8 @@
                 app:layout_constraintCircleRadius="40dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/Quantity" />
+                app:layout_constraintTop_toBottomOf="@+id/Quantity"
+                />
 
             <ImageView
                 android:id="@+id/like_button"
@@ -181,7 +182,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/nunito"
-                android:text="10"
+                android:text="@string/capsules_example"
                 android:textSize="12dp"
                 app:layout_constraintBottom_toBottomOf="@+id/available_capsules"
                 app:layout_constraintEnd_toStartOf="@+id/like_button"

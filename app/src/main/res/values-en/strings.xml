@@ -9,5 +9,21 @@
   <string name="unauthorized">Account unauthorized</string>
   <string name="sign_in">Access my account</string>
   <string name="create_account">New account</string>
+  <string name="new_coffee">New coffee</string>
+  <string name="name">name</string>
+  <string name="description">description</string>
+  <string name="intensity">instensity</string>
+  <string name="quantity">quantity in ml</string>
+  <string name="capsules">capsules</string>
+  <string name="inventory">inventory</string>
+  <string name="save">Save</string>
+  <string name="available_capsules">Available capsules: </string>
+  <string name="drink_now">Drink now</string>
+  <string name="capsules_example">10</string>
+  <string name="coffee_type">Coffee type</string>
+  <string name="add_coffee">Add coffee</string>
+  <string name="confirm_password">Confirm the password</string>
+  <string name="password">Password</string>
+  <string name="register_now">register now!</string>
 
 </resources>

@@ -9,5 +9,21 @@
   <string name="unauthorized">Credenciais inválidass</string>
   <string name="sign_in">Acessar minha conta</string>
   <string name="create_account">Nova conta</string>
+  <string name="new_coffee">Nova conta</string>
+  <string name="name">nome</string>
+  <string name="description">descrição</string>
+  <string name="intensity">intensidade</string>
+  <string name="quantity">quantidade em ml</string>
+  <string name="capsules">capsulas</string>
+  <string name="inventory">inventário</string>
+  <string name="save">Salvar</string>
+  <string name="available_capsules">Capsulas disponíveis: </string>
+  <string name="drink_now">Tomar agora</string>
+  <string name="capsules_example">10</string>
+  <string name="coffee_type">Tipo do café</string>
+  <string name="add_coffee">Adicionar café</string>
+  <string name="confirm_password">Confirme a senha</string>
+  <string name="password">Senha</string>
+  <string name="register_now">registre agora!</string>
 
 </resources>

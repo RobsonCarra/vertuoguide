@@ -39,7 +39,7 @@
                 android:layout_marginRight="24dp"
                 android:layout_marginStart="32dp"
                 android:fontFamily="@font/nunito_extrabold"
-                android:text="CoffeType"
+                android:text="@string/coffee_type"
                 android:textColor="#000000"
                 android:textSize="20sp"
                 android:textStyle="bold"
@@ -54,7 +54,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/nunito"
-                android:text="10"
+                android:text="@string/capsules_example"
                 android:textSize="12sp"
                 app:layout_constraintStart_toEndOf="@+id/textView"
                 app:layout_constraintTop_toBottomOf="@+id/name"
@@ -65,7 +65,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/nunito"
-                android:text="Available Capsules:"
+                android:text="@string/available_capsules"
                 android:textSize="12sp"
                 app:layout_constraintStart_toStartOf="@+id/name"
                 app:layout_constraintTop_toBottomOf="@+id/name"
@@ -88,7 +88,6 @@
                 app:civ_shadow="true"
                 app:civ_shadow_color="#003F51B5"
                 />
-
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

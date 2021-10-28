@@ -5,10 +5,6 @@
         android:icon="@drawable/home"
         android:title="" />
     <item
-        android:id="@+id/favAction"
-        android:icon="@drawable/favorite"
-        android:title="" />
-    <item
         android:id="@+id/setAction"
         android:icon="@drawable/plus"
         android:title="" />

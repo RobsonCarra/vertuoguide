@@ -19,6 +19,7 @@ import br.com.alura.ceep.ui.coffemachine.domain.Coffee
 import br.com.alura.ceep.ui.coffemachine.helpers.CoffesRoomDataBase
 import br.com.alura.ceep.ui.coffemachine.helpers.RetrofitConfig
 import br.com.alura.ceep.ui.coffemachine.helpers.SharedPref
+import br.com.alura.ceep.ui.coffemachine.presentation.Login.view.LoginActivity
 import br.com.alura.ceep.ui.coffemachine.presentation.custom.ItemAdapter
 import br.com.alura.ceep.ui.coffemachine.repository.CoffesRepository
 import br.com.alura.ceep.ui.coffemachine.viewmodel.CoffesViewModel
@@ -45,6 +46,7 @@ class InventoryFragment : Fragment() {
   private lateinit var new: Button
   private lateinit var recyclerView: RecyclerView
   private lateinit var progressBar: ProgressBar
+  private lateinit var addCoffeesButton: Button
 
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,
@@ -81,6 +83,8 @@ class InventoryFragment : Fragment() {
     new = view.findViewById(R.id.new_coffe_button)
     recyclerView = view.findViewById(R.id.coffe_recyclerview_inventory)
     progressBar = view.findViewById(R.id.progress_bar_inventory)
+    addCoffeesButton = view.findViewById(R.id.add_coffees_inventory_btn)
+    addCoffeesButton.visibility = View.INVISIBLE
   }
 
   private fun observers() {
@@ -89,6 +93,7 @@ class InventoryFragment : Fragment() {
       itemAdapter.list.addAll(coffes)
       itemAdapter.notifyDataSetChanged()
       progressBar.visibility = View.INVISIBLE
+      addCoffeesButton.visibility = View.INVISIBLE
 
     }
     viewModel.coffeeFiltered.observe(viewLifecycleOwner, { list ->
@@ -101,6 +106,10 @@ class InventoryFragment : Fragment() {
         Toast.makeText(requireContext(), "Salvo com sucesso", Toast.LENGTH_SHORT).show()
       }
       viewModel.getAll()
+      viewModel.error.observe(viewLifecycleOwner) { coffes ->
+        progressBar.visibility = View.INVISIBLE
+        addCoffeesButton.visibility = View.VISIBLE
+      }
       val token = SharedPref(requireContext()).getString(SharedPref.TOKEN)
       token?.let {
         // viewModel.getAll(viewLifecycleOwner, token)
@@ -110,6 +119,10 @@ class InventoryFragment : Fragment() {
 
   private fun listeners() {
     new.setOnClickListener { v: View? ->
+      val intent = Intent(context, NewCoffeeActivity::class.java)
+      context?.startActivity(intent)
+    }
+    addCoffeesButton.setOnClickListener {
       val intent = Intent(context, NewCoffeeActivity::class.java)
       context?.startActivity(intent)
     }
