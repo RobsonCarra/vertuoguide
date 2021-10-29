@@ -35,7 +35,6 @@
             android:textSize="16sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
-
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/email_layout"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
