@@ -4,6 +4,7 @@ import android.app.Activity.RESULT_CANCELED
 import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.LayoutInflater
@@ -66,6 +67,12 @@ class ProfileFragment : Fragment() {
       Toast.makeText(context, "hello", Toast.LENGTH_SHORT).show()
     }
     off.setOnClickListener { v: View? ->
+    }
+    terms.setOnClickListener {
+      val url = "http://www.google.com"
+      val i = Intent(Intent.ACTION_VIEW)
+      i.data = Uri.parse(url)
+      startActivity(i)
     }
     exit.setOnClickListener {
       SharedPref(requireContext()).clear()

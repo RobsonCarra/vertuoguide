@@ -141,9 +141,9 @@ class CoffesRepository(private val coffesDao: CoffesDao, private val client: Ret
     }
   }
 
-  suspend fun save(coffee: Coffee) = flow {
+  suspend fun save(coffee: Coffee, uid: String) = flow {
     val api = client.create(CoffeeInterface::class.java)
-    val req = api.save(coffee)
+    val req = api.save(coffee, uid)
     val res = req.await()
     when (res.code()) {
       HttpURLConnection.HTTP_OK -> emit(Res.Success(true))

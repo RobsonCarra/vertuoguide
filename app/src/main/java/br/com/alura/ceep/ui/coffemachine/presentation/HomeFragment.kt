@@ -30,7 +30,6 @@ import com.google.firebase.auth.FirebaseAuth
 
 class HomeFragment() : Fragment() {
 
-  private lateinit var crashButton: Button
   private lateinit var recyclerView: RecyclerView
   private lateinit var progressBar: ProgressBar
   private lateinit var addCoffeesButton: Button
@@ -80,7 +79,6 @@ class HomeFragment() : Fragment() {
 
   private fun setup(view: View) {
     recyclerView = view.findViewById(R.id.coffe_list_recyclerview)
-    crashButton = view.findViewById(R.id.coffe_now_button)
     progressBar = view.findViewById(R.id.progress)
     addCoffeesButton = view.findViewById(R.id.add_coffees_btn)
     addCoffeesMsg = view.findViewById(R.id.add_coffee_msg)

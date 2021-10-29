@@ -12,7 +12,7 @@
   <string name="new_coffee">New coffee</string>
   <string name="name">name</string>
   <string name="description">description</string>
-  <string name="intensity">instensity</string>
+  <string name="intensity">intensity</string>
   <string name="quantity">quantity in ml</string>
   <string name="capsules">capsules</string>
   <string name="inventory">inventory</string>

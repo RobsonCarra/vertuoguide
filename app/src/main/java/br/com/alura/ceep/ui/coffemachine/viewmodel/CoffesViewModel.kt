@@ -24,7 +24,6 @@ class CoffesViewModel(
   val goToHome = MutableLiveData<Boolean>()
   val showError = MutableLiveData<Int>()
   val list = MutableLiveData<List<Coffee>>()
-
   val coffeeById = MutableLiveData<Coffee>()
   var coffeeFiltered = MutableLiveData<List<Coffee>>()
   val added = MutableLiveData(false)
@@ -62,9 +61,9 @@ class CoffesViewModel(
     }
   }
 
-  fun save(coffee: Coffee) {
+  fun save(coffee: Coffee, uid: String) {
     viewModelScope.launch {
-      coffesRepository.save(coffee).collect { saved ->
+      coffesRepository.save(coffee, uid).collect { saved ->
         when (saved) {
           is Res.Success -> added.postValue(saved.items as Boolean)
           is Res.Failure -> errorSave.postValue(saved.exception)

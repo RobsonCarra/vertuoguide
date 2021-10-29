@@ -187,7 +187,7 @@ class NewCoffeeActivity : AppCompatActivity() {
       }
       val token = SharedPref(this).getString(SharedPref.TOKEN)
       token?.let {
-        viewModel.save(coffee)
+        uid?.let { it1 -> viewModel.save(coffee, it1) }
       }
     }
   }
@@ -251,11 +251,3 @@ class NewCoffeeActivity : AppCompatActivity() {
     camera.setImageBitmap(bitmap)
   }
 }
-
-
-
-
-
-
-
-

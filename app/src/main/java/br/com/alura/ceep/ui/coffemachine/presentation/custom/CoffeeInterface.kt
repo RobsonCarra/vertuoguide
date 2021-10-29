@@ -17,7 +17,7 @@ interface CoffeeInterface {
   fun getByUid(@Path("uid") uid: String): Deferred<Response<Coffee>>
 
   @POST("coffee")
-  fun save(@Body coffee: Coffee): Deferred<Response<Void>>
+  fun save(@Body coffee: Coffee, @Path("uid") uid: String): Deferred<Response<Void>>
 
   companion object {
     const val GET_ALL = "coffees"
