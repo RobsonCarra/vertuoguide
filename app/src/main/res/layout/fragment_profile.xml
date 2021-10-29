@@ -23,15 +23,16 @@
                 android:id="@+id/inventory"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
                 android:layout_marginLeft="24dp"
+                android:layout_marginStart="24dp"
                 android:layout_marginTop="24dp"
                 android:fontFamily="@font/nunito_extrabold"
                 android:text="profile"
                 android:textColor="#58D697"
-                android:textSize="24sp"
+                android:textSize="28sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                />
 
 
             <TextView
@@ -85,30 +86,19 @@
                 app:layout_constraintTop_toBottomOf="@+id/rate" />
 
             <TextView
-                android:id="@+id/my_data"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:fontFamily="@font/nunito_extrabold"
-                android:text="My data"
-                android:textColor="#000000"
-                android:textSize="16sp"
-                app:layout_constraintStart_toStartOf="@+id/terms_of_use"
-                app:layout_constraintTop_toBottomOf="@+id/terms_of_use" />
-
-            <TextView
                 android:id="@+id/exit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
                 android:layout_marginBottom="32dp"
+                android:layout_marginTop="24dp"
                 android:fontFamily="@font/nunito_extrabold"
                 android:text="Exit"
                 android:textColor="#000000"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/my_data"
-                app:layout_constraintTop_toBottomOf="@+id/my_data" />
+                app:layout_constraintStart_toStartOf="@+id/terms_of_use"
+                app:layout_constraintTop_toBottomOf="@+id/terms_of_use"
+                />
 
             <TextView
                 android:id="@+id/on"

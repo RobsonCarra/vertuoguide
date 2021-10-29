@@ -26,7 +26,6 @@ class ProfileFragment : Fragment() {
   private lateinit var share: TextView
   private lateinit var rate: TextView
   private lateinit var terms: TextView
-  private lateinit var myData: TextView
   private lateinit var exit: TextView
   private lateinit var on: TextView
   private lateinit var off: TextView
@@ -51,7 +50,6 @@ class ProfileFragment : Fragment() {
     share = view.findViewById(R.id.share)
     rate = view.findViewById(R.id.rate)
     terms = view.findViewById(R.id.terms_of_use)
-    myData = view.findViewById(R.id.my_data)
     exit = view.findViewById(R.id.exit)
     on = view.findViewById(R.id.on)
     off = view.findViewById(R.id.off)

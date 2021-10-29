@@ -8,23 +8,6 @@
     tools:context=".presentation.DashboardActivity"
     >
 
-  <Button
-      android:id="@+id/coffe_now_button"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginEnd="16dp"
-      android:layout_marginRight="16dp"
-      android:fontFamily="@font/nunito_extrabold"
-      android:text="Coffee now"
-      android:textAllCaps="false"
-      android:textColor="#000000"
-      app:layout_constraintBottom_toBottomOf="@+id/app_name"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintTop_toTopOf="@+id/app_name"
-      app:backgroundTint="#FFFFFF"
-      style="?android:attr/borderlessButtonStyle"
-      />
-
 
   <Button
       android:id="@+id/add_coffees_btn"
@@ -45,17 +28,22 @@
       app:layout_constraintVertical_bias="0.06999999"
       />
 
-  <ImageView
-      android:id="@+id/app_name"
+  <TextView
+      android:id="@+id/inventory"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginLeft="24dp"
       android:layout_marginStart="24dp"
       android:layout_marginTop="24dp"
+      android:fontFamily="@font/nunito_extrabold"
+      android:text="vertuoguide"
+      android:textColor="#58D697"
+      android:textSize="28sp"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
-      app:srcCompat="@drawable/vertuoguidelogo"
-      />
+      >
+
+  </TextView>
 
   <ProgressBar
       android:id="@+id/progress"
@@ -90,7 +78,7 @@
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/coffe_now_button"
+      app:layout_constraintTop_toBottomOf="@+id/inventory"
       tools:itemCount="3"
       tools:listitem="@layout/coffe_item_list"
       />

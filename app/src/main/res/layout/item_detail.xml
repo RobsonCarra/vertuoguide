@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/white">
 
     <ScrollView
         android:layout_width="0dp"
@@ -68,6 +69,7 @@
                 android:fontFamily="@font/nunito"
                 android:text="@string/available_capsules"
                 android:textSize="12sp"
+                android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="@+id/name"
                 app:layout_constraintTop_toBottomOf="@+id/name" />
 
@@ -79,6 +81,7 @@
                 android:layout_marginLeft="32dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="32dp"
+                android:textColor="@color/black"
                 android:layout_marginRight="32dp"
                 android:fontFamily="@font/nunito"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -94,7 +97,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 android:fontFamily="@font/nunito_extrabold"
-                android:textColor="#000000"
+                android:textColor="@color/black"
                 android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="@+id/Intensity"
                 app:layout_constraintStart_toStartOf="@+id/Intensity"
@@ -109,7 +112,7 @@
                 android:layout_marginLeft="48dp"
                 android:fontFamily="@font/nunito_bold"
                 android:text="@string/intensity"
-                android:textColor="#000000"
+                android:textColor="@color/black"
                 android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/intensity" />
@@ -119,7 +122,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/nunito_extrabold"
-                android:textColor="#000000"
+                android:textColor="@color/black"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="@+id/intensity"
                 app:layout_constraintEnd_toEndOf="@+id/Quantity"
@@ -135,7 +138,7 @@
                 android:layout_marginRight="48dp"
                 android:fontFamily="@font/nunito_bold"
                 android:text="@string/quantity"
-                android:textColor="#000000"
+                android:textColor="@color/black"
                 android:textSize="14sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -155,6 +158,7 @@
                 android:text="@string/drink_now"
                 android:textColor="#FFFFFF"
                 android:textSize="16sp"
+                android:textAllCaps="false"
                 app:backgroundTint="#58D697"
                 app:cornerRadius="40dp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -184,6 +188,7 @@
                 android:fontFamily="@font/nunito"
                 android:text="@string/capsules_example"
                 android:textSize="12dp"
+                android:textColor="@color/black"
                 app:layout_constraintBottom_toBottomOf="@+id/available_capsules"
                 app:layout_constraintEnd_toStartOf="@+id/like_button"
                 app:layout_constraintHorizontal_bias="0.0"
