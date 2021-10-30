@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import br.com.alura.ceep.ui.coffemachine.R
 import br.com.alura.ceep.ui.coffemachine.domain.Coffee
+import br.com.alura.ceep.ui.coffemachine.domain.CoffeeUser
 import br.com.alura.ceep.ui.coffemachine.exceptions.BadGatewayException
 import br.com.alura.ceep.ui.coffemachine.exceptions.BadRequestException
 import br.com.alura.ceep.ui.coffemachine.exceptions.NoContentException
@@ -97,23 +98,22 @@ class DetailActivity : AppCompatActivity() {
       if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
         return@setOnClickListener
       }
+      val capsules = putCapsules.text.toString().toInt()
       mLastClickTime = SystemClock.elapsedRealtime();
-      val coffee = Coffee(
-        name = name.text.toString(),
-        capsules = putCapsules.toString().toInt(),
-        description = description.text.toString(),
-        intensity = intensity.text.toString(),
-        quantity = size.text.toString()
+      val coffeeUser = CoffeeUser(
+        capsules = capsules,
+        uid = uid.toString()
       )
       uid?.let { uidNotNull ->
-        coffee.uid = uidNotNull
+        coffeeUser.uid = uidNotNull
       }
       val token = SharedPref(this).getString(SharedPref.TOKEN)
       token?.let {
         uid?.let { uid ->
-          viewModel.save(coffee, uid)
+          viewModel.save(coffeeUser)
         }
       }
+      progressBar.visibility = View.GONE
     }
   }
 
@@ -124,17 +124,12 @@ class DetailActivity : AppCompatActivity() {
       description.text = coffee.description
       size.text = coffee.quantity + " ml"
       intensity.text = coffee.intensity
-      capsules.text = coffee.capsules.toString()
-      putCapsules.setText(coffee.capsules)
-      PhotoHelper.loadStorageImage("Coffees/photos", coffee.image) { url ->
-        if (url.isNotEmpty()) {
-          Picasso.get().load(url)
-            .placeholder(R.drawable.ic_launcher_background)
-            .into(image)
-        }
-      }
-      progressBar.visibility = View.GONE
+      Picasso.get().load(coffee.image)
+        .placeholder(R.drawable.ic_launcher_background)
+        .into(image)
     }
+    progressBar.visibility = View.GONE
+
     viewModel.errorById.observe(this) { exception ->
       when (exception) {
         is NoContentException -> {
@@ -167,3 +162,4 @@ class DetailActivity : AppCompatActivity() {
     }
   }
 }
+

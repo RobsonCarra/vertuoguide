@@ -12,7 +12,7 @@ interface CoffesDao {
     @Delete
     fun delete(coffee: Coffee)
 
-    @Query("SELECT * from Coffee ORDER BY name ASC")
+    @Query("SELECT * from Coffee")
     fun getAll(): List<Coffee>
 
 //    @Query("SELECT* from Coffee ORDER BY name ASC")

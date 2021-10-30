@@ -164,30 +164,29 @@ class NewCoffeeActivity : AppCompatActivity() {
         ).show()
         return@setOnClickListener
       }
-      val coffee = Coffee(
-        name = name,
-        capsules = capsules,
-        description = description,
-        intensity = intensity.toString(),
-        quantity = quantity.toString()
-      )
-      uid?.let { uidNotNull ->
-        coffee.uid = uidNotNull
-        coffee.image = uidNotNull + ".jpg"
-      }
-      image?.let { bitmapNotNull ->
-        PhotoHelper.save(
-          image = bitmapNotNull.toByteArray(),
-          fileName = coffee.image,
-          storagePath = "Coffees/photos",
-          isSuccess = {
-            Toast.makeText(this@NewCoffeeActivity, "Saved", Toast.LENGTH_SHORT).show()
-          }
-        )
-      }
+      // val coffee = Coffee(
+      //   name = name,
+      //   capsules = capsules,
+      //   description = description,
+      //   intensity = intensity.toString(),
+      //   quantity = quantity.toString()
+      // )
+      // uid?.let { uidNotNull ->
+      //   coffee.uid = uidNotNull
+      //   coffee.image = uidNotNull + ".jpg"
+      // }
+      // image?.let { bitmapNotNull ->
+      //   PhotoHelper.save(
+      //     image = bitmapNotNull.toByteArray(),
+      //     // fileName = coffee.image,
+      //     storagePath = "Coffees/photos",
+      //     isSuccess = {
+      //       Toast.makeText(this@NewCoffeeActivity, "Saved", Toast.LENGTH_SHORT).show()
+      //     }
+      //   )
       val token = SharedPref(this).getString(SharedPref.TOKEN)
       token?.let {
-        uid?.let { it1 -> viewModel.save(coffee, it1) }
+        // uid?.let { it1 -> viewModel.save(coffeeUser = ) }
       }
     }
   }

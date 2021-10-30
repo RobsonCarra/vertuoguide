@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import br.com.alura.ceep.ui.coffemachine.R
 import br.com.alura.ceep.ui.coffemachine.domain.Coffee
+import br.com.alura.ceep.ui.coffemachine.domain.CoffeeUser
 import br.com.alura.ceep.ui.coffemachine.helpers.Res
 import br.com.alura.ceep.ui.coffemachine.helpers.SharedPref
 import br.com.alura.ceep.ui.coffemachine.repository.CoffesRepository
@@ -61,9 +62,9 @@ class CoffesViewModel(
     }
   }
 
-  fun save(coffee: Coffee, uid: String) {
+  fun save(coffeeUser: CoffeeUser) {
     viewModelScope.launch {
-      coffesRepository.save(coffee, uid).collect { saved ->
+      coffesRepository.save(coffeeUser).collect { saved ->
         when (saved) {
           is Res.Success -> added.postValue(saved.items as Boolean)
           is Res.Failure -> errorSave.postValue(saved.exception)

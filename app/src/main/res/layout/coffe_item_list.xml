@@ -57,7 +57,7 @@
                 android:layout_marginEnd="4dp"
                 android:layout_marginRight="4dp"
                 android:fontFamily="@font/nunito"
-                android:text="Available Capsules:"
+                android:text="@string/available_capsules"
                 android:textSize="12sp"
                 app:layout_constraintEnd_toStartOf="@+id/capsules"
                 app:layout_constraintStart_toStartOf="@+id/name"

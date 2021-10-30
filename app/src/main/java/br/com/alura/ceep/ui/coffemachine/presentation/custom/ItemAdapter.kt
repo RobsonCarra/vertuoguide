@@ -19,14 +19,12 @@ class ItemAdapter(val selected: (coffee: Coffee) -> Unit) :
       LayoutInflater.from(context).inflate(R.layout.inventory_item_list, parent, false)
     return ItemViewHolder(view)
   }
-
   override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
     holder.bind(list.get(position))
     holder.itemView.setOnClickListener { v: View? ->
       selected(list.get(position))
     }
   }
-
   override fun getItemCount(): Int {
     return list.count()
   }

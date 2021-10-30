@@ -2,6 +2,7 @@ package br.com.alura.ceep.ui.coffemachine.repository
 
 import androidx.lifecycle.MutableLiveData
 import br.com.alura.ceep.ui.coffemachine.domain.Coffee
+import br.com.alura.ceep.ui.coffemachine.domain.CoffeeUser
 import br.com.alura.ceep.ui.coffemachine.exceptions.BadGatewayException
 import br.com.alura.ceep.ui.coffemachine.exceptions.BadRequestException
 import br.com.alura.ceep.ui.coffemachine.exceptions.ConflictException
@@ -59,9 +60,9 @@ class CoffesRepository(private val coffesDao: CoffesDao, private val client: Ret
               list.add(cf)
             }
           }
-          val filtered =
-            list.filter { coffee -> coffee.name.lowercase().contains(name.lowercase()) }
-          datas.postValue(filtered)
+          // val filtered =
+            // list.filter { coffee -> coffee.name.lowercase().contains(name.lowercase()) }
+          // datas.postValue(filtered)
         }
       }
     return datas
@@ -115,7 +116,7 @@ class CoffesRepository(private val coffesDao: CoffesDao, private val client: Ret
       HttpURLConnection.HTTP_BAD_REQUEST -> emit(Res.Failure(BadRequestException()))
       HttpURLConnection.HTTP_BAD_GATEWAY -> emit(Res.Failure(BadGatewayException()))
       HttpURLConnection.HTTP_NO_CONTENT -> emit(Res.Failure(NoContentException()))
-      else ->  emit(Res.Failure(Exception("Erro Generico")))
+      else -> emit(Res.Failure(Exception("Erro Generico")))
     }
     // when (res.code()) {
     //   HttpURLConnection.HTTP_OK -> emit(res.body())
@@ -137,13 +138,13 @@ class CoffesRepository(private val coffesDao: CoffesDao, private val client: Ret
       HttpURLConnection.HTTP_BAD_REQUEST -> emit(Res.Failure(BadRequestException()))
       HttpURLConnection.HTTP_BAD_GATEWAY -> emit(Res.Failure(BadGatewayException()))
       HttpURLConnection.HTTP_NO_CONTENT -> emit(Res.Failure(NoContentException()))
-      else ->  emit(Res.Failure(Exception("Erro Generico")))
+      else -> emit(Res.Failure(Exception("Erro Generico")))
     }
   }
 
-  suspend fun save(coffee: Coffee, uid: String) = flow {
+  suspend fun save(coffeeUser: CoffeeUser) = flow {
     val api = client.create(CoffeeInterface::class.java)
-    val req = api.save(coffee, uid)
+    val req = api.save(coffeeUser)
     val res = req.await()
     when (res.code()) {
       HttpURLConnection.HTTP_OK -> emit(Res.Success(true))
