@@ -9,13 +9,13 @@ import br.com.alura.ceep.ui.coffemachine.domain.Coffee
 import br.com.alura.ceep.ui.coffemachine.domain.CoffeeUser
 import br.com.alura.ceep.ui.coffemachine.helpers.Res
 import br.com.alura.ceep.ui.coffemachine.helpers.SharedPref
-import br.com.alura.ceep.ui.coffemachine.repository.CoffesRepository
+import br.com.alura.ceep.ui.coffemachine.repository.CoffeesRepository
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-class CoffesViewModel(
-  private val coffesRepository: CoffesRepository,
+class CoffeesViewModel(
+  private val coffeesRepository: CoffeesRepository,
   private val auth: FirebaseAuth,
   private val sharedPref: SharedPref
 ) : ViewModel() {
@@ -34,7 +34,7 @@ class CoffesViewModel(
 
   fun getAll() {
     viewModelScope.launch {
-      coffesRepository.getAll().collect { result ->
+      coffeesRepository.getAll().collect { result ->
         when (result) {
           is Res.Success -> list.postValue(result.items as List<Coffee>)
           is Res.Failure -> error.postValue(result.exception)
@@ -45,7 +45,7 @@ class CoffesViewModel(
 
   fun searchByName(name: String, lifecycleOwner: LifecycleOwner) {
     viewModelScope.launch {
-      coffesRepository.getByName(name).observe(lifecycleOwner) { result ->
+      coffeesRepository.getByName(name).observe(lifecycleOwner) { result ->
         coffeeFiltered.postValue(result)
       }
     }
@@ -53,7 +53,7 @@ class CoffesViewModel(
 
   fun searchByUid(uid: String) {
     viewModelScope.launch {
-      coffesRepository.getByUid(uid).collect { result ->
+      coffeesRepository.getByUid(uid).collect { result ->
         when (result) {
           is Res.Success -> coffeeById.postValue(result.items as Coffee)
           is Res.Failure -> errorById.postValue(result.exception)
@@ -64,7 +64,7 @@ class CoffesViewModel(
 
   fun save(coffeeUser: CoffeeUser) {
     viewModelScope.launch {
-      coffesRepository.save(coffeeUser).collect { saved ->
+      coffeesRepository.save(coffeeUser).collect { saved ->
         when (saved) {
           is Res.Success -> added.postValue(saved.items as Boolean)
           is Res.Failure -> errorSave.postValue(saved.exception)

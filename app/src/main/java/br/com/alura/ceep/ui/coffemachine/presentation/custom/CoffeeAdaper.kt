@@ -1,23 +1,14 @@
 package br.com.alura.ceep.ui.coffemachine.presentation.custom
 
 import android.content.Context
-import android.content.Intent
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.viewModels
-import androidx.core.content.ContentProviderCompat.requireContext
-import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.RecyclerView
 import br.com.alura.ceep.ui.coffemachine.R
 import br.com.alura.ceep.ui.coffemachine.domain.Coffee
-import br.com.alura.ceep.ui.coffemachine.helpers.CoffesRoomDataBase
-import br.com.alura.ceep.ui.coffemachine.presentation.DetailActivity
-import br.com.alura.ceep.ui.coffemachine.repository.CoffesRepository
-import br.com.alura.ceep.ui.coffemachine.viewmodel.CoffesViewModel
 
-class CoffeAdapter(val selected: (coffee: Coffee) -> Unit) :
+class CoffeeAdaper(val selected: (coffee: Coffee) -> Unit) :
   RecyclerView.Adapter<CoffeeViewHolder>() {
   var list = ArrayList<Coffee>()
   private var context: Context? = null

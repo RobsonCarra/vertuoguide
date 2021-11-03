@@ -16,13 +16,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import br.com.alura.ceep.ui.coffemachine.R
 import br.com.alura.ceep.ui.coffemachine.domain.Coffee
-import br.com.alura.ceep.ui.coffemachine.helpers.CoffesRoomDataBase
+import br.com.alura.ceep.ui.coffemachine.helpers.CoffeesRoomDataBase
 import br.com.alura.ceep.ui.coffemachine.helpers.RetrofitConfig
 import br.com.alura.ceep.ui.coffemachine.helpers.SharedPref
-import br.com.alura.ceep.ui.coffemachine.presentation.Login.view.LoginActivity
 import br.com.alura.ceep.ui.coffemachine.presentation.custom.ItemAdapter
-import br.com.alura.ceep.ui.coffemachine.repository.CoffesRepository
-import br.com.alura.ceep.ui.coffemachine.viewmodel.CoffesViewModel
+import br.com.alura.ceep.ui.coffemachine.repository.CoffeesRepository
+import br.com.alura.ceep.ui.coffemachine.viewmodel.CoffeesViewModel
 import br.com.alura.ceep.ui.coffemachine.viewmodel.config.CoffesViewModelFactory
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
@@ -30,10 +29,10 @@ import kotlinx.coroutines.launch
 
 class InventoryFragment : Fragment() {
 
-  private val viewModel: CoffesViewModel by viewModels {
+  private val viewModel: CoffeesViewModel by viewModels {
     CoffesViewModelFactory(
-      CoffesRepository(
-        CoffesRoomDataBase.getDatabase(requireContext()).coffesDao(),
+      CoffeesRepository(
+        CoffeesRoomDataBase.getDatabase(requireContext()).coffesDao(),
         RetrofitConfig().getClient(requireContext())
       ),
       FirebaseAuth.getInstance(),

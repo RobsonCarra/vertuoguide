@@ -10,7 +10,6 @@ import br.com.alura.ceep.ui.coffemachine.exceptions.InternalException
 import br.com.alura.ceep.ui.coffemachine.exceptions.NoContentException
 import br.com.alura.ceep.ui.coffemachine.exceptions.NotFoundException
 import br.com.alura.ceep.ui.coffemachine.helpers.Res
-import br.com.alura.ceep.ui.coffemachine.presentation.custom.CoffeeInterface
 import com.google.common.reflect.TypeToken
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.gson.Gson
@@ -19,7 +18,7 @@ import retrofit2.Retrofit
 import java.lang.Exception
 import java.net.HttpURLConnection
 
-class CoffesRepository(private val coffesDao: CoffesDao, private val client: Retrofit) {
+class CoffeesRepository(private val coffeesDao: CoffeesDao, private val client: Retrofit) {
 
   //    fun getAll(): MutableLiveData<List<Coffee>> {
 //        val data = MutableLiveData<List<Coffee>>()
@@ -61,7 +60,7 @@ class CoffesRepository(private val coffesDao: CoffesDao, private val client: Ret
             }
           }
           // val filtered =
-            // list.filter { coffee -> coffee.name.lowercase().contains(name.lowercase()) }
+          // list.filter { coffee -> coffee.name.lowercase().contains(name.lowercase()) }
           // datas.postValue(filtered)
         }
       }

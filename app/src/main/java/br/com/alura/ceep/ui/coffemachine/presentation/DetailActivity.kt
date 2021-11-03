@@ -15,18 +15,16 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import br.com.alura.ceep.ui.coffemachine.R
-import br.com.alura.ceep.ui.coffemachine.domain.Coffee
 import br.com.alura.ceep.ui.coffemachine.domain.CoffeeUser
 import br.com.alura.ceep.ui.coffemachine.exceptions.BadGatewayException
 import br.com.alura.ceep.ui.coffemachine.exceptions.BadRequestException
 import br.com.alura.ceep.ui.coffemachine.exceptions.NoContentException
 import br.com.alura.ceep.ui.coffemachine.exceptions.NotFoundException
-import br.com.alura.ceep.ui.coffemachine.helpers.CoffesRoomDataBase
-import br.com.alura.ceep.ui.coffemachine.helpers.PhotoHelper
+import br.com.alura.ceep.ui.coffemachine.helpers.CoffeesRoomDataBase
 import br.com.alura.ceep.ui.coffemachine.helpers.RetrofitConfig
 import br.com.alura.ceep.ui.coffemachine.helpers.SharedPref
-import br.com.alura.ceep.ui.coffemachine.repository.CoffesRepository
-import br.com.alura.ceep.ui.coffemachine.viewmodel.CoffesViewModel
+import br.com.alura.ceep.ui.coffemachine.repository.CoffeesRepository
+import br.com.alura.ceep.ui.coffemachine.viewmodel.CoffeesViewModel
 import br.com.alura.ceep.ui.coffemachine.viewmodel.config.CoffesViewModelFactory
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
@@ -34,10 +32,10 @@ import com.squareup.picasso.Picasso
 
 class DetailActivity : AppCompatActivity() {
 
-  private val viewModel: CoffesViewModel by viewModels {
+  private val viewModel: CoffeesViewModel by viewModels {
     CoffesViewModelFactory(
-      CoffesRepository(
-        CoffesRoomDataBase.getDatabase(this).coffesDao(),
+      CoffeesRepository(
+        CoffeesRoomDataBase.getDatabase(this).coffesDao(),
         RetrofitConfig().getClient(this)
       ),
       FirebaseAuth.getInstance(),
@@ -127,8 +125,8 @@ class DetailActivity : AppCompatActivity() {
       Picasso.get().load(coffee.image)
         .placeholder(R.drawable.ic_launcher_background)
         .into(image)
+      progressBar.visibility = View.GONE
     }
-    progressBar.visibility = View.GONE
 
     viewModel.errorById.observe(this) { exception ->
       when (exception) {

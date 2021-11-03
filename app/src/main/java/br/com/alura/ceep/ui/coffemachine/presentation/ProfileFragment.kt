@@ -14,6 +14,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import br.com.alura.ceep.ui.coffemachine.BuildConfig
 import br.com.alura.ceep.ui.coffemachine.R
 import br.com.alura.ceep.ui.coffemachine.helpers.PhotoHelper
 import br.com.alura.ceep.ui.coffemachine.helpers.SharedPref
@@ -67,6 +68,16 @@ class ProfileFragment : Fragment() {
       Toast.makeText(context, "hello", Toast.LENGTH_SHORT).show()
     }
     off.setOnClickListener { v: View? ->
+    }
+    share.setOnClickListener {
+      val sendIntent = Intent()
+      sendIntent.action = Intent.ACTION_SEND
+      sendIntent.putExtra(
+        Intent.EXTRA_TEXT,
+        "Hey check out my app at: https://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID
+      )
+      sendIntent.type = "text/plain"
+      startActivity(sendIntent)
     }
     terms.setOnClickListener {
       val url = "http://www.google.com"

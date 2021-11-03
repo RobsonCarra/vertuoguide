@@ -4,7 +4,7 @@ import androidx.room.*
 import br.com.alura.ceep.ui.coffemachine.domain.Coffee
 
 @Dao
-interface CoffesDao {
+interface CoffeesDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun save(coffee: Coffee): Long

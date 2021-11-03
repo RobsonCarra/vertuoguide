@@ -8,7 +8,6 @@
     tools:context=".presentation.DashboardActivity"
     >
 
-
   <Button
       android:id="@+id/add_coffees_btn"
       android:layout_width="wrap_content"
@@ -42,7 +41,6 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
       >
-
   </TextView>
 
   <ProgressBar

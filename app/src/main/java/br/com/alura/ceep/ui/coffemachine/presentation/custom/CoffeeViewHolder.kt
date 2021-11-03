@@ -33,12 +33,8 @@ class CoffeeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     size.text = coffee.quantity
     intensity.text = coffee.intensity
     capsules.text = coffee.capsules.toString()
-    PhotoHelper.loadStorageImage("Coffees/photos", coffee.image) { url ->
-      if (url.isNotEmpty()) {
-        Picasso.get().load(url)
-          .placeholder(R.drawable.ic_launcher_background)
-          .into(image)
-      }
-    }
+    Picasso.get().load(coffee.image)
+      .placeholder(R.drawable.ic_launcher_background)
+      .into(image)
   }
 }

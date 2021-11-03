@@ -1,4 +1,4 @@
-package br.com.alura.ceep.ui.coffemachine.presentation.custom
+package br.com.alura.ceep.ui.coffemachine.repository
 
 import br.com.alura.ceep.ui.coffemachine.domain.Coffee
 import br.com.alura.ceep.ui.coffemachine.domain.CoffeeUser
