@@ -69,6 +69,9 @@ class ProfileFragment : Fragment() {
     }
     off.setOnClickListener { v: View? ->
     }
+    rate.setOnClickListener {
+
+    }
     share.setOnClickListener {
       val sendIntent = Intent()
       sendIntent.action = Intent.ACTION_SEND

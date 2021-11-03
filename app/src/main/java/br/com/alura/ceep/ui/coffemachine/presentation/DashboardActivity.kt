@@ -1,17 +1,11 @@
 package br.com.alura.ceep.ui.coffemachine.presentation
 
-import android.content.ContentValues
-import android.content.ContentValues.TAG
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContentProviderCompat.requireContext
 import br.com.alura.ceep.ui.coffemachine.R
-import com.google.android.gms.tasks.OnCompleteListener
+import br.com.alura.ceep.ui.coffemachine.helpers.AppRater
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.firebase.messaging.FirebaseMessaging
 
 class DashboardActivity : AppCompatActivity(),
   BottomNavigationView.OnNavigationItemSelectedListener {
@@ -25,6 +19,7 @@ class DashboardActivity : AppCompatActivity(),
     setContentView(R.layout.dashboard_activity)
     nav.setOnNavigationItemSelectedListener(this)
     supportFragmentManager.beginTransaction().replace(R.id.frame, HomeFragment()).commit()
+    rater()
   }
 
   override fun onNavigationItemSelected(item: MenuItem): Boolean {
@@ -49,4 +44,10 @@ class DashboardActivity : AppCompatActivity(),
     }
     return false;
   }
+
+  fun rater() {
+    val raterApp = AppRater()
+    raterApp.app_launched(this)
+  }
 }
+

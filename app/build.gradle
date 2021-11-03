@@ -91,6 +91,9 @@ dependencies {
   implementation 'com.google.firebase:firebase-storage-ktx:20.0.0'
   implementation 'de.hdodenhof:circleimageview:3.1.0'
   implementation 'com.karumi:dexter:6.2.3'
+  implementation 'com.vorlonsoft:androidrate:1.0.8'
+
+
 }
 repositories {
   mavenCentral()
