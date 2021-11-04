@@ -16,6 +16,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import br.com.alura.ceep.ui.coffemachine.R
 import br.com.alura.ceep.ui.coffemachine.domain.Coffee
+import br.com.alura.ceep.ui.coffemachine.exceptions.BadGatewayException
+import br.com.alura.ceep.ui.coffemachine.exceptions.BadRequestException
+import br.com.alura.ceep.ui.coffemachine.exceptions.NoContentException
+import br.com.alura.ceep.ui.coffemachine.exceptions.NotFoundException
 import br.com.alura.ceep.ui.coffemachine.helpers.CoffeesRoomDataBase
 import br.com.alura.ceep.ui.coffemachine.helpers.RetrofitConfig
 import br.com.alura.ceep.ui.coffemachine.helpers.SharedPref
@@ -62,6 +66,7 @@ class InventoryFragment : Fragment() {
     observers()
     watchers()
     viewModel.searchByUser()
+    progressBar.visibility = View.VISIBLE
     val token = SharedPref(requireContext()).getString(SharedPref.TOKEN)
     token?.let {
       lifecycleScope.launch {
@@ -87,14 +92,30 @@ class InventoryFragment : Fragment() {
     addCoffeesButton.visibility = View.INVISIBLE
   }
 
-  private fun observers() {
-    viewModel.listByUser.observe(viewLifecycleOwner) { coffes ->
-      itemAdapter.list.clear()
-      itemAdapter.list.addAll(coffes)
-      itemAdapter.notifyDataSetChanged()
-      progressBar.visibility = View.INVISIBLE
-      addCoffeesButton.visibility = View.INVISIBLE
+  private fun listeners() {
+    new.setOnClickListener { v: View? ->
+      val intent = Intent(context, NewCoffeeActivity::class.java)
+      context?.startActivity(intent)
+    }
+    addCoffeesButton.setOnClickListener {
+      val intent = Intent(context, NewCoffeeActivity::class.java)
+      context?.startActivity(intent)
+    }
+  }
 
+  private fun observers() {
+    viewModel.listByUser.observe(viewLifecycleOwner) { coffees ->
+      if (coffees.isNotEmpty()) {
+        itemAdapter.list.clear()
+        itemAdapter.list.addAll(coffees)
+        itemAdapter.notifyDataSetChanged()
+        progressBar.visibility = View.INVISIBLE
+        recyclerView.visibility = View.VISIBLE
+      } else {
+        recyclerView.visibility = View.GONE
+        progressBar.visibility = View.GONE
+        addCoffeesButton.visibility = View.VISIBLE
+      }
     }
     viewModel.coffeeFiltered.observe(viewLifecycleOwner, { list ->
       itemAdapter.list.clear()
@@ -108,23 +129,35 @@ class InventoryFragment : Fragment() {
       viewModel.searchByUser()
       viewModel.errorByUser.observe(viewLifecycleOwner) { coffes ->
         progressBar.visibility = View.INVISIBLE
-        addCoffeesButton.visibility = View.VISIBLE
       }
       val token = SharedPref(requireContext()).getString(SharedPref.TOKEN)
       token?.let {
         // viewModel.getAll(viewLifecycleOwner, token)
       }
     }
-  }
-
-  private fun listeners() {
-    new.setOnClickListener { v: View? ->
-      val intent = Intent(context, NewCoffeeActivity::class.java)
-      context?.startActivity(intent)
-    }
-    addCoffeesButton.setOnClickListener {
-      val intent = Intent(context, NewCoffeeActivity::class.java)
-      context?.startActivity(intent)
+    viewModel.errorByUser.observe(requireActivity()) { exception ->
+      when (exception) {
+        is NoContentException -> {
+          recyclerView.visibility = View.GONE
+          progressBar.visibility = View.GONE
+          addCoffeesButton.visibility = View.VISIBLE
+        }
+        is BadRequestException -> Toast.makeText(
+          requireContext(),
+          exception.message,
+          Toast.LENGTH_SHORT
+        ).show()
+        is NotFoundException -> Toast.makeText(
+          requireContext(),
+          exception.message,
+          Toast.LENGTH_SHORT
+        ).show()
+        is BadGatewayException -> Toast.makeText(
+          requireContext(),
+          exception.message,
+          Toast.LENGTH_SHORT
+        ).show()
+      }
     }
   }
 
@@ -145,6 +178,7 @@ class InventoryFragment : Fragment() {
 
   fun initList() {
     progressBar.visibility = View.VISIBLE
+    recyclerView.visibility = View.GONE
     itemAdapter = ItemAdapter(selected = { selected ->
       onChangeCoffedata(selected)
     })
@@ -153,3 +187,4 @@ class InventoryFragment : Fragment() {
     recyclerView.adapter = itemAdapter
   }
 }
+

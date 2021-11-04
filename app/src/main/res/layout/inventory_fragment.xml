@@ -10,9 +10,9 @@
         android:id="@+id/inventory"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
         android:layout_marginLeft="24dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
         android:fontFamily="@font/nunito_extrabold"
         android:text="inventory"
         android:textColor="#58D697"
@@ -20,7 +20,8 @@
         app:layout_constraintEnd_toStartOf="@+id/new_coffe_button"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        />
 
     <Button
         android:id="@+id/new_coffe_button"
@@ -93,12 +94,13 @@
         android:id="@+id/progress_bar_inventory"
         android:layout_width="80dp"
         android:layout_height="80dp"
+        android:layout_marginTop="32dp"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@+id/coffe_recyclerview_inventory"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.6" />
+        app:layout_constraintTop_toBottomOf="@+id/name"
+        />
     <Button
         android:id="@+id/add_coffees_inventory_btn"
         android:layout_width="wrap_content"

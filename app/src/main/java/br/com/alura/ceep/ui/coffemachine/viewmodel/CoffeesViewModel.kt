@@ -75,9 +75,9 @@ class CoffeesViewModel(
     }
   }
 
-  fun save(coffeeUser: CoffeeUser, uid: String) {
+  fun save(coffeeUser: CoffeeUser) {
     viewModelScope.launch {
-      coffeesRepository.save(coffeeUser, uid).collect { saved ->
+      coffeesRepository.save(coffeeUser).collect { saved ->
         when (saved) {
           is Res.Success -> added.postValue(saved.items as Boolean)
           is Res.Failure -> errorSave.postValue(saved.exception)

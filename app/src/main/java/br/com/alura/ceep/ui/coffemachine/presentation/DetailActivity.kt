@@ -55,6 +55,7 @@ class DetailActivity : AppCompatActivity() {
   private var mLastClickTime: Long = 0
   private lateinit var save_btn: Button
   private var uid: String? = null
+  private lateinit var coffeeCaps: String
 
   @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
   public override fun onCreate(savedInstanceState: Bundle?) {
@@ -68,6 +69,9 @@ class DetailActivity : AppCompatActivity() {
     token?.let {
       intent.extras?.getString("uid")?.let { uid ->
         viewModel.searchByUid(uid)
+      }
+      intent.extras?.getString("capsules")?.let { caps ->
+        coffeeCaps = caps
       }
     }
   }
@@ -108,7 +112,7 @@ class DetailActivity : AppCompatActivity() {
       val token = SharedPref(this).getString(SharedPref.TOKEN)
       token?.let {
         uid?.let { uid ->
-          viewModel.save(coffeeUser, uid)
+          viewModel.save(coffeeUser)
         }
       }
       progressBar.visibility = View.GONE
@@ -121,6 +125,7 @@ class DetailActivity : AppCompatActivity() {
       name.text = coffee.name
       description.text = coffee.description
       size.text = coffee.quantity + " ml"
+      capsules.text = coffeeCaps
       intensity.text = coffee.intensity
       Picasso.get().load(coffee.image)
         .placeholder(R.drawable.ic_launcher_background)

@@ -60,20 +60,6 @@
           app:srcCompat="@drawable/capuccino"
           />
 
-      <ImageView
-          android:id="@+id/like_button"
-          android:layout_width="30dp"
-          android:layout_height="24dp"
-          android:layout_marginEnd="32dp"
-          android:layout_marginRight="32dp"
-          android:background="@drawable/liketest"
-          android:scaleX="1"
-          android:scaleY="1"
-          app:layout_constraintBottom_toBottomOf="@+id/available_capsules"
-          app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintTop_toTopOf="@+id/name"
-          />
-
       <ProgressBar
           android:id="@+id/progress_bar_detail_activity"
           android:layout_width="35dp"
@@ -87,6 +73,23 @@
           />
 
       <TextView
+          android:id="@+id/coffee_now_btn_detail"
+          android:layout_width="wrap_content"
+          android:layout_height="24dp"
+          android:layout_marginEnd="32dp"
+          android:layout_marginRight="32dp"
+          android:fontFamily="@font/nunito_extrabold"
+          android:scaleX="1"
+          android:scaleY="1"
+          android:text="Coffee now"
+          android:textColor="#000000"
+          android:textSize="16sp"
+          app:layout_constraintBottom_toBottomOf="@+id/available_capsules"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintTop_toTopOf="@+id/name"
+          />
+
+      <TextView
           android:id="@+id/name"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
@@ -97,7 +100,7 @@
           android:text="@string/name"
           android:textColor="#000000"
           android:textSize="20sp"
-          app:layout_constraintEnd_toStartOf="@+id/like_button"
+          app:layout_constraintEnd_toStartOf="@+id/coffee_now_btn_detail"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toBottomOf="@+id/image"
           />
@@ -106,14 +109,12 @@
           android:id="@+id/available_capsules"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:layout_marginLeft="8dp"
-          android:layout_marginStart="8dp"
           android:fontFamily="@font/nunito"
           android:text="@string/available_capsules"
           android:textColor="@color/black"
           android:textSize="12sp"
           app:layout_constraintBottom_toBottomOf="@+id/capsules"
-          app:layout_constraintStart_toEndOf="@+id/capsules"
+          app:layout_constraintStart_toStartOf="@+id/name"
           app:layout_constraintTop_toTopOf="@+id/capsules"
           />
       <TextView
@@ -196,11 +197,13 @@
           android:id="@+id/capsules"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
+          android:layout_marginLeft="8dp"
+          android:layout_marginStart="8dp"
           android:fontFamily="@font/nunito"
           android:text="@string/capsules_example"
           android:textColor="@color/black"
           android:textSize="12dp"
-          app:layout_constraintStart_toStartOf="@+id/name"
+          app:layout_constraintStart_toEndOf="@+id/available_capsules"
           app:layout_constraintTop_toBottomOf="@+id/name"
           />
       <androidx.appcompat.widget.Toolbar

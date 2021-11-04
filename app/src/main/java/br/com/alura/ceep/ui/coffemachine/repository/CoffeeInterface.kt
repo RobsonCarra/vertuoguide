@@ -20,8 +20,8 @@ interface CoffeeInterface {
   @GET("coffees/user")
   fun getByUser(): Deferred<Response<List<Coffee>>>
 
-  @POST("coffees/user")
-  fun save(@Body coffeeUser: CoffeeUser, @Path("uid") uid: String): Deferred<Response<Void>>
+  @POST("coffee")
+  fun save(@Body coffeeUser: CoffeeUser): Deferred<Response<Void>>
 
   companion object {
     const val GET_ALL = "coffees"

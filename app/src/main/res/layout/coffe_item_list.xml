@@ -38,17 +38,20 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@mipmap/coffe_foreground" />
 
-            <ImageView
-                android:id="@+id/like"
-                android:layout_width="30dp"
+            <TextView
+                android:id="@+id/coffee_now_btn"
+                android:layout_width="wrap_content"
                 android:layout_height="24dp"
                 android:layout_marginEnd="24dp"
                 android:layout_marginRight="24dp"
-                android:background="@drawable/liketest"
                 android:elevation="2dp"
+                android:fontFamily="@font/nunito_extrabold"
+                android:text="Coffee now"
+                android:textColor="#000000"
                 app:layout_constraintBottom_toBottomOf="@+id/capsules_text"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/name" />
+                app:layout_constraintTop_toTopOf="@+id/name"
+                />
 
             <TextView
                 android:id="@+id/capsules_text"
@@ -151,7 +154,7 @@
                 android:textColor="#000000"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toStartOf="@+id/like"
+                app:layout_constraintEnd_toStartOf="@+id/coffee_now_btn"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/image_coffe" />
 
@@ -163,7 +166,7 @@
                 android:text="10"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="@+id/capsules_text"
-                app:layout_constraintEnd_toStartOf="@+id/like"
+                app:layout_constraintEnd_toStartOf="@+id/coffee_now_btn"
                 app:layout_constraintHorizontal_bias="0.03"
                 app:layout_constraintStart_toEndOf="@+id/capsules_text"
                 app:layout_constraintTop_toTopOf="@+id/capsules_text" />
