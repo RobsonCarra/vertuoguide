@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import br.com.alura.ceep.ui.coffemachine.R
@@ -28,6 +29,7 @@ import com.google.firebase.auth.FirebaseAuth
 class AddCoffeeAcitivity : AppCompatActivity() {
   private lateinit var recyclerView: RecyclerView
   private lateinit var progressBar: ProgressBar
+  private lateinit var coffeToolbar: Toolbar
   private var coffeeAdaper: CoffeeAdaper = CoffeeAdaper(selected = { coffee ->
     val bundle = Bundle()
     bundle.putString("uid", coffee.uid)
@@ -64,6 +66,7 @@ class AddCoffeeAcitivity : AppCompatActivity() {
   private fun setup() {
     recyclerView = findViewById(R.id.coffe_list_recyclerview)
     progressBar = findViewById(R.id.progress)
+    coffeToolbar = findViewById(R.id.coffe_toolbar_add_coffee)
   }
 
   private fun observers() {

@@ -55,12 +55,12 @@ class DetailActivity : AppCompatActivity() {
   private var mLastClickTime: Long = 0
   private lateinit var save_btn: Button
   private var uid: String? = null
-  private lateinit var coffeeCaps: String
+  private var coffeeCaps: String? = null
 
   @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
   public override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    setContentView(R.layout.item_detail)
+    setContentView(R.layout.detail_activity)
     setup()
     listeners()
     observers()
@@ -157,7 +157,7 @@ class DetailActivity : AppCompatActivity() {
 
     viewModel.added.observe(this) { saved ->
       if (saved) {
-        Toast.makeText(this, "Salvo com sucesso", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "Saved", Toast.LENGTH_SHORT).show()
         val intent = Intent(this, DashboardActivity::class.java)
         this.startActivity(intent)
         progressBar.visibility = View.GONE

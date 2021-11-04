@@ -78,14 +78,14 @@ class InventoryFragment : Fragment() {
   private fun onChangeCoffedata(selected: Coffee) {
     val bundle = Bundle()
     bundle.putParcelable("coffe", selected)
-    val intent = Intent(requireContext(), NewCoffeeActivity::class.java)
+    val intent = Intent(requireContext(), AddCoffeeAcitivity::class.java)
     intent.putExtras(bundle)
     requireContext().startActivity(intent)
   }
 
   private fun setup(view: View) {
     putName = view.findViewById(R.id.confirm_password)
-    new = view.findViewById(R.id.new_coffe_button)
+    new = view.findViewById(R.id.new_coffee_inventory_btn)
     recyclerView = view.findViewById(R.id.coffe_recyclerview_inventory)
     progressBar = view.findViewById(R.id.progress_bar_inventory)
     addCoffeesButton = view.findViewById(R.id.add_coffees_inventory_btn)
@@ -94,11 +94,11 @@ class InventoryFragment : Fragment() {
 
   private fun listeners() {
     new.setOnClickListener { v: View? ->
-      val intent = Intent(context, NewCoffeeActivity::class.java)
+      val intent = Intent(context, AddCoffeeAcitivity::class.java)
       context?.startActivity(intent)
     }
     addCoffeesButton.setOnClickListener {
-      val intent = Intent(context, NewCoffeeActivity::class.java)
+      val intent = Intent(context, AddCoffeeAcitivity::class.java)
       context?.startActivity(intent)
     }
   }

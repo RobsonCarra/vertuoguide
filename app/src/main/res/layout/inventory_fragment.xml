@@ -17,28 +17,29 @@
         android:text="inventory"
         android:textColor="#58D697"
         android:textSize="28sp"
-        app:layout_constraintEnd_toStartOf="@+id/new_coffe_button"
+        app:layout_constraintEnd_toStartOf="@+id/new_coffee_inventory_btn"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         />
 
     <Button
-        android:id="@+id/new_coffe_button"
-        style="?android:attr/borderlessButtonStyle"
+        android:id="@+id/new_coffee_inventory_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/nunito_extrabold"
         android:gravity="top"
-        android:text="New coffee"
+        android:text="@string/add_coffee"
         android:textAllCaps="false"
         android:textColor="#000000"
         android:textSize="14sp"
-        app:backgroundTint="#00FFFFFF"
         app:layout_constraintBottom_toBottomOf="@+id/inventory"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/inventory"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0"
+        app:backgroundTint="#00FFFFFF"
+        style="?android:attr/borderlessButtonStyle"
+        />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/name"
@@ -51,7 +52,7 @@
         android:layout_marginTop="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/new_coffe_button"
+        app:layout_constraintTop_toBottomOf="@+id/new_coffee_inventory_btn"
         app:boxCornerRadiusBottomEnd="10dp"
         app:boxCornerRadiusBottomStart="10dp"
         app:boxCornerRadiusTopEnd="10dp"

@@ -7,6 +7,18 @@
     android:orientation="vertical"
     tools:context=".presentation.DashboardActivity"
     >
+  <androidx.appcompat.widget.Toolbar
+      android:id="@+id/coffe_toolbar_add_coffee"
+      android:layout_width="match_parent"
+      android:layout_height="56dp"
+      android:elevation="2dp"
+      android:theme="@style/ToolbarTheme"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:navigationIcon="@drawable/ic_arrowbackblack"
+      app:title=" "
+      app:titleTextColor="@color/black" />
 
   <Button
       android:id="@+id/add_coffees_btn"
@@ -33,13 +45,12 @@
       android:layout_height="wrap_content"
       android:layout_marginLeft="24dp"
       android:layout_marginStart="24dp"
-      android:layout_marginTop="24dp"
       android:fontFamily="@font/nunito_extrabold"
       android:text="@string/available_coffees"
       android:textColor="#58D697"
       android:textSize="28sp"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/coffe_toolbar_add_coffee"
       />
 
   <ProgressBar

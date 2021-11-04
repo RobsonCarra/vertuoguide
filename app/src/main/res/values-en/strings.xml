@@ -14,7 +14,7 @@
   <string name="description">description</string>
   <string name="intensity">intensity</string>
   <string name="quantity">quantity in ml</string>
-  <string name="capsules">Capsules</string>
+  <string name="capsules">   Capsules</string>
   <string name="inventory">inventory</string>
   <string name="save">Save</string>
   <string name="available_capsules">Available capsules: </string>
@@ -23,6 +23,7 @@
   <string name="capsules_example">10</string>
   <string name="coffee_type">Coffee type</string>
   <string name="add_coffee">Add coffee</string>
+  <string name="saved">Saved with success</string>
   <string name="confirm_password">Confirm the password</string>
   <string name="password">Password</string>
   <string name="register_now">register now!</string>
