@@ -141,9 +141,9 @@ class CoffeesRepository(private val coffeesDao: CoffeesDao, private val client: 
     }
   }
 
-  suspend fun save(coffeeUser: CoffeeUser) = flow {
+  suspend fun save(coffeeUser: CoffeeUser, uid: String) = flow {
     val api = client.create(CoffeeInterface::class.java)
-    val req = api.save(coffeeUser)
+    val req = api.save(coffeeUser, uid)
     val res = req.await()
     when (res.code()) {
       HttpURLConnection.HTTP_OK -> emit(Res.Success(true))
@@ -155,6 +155,23 @@ class CoffeesRepository(private val coffeesDao: CoffeesDao, private val client: 
       else -> emit(false)
     }
   }
+
+  suspend fun getByUser() = flow {
+    val api = client.create(CoffeeInterface::class.java)
+    val req = api.getByUser()
+    val res = req.await()
+    when (res.code()) {
+      HttpURLConnection.HTTP_OK -> emit(Res.Success(res.body()))
+      HttpURLConnection.HTTP_NOT_FOUND -> emit(Res.Failure(NotFoundException("Usuário não encontrado")))
+      HttpURLConnection.HTTP_BAD_REQUEST -> emit(Res.Failure(BadRequestException()))
+      HttpURLConnection.HTTP_BAD_GATEWAY -> emit(Res.Failure(BadGatewayException()))
+      HttpURLConnection.HTTP_NO_CONTENT -> emit(Res.Failure(NoContentException()))
+      else -> emit(Res.Failure(Exception("Erro Generico")))
+    }
+  }
+
+
+
 //    fun getAll() = coffesDao.getAll()
 //    fun getById(id: Long) = coffesDao.getById(id)
 //    fun searchByName(name: String) {

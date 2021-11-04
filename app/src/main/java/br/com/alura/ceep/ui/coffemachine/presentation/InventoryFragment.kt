@@ -61,6 +61,7 @@ class InventoryFragment : Fragment() {
     initList()
     observers()
     watchers()
+    viewModel.searchByUser()
     val token = SharedPref(requireContext()).getString(SharedPref.TOKEN)
     token?.let {
       lifecycleScope.launch {
@@ -87,7 +88,7 @@ class InventoryFragment : Fragment() {
   }
 
   private fun observers() {
-    viewModel.list.observe(viewLifecycleOwner) { coffes ->
+    viewModel.listByUser.observe(viewLifecycleOwner) { coffes ->
       itemAdapter.list.clear()
       itemAdapter.list.addAll(coffes)
       itemAdapter.notifyDataSetChanged()
@@ -104,8 +105,8 @@ class InventoryFragment : Fragment() {
       if (saved) {
         Toast.makeText(requireContext(), "Salvo com sucesso", Toast.LENGTH_SHORT).show()
       }
-      viewModel.getAll()
-      viewModel.error.observe(viewLifecycleOwner) { coffes ->
+      viewModel.searchByUser()
+      viewModel.errorByUser.observe(viewLifecycleOwner) { coffes ->
         progressBar.visibility = View.INVISIBLE
         addCoffeesButton.visibility = View.VISIBLE
       }

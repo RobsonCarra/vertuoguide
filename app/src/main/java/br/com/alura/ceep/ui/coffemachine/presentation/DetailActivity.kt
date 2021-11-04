@@ -108,7 +108,7 @@ class DetailActivity : AppCompatActivity() {
       val token = SharedPref(this).getString(SharedPref.TOKEN)
       token?.let {
         uid?.let { uid ->
-          viewModel.save(coffeeUser)
+          viewModel.save(coffeeUser, uid)
         }
       }
       progressBar.visibility = View.GONE
