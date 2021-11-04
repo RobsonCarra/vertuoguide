@@ -30,7 +30,7 @@ import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import com.squareup.picasso.Picasso
 
-class DetailActivity : AppCompatActivity() {
+class AddCoffeeActivity : AppCompatActivity() {
 
   private val viewModel: CoffeesViewModel by viewModels {
     CoffesViewModelFactory(
@@ -48,17 +48,19 @@ class DetailActivity : AppCompatActivity() {
   private lateinit var intensity: TextView
   private lateinit var size: TextView
   private lateinit var capsules: TextView
-  private lateinit var coffeeNow: TextView
   private lateinit var image: ImageView
   private lateinit var coffeToolbar: Toolbar
   private lateinit var progressBar: ProgressBar
+  private lateinit var putCapsules: TextInputEditText
+  private var mLastClickTime: Long = 0
+  private lateinit var save_btn: Button
   private var uid: String? = null
   private var coffeeCaps: String? = null
 
   @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
   public override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    setContentView(R.layout.detail_activity)
+    setContentView(R.layout.add_coffee_activity)
     setup()
     listeners()
     observers()
@@ -82,8 +84,9 @@ class DetailActivity : AppCompatActivity() {
     image = findViewById(R.id.image)
     capsules = findViewById(R.id.capsules)
     coffeToolbar = findViewById(R.id.coffe_toolbar)
-    coffeeNow = findViewById(R.id.coffee_now_btn_detail)
     progressBar = findViewById(R.id.progress_bar_detail_activity)
+    putCapsules = findViewById(R.id.put_capsules_now)
+    save_btn = findViewById(R.id.save_btn)
     setSupportActionBar(coffeToolbar)
     supportActionBar!!.setDisplayHomeAsUpEnabled(true)
   }
@@ -92,9 +95,27 @@ class DetailActivity : AppCompatActivity() {
     coffeToolbar.setNavigationOnClickListener { arrow: View? ->
       onBackPressed()
     }
-    coffeeNow.setOnClickListener {
-      val intent = Intent(this, DrinkNowActivity::class.java)
-      this.startActivity(intent)
+    save_btn.setOnClickListener {
+      progressBar.visibility = View.VISIBLE
+      if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
+        return@setOnClickListener
+      }
+      val capsules = putCapsules.text.toString().toInt()
+      mLastClickTime = SystemClock.elapsedRealtime();
+      val coffeeUser = CoffeeUser(
+        capsules = capsules,
+        uid = uid.toString()
+      )
+      uid?.let { uidNotNull ->
+        coffeeUser.uid = uidNotNull
+      }
+      val token = SharedPref(this).getString(SharedPref.TOKEN)
+      token?.let {
+        uid?.let { uid ->
+          viewModel.save(coffeeUser)
+        }
+      }
+      progressBar.visibility = View.GONE
     }
   }
 
@@ -131,6 +152,15 @@ class DetailActivity : AppCompatActivity() {
           exception.message,
           Toast.LENGTH_SHORT
         ).show()
+      }
+    }
+
+    viewModel.added.observe(this) { saved ->
+      if (saved) {
+        Toast.makeText(this, "Saved", Toast.LENGTH_SHORT).show()
+        val intent = Intent(this, DashboardActivity::class.java)
+        this.startActivity(intent)
+        progressBar.visibility = View.GONE
       }
     }
   }

@@ -19,11 +19,11 @@
         <action android:name="com.google.firebase.MESSAGING_EVENT" />
       </intent-filter>
     </activity>
-    <activity android:name=".presentation.NewCoffeeActivity"></activity>
-    <activity android:name=".presentation.DetailActivity"></activity>
+]    <activity android:name=".presentation.DetailActivity"></activity>
     <activity android:name=".presentation.RegisterActivity"></activity>
-    <activity android:name=".presentation.AddCoffeeAcitivity"></activity>
-
+    <activity android:name=".presentation.AvailableCoffeeActivity"></activity>
+    <activity android:name=".presentation.DrinkNowActivity"></activity>
+    <activity android:name=".presentation.AddCoffeeActivity"></activity>
     <activity android:name=".presentation.Login.view.LoginActivity">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />

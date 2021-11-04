@@ -4,91 +4,238 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".presentation.DashboardActivity"
+    android:background="@color/white"
     >
-  <androidx.appcompat.widget.Toolbar
-      android:id="@+id/coffe_toolbar_add_coffee"
-      android:layout_width="match_parent"
-      android:layout_height="56dp"
-      android:elevation="2dp"
-      android:theme="@style/ToolbarTheme"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent"
-      app:navigationIcon="@drawable/ic_arrowbackblack"
-      app:title=" "
-      app:titleTextColor="@color/black" />
 
-  <Button
-      android:id="@+id/add_coffees_btn"
-      android:layout_width="wrap_content"
-      android:layout_height="60dp"
-      android:fontFamily="@font/nunito_extrabold"
-      android:paddingLeft="24dp"
-      android:paddingRight="24dp"
-      android:text="@string/add_coffee"
-      android:textAllCaps="false"
-      android:textSize="14sp"
-      android:visibility="gone"
-      app:cornerRadius="40dp"
-      app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/add_coffee_msg"
-      app:layout_constraintVertical_bias="0.06999999"
-      />
-
-  <TextView
-      android:id="@+id/inventory"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginLeft="24dp"
-      android:layout_marginStart="24dp"
-      android:fontFamily="@font/nunito_extrabold"
-      android:text="@string/available_coffees"
-      android:textColor="#58D697"
-      android:textSize="28sp"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/coffe_toolbar_add_coffee"
-      />
-
-  <ProgressBar
-      android:id="@+id/progress"
-      android:layout_width="80dp"
-      android:layout_height="80dp"
-      android:visibility="invisible"
-      app:layout_constraintBottom_toBottomOf="@+id/coffe_list_recyclerview"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent"
-      />
-  <TextView
-      android:id="@+id/add_coffee_msg"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:fontFamily="@font/nunito"
-      android:text="Nenhum café foi encontrado"
-      android:textColor="@color/black"
-      android:visibility="gone"
-      app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent"
-      app:layout_constraintVertical_bias="0.39"
-      />
-  <androidx.recyclerview.widget.RecyclerView
-      android:id="@+id/coffe_list_recyclerview"
+  <ScrollView
       android:layout_width="0dp"
       android:layout_height="0dp"
-      android:layout_margin="2dp"
-      android:visibility="visible"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/inventory"
-      tools:itemCount="3"
-      tools:listitem="@layout/coffe_item_list"
-      />
+      app:layout_constraintTop_toTopOf="parent"
+      >
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        >
+
+      <Button
+          android:id="@+id/save_btn"
+          android:layout_width="0dp"
+          android:layout_height="60dp"
+          android:layout_marginEnd="32dp"
+          android:layout_marginLeft="32dp"
+          android:layout_marginRight="32dp"
+          android:layout_marginStart="32dp"
+          android:layout_marginTop="32dp"
+          android:fontFamily="@font/nunito_extrabold"
+          android:text="@string/save"
+          android:textAllCaps="false"
+          android:textColor="@color/white"
+          android:textSize="16sp"
+          app:layout_constraintCircleRadius="40dp"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@+id/capsules_now"
+          app:backgroundTint="#58D697"
+          app:cornerRadius="40dp"
+          />
+
+      <ImageView
+          android:id="@+id/image"
+          android:layout_width="match_parent"
+          android:layout_height="160dp"
+          android:layout_marginBottom="32dp"
+          android:scaleType="centerCrop"
+          app:layout_constraintBottom_toTopOf="@+id/name"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent"
+          app:srcCompat="@drawable/capuccino"
+          />
+
+      <ProgressBar
+          android:id="@+id/progress_bar_detail_activity"
+          android:layout_width="35dp"
+          android:layout_height="35dp"
+          android:visibility="invisible"
+          app:layout_constraintBottom_toBottomOf="@+id/coffe_toolbar"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintHorizontal_bias="0.95"
+          app:layout_constraintStart_toStartOf="@+id/coffe_toolbar"
+          app:layout_constraintTop_toTopOf="@+id/coffe_toolbar"
+          />
+
+      <TextView
+          android:id="@+id/name"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_marginLeft="32dp"
+          android:layout_marginStart="32dp"
+          android:layout_marginTop="32dp"
+          android:fontFamily="@font/nunito_extrabold"
+          android:text="@string/name"
+          android:textColor="#000000"
+          android:textSize="20sp"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@+id/image"
+          />
+
+      <TextView
+          android:id="@+id/available_capsules"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:fontFamily="@font/nunito"
+          android:text="@string/available_capsules"
+          android:textColor="@color/black"
+          android:textSize="12sp"
+          app:layout_constraintBottom_toBottomOf="@+id/capsules"
+          app:layout_constraintStart_toStartOf="@+id/name"
+          app:layout_constraintTop_toTopOf="@+id/capsules"
+          />
+      <TextView
+          android:id="@+id/description"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginEnd="32dp"
+          android:layout_marginLeft="32dp"
+          android:layout_marginRight="32dp"
+          android:layout_marginStart="32dp"
+          android:layout_marginTop="16dp"
+          android:fontFamily="@font/nunito"
+          android:textColor="@color/black"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintHorizontal_bias="0.0"
+          app:layout_constraintStart_toStartOf="@+id/available_capsules"
+          app:layout_constraintTop_toBottomOf="@+id/available_capsules"
+          tools:text="Cum sociis natoque penatibus et magnis dis parturient montes,
+                 nascetur ridiculus mus. Sed posuere consectetur est at lobortis."
+          />
+
+      <TextView
+          android:id="@+id/intensity"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="32dp"
+          android:fontFamily="@font/nunito_extrabold"
+          android:textColor="@color/black"
+          android:textSize="20sp"
+          app:layout_constraintEnd_toEndOf="@+id/Intensity"
+          app:layout_constraintStart_toStartOf="@+id/Intensity"
+          app:layout_constraintTop_toBottomOf="@+id/description"
+          tools:text="8"
+          />
+
+      <TextView
+          android:id="@+id/Intensity"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginLeft="48dp"
+          android:layout_marginStart="48dp"
+          android:fontFamily="@font/nunito_bold"
+          android:text="@string/intensity"
+          android:textColor="@color/black"
+          android:textSize="14sp"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@+id/intensity"
+          />
+
+      <TextView
+          android:id="@+id/size"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:fontFamily="@font/nunito_extrabold"
+          android:textColor="@color/black"
+          android:textSize="20sp"
+          app:layout_constraintBottom_toBottomOf="@+id/intensity"
+          app:layout_constraintEnd_toEndOf="@+id/Quantity"
+          app:layout_constraintStart_toStartOf="@+id/Quantity"
+          app:layout_constraintTop_toTopOf="@+id/intensity"
+          tools:text="100ml"
+          />
+
+      <TextView
+          android:id="@+id/Quantity"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginEnd="48dp"
+          android:layout_marginRight="48dp"
+          android:fontFamily="@font/nunito_bold"
+          android:text="@string/quantity"
+          android:textColor="@color/black"
+          android:textSize="14sp"
+          android:textStyle="bold"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintTop_toBottomOf="@+id/size"
+          />
+
+      <TextView
+          android:id="@+id/capsules"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginLeft="8dp"
+          android:layout_marginStart="8dp"
+          android:fontFamily="@font/nunito"
+          android:text="@string/capsules_example"
+          android:textColor="@color/black"
+          android:textSize="12dp"
+          app:layout_constraintStart_toEndOf="@+id/available_capsules"
+          app:layout_constraintTop_toBottomOf="@+id/name"
+          />
+      <androidx.appcompat.widget.Toolbar
+          android:id="@+id/coffe_toolbar"
+          android:layout_width="match_parent"
+          android:layout_height="56dp"
+          android:elevation="2dp"
+          android:theme="@style/ToolbarTheme"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent"
+          app:navigationIcon="@drawable/ic_arrowbackblack"
+          app:title=" "
+          app:titleTextColor="@color/white"
+          />
+      <com.google.android.material.textfield.TextInputLayout
+          android:id="@+id/capsules_now"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginEnd="32dp"
+          android:layout_marginLeft="32dp"
+          android:layout_marginRight="32dp"
+          android:layout_marginStart="32dp"
+          android:layout_marginTop="32dp"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@+id/Intensity"
+          app:boxCornerRadiusBottomEnd="10dp"
+          app:boxCornerRadiusBottomStart="10dp"
+          app:boxCornerRadiusTopEnd="10dp"
+          app:boxCornerRadiusTopStart="10dp"
+          style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+          >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/put_capsules_now"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:autofillHints="search"
+            android:fontFamily="@font/nunito"
+            android:hint="@string/capsules"
+            android:padding="10dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
+            android:textSize="14dp"
+            />
+      </com.google.android.material.textfield.TextInputLayout>
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+  </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

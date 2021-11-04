@@ -26,14 +26,14 @@ import br.com.alura.ceep.ui.coffemachine.viewmodel.CoffeesViewModel
 import br.com.alura.ceep.ui.coffemachine.viewmodel.config.CoffesViewModelFactory
 import com.google.firebase.auth.FirebaseAuth
 
-class AddCoffeeAcitivity : AppCompatActivity() {
+class AvailableCoffeeActivity : AppCompatActivity() {
   private lateinit var recyclerView: RecyclerView
   private lateinit var progressBar: ProgressBar
   private lateinit var coffeToolbar: Toolbar
   private var coffeeAdaper: CoffeeAdaper = CoffeeAdaper(selected = { coffee ->
     val bundle = Bundle()
     bundle.putString("uid", coffee.uid)
-    val intent = Intent(this, DetailActivity::class.java)
+    val intent = Intent(this, AddCoffeeActivity::class.java)
     intent.putExtras(bundle)
     this.startActivity(intent)
   })
@@ -52,7 +52,7 @@ class AddCoffeeAcitivity : AppCompatActivity() {
   @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
   public override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    setContentView(R.layout.add_coffee_activity)
+    setContentView(R.layout.available_coffee_activity)
     setup()
     initList()
     listeners()
@@ -61,6 +61,9 @@ class AddCoffeeAcitivity : AppCompatActivity() {
   }
 
   private fun listeners() {
+    coffeToolbar.setNavigationOnClickListener { arrow: View? ->
+      onBackPressed()
+    }
   }
 
   private fun setup() {

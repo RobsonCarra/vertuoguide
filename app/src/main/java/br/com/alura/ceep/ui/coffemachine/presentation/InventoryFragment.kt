@@ -75,13 +75,14 @@ class InventoryFragment : Fragment() {
     }
   }
 
-  private fun onChangeCoffedata(selected: Coffee) {
-    val bundle = Bundle()
-    bundle.putParcelable("coffe", selected)
-    val intent = Intent(requireContext(), AddCoffeeAcitivity::class.java)
-    intent.putExtras(bundle)
-    requireContext().startActivity(intent)
-  }
+  // private fun onChangeCoffedata(selected: Coffee) {
+  //   val bundle = Bundle()
+  //   bundle.putString("uid", selected.uid)
+  //   bundle.putString("capsules", selected.capsules.toString())
+  //   val intent = Intent(context, DetailActivity::class.java)
+  //   intent.putExtras(bundle)
+  //   context?.startActivity(intent)
+  // }
 
   private fun setup(view: View) {
     putName = view.findViewById(R.id.confirm_password)
@@ -94,11 +95,11 @@ class InventoryFragment : Fragment() {
 
   private fun listeners() {
     new.setOnClickListener { v: View? ->
-      val intent = Intent(context, AddCoffeeAcitivity::class.java)
+      val intent = Intent(context, AvailableCoffeeActivity::class.java)
       context?.startActivity(intent)
     }
     addCoffeesButton.setOnClickListener {
-      val intent = Intent(context, AddCoffeeAcitivity::class.java)
+      val intent = Intent(context, AvailableCoffeeActivity::class.java)
       context?.startActivity(intent)
     }
   }
@@ -180,7 +181,7 @@ class InventoryFragment : Fragment() {
     progressBar.visibility = View.VISIBLE
     recyclerView.visibility = View.GONE
     itemAdapter = ItemAdapter(selected = { selected ->
-      onChangeCoffedata(selected)
+      // onChangeCoffedata(selected)
     })
     recyclerView.setHasFixedSize(true)
     recyclerView.layoutManager = LinearLayoutManager(requireContext())

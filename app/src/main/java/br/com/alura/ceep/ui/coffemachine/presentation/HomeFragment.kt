@@ -72,7 +72,7 @@ class HomeFragment() : Fragment() {
 
   private fun listeners() {
     addCoffeesButton.setOnClickListener {
-      val intent = Intent(context, AddCoffeeAcitivity::class.java)
+      val intent = Intent(context, AvailableCoffeeActivity::class.java)
       context?.startActivity(intent)
     }
   }

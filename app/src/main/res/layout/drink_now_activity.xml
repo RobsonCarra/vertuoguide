@@ -25,6 +25,28 @@
         app:layout_constraintTop_toTopOf="parent"
         >
 
+      <Button
+          android:id="@+id/drink_now_btn"
+          android:layout_width="0dp"
+          android:layout_height="60dp"
+          android:layout_marginEnd="32dp"
+          android:layout_marginLeft="32dp"
+          android:layout_marginRight="32dp"
+          android:layout_marginStart="32dp"
+          android:layout_marginTop="32dp"
+          android:fontFamily="@font/nunito_extrabold"
+          android:text="@string/drink_now"
+          android:textAllCaps="false"
+          android:textColor="@color/white"
+          android:textSize="16sp"
+          app:layout_constraintCircleRadius="40dp"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@+id/Intensity"
+          app:backgroundTint="#58D697"
+          app:cornerRadius="40dp"
+          />
+
       <ImageView
           android:id="@+id/image"
           android:layout_width="match_parent"
@@ -51,23 +73,6 @@
           />
 
       <TextView
-          android:id="@+id/coffee_now_btn_detail"
-          android:layout_width="wrap_content"
-          android:layout_height="24dp"
-          android:layout_marginEnd="32dp"
-          android:layout_marginRight="32dp"
-          android:fontFamily="@font/nunito_extrabold"
-          android:scaleX="1"
-          android:scaleY="1"
-          android:text="Coffee now"
-          android:textColor="#000000"
-          android:textSize="16sp"
-          app:layout_constraintBottom_toBottomOf="@+id/available_capsules"
-          app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintTop_toTopOf="@+id/name"
-          />
-
-      <TextView
           android:id="@+id/name"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
@@ -78,7 +83,6 @@
           android:text="@string/name"
           android:textColor="#000000"
           android:textSize="20sp"
-          app:layout_constraintEnd_toStartOf="@+id/coffee_now_btn_detail"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toBottomOf="@+id/image"
           />
@@ -132,14 +136,12 @@
           android:id="@+id/Intensity"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:layout_marginBottom="24dp"
           android:layout_marginLeft="48dp"
           android:layout_marginStart="48dp"
           android:fontFamily="@font/nunito_bold"
           android:text="@string/intensity"
           android:textColor="@color/black"
           android:textSize="14sp"
-          app:layout_constraintBottom_toBottomOf="parent"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toBottomOf="@+id/intensity"
           />
