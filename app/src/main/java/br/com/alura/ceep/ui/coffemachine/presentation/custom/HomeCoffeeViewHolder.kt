@@ -9,7 +9,7 @@ import br.com.alura.ceep.ui.coffemachine.domain.Coffee
 import br.com.alura.ceep.ui.coffemachine.helpers.PhotoHelper
 import com.squareup.picasso.Picasso
 
-class CoffeeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+class HomeCoffeeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
   var image: ImageView
   var description: TextView
@@ -17,6 +17,7 @@ class CoffeeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
   var size: TextView
   var intensity: TextView
   var capsules: TextView
+  var coffeeNow: TextView
 
   init {
     image = itemView.findViewById(R.id.image_coffe)
@@ -25,6 +26,7 @@ class CoffeeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     size = itemView.findViewById(R.id.size)
     intensity = itemView.findViewById(R.id.intensity)
     capsules = itemView.findViewById(R.id.capsules)
+    coffeeNow = itemView.findViewById(R.id.coffee_now_btn)
   }
 
   fun bind(coffee: Coffee) {

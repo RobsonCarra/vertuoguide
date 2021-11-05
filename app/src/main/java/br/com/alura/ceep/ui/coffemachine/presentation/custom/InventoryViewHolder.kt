@@ -10,7 +10,7 @@ import br.com.alura.ceep.ui.coffemachine.helpers.PhotoHelper
 import com.squareup.picasso.Picasso
 import org.w3c.dom.Text
 
-class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+class InventoryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
   var image: ImageView = itemView.findViewById(R.id.circular_image)
   var name: TextView = itemView.findViewById(R.id.name)

@@ -20,23 +20,25 @@ import br.com.alura.ceep.ui.coffemachine.exceptions.NotFoundException
 import br.com.alura.ceep.ui.coffemachine.helpers.CoffeesRoomDataBase
 import br.com.alura.ceep.ui.coffemachine.helpers.RetrofitConfig
 import br.com.alura.ceep.ui.coffemachine.helpers.SharedPref
-import br.com.alura.ceep.ui.coffemachine.presentation.custom.CoffeeAdaper
+import br.com.alura.ceep.ui.coffemachine.presentation.custom.AvailableCoffeeAdapter
+import br.com.alura.ceep.ui.coffemachine.presentation.custom.HomeCoffeeAdapter
 import br.com.alura.ceep.ui.coffemachine.repository.CoffeesRepository
 import br.com.alura.ceep.ui.coffemachine.viewmodel.CoffeesViewModel
 import br.com.alura.ceep.ui.coffemachine.viewmodel.config.CoffesViewModelFactory
 import com.google.firebase.auth.FirebaseAuth
 
-class AvailableCoffeeActivity : AppCompatActivity() {
+class AvailableActivity : AppCompatActivity() {
   private lateinit var recyclerView: RecyclerView
   private lateinit var progressBar: ProgressBar
   private lateinit var coffeToolbar: Toolbar
-  private var coffeeAdaper: CoffeeAdaper = CoffeeAdaper(selected = { coffee ->
-    val bundle = Bundle()
-    bundle.putString("uid", coffee.uid)
-    val intent = Intent(this, AddCoffeeActivity::class.java)
-    intent.putExtras(bundle)
-    this.startActivity(intent)
-  })
+  private var availableCoffeeAdapter: AvailableCoffeeAdapter =
+    AvailableCoffeeAdapter(selected = { coffee ->
+      val bundle = Bundle()
+      bundle.putString("uid", coffee.uid)
+      val intent = Intent(this, AddActivity::class.java)
+      intent.putExtras(bundle)
+      this.startActivity(intent)
+    })
 
   private val viewModel: CoffeesViewModel by viewModels {
     CoffesViewModelFactory(
@@ -76,9 +78,9 @@ class AvailableCoffeeActivity : AppCompatActivity() {
     viewModel.list.observe(this) { coffee ->
       if (coffee.isNotEmpty()) {
         recyclerView.visibility = View.VISIBLE
-        coffeeAdaper.list.clear()
-        coffeeAdaper.list.addAll(coffee)
-        coffeeAdaper.notifyDataSetChanged()
+        availableCoffeeAdapter.list.clear()
+        availableCoffeeAdapter.list.addAll(coffee)
+        availableCoffeeAdapter.notifyDataSetChanged()
         progressBar.visibility = View.GONE
       } else {
         recyclerView.visibility = View.GONE
@@ -113,6 +115,6 @@ class AvailableCoffeeActivity : AppCompatActivity() {
     progressBar.visibility = View.VISIBLE
     recyclerView.hasFixedSize()
     recyclerView.layoutManager = LinearLayoutManager(this)
-    recyclerView.adapter = coffeeAdaper
+    recyclerView.adapter = availableCoffeeAdapter
   }
 }

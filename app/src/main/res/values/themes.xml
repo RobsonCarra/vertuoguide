@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools">
   <!-- Base application theme. -->
-  <style name="Theme.CoffeMachine" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+  <style name="Theme.CoffeeMachine.Machine" parent="Theme.MaterialComponents.DayNight.NoActionBar">
     <!-- Primary brand color. -->
     <item name="colorPrimary">@color/green_100</item>
     <item name="colorPrimaryVariant">@color/green_100</item>

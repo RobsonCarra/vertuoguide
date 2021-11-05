@@ -5,6 +5,7 @@
   <string name="start_sesssion">Iniciar sessão</string>
   <string name="email_required">E-mail obrigatório</string>
   <string name="invalid_email">E-mail inválido</string>
+  <string name="invalid_capsules">Quantidade de capsulas inválida</string>
   <string name="password_required">Senha obrigatória</string>
   <string name="unauthorized">Credenciais inválidass</string>
   <string name="sign_in">Acessar minha conta</string>
@@ -22,6 +23,7 @@
   <string name="available_capsules">Capsulas disponíveis: </string>
   <string name="available_coffees">Cafés disponíveis</string>
   <string name="drink_now">Tomar agora</string>
+  <string name="drinked">tomado</string>
   <string name="capsules_example">10</string>
   <string name="coffee_type">Tipo do café</string>
   <string name="add_coffee">Adicionar café</string>

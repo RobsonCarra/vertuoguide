@@ -7,21 +7,6 @@
     android:orientation="vertical"
     tools:context=".presentation.DashboardActivity"
     >
-  <androidx.appcompat.widget.Toolbar
-      android:id="@+id/coffe_toolbar_add_coffee"
-      android:layout_width="match_parent"
-      android:layout_height="56dp"
-      android:layout_marginTop="8dp"
-      android:elevation="10dp"
-      android:theme="@style/ToolbarTheme"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent"
-      app:navigationIcon="@drawable/ic_arrowbackblack"
-      app:title=" "
-      app:titleTextColor="@color/black"
-      />
-
   <Button
       android:id="@+id/add_coffees_btn"
       android:layout_width="wrap_content"
@@ -33,12 +18,23 @@
       android:textAllCaps="false"
       android:textSize="14sp"
       android:visibility="gone"
-      app:cornerRadius="40dp"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/add_coffee_msg"
       app:layout_constraintVertical_bias="0.06999999"
+      app:cornerRadius="40dp"
+      />
+
+  <ProgressBar
+      android:id="@+id/progress"
+      android:layout_width="80dp"
+      android:layout_height="80dp"
+      android:visibility="invisible"
+      app:layout_constraintBottom_toBottomOf="@+id/coffe_list_recyclerview"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
       />
 
   <TextView
@@ -56,16 +52,6 @@
       app:layout_constraintTop_toTopOf="parent"
       />
 
-  <ProgressBar
-      android:id="@+id/progress"
-      android:layout_width="80dp"
-      android:layout_height="80dp"
-      android:visibility="invisible"
-      app:layout_constraintBottom_toBottomOf="@+id/coffe_list_recyclerview"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent"
-      />
   <TextView
       android:id="@+id/add_coffee_msg"
       android:layout_width="wrap_content"
@@ -80,6 +66,20 @@
       app:layout_constraintTop_toTopOf="parent"
       app:layout_constraintVertical_bias="0.39"
       />
+  <androidx.appcompat.widget.Toolbar
+      android:id="@+id/coffe_toolbar_add_coffee"
+      android:layout_width="match_parent"
+      android:layout_height="56dp"
+      android:layout_marginTop="8dp"
+      android:elevation="10dp"
+      android:theme="@style/ToolbarTheme"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:navigationIcon="@drawable/ic_arrowbackblack"
+      app:title=" "
+      app:titleTextColor="@color/black"
+      />
   <androidx.recyclerview.widget.RecyclerView
       android:id="@+id/coffe_list_recyclerview"
       android:layout_width="0dp"
@@ -91,7 +91,7 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/inventory"
       tools:itemCount="3"
-      tools:listitem="@layout/coffe_item_list"
+      tools:listitem="@layout/home_coffe_item_list"
       />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

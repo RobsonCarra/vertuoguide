@@ -30,7 +30,7 @@ import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import com.squareup.picasso.Picasso
 
-class AddCoffeeActivity : AppCompatActivity() {
+class AddActivity : AppCompatActivity() {
 
   private val viewModel: CoffeesViewModel by viewModels {
     CoffesViewModelFactory(
@@ -49,8 +49,12 @@ class AddCoffeeActivity : AppCompatActivity() {
   private lateinit var size: TextView
   private lateinit var capsules: TextView
   private lateinit var image: ImageView
+  private lateinit var quantityText: TextView
+  private lateinit var intensityText: TextView
+  private lateinit var availableCapsules: TextView
   private lateinit var coffeToolbar: Toolbar
   private lateinit var progressBar: ProgressBar
+  private lateinit var progressBarSaved: ProgressBar
   private lateinit var putCapsules: TextInputEditText
   private var mLastClickTime: Long = 0
   private lateinit var save_btn: Button
@@ -62,6 +66,7 @@ class AddCoffeeActivity : AppCompatActivity() {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.add_coffee_activity)
     setup()
+    layoutGone()
     listeners()
     observers()
     progressBar.visibility = View.VISIBLE
@@ -83,8 +88,12 @@ class AddCoffeeActivity : AppCompatActivity() {
     size = findViewById(R.id.size)
     image = findViewById(R.id.image)
     capsules = findViewById(R.id.capsules)
+    intensityText = findViewById(R.id.Intensity)
+    quantityText = findViewById(R.id.Quantity)
+    availableCapsules = findViewById(R.id.available_capsules)
     coffeToolbar = findViewById(R.id.coffe_toolbar)
     progressBar = findViewById(R.id.progress_bar_detail_activity)
+    progressBarSaved = findViewById(R.id.progress_bar_add_activity)
     putCapsules = findViewById(R.id.put_capsules_now)
     save_btn = findViewById(R.id.save_btn)
     setSupportActionBar(coffeToolbar)
@@ -96,24 +105,32 @@ class AddCoffeeActivity : AppCompatActivity() {
       onBackPressed()
     }
     save_btn.setOnClickListener {
+      progressBarSaved.visibility = View.VISIBLE
       progressBar.visibility = View.VISIBLE
       if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
         return@setOnClickListener
       }
-      val capsules = putCapsules.text.toString().toInt()
+      val capsules = putCapsules.text.toString()
       mLastClickTime = SystemClock.elapsedRealtime();
-      val coffeeUser = CoffeeUser(
-        capsules = capsules,
-        uid = uid.toString()
-      )
-      uid?.let { uidNotNull ->
-        coffeeUser.uid = uidNotNull
-      }
-      val token = SharedPref(this).getString(SharedPref.TOKEN)
-      token?.let {
-        uid?.let { uid ->
-          viewModel.save(coffeeUser)
+      if (capsules.isNotEmpty()) {
+        val caps = capsules.toInt()
+        val coffeeUser = CoffeeUser(
+          capsules = caps,
+          uid = uid.toString()
+        )
+        uid?.let { uidNotNull ->
+          coffeeUser.uid = uidNotNull
         }
+        val token = SharedPref(this).getString(SharedPref.TOKEN)
+        token?.let {
+          uid?.let { uid ->
+            viewModel.save(coffeeUser)
+          }
+        }
+      } else {
+        putCapsules.error = getString(R.string.invalid_capsules)
+        putCapsules.requestFocus()
+        progressBarSaved.visibility = View.GONE
       }
       progressBar.visibility = View.GONE
     }
@@ -130,6 +147,7 @@ class AddCoffeeActivity : AppCompatActivity() {
       Picasso.get().load(coffee.image)
         .placeholder(R.drawable.ic_launcher_background)
         .into(image)
+      layoutStart()
       progressBar.visibility = View.GONE
     }
 
@@ -157,12 +175,45 @@ class AddCoffeeActivity : AppCompatActivity() {
 
     viewModel.added.observe(this) { saved ->
       if (saved) {
-        Toast.makeText(this, "Saved", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, getString(R.string.saved), Toast.LENGTH_SHORT).show()
         val intent = Intent(this, DashboardActivity::class.java)
         this.startActivity(intent)
         progressBar.visibility = View.GONE
       }
     }
+  }
+
+  fun layoutGone() {
+    progressBar.visibility = View.VISIBLE
+    coffeToolbar.visibility = View.VISIBLE
+    name.visibility = View.GONE
+    description.visibility = View.GONE
+    intensity.visibility = View.GONE
+    size.visibility = View.GONE
+    image.visibility = View.GONE
+    capsules.visibility = View.GONE
+    intensityText.visibility = View.GONE
+    quantityText.visibility = View.GONE
+    availableCapsules.visibility = View.GONE
+    save_btn.visibility = View.GONE
+    putCapsules.visibility = View.GONE
+  }
+
+  fun layoutStart() {
+    if (coffeeCaps?.isNotEmpty() == true) {
+      availableCapsules.visibility = View.VISIBLE
+      capsules.visibility = View.VISIBLE
+    }
+    progressBar.visibility = View.GONE
+    name.visibility = View.VISIBLE
+    description.visibility = View.VISIBLE
+    intensity.visibility = View.VISIBLE
+    size.visibility = View.VISIBLE
+    image.visibility = View.VISIBLE
+    intensityText.visibility = View.VISIBLE
+    quantityText.visibility = View.VISIBLE
+    save_btn.visibility = View.VISIBLE
+    putCapsules.visibility = View.VISIBLE
   }
 }
 

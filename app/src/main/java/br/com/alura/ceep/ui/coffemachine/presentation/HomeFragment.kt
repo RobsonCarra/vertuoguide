@@ -14,6 +14,7 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import br.com.alura.ceep.ui.coffemachine.R
+import br.com.alura.ceep.ui.coffemachine.domain.CoffeeUser
 import br.com.alura.ceep.ui.coffemachine.exceptions.BadGatewayException
 import br.com.alura.ceep.ui.coffemachine.exceptions.BadRequestException
 import br.com.alura.ceep.ui.coffemachine.exceptions.NoContentException
@@ -21,7 +22,7 @@ import br.com.alura.ceep.ui.coffemachine.exceptions.NotFoundException
 import br.com.alura.ceep.ui.coffemachine.helpers.CoffeesRoomDataBase
 import br.com.alura.ceep.ui.coffemachine.helpers.RetrofitConfig
 import br.com.alura.ceep.ui.coffemachine.helpers.SharedPref
-import br.com.alura.ceep.ui.coffemachine.presentation.custom.CoffeeAdaper
+import br.com.alura.ceep.ui.coffemachine.presentation.custom.HomeCoffeeAdapter
 import br.com.alura.ceep.ui.coffemachine.repository.CoffeesRepository
 import br.com.alura.ceep.ui.coffemachine.viewmodel.CoffeesViewModel
 import br.com.alura.ceep.ui.coffemachine.viewmodel.config.CoffesViewModelFactory
@@ -34,14 +35,33 @@ class HomeFragment() : Fragment() {
   private lateinit var addCoffeesButton: Button
   private lateinit var addCoffeesMsg: TextView
 
-  private var coffeeAdaper: CoffeeAdaper = CoffeeAdaper(selected = { coffee ->
+  private var homeCoffeeAdapter: HomeCoffeeAdapter = HomeCoffeeAdapter(selected = { coffee ->
     val bundle = Bundle()
     bundle.putString("uid", coffee.uid)
     bundle.putString("capsules", coffee.capsules.toString())
-    val intent = Intent(context, DetailActivity::class.java)
+    val intent = Intent(context, DrinkNowActivity::class.java)
     intent.putExtras(bundle)
     context?.startActivity(intent)
-  })
+  }, onCoffeeNow = { coffee ->
+    recyclerView.visibility = View.GONE
+    progressBar.visibility = View.VISIBLE
+    val uid = coffee.uid
+    val capsules = coffee.capsules
+    val coffeeUser = capsules.let { it1 ->
+      CoffeeUser(
+        capsules = it1 - 1,
+        uid = uid
+      )
+    }
+    viewModel.save(coffeeUser)
+    viewModel.added.observe(this) { saved ->
+      if (saved) {
+        Toast.makeText(requireContext(), coffee.name + " drinked", Toast.LENGTH_SHORT).show()
+        viewModel.searchByUser()
+      }
+    }
+  }
+  )
 
   private val viewModel: CoffeesViewModel by viewModels {
     CoffesViewModelFactory(
@@ -72,7 +92,7 @@ class HomeFragment() : Fragment() {
 
   private fun listeners() {
     addCoffeesButton.setOnClickListener {
-      val intent = Intent(context, AvailableCoffeeActivity::class.java)
+      val intent = Intent(context, AvailableActivity::class.java)
       context?.startActivity(intent)
     }
   }
@@ -88,9 +108,9 @@ class HomeFragment() : Fragment() {
     viewModel.listByUser.observe(viewLifecycleOwner) { coffee ->
       if (coffee.isNotEmpty()) {
         recyclerView.visibility = View.VISIBLE
-        coffeeAdaper.list.clear()
-        coffeeAdaper.list.addAll(coffee)
-        coffeeAdaper.notifyDataSetChanged()
+        homeCoffeeAdapter.list.clear()
+        homeCoffeeAdapter.list.addAll(coffee)
+        homeCoffeeAdapter.notifyDataSetChanged()
         progressBar.visibility = View.GONE
         addCoffeesButton.visibility = View.GONE
         addCoffeesMsg.visibility = View.GONE
@@ -133,7 +153,7 @@ class HomeFragment() : Fragment() {
     progressBar.visibility = View.VISIBLE
     recyclerView.hasFixedSize()
     recyclerView.layoutManager = LinearLayoutManager(context)
-    recyclerView.adapter = coffeeAdaper
+    recyclerView.adapter = homeCoffeeAdapter
   }
 }
 

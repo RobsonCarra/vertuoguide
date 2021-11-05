@@ -5,6 +5,7 @@
   <string name="start_sesssion">Getting started</string>
   <string name="email_required">E-mail required</string>
   <string name="invalid_email">E-mail must be valid</string>
+  <string name="invalid_capsules">Invalid quantity of capsules</string>
   <string name="password_required">Password required</string>
   <string name="unauthorized">Account unauthorized</string>
   <string name="sign_in">Access my account</string>
@@ -20,6 +21,7 @@
   <string name="available_capsules">Available capsules: </string>
   <string name="available_coffees">Available coffees</string>
   <string name="drink_now">Drink now</string>
+  <string name="drinked">drinked</string>
   <string name="capsules_example">10</string>
   <string name="coffee_type">Coffee type</string>
   <string name="add_coffee">Add coffee</string>
@@ -28,5 +30,4 @@
   <string name="confirm_password">Confirm the password</string>
   <string name="password">Password</string>
   <string name="register_now">register now!</string>
-
 </resources>
