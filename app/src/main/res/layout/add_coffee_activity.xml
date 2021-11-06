@@ -170,14 +170,14 @@
           android:textColor="@color/black"
           android:textSize="20sp"
           app:layout_constraintBottom_toBottomOf="@+id/intensity"
-          app:layout_constraintEnd_toEndOf="@+id/Quantity"
-          app:layout_constraintStart_toStartOf="@+id/Quantity"
+          app:layout_constraintEnd_toEndOf="@+id/quantity"
+          app:layout_constraintStart_toStartOf="@+id/quantity"
           app:layout_constraintTop_toTopOf="@+id/intensity"
           tools:text="100ml"
           />
 
       <TextView
-          android:id="@+id/Quantity"
+          android:id="@+id/quantity"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_marginEnd="48dp"

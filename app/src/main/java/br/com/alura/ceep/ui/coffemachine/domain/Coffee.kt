@@ -10,11 +10,11 @@ import java.util.*
 @Parcelize
 class Coffee(
   @PrimaryKey
-  var name: String,
-  var capsules: Int,
-  var description: String,
-  var intensity: String,
-  var quantity: String,
+  var name: String = "",
+  var capsules: Int = 0,
+  var description: String = "",
+  var intensity: String = "",
+  var quantity: String = "",
   var uid: String = UUID.randomUUID().toString(),
-  var image: String,
+  var image: String = "",
 ) : Parcelable

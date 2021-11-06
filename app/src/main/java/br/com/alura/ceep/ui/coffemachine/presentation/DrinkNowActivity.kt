@@ -26,7 +26,6 @@ import br.com.alura.ceep.ui.coffemachine.helpers.SharedPref
 import br.com.alura.ceep.ui.coffemachine.repository.CoffeesRepository
 import br.com.alura.ceep.ui.coffemachine.viewmodel.CoffeesViewModel
 import br.com.alura.ceep.ui.coffemachine.viewmodel.config.CoffesViewModelFactory
-import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import com.squareup.picasso.Picasso
 
@@ -35,7 +34,6 @@ class DrinkNowActivity : AppCompatActivity() {
   private val viewModel: CoffeesViewModel by viewModels {
     CoffesViewModelFactory(
       CoffeesRepository(
-        CoffeesRoomDataBase.getDatabase(this).coffesDao(),
         RetrofitConfig().getClient(this)
       ),
       FirebaseAuth.getInstance(),
@@ -61,7 +59,6 @@ class DrinkNowActivity : AppCompatActivity() {
   private var coffeName: String? = null
   private var coffeeCaps: String? = null
 
-  @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
   public override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.drink_now_activity)
@@ -89,7 +86,7 @@ class DrinkNowActivity : AppCompatActivity() {
     image = findViewById(R.id.image)
     capsules = findViewById(R.id.capsules)
     intensityText = findViewById(R.id.Intensity)
-    quantityText = findViewById(R.id.Quantity)
+    quantityText = findViewById(R.id.quantity)
     availableCapsules = findViewById(R.id.available_capsules)
     coffeToolbar = findViewById(R.id.coffe_toolbar)
     progressBar = findViewById(R.id.progress_bar_detail_activity)

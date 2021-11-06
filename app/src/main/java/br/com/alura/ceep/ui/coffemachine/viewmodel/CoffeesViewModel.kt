@@ -47,8 +47,10 @@ class CoffeesViewModel(
 
   fun searchByName(name: String, lifecycleOwner: LifecycleOwner) {
     viewModelScope.launch {
-      coffeesRepository.getByName(name).observe(lifecycleOwner) { result ->
-        coffeeFiltered.postValue(result)
+      sharedPref.getString(SharedPref.UID)?.let { uid ->
+        // coffeesRepository.getByName(uid, name).observe(lifecycleOwner) { result ->
+        //   coffeeFiltered.postValue(result)
+        // }
       }
     }
   }
@@ -90,6 +92,7 @@ class CoffeesViewModel(
     showLoader.postValue(true)
     auth.signInWithEmailAndPassword(email, password).addOnCompleteListener { task ->
       if (task.isSuccessful) {
+        task.getResult()?.user?.uid?.let { uid -> sharedPref.put(SharedPref.UID, uid) }
         auth.currentUser?.getIdToken(true)?.addOnCompleteListener { result ->
           if (result.isSuccessful) {
             result.result?.token?.let { token ->

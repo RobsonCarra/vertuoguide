@@ -20,6 +20,10 @@ import br.com.alura.ceep.ui.coffemachine.helpers.PhotoHelper
 import br.com.alura.ceep.ui.coffemachine.helpers.SharedPref
 import br.com.alura.ceep.ui.coffemachine.helpers.toByteArray
 import br.com.alura.ceep.ui.coffemachine.presentation.Login.view.LoginActivity
+import com.google.android.play.core.review.ReviewInfo
+import com.google.android.play.core.review.ReviewManager
+import com.google.android.play.core.review.ReviewManagerFactory
+import com.google.android.play.core.tasks.Task
 
 class ProfileFragment : Fragment() {
 
@@ -29,8 +33,6 @@ class ProfileFragment : Fragment() {
   private lateinit var rate: TextView
   private lateinit var terms: TextView
   private lateinit var exit: TextView
-  private lateinit var on: TextView
-  private lateinit var off: TextView
   private val REQUEST_CODE_PHOTO = 10
 
   override fun onCreateView(
@@ -53,8 +55,6 @@ class ProfileFragment : Fragment() {
     rate = view.findViewById(R.id.rate)
     terms = view.findViewById(R.id.terms_of_use)
     exit = view.findViewById(R.id.exit)
-    on = view.findViewById(R.id.on)
-    off = view.findViewById(R.id.off)
   }
 
   private fun listeners() {
@@ -64,13 +64,21 @@ class ProfileFragment : Fragment() {
       startActivityForResult(intent, REQUEST_CODE_PHOTO)
       intent.type = "image/*"
     }
-    on.setOnClickListener { v: View? ->
-      Toast.makeText(context, "hello", Toast.LENGTH_SHORT).show()
-    }
-    off.setOnClickListener { v: View? ->
-    }
     rate.setOnClickListener {
-
+      val reviewManager = ReviewManagerFactory.create(requireContext())
+      val requestReviewTask = reviewManager.requestReviewFlow()
+      requestReviewTask.addOnCompleteListener { request ->
+        if (request.isSuccessful) {
+          // Request succeeded and a ReviewInfo instance was received
+          val reviewInfo: ReviewInfo = request.result
+          val launchReviewTask: Task<*> = reviewManager.launchReviewFlow(requireActivity(), reviewInfo)
+          launchReviewTask.addOnCompleteListener { _ ->
+            Toast.makeText(requireContext(), "Obrigado pela sua avaliação", Toast.LENGTH_SHORT).show()
+          }
+        } else {
+          // Request failed
+        }
+      }
     }
     share.setOnClickListener {
       val sendIntent = Intent()

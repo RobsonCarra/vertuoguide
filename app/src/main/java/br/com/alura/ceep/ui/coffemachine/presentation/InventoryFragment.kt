@@ -36,7 +36,6 @@ class InventoryFragment : Fragment() {
   private val viewModel: CoffeesViewModel by viewModels {
     CoffesViewModelFactory(
       CoffeesRepository(
-        CoffeesRoomDataBase.getDatabase(requireContext()).coffesDao(),
         RetrofitConfig().getClient(requireContext())
       ),
       FirebaseAuth.getInstance(),
@@ -168,10 +167,7 @@ class InventoryFragment : Fragment() {
         if (it.count() >= 3) {
           viewModel.searchByName(typed.toString(), viewLifecycleOwner)
         } else if (it.count() == 0) {
-          val token = SharedPref(requireContext()).getString(SharedPref.TOKEN)
-          token?.let {
-            // viewModel.getAll(viewLifecycleOwner, token)
-          }
+          viewModel.searchByUser()
         }
       }
     }

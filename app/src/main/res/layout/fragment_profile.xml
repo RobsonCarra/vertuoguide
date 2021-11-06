@@ -26,11 +26,10 @@
           android:id="@+id/inventory"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:layout_marginLeft="24dp"
           android:layout_marginStart="24dp"
           android:layout_marginTop="24dp"
           android:fontFamily="@font/nunito_extrabold"
-          android:text="profile"
+          android:text="perfil"
           android:textColor="#58D697"
           android:textSize="28sp"
           app:layout_constraintStart_toStartOf="parent"
@@ -38,105 +37,87 @@
           />
 
 
-      <TextView
+      <Button
           android:id="@+id/notifications"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:layout_marginLeft="4dp"
-          android:layout_marginStart="4dp"
+          android:layout_marginStart="16dp"
           android:layout_marginTop="56dp"
           android:fontFamily="@font/nunito_extrabold"
-          android:text="Notifications"
+          android:gravity="center|start"
+          android:text="Notificações"
+          android:textAllCaps="false"
           android:textColor="#000000"
           android:textSize="16sp"
-          app:layout_constraintStart_toStartOf="@+id/inventory"
+          app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toBottomOf="@+id/camera_button"
+          style="@style/Widget.AppCompat.Button.Borderless"
           />
 
-      <TextView
+      <Button
           android:id="@+id/share"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:layout_marginTop="16dp"
           android:fontFamily="@font/nunito_extrabold"
-          android:text="Share"
+          android:gravity="center|start"
+          android:text="Compartilhar"
+          android:textAllCaps="false"
           android:textColor="#000000"
           android:textSize="16sp"
           app:layout_constraintStart_toStartOf="@+id/notifications"
           app:layout_constraintTop_toBottomOf="@+id/notifications"
+          style="@style/Widget.AppCompat.Button.Borderless"
           />
 
-      <TextView
+      <Button
           android:id="@+id/rate"
-          android:layout_width="wrap_content"
+          android:layout_width="0dp"
           android:layout_height="wrap_content"
-          android:layout_marginTop="16dp"
+          android:layout_marginEnd="16dp"
           android:fontFamily="@font/nunito_extrabold"
-          android:text="Rate"
+          android:gravity="center|start"
+          android:text="Fazer uma avaliação"
+          android:textAllCaps="false"
           android:textColor="#000000"
           android:textSize="16sp"
+          app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="@+id/share"
           app:layout_constraintTop_toBottomOf="@+id/share"
+          style="@style/Widget.AppCompat.Button.Borderless"
           />
 
       <TextView
           android:id="@+id/terms_of_use"
-          android:layout_width="wrap_content"
+          android:layout_width="0dp"
           android:layout_height="wrap_content"
-          android:layout_marginTop="16dp"
+          android:layout_marginEnd="16dp"
           android:fontFamily="@font/nunito_extrabold"
-          android:text="Terms of use"
+          android:gravity="center|start"
+          android:text="Políticas e termos"
+          android:textAllCaps="false"
           android:textColor="#000000"
           android:textSize="16sp"
+          app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="@+id/rate"
           app:layout_constraintTop_toBottomOf="@+id/rate"
+          style="@style/Widget.AppCompat.Button.Borderless"
           />
 
-      <TextView
+      <Button
           android:id="@+id/exit"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_marginBottom="32dp"
-          android:layout_marginTop="24dp"
           android:fontFamily="@font/nunito_extrabold"
-          android:text="Exit"
+          android:gravity="center|start"
+          android:text="Sair"
+          android:textAllCaps="false"
           android:textColor="#000000"
           android:textSize="16sp"
           app:layout_constraintBottom_toBottomOf="parent"
           app:layout_constraintStart_toStartOf="@+id/terms_of_use"
           app:layout_constraintTop_toBottomOf="@+id/terms_of_use"
-          />
-
-      <TextView
-          android:id="@+id/on"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_marginEnd="24dp"
-          android:layout_marginRight="24dp"
-          android:fontFamily="@font/nunito_extrabold"
-          android:text="LIGADO"
-          android:textColor="#58D697"
-          android:textSize="10sp"
-          app:layout_constraintBottom_toBottomOf="@+id/off"
-          app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintTop_toTopOf="@+id/off"
-          />
-
-      <TextView
-          android:id="@+id/off"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_marginEnd="8dp"
-          android:layout_marginRight="8dp"
-          android:fontFamily="@font/nunito_extrabold"
-          android:text="DESLIGADO"
-          android:textColor="#e5e5e5"
-          android:textSize="10sp"
-          app:layout_constraintBottom_toBottomOf="@+id/notifications"
-          app:layout_constraintEnd_toStartOf="@+id/on"
-          app:layout_constraintHorizontal_bias="1.0"
-          app:layout_constraintStart_toEndOf="@+id/notifications"
-          app:layout_constraintTop_toTopOf="@+id/notifications"
+          style="@style/Widget.AppCompat.Button.Borderless"
           />
 
       <de.hdodenhof.circleimageview.CircleImageView
@@ -150,6 +131,17 @@
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toBottomOf="@+id/inventory"
           ></de.hdodenhof.circleimageview.CircleImageView>
+      <Switch
+          android:id="@+id/notificationsSwitch"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginEnd="24dp"
+          app:layout_constraintBottom_toBottomOf="@+id/notifications"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintHorizontal_bias="1.0"
+          app:layout_constraintStart_toEndOf="@+id/notifications"
+          app:layout_constraintTop_toTopOf="@+id/notifications"
+          />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
   </ScrollView>

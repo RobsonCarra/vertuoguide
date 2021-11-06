@@ -66,7 +66,6 @@ class HomeFragment() : Fragment() {
   private val viewModel: CoffeesViewModel by viewModels {
     CoffesViewModelFactory(
       CoffeesRepository(
-        CoffeesRoomDataBase.getDatabase(requireContext()).coffesDao(),
         RetrofitConfig().getClient(requireContext())
       ),
       FirebaseAuth.getInstance(),

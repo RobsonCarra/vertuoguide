@@ -43,7 +43,6 @@ class AvailableActivity : AppCompatActivity() {
   private val viewModel: CoffeesViewModel by viewModels {
     CoffesViewModelFactory(
       CoffeesRepository(
-        CoffeesRoomDataBase.getDatabase(this).coffesDao(),
         RetrofitConfig().getClient(this)
       ),
       FirebaseAuth.getInstance(),

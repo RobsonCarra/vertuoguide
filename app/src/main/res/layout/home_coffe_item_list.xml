@@ -8,20 +8,17 @@
     >
 
   <androidx.cardview.widget.CardView
-
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_marginBottom="16dp"
       android:layout_marginEnd="16dp"
-      android:layout_marginLeft="16dp"
-      android:layout_marginRight="16dp"
       android:layout_marginStart="16dp"
       android:layout_marginTop="16dp"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
-      app:cardBackgroundColor="#FFFFFF"
+      app:cardBackgroundColor="@color/background_login"
       app:cardCornerRadius="10dp"
       app:cardElevation="10dp"
       >
@@ -30,6 +27,22 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         >
+
+      <Button
+          android:id="@+id/coffee_now_btn"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginEnd="16dp"
+          android:elevation="2dp"
+          android:fontFamily="@font/nunito_extrabold"
+          android:text=" Tomar agora"
+          android:textAllCaps="false"
+          android:textColor="#000000"
+          app:layout_constraintBottom_toBottomOf="@+id/capsules_text"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintTop_toTopOf="@+id/name"
+          style="@style/Widget.AppCompat.Button.Borderless.Colored"
+          />
 
       <ImageView
           android:id="@+id/image_coffe"
@@ -43,29 +56,14 @@
           />
 
       <TextView
-          android:id="@+id/coffee_now_btn"
-          android:layout_width="wrap_content"
-          android:layout_height="24dp"
-          android:layout_marginEnd="24dp"
-          android:layout_marginRight="24dp"
-          android:elevation="2dp"
-          android:fontFamily="@font/nunito_extrabold"
-          android:text="Coffee now"
-          android:textColor="#000000"
-          app:layout_constraintBottom_toBottomOf="@+id/capsules_text"
-          app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintTop_toTopOf="@+id/name"
-          />
-
-      <TextView
           android:id="@+id/capsules_text"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_marginEnd="4dp"
-          android:layout_marginRight="4dp"
+          android:layout_marginTop="4dp"
           android:fontFamily="@font/nunito"
           android:text="@string/available_capsules"
-          android:textSize="12sp"
+          android:textSize="14sp"
           app:layout_constraintEnd_toStartOf="@+id/capsules"
           app:layout_constraintStart_toStartOf="@+id/name"
           app:layout_constraintTop_toBottomOf="@+id/name"
@@ -76,45 +74,42 @@
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:layout_marginEnd="16dp"
-          android:layout_marginLeft="16dp"
-          android:layout_marginRight="16dp"
           android:layout_marginStart="16dp"
           android:layout_marginTop="16dp"
           android:fontFamily="@font/nunito"
-          android:text="Description"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toBottomOf="@+id/capsules_text"
+          tools:text="Description"
           />
 
       <TextView
           android:id="@+id/intensity"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:layout_marginTop="8dp"
+          android:layout_marginTop="16dp"
           android:fontFamily="@font/nunito_extrabold"
-          android:text="Intensity Scale"
           android:textColor="#070707"
           android:textSize="20sp"
           android:textStyle="bold"
-          app:layout_constraintEnd_toEndOf="@+id/Intensity"
-          app:layout_constraintStart_toStartOf="@+id/Intensity"
+          app:layout_constraintEnd_toStartOf="@+id/guideline2"
+          app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toBottomOf="@+id/description"
+          tools:text="5"
           />
 
       <TextView
-          android:id="@+id/Quantity"
+          android:id="@+id/quantity"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:layout_marginEnd="32dp"
-          android:layout_marginRight="32dp"
           android:fontFamily="@font/nunito_extrabold"
-          android:text="Quantity"
+          android:text="@string/quantity"
           android:textColor="#070707"
           android:textSize="14sp"
           android:textStyle="bold"
           app:layout_constraintBottom_toBottomOf="@+id/Intensity"
           app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="@+id/guideline2"
           app:layout_constraintTop_toBottomOf="@+id/intensity"
           />
 
@@ -123,64 +118,70 @@
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_marginBottom="24dp"
-          android:layout_marginLeft="32dp"
-          android:layout_marginStart="32dp"
           android:fontFamily="@font/nunito_extrabold"
-          android:text="Intensity"
+          android:text="@string/intensity"
           android:textColor="#040404"
           android:textSize="14sp"
           android:textStyle="bold"
           app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintEnd_toStartOf="@+id/guideline2"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toBottomOf="@+id/intensity"
+          app:layout_constraintVertical_bias="0.0"
           />
-
       <TextView
           android:id="@+id/size"
           android:layout_width="wrap_content"
           android:layout_height="match_parent"
-          android:layout_marginTop="8dp"
+          android:layout_marginTop="16dp"
           android:fontFamily="@font/nunito_extrabold"
-          android:text="Size"
           android:textColor="#040404"
           android:textSize="20sp"
           android:textStyle="bold"
-          app:layout_constraintEnd_toEndOf="@+id/Quantity"
-          app:layout_constraintStart_toStartOf="@+id/Quantity"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="@+id/guideline2"
           app:layout_constraintTop_toBottomOf="@+id/description"
+          tools:text="240"
           />
 
       <TextView
           android:id="@+id/name"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
-          android:layout_marginEnd="16dp"
-          android:layout_marginLeft="16dp"
-          android:layout_marginRight="16dp"
+          android:layout_marginEnd="8dp"
           android:layout_marginStart="16dp"
           android:layout_marginTop="16dp"
           android:fontFamily="@font/nunito_extrabold"
-          android:text="Name"
           android:textColor="#000000"
           android:textSize="20sp"
           android:textStyle="bold"
           app:layout_constraintEnd_toStartOf="@+id/coffee_now_btn"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toBottomOf="@+id/image_coffe"
+          tools:text="Cafe"
           />
 
       <TextView
           android:id="@+id/capsules"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
+          android:layout_marginEnd="8dp"
+          android:layout_marginTop="4dp"
           android:fontFamily="@font/nunito"
-          android:text="10"
-          android:textSize="12sp"
+          android:textSize="14sp"
           app:layout_constraintBottom_toBottomOf="@+id/capsules_text"
           app:layout_constraintEnd_toStartOf="@+id/coffee_now_btn"
           app:layout_constraintHorizontal_bias="0.03"
           app:layout_constraintStart_toEndOf="@+id/capsules_text"
           app:layout_constraintTop_toTopOf="@+id/capsules_text"
+          tools:text="10"
+          />
+      <androidx.constraintlayout.widget.Guideline
+          android:id="@+id/guideline2"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:orientation="vertical"
+          app:layout_constraintGuide_percent="0.5"
           />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

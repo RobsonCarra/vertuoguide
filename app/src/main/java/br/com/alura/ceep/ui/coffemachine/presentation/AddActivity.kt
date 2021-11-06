@@ -35,7 +35,6 @@ class AddActivity : AppCompatActivity() {
   private val viewModel: CoffeesViewModel by viewModels {
     CoffesViewModelFactory(
       CoffeesRepository(
-        CoffeesRoomDataBase.getDatabase(this).coffesDao(),
         RetrofitConfig().getClient(this)
       ),
       FirebaseAuth.getInstance(),
@@ -89,7 +88,7 @@ class AddActivity : AppCompatActivity() {
     image = findViewById(R.id.image)
     capsules = findViewById(R.id.capsules)
     intensityText = findViewById(R.id.Intensity)
-    quantityText = findViewById(R.id.Quantity)
+    quantityText = findViewById(R.id.quantity)
     availableCapsules = findViewById(R.id.available_capsules)
     coffeToolbar = findViewById(R.id.coffe_toolbar)
     progressBar = findViewById(R.id.progress_bar_detail_activity)

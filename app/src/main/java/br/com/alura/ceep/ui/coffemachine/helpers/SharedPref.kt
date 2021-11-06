@@ -36,5 +36,6 @@ class SharedPref(val context: Context) {
 
   companion object {
     const val TOKEN = "token"
+    const val UID = "uid"
   }
 }
