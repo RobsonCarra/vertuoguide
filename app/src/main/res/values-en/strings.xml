@@ -23,8 +23,14 @@
   <string name="drink_now">Drink now</string>
   <string name="drinked">drinked</string>
   <string name="capsules_example">10</string>
+  <string name="politics_and_terms">Politics and terms</string>
   <string name="coffee_type">Coffee type</string>
+  <string name="make_an_assessment">Make an assessment</string>
   <string name="add_coffee">Add</string>
+  <string name="share">Share</string>
+  <string name="notifications">Notifications</string>
+  <string name="perfil">Perfil</string>
+  <string name="exit">Exit</string>
   <string name="saved">Saved with success</string>
   <string name="drink">Drink now</string>
   <string name="confirm_password">Confirm the password</string>

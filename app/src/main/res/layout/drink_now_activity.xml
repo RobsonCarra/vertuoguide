@@ -213,7 +213,7 @@
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toTopOf="parent"
-          app:navigationIcon="@drawable/ic_arrowbackblack"
+          app:navigationIcon="@drawable/arrow_back"
           app:title=" "
           app:titleTextColor="@color/white"
           />

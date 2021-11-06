@@ -15,7 +15,7 @@
       android:gravity="top"
       android:text="@string/add_coffee"
       android:textAllCaps="false"
-      android:textColor="#000000"
+      android:textColor="@color/black"
       android:textSize="14sp"
       app:layout_constraintBottom_toBottomOf="@+id/inventory"
       app:layout_constraintEnd_toEndOf="parent"

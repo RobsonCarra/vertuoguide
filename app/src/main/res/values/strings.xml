@@ -25,8 +25,14 @@
   <string name="drink_now">Tomar agora</string>
   <string name="drinked">tomado</string>
   <string name="capsules_example">10</string>
+  <string name="politics_and_terms">Políticas e termos</string>
   <string name="coffee_type">Tipo do café</string>
+  <string name="make_an_assessment">Fazer uma avaliação</string>
   <string name="add_coffee">Adicionar</string>
+  <string name="share">Compartilhar</string>
+  <string name="notifications">Notificações</string>
+  <string name="perfil">Perfil</string>
+  <string name="exit">Sair</string>
   <string name="confirm_password">Confirme a senha</string>
   <string name="password">Senha</string>
   <string name="register_now">registre agora!</string>
