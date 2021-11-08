@@ -20,7 +20,6 @@ import java.net.HttpURLConnection
 class CoffeesRepository(private val client: Retrofit) {
 
   fun getByName(uid: String, name: String) {
-
   }
 
   suspend fun getAll() = flow {

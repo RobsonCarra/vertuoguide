@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
     >
 
   <Button
@@ -20,7 +19,6 @@
       app:layout_constraintStart_toStartOf="@+id/names"
       app:layout_constraintTop_toBottomOf="@+id/names"
       app:cornerRadius="40dp"
-      app:elevation="2dp"
       />
 
   <Button
@@ -55,9 +53,7 @@
       android:layout_height="20dp"
       android:layout_marginLeft="24dp"
       android:layout_marginStart="24dp"
-      android:elevation="4dp"
       android:indeterminate="true"
-      android:indeterminateTint="@color/white"
       android:visibility="invisible"
       app:layout_constraintBottom_toBottomOf="@+id/login_button"
       app:layout_constraintEnd_toEndOf="parent"
@@ -92,7 +88,6 @@
       android:layout_marginRight="24dp"
       android:layout_marginStart="24dp"
       android:layout_marginTop="8dp"
-      android:elevation="2dp"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/startSession"
@@ -106,8 +101,11 @@
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/email_input"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="56dp"
+        android:fontFamily="@font/nunito"
         android:hint="@string/email"
+        android:inputType="textEmailAddress"
+        android:padding="10dp"
         android:textColor="@color/black"
         android:textColorHint="@color/black"
         android:textSize="16sp"
@@ -124,7 +122,6 @@
       android:layout_marginRight="24dp"
       android:layout_marginStart="24dp"
       android:layout_marginTop="4dp"
-      android:elevation="2dp"
       app:layout_constraintEnd_toEndOf="@+id/email_layout"
       app:layout_constraintStart_toStartOf="@+id/email_layout"
       app:layout_constraintTop_toBottomOf="@+id/email_layout"
@@ -138,9 +135,11 @@
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/password_input"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="56dp"
+        android:fontFamily="@font/nunito"
         android:hint="@string/password"
         android:inputType="textPassword"
+        android:padding="10dp"
         android:textColor="@color/black"
         android:textColorHint="@color/black"
         android:textSize="16sp"

@@ -11,6 +11,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -21,9 +22,9 @@ import br.com.alura.ceep.ui.coffemachine.helpers.SharedPref
 import br.com.alura.ceep.ui.coffemachine.helpers.toByteArray
 import br.com.alura.ceep.ui.coffemachine.presentation.Login.view.LoginActivity
 import com.google.android.play.core.review.ReviewInfo
-import com.google.android.play.core.review.ReviewManager
 import com.google.android.play.core.review.ReviewManagerFactory
 import com.google.android.play.core.tasks.Task
+import com.squareup.picasso.Picasso
 
 class ProfileFragment : Fragment() {
 
@@ -33,6 +34,7 @@ class ProfileFragment : Fragment() {
   private lateinit var rate: TextView
   private lateinit var terms: TextView
   private lateinit var exit: TextView
+  private lateinit var progressBar: ProgressBar
   private val REQUEST_CODE_PHOTO = 10
 
   override fun onCreateView(
@@ -45,6 +47,8 @@ class ProfileFragment : Fragment() {
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     setup(view)
+    camera.visibility = View.GONE
+    loadPerfilPhoto()
     listeners()
   }
 
@@ -55,6 +59,7 @@ class ProfileFragment : Fragment() {
     rate = view.findViewById(R.id.rate)
     terms = view.findViewById(R.id.terms_of_use)
     exit = view.findViewById(R.id.exit)
+    progressBar = view.findViewById(R.id.progress_bar_perfil_fragment)
   }
 
   private fun listeners() {
@@ -71,9 +76,11 @@ class ProfileFragment : Fragment() {
         if (request.isSuccessful) {
           // Request succeeded and a ReviewInfo instance was received
           val reviewInfo: ReviewInfo = request.result
-          val launchReviewTask: Task<*> = reviewManager.launchReviewFlow(requireActivity(), reviewInfo)
+          val launchReviewTask: Task<*> =
+            reviewManager.launchReviewFlow(requireActivity(), reviewInfo)
           launchReviewTask.addOnCompleteListener { _ ->
-            Toast.makeText(requireContext(), "Obrigado pela sua avaliação", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "Obrigado pela sua avaliação", Toast.LENGTH_SHORT)
+              .show()
           }
         } else {
           // Request failed
@@ -103,6 +110,9 @@ class ProfileFragment : Fragment() {
     }
   }
 
+  fun photoLoader() {
+  }
+
   @Override
   override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
     super.onActivityResult(requestCode, resultCode, data)
@@ -116,6 +126,7 @@ class ProfileFragment : Fragment() {
   private fun photoHandler(data: Bundle) {
     val bitmap = data.get("data") as Bitmap
     camera.setImageBitmap(bitmap)
+    camera.visibility = View.VISIBLE
     PhotoHelper.save(
       image = bitmap.toByteArray(),
       fileName = "perfil.jpg",
@@ -124,6 +135,19 @@ class ProfileFragment : Fragment() {
         Toast.makeText(requireContext(), getString(R.string.saved), Toast.LENGTH_SHORT).show()
       }
     )
+  }
+
+  private fun loadPerfilPhoto() {
+    progressBar.visibility = View.VISIBLE
+    PhotoHelper.loadStorageImage("users/photos", "perfil.jpg", loaded = { image ->
+      if (image != "") {
+        Picasso.get().load(image)
+          .placeholder(R.drawable.ic_launcher_background)
+          .into(camera)
+      }
+      progressBar.visibility = View.GONE
+      camera.visibility = View.VISIBLE
+    })
   }
 }
 
