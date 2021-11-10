@@ -223,6 +223,5 @@ class AddActivity : AppCompatActivity() {
     const val CAPSULES = "capsules"
     const val ml = " ml"
   }
-
 }
 
