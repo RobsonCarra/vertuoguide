@@ -155,7 +155,6 @@ class ProfileFragment : Fragment() {
     const val COLLECTION = "users/photos"
     const val CANCELED = "canceled"
     const val DATA = "data"
-
   }
 }
 
