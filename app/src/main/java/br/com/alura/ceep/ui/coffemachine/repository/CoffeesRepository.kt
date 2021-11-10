@@ -21,7 +21,7 @@ class CoffeesRepository(private val client: Retrofit) {
 
   suspend fun searchByName(name: String) = flow {
     val api = client.create(CoffeeInterface::class.java)
-    val req = api.getByName(name)
+    val req = api.searchByName(name)
     val res = req.await()
     when (res.code()) {
       HttpURLConnection.HTTP_OK -> emit(Res.Success(res.body() as List<Coffee>))

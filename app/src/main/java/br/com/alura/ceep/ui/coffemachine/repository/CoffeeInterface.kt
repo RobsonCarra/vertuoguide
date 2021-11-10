@@ -21,7 +21,7 @@ interface CoffeeInterface {
   fun getByUser(): Deferred<Response<List<Coffee>>>
 
   @GET(SEARCH_BY_NAME)
-  fun getByName(@Path(NAME) name: String): Deferred<Response<List<Coffee>>>
+  fun searchByName(@Path(NAME) name: String): Deferred<Response<List<Coffee>>>
 
   @POST(SAVE)
   fun save(@Body coffeeUser: CoffeeUser): Deferred<Response<Void>>
