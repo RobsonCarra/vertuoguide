@@ -36,4 +36,5 @@
   <string name="confirm_password">Confirm the password</string>
   <string name="password">Password</string>
   <string name="register_now">register now!</string>
+  <string name="coffee_not_found">Not found coffee</string>
 </resources>

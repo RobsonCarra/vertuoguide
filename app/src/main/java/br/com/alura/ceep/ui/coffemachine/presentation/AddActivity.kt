@@ -152,8 +152,11 @@ class AddActivity : AppCompatActivity() {
 
     viewModel.errorById.observe(this) { exception ->
       when (exception) {
-        is NoContentException -> {
-        }
+        is NoContentException -> Toast.makeText(
+          this,
+          exception.message,
+          Toast.LENGTH_SHORT
+        ).show()
         is BadRequestException -> Toast.makeText(
           this,
           exception.message,

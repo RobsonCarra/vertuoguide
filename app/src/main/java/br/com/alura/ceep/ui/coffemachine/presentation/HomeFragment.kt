@@ -56,7 +56,11 @@ class HomeFragment() : Fragment() {
     viewModel.save(coffeeUser)
     viewModel.added.observe(this) { saved ->
       if (saved) {
-        Toast.makeText(requireContext(), coffee.name + " " + getString(R.string.drinked), Toast.LENGTH_SHORT).show()
+        Toast.makeText(
+          requireContext(),
+          coffee.name + " " + getString(R.string.drinked),
+          Toast.LENGTH_SHORT
+        ).show()
         viewModel.searchByUser()
       }
     }

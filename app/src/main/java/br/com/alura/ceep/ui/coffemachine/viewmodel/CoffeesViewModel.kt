@@ -1,6 +1,5 @@
 package br.com.alura.ceep.ui.coffemachine.viewmodel
 
-import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -33,6 +32,7 @@ class CoffeesViewModel(
   val errorById = MutableLiveData<Exception>()
   val errorByUser = MutableLiveData<Exception>()
   val errorSave = MutableLiveData<Exception>()
+  val errorByName = MutableLiveData<Exception>()
 
   fun getAll() {
     viewModelScope.launch {
@@ -45,20 +45,14 @@ class CoffeesViewModel(
     }
   }
 
-  fun searchByName(name: String, lifecycleOwner: LifecycleOwner) {
+  fun searchByName(name: String) {
     viewModelScope.launch {
       coffeesRepository.searchByName(name).collect { result ->
         when (result) {
           is Res.Success -> coffeeFiltered.postValue(result.items as List<Coffee>)
-          is Res.Failure -> errorById.postValue(result.exception)
+          is Res.Failure -> errorByName.postValue(result.exception)
         }
       }
-      //   sharedPref.getString(SharedPref.UID)?.let { uid ->
-      //     coffeesRepository.getByName(uid, name).observe(lifecycleOwner) { result ->
-      //       coffeeFiltered.postValue(result)
-      //     }
-      //   }
-      // }
     }
   }
 

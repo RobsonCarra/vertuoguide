@@ -159,13 +159,37 @@ class InventoryFragment : Fragment() {
         ).show()
       }
     }
+    viewModel.errorByName.observe(requireActivity()) { exception ->
+      when (exception) {
+        is NoContentException -> Toast.makeText(
+          requireContext(),
+          exception.message,
+          Toast.LENGTH_SHORT
+        ).show()
+        is BadRequestException -> Toast.makeText(
+          requireContext(),
+          exception.message,
+          Toast.LENGTH_SHORT
+        ).show()
+        is NotFoundException -> Toast.makeText(
+          requireContext(),
+          getString(R.string.coffee_not_found),
+          Toast.LENGTH_SHORT
+        ).show()
+        is BadGatewayException -> Toast.makeText(
+          requireContext(),
+          exception.message,
+          Toast.LENGTH_SHORT
+        ).show()
+      }
+    }
   }
 
   private fun watchers() {
     putName.doAfterTextChanged { typed ->
       typed?.let {
         if (it.count() >= 3) {
-          viewModel.searchByName(typed.toString(), viewLifecycleOwner)
+          viewModel.searchByName(typed.toString())
         } else if (it.count() == 0) {
           viewModel.searchByUser()
         }
