@@ -12,11 +12,12 @@ class AuthInterceptor(val context: Context) : Interceptor {
     SharedPref(context).getString(SharedPref.TOKEN)?.let { token ->
       request = request.newBuilder().addHeader(AUTHORIZATION, token).build()
       return chain.proceed(request)
-    } ?: request.newBuilder().addHeader(AUTHORIZATION, "Invalid").build()
+    } ?: request.newBuilder().addHeader(AUTHORIZATION, INVALID).build()
     return chain.proceed(request)
   }
 
   companion object {
     const val AUTHORIZATION = "Authorization"
+    const val INVALID = "Invalid"
   }
 }
