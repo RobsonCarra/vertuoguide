@@ -1,6 +1,7 @@
 package br.com.alura.ceep.ui.coffemachine.presentation.custom
 
 import android.content.Context
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -30,8 +31,10 @@ class AvailableCoffeeAdapter(
     holderHome.descriptionButton.setOnClickListener { v: View? ->
       if (holderHome.description.visibility == View.VISIBLE) {
         holderHome.description.visibility = View.GONE
+        holderHome.descriptionButton.setImageResource(R.drawable.down_arrow)
       } else {
         holderHome.description.visibility = View.VISIBLE
+        holderHome.descriptionButton.setImageResource(R.drawable.up_arrow)
       }
     }
   }
