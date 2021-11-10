@@ -124,7 +124,7 @@ class InventoryFragment : Fragment() {
     })
     viewModel.added.observe(viewLifecycleOwner) { saved ->
       if (saved) {
-        Toast.makeText(requireContext(), "Salvo com sucesso", Toast.LENGTH_SHORT).show()
+        Toast.makeText(requireContext(), getString(R.string.saved), Toast.LENGTH_SHORT).show()
       }
       viewModel.searchByUser()
       viewModel.errorByUser.observe(viewLifecycleOwner) { coffes ->

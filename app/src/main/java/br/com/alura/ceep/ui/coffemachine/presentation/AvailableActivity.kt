@@ -34,7 +34,7 @@ class AvailableActivity : AppCompatActivity() {
   private var availableCoffeeAdapter: AvailableCoffeeAdapter =
     AvailableCoffeeAdapter(selected = { coffee ->
       val bundle = Bundle()
-      bundle.putString("uid", coffee.uid)
+      bundle.putString(UID, coffee.uid)
       val intent = Intent(this, AddActivity::class.java)
       intent.putExtras(bundle)
       this.startActivity(intent)
@@ -115,5 +115,9 @@ class AvailableActivity : AppCompatActivity() {
     recyclerView.hasFixedSize()
     recyclerView.layoutManager = LinearLayoutManager(this)
     recyclerView.adapter = availableCoffeeAdapter
+  }
+
+  companion object {
+    const val UID = "uid"
   }
 }

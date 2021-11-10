@@ -118,19 +118,19 @@ class ProfileFragment : Fragment() {
     super.onActivityResult(requestCode, resultCode, data)
     when (resultCode) {
       RESULT_OK -> data?.extras?.let { response -> photoHandler(response) }
-      RESULT_CANCELED -> Toast.makeText(requireContext(), "Canceled", Toast.LENGTH_SHORT)
+      RESULT_CANCELED -> Toast.makeText(requireContext(), CANCELED, Toast.LENGTH_SHORT)
         .show()
     }
   }
 
   private fun photoHandler(data: Bundle) {
-    val bitmap = data.get("data") as Bitmap
+    val bitmap = data.get(DATA) as Bitmap
     camera.setImageBitmap(bitmap)
     camera.visibility = View.VISIBLE
     PhotoHelper.save(
       image = bitmap.toByteArray(),
-      fileName = "perfil.jpg",
-      storagePath = "users/photos",
+      fileName = JPG,
+      storagePath = COLLECTION,
       isSuccess = {
         Toast.makeText(requireContext(), getString(R.string.saved), Toast.LENGTH_SHORT).show()
       }
@@ -139,7 +139,7 @@ class ProfileFragment : Fragment() {
 
   private fun loadPerfilPhoto() {
     progressBar.visibility = View.VISIBLE
-    PhotoHelper.loadStorageImage("users/photos", "perfil.jpg", loaded = { image ->
+    PhotoHelper.loadStorageImage(COLLECTION, JPG, loaded = { image ->
       if (image != "") {
         Picasso.get().load(image)
           .placeholder(R.drawable.ic_launcher_background)
@@ -148,6 +148,14 @@ class ProfileFragment : Fragment() {
       progressBar.visibility = View.GONE
       camera.visibility = View.VISIBLE
     })
+  }
+
+  companion object {
+    const val JPG = "perfil.jpg"
+    const val COLLECTION = "users/photos"
+    const val CANCELED = "canceled"
+    const val DATA = "data"
+
   }
 }
 

@@ -37,8 +37,8 @@ class HomeFragment() : Fragment() {
 
   private var homeCoffeeAdapter: HomeCoffeeAdapter = HomeCoffeeAdapter(selected = { coffee ->
     val bundle = Bundle()
-    bundle.putString("uid", coffee.uid)
-    bundle.putString("capsules", coffee.capsules.toString())
+    bundle.putString(UID, coffee.uid)
+    bundle.putString(CAPSULES, coffee.capsules.toString())
     val intent = Intent(context, DrinkNowActivity::class.java)
     intent.putExtras(bundle)
     context?.startActivity(intent)
@@ -58,7 +58,7 @@ class HomeFragment() : Fragment() {
       if (saved) {
         Toast.makeText(
           requireContext(),
-          coffee.name + " " + getString(R.string.drinked),
+          coffee.name + SPACE + getString(R.string.drinked),
           Toast.LENGTH_SHORT
         ).show()
         viewModel.searchByUser()
@@ -158,7 +158,14 @@ class HomeFragment() : Fragment() {
     recyclerView.layoutManager = LinearLayoutManager(context)
     recyclerView.adapter = homeCoffeeAdapter
   }
+
+  companion object {
+    const val UID = "uid"
+    const val CAPSULES = "capsules"
+    const val SPACE = " "
+  }
 }
+
 
 
 

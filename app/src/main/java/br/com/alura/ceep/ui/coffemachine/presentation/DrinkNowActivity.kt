@@ -69,10 +69,10 @@ class DrinkNowActivity : AppCompatActivity() {
     progressBar.visibility = View.VISIBLE
     val token = SharedPref(this).getString(SharedPref.TOKEN)
     token?.let {
-      intent.extras?.getString("uid")?.let { uid ->
+      intent.extras?.getString(UID)?.let { uid ->
         viewModel.searchByUid(uid)
       }
-      intent.extras?.getString("capsules")?.let { caps ->
+      intent.extras?.getString(CAPSULES)?.let { caps ->
         coffeeCaps = caps
       }
     }
@@ -121,7 +121,11 @@ class DrinkNowActivity : AppCompatActivity() {
         uid?.let { uid ->
           if (coffeeUser != null) {
             viewModel.save(coffeeUser)
-            Toast.makeText(this, coffeName + " " + getString(R.string.drinked), Toast.LENGTH_SHORT)
+            Toast.makeText(
+              this,
+              coffeName + SPACE + getString(R.string.drinked),
+              Toast.LENGTH_SHORT
+            )
               .show()
           }
         }
@@ -136,7 +140,7 @@ class DrinkNowActivity : AppCompatActivity() {
       uid = coffee.uid
       name.text = coffee.name
       description.text = coffee.description
-      size.text = coffee.quantity + " ml"
+      size.text = coffee.quantity + ml
       capsules.text = coffeeCaps
       intensity.text = coffee.intensity
       Picasso.get().load(coffee.image)
@@ -210,6 +214,13 @@ class DrinkNowActivity : AppCompatActivity() {
     quantityText.visibility = View.VISIBLE
     availableCapsules.visibility = View.VISIBLE
     drink_now_btn.visibility = View.VISIBLE
+  }
+
+  companion object {
+    const val UID = "uid"
+    const val CAPSULES = "capsules"
+    const val SPACE = " "
+    const val ml = " ml"
   }
 }
 

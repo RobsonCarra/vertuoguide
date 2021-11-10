@@ -7,7 +7,7 @@
   <string name="invalid_email">E-mail inválido</string>
   <string name="invalid_capsules">Quantidade de capsulas inválida</string>
   <string name="password_required">Senha obrigatória</string>
-  <string name="unauthorized">Credenciais inválidass</string>
+  <string name="unauthorized">Credenciais inválidas</string>
   <string name="sign_in">Acessar minha conta</string>
   <string name="create_account">Nova conta</string>
   <string name="new_coffee">Nova conta</string>
@@ -37,4 +37,11 @@
   <string name="password">Senha</string>
   <string name="register_now">registre agora!</string>
   <string name="coffee_not_found">Café não encontrado</string>
+  <string name="enter_email">Por favor, digite o e-mail</string>
+  <string name="enter_password">Por favor, digite a senha</string>
+  <string name="enter_password_confirmation">Por favor, confirme a senha</string>
+  <string name="enter_correct_email">Por favor, digite um e-mail válido</string>
+  <string name="correctly_created_user">Usuário criado corretamente</string>
+  <string name ="passwords_different">As senhas estão diferentes, coloque uma correta</string>
+
 </resources>

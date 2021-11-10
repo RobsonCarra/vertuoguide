@@ -71,10 +71,10 @@ class AddActivity : AppCompatActivity() {
     progressBar.visibility = View.VISIBLE
     val token = SharedPref(this).getString(SharedPref.TOKEN)
     token?.let {
-      intent.extras?.getString("uid")?.let { uid ->
+      intent.extras?.getString(UID)?.let { uid ->
         viewModel.searchByUid(uid)
       }
-      intent.extras?.getString("capsules")?.let { caps ->
+      intent.extras?.getString(CAPSULES)?.let { caps ->
         coffeeCaps = caps
       }
     }
@@ -140,7 +140,7 @@ class AddActivity : AppCompatActivity() {
       uid = coffee.uid
       name.text = coffee.name
       description.text = coffee.description
-      size.text = coffee.quantity + " ml"
+      size.text = coffee.quantity + ml
       capsules.text = coffeeCaps
       intensity.text = coffee.intensity
       Picasso.get().load(coffee.image)
@@ -217,5 +217,12 @@ class AddActivity : AppCompatActivity() {
     save_btn.visibility = View.VISIBLE
     putCapsules.visibility = View.VISIBLE
   }
+
+  companion object {
+    const val UID = "uid"
+    const val CAPSULES = "capsules"
+    const val ml = " ml"
+  }
+
 }
 

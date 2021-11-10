@@ -58,21 +58,21 @@ class RegisterActivity : AppCompatActivity() {
       val password = putPassword.text.toString()
       val confirmPassword = putConfirmPassword.text.toString()
       if (email.isEmpty()) {
-        putEmail.error = "Please enter the e-mail"
+        putEmail.error = getString(R.string.enter_email)
         return@setOnClickListener
       }
       putEmail.requestFocus()
       if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-        putEmail.error = "Please enter valid email"
+        putEmail.error = getString(R.string.enter_correct_email)
         putEmail.requestFocus()
         return@setOnClickListener
       }
       if (password.isEmpty()) {
-        putPassword.error = "Please enter password"
+        putPassword.error = getString(R.string.enter_password)
         putPassword.requestFocus()
       }
       if (confirmPassword.isEmpty()) {
-        putConfirmPassword.error = "Please enter the password confirmation"
+        putConfirmPassword.error = getString(R.string.enter_password_confirmation)
         return@setOnClickListener
       }
       if (password == confirmPassword) {
@@ -84,7 +84,7 @@ class RegisterActivity : AppCompatActivity() {
               val user = auth.currentUser
               Toast.makeText(
                 this@RegisterActivity,
-                "Correctly created user",
+                getString(R.string.correctly_created_user),
                 Toast.LENGTH_SHORT
               )
                 .show()
@@ -92,7 +92,7 @@ class RegisterActivity : AppCompatActivity() {
             } else {
               Toast.makeText(
                 this@RegisterActivity,
-                "Unauthorized",
+                getString(R.string.unauthorized),
                 Toast.LENGTH_SHORT
               )
                 .show()
@@ -102,7 +102,7 @@ class RegisterActivity : AppCompatActivity() {
         progressBar.visibility = View.INVISIBLE
         Toast.makeText(
           this@RegisterActivity,
-          "The passwords are different, please enter correctly",
+          getString(R.string.passwords_different),
           Toast.LENGTH_SHORT
         )
           .show()
