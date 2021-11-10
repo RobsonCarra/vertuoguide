@@ -14,16 +14,25 @@ interface CoffeeInterface {
   @GET(GET_ALL)
   fun getAll(): Deferred<Response<List<Coffee>>>
 
-  @GET("coffees/user/{uid}")
-  fun getByUid(@Path("uid") uid: String): Deferred<Response<Coffee>>
+  @GET(GET_BY_UID)
+  fun getByUid(@Path(UID) uid: String): Deferred<Response<Coffee>>
 
-  @GET("coffees/user")
+  @GET(GET_BY_USER)
   fun getByUser(): Deferred<Response<List<Coffee>>>
 
-  @POST("coffee")
+  @GET(SEARCH_BY_NAME)
+  fun getByName(@Path(NAME) name: String): Deferred<Response<List<Coffee>>>
+
+  @POST(SAVE)
   fun save(@Body coffeeUser: CoffeeUser): Deferred<Response<Void>>
 
   companion object {
     const val GET_ALL = "coffees"
+    const val GET_BY_UID = "coffees/user/{uid}"
+    const val GET_BY_USER = "coffees/user"
+    const val SEARCH_BY_NAME = "coffees/search/{name}"
+    const val SAVE = "coffee"
+    const val UID = "uid"
+    const val NAME = "name"
   }
 }

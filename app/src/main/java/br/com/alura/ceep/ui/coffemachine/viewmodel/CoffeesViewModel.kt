@@ -47,11 +47,18 @@ class CoffeesViewModel(
 
   fun searchByName(name: String, lifecycleOwner: LifecycleOwner) {
     viewModelScope.launch {
-      sharedPref.getString(SharedPref.UID)?.let { uid ->
-        // coffeesRepository.getByName(uid, name).observe(lifecycleOwner) { result ->
-        //   coffeeFiltered.postValue(result)
-        // }
+      coffeesRepository.searchByName(name).collect { result ->
+        when (result) {
+          is Res.Success -> coffeeFiltered.postValue(result.items as List<Coffee>)
+          is Res.Failure -> errorById.postValue(result.exception)
+        }
       }
+      //   sharedPref.getString(SharedPref.UID)?.let { uid ->
+      //     coffeesRepository.getByName(uid, name).observe(lifecycleOwner) { result ->
+      //       coffeeFiltered.postValue(result)
+      //     }
+      //   }
+      // }
     }
   }
 
