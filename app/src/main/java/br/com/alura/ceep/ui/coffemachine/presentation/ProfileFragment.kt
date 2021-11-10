@@ -47,7 +47,7 @@ class ProfileFragment : Fragment() {
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     setup(view)
-    camera.visibility = View.GONE
+    cameraInvisible()
     loadPerfilPhoto()
     listeners()
   }
@@ -126,7 +126,6 @@ class ProfileFragment : Fragment() {
   private fun photoHandler(data: Bundle) {
     val bitmap = data.get(DATA) as Bitmap
     camera.setImageBitmap(bitmap)
-    camera.visibility = View.VISIBLE
     PhotoHelper.save(
       image = bitmap.toByteArray(),
       fileName = JPG,
@@ -142,7 +141,6 @@ class ProfileFragment : Fragment() {
     PhotoHelper.loadStorageImage(COLLECTION, JPG, loaded = { image ->
       if (image != "") {
         Picasso.get().load(image)
-          .placeholder(R.drawable.ic_launcher_background)
           .into(camera)
       }
       progressBar.visibility = View.GONE
@@ -155,6 +153,10 @@ class ProfileFragment : Fragment() {
     const val COLLECTION = "users/photos"
     const val CANCELED = "canceled"
     const val DATA = "data"
+  }
+
+  fun cameraInvisible() {
+    camera.visibility = View.GONE
   }
 }
 

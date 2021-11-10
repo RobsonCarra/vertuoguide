@@ -9,7 +9,7 @@ import br.com.alura.ceep.ui.coffemachine.R
 import br.com.alura.ceep.ui.coffemachine.domain.Coffee
 
 class AvailableCoffeeAdapter(
-  val selected: (coffee: Coffee) -> Unit,
+  val selected: (coffee: Coffee) -> Unit
 ) :
   RecyclerView.Adapter<AvailableCoffeeViewHolder>() {
   var list = ArrayList<Coffee>()
@@ -26,6 +26,13 @@ class AvailableCoffeeAdapter(
     holderHome.bind(list.get(position))
     holderHome.itemView.setOnClickListener { v: View? ->
       selected(list.get(position))
+    }
+    holderHome.descriptionButton.setOnClickListener { v: View? ->
+      if (holderHome.description.visibility == View.VISIBLE) {
+        holderHome.description.visibility = View.GONE
+      } else {
+        holderHome.description.visibility = View.VISIBLE
+      }
     }
   }
 

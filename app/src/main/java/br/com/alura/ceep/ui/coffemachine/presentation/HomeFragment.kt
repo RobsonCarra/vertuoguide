@@ -110,13 +110,13 @@ class HomeFragment() : Fragment() {
   private fun observers() {
     viewModel.listByUser.observe(viewLifecycleOwner) { coffee ->
       if (coffee.isNotEmpty()) {
-        recyclerView.visibility = View.VISIBLE
         homeCoffeeAdapter.list.clear()
         homeCoffeeAdapter.list.addAll(coffee)
         homeCoffeeAdapter.notifyDataSetChanged()
         progressBar.visibility = View.GONE
         addCoffeesButton.visibility = View.GONE
         addCoffeesMsg.visibility = View.GONE
+        recyclerView.visibility = View.VISIBLE
       } else {
         recyclerView.visibility = View.GONE
         progressBar.visibility = View.GONE

@@ -112,6 +112,7 @@
         android:fontFamily="@font/nunito"
         android:hint="Search"
         android:padding="10dp"
+        android:singleLine="true"
         android:textColor="@color/black"
         android:textColorHint="@color/black"
         android:textSize="14dp"

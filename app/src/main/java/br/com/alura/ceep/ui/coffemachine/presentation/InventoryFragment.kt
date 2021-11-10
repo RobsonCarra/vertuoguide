@@ -117,7 +117,7 @@ class InventoryFragment : Fragment() {
         addCoffeesButton.visibility = View.VISIBLE
       }
     }
-    viewModel.coffeeFiltered.observe(viewLifecycleOwner, { list ->
+    viewModel.coffeeFilteredUser.observe(viewLifecycleOwner, { list ->
       inventoryAdapter.list.clear()
       inventoryAdapter.list.addAll(list)
       inventoryAdapter.notifyDataSetChanged()
@@ -189,7 +189,7 @@ class InventoryFragment : Fragment() {
     putName.doAfterTextChanged { typed ->
       typed?.let {
         if (it.count() >= 3) {
-          viewModel.searchByName(typed.toString())
+          viewModel.searchByNameUser(typed.toString())
         } else if (it.count() == 0) {
           viewModel.searchByUser()
         }

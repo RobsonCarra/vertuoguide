@@ -36,7 +36,6 @@ class HomeCoffeeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     intensity.text = coffee.intensity
     capsules.text = coffee.capsules.toString()
     Picasso.get().load(coffee.image)
-      .placeholder(R.drawable.ic_launcher_background)
       .into(image)
   }
 }

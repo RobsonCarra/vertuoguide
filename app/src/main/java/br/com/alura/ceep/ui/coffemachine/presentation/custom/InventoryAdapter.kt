@@ -8,7 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import br.com.alura.ceep.ui.coffemachine.R
 import br.com.alura.ceep.ui.coffemachine.domain.Coffee
 
-class InventoryAdapter(val selected: (coffee: Coffee) -> Unit) :
+class InventoryAdapter(
+  val selected: (coffee: Coffee) -> Unit
+) :
   RecyclerView.Adapter<InventoryViewHolder>() {
   var list = ArrayList<Coffee>()
   private var context: Context? = null

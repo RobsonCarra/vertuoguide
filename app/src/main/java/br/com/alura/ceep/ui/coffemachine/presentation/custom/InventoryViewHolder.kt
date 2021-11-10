@@ -20,7 +20,6 @@ class InventoryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     name.text = coffee.name
     capsules.text = coffee.capsules.toString()
     Picasso.get().load(coffee.image)
-      .placeholder(R.drawable.ic_launcher_background)
       .into(image)
   }
 }

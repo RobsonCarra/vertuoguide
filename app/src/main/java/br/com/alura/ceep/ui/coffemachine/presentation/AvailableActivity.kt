@@ -10,6 +10,7 @@ import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.widget.doAfterTextChanged
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import br.com.alura.ceep.ui.coffemachine.R
@@ -25,12 +26,15 @@ import br.com.alura.ceep.ui.coffemachine.presentation.custom.HomeCoffeeAdapter
 import br.com.alura.ceep.ui.coffemachine.repository.CoffeesRepository
 import br.com.alura.ceep.ui.coffemachine.viewmodel.CoffeesViewModel
 import br.com.alura.ceep.ui.coffemachine.viewmodel.config.CoffesViewModelFactory
+import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 
 class AvailableActivity : AppCompatActivity() {
   private lateinit var recyclerView: RecyclerView
   private lateinit var progressBar: ProgressBar
   private lateinit var coffeToolbar: Toolbar
+  private lateinit var putName: TextInputEditText
+
   private var availableCoffeeAdapter: AvailableCoffeeAdapter =
     AvailableCoffeeAdapter(selected = { coffee ->
       val bundle = Bundle()
@@ -59,6 +63,7 @@ class AvailableActivity : AppCompatActivity() {
     listeners()
     viewModel.getAll()
     observers()
+    watchers()
   }
 
   private fun listeners() {
@@ -71,6 +76,7 @@ class AvailableActivity : AppCompatActivity() {
     recyclerView = findViewById(R.id.coffe_list_recyclerview)
     progressBar = findViewById(R.id.progress)
     coffeToolbar = findViewById(R.id.coffe_toolbar_add_coffee)
+    putName = findViewById(R.id.put_name)
   }
 
   private fun observers() {
@@ -106,6 +112,23 @@ class AvailableActivity : AppCompatActivity() {
           exception.message,
           Toast.LENGTH_SHORT
         ).show()
+      }
+    }
+    viewModel.coffeeFilteredUser.observe(this) { list ->
+      availableCoffeeAdapter.list.clear()
+      availableCoffeeAdapter.list.addAll(list)
+      availableCoffeeAdapter.notifyDataSetChanged()
+    }
+  }
+
+  private fun watchers() {
+    putName.doAfterTextChanged { typed ->
+      typed?.let {
+        if (it.count() >= 3) {
+          viewModel.searchByName(typed.toString())
+        } else if (it.count() == 0) {
+          viewModel.searchByUser()
+        }
       }
     }
   }

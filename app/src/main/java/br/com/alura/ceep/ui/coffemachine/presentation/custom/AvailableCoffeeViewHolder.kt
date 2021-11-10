@@ -1,6 +1,7 @@
 package br.com.alura.ceep.ui.coffemachine.presentation.custom
 
 import android.view.View
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -16,6 +17,7 @@ class AvailableCoffeeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemVi
   var name: TextView
   var size: TextView
   var intensity: TextView
+  var descriptionButton: ImageButton
 
   init {
     image = itemView.findViewById(R.id.image_coffe)
@@ -23,6 +25,8 @@ class AvailableCoffeeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemVi
     name = itemView.findViewById(R.id.name)
     size = itemView.findViewById(R.id.size)
     intensity = itemView.findViewById(R.id.intensity)
+    descriptionButton = itemView.findViewById(R.id.description_button)
+    description.visibility = View.GONE
   }
 
   fun bind(coffee: Coffee) {
@@ -31,7 +35,6 @@ class AvailableCoffeeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemVi
     size.text = coffee.quantity
     intensity.text = coffee.intensity
     Picasso.get().load(coffee.image)
-      .placeholder(R.drawable.ic_launcher_background)
       .into(image)
   }
 }

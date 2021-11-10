@@ -20,6 +20,9 @@ interface CoffeeInterface {
   @GET(GET_BY_USER)
   fun getByUser(): Deferred<Response<List<Coffee>>>
 
+  @GET(SEARCH_BY_NAME_USER)
+  fun searchByNameUser(@Path(NAME) name: String): Deferred<Response<List<Coffee>>>
+
   @GET(SEARCH_BY_NAME)
   fun searchByName(@Path(NAME) name: String): Deferred<Response<List<Coffee>>>
 
@@ -30,7 +33,8 @@ interface CoffeeInterface {
     const val GET_ALL = "coffees"
     const val GET_BY_UID = "coffees/user/{uid}"
     const val GET_BY_USER = "coffees/user"
-    const val SEARCH_BY_NAME = "coffees/search/{name}"
+    const val SEARCH_BY_NAME_USER = "coffees/search/{name}"
+    const val SEARCH_BY_NAME = "coffees/{name}"
     const val SAVE = "coffee"
     const val UID = "uid"
     const val NAME = "name"

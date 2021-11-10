@@ -19,6 +19,20 @@ import java.net.HttpURLConnection
 
 class CoffeesRepository(private val client: Retrofit) {
 
+  suspend fun searchByNameUser(name: String) = flow {
+    val api = client.create(CoffeeInterface::class.java)
+    val req = api.searchByNameUser(name)
+    val res = req.await()
+    when (res.code()) {
+      HttpURLConnection.HTTP_OK -> emit(Res.Success(res.body() as List<Coffee>))
+      HttpURLConnection.HTTP_NOT_FOUND -> emit(Res.Failure(NotFoundException()))
+      HttpURLConnection.HTTP_BAD_REQUEST -> emit(Res.Failure(BadRequestException()))
+      HttpURLConnection.HTTP_BAD_GATEWAY -> emit(Res.Failure(BadGatewayException()))
+      HttpURLConnection.HTTP_NO_CONTENT -> emit(Res.Failure(NoContentException()))
+      else -> emit(Res.Failure(Exception("Erro Generico")))
+    }
+  }
+
   suspend fun searchByName(name: String) = flow {
     val api = client.create(CoffeeInterface::class.java)
     val req = api.searchByName(name)

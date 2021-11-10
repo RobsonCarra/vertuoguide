@@ -88,9 +88,40 @@
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/inventory"
+      app:layout_constraintTop_toBottomOf="@+id/name"
       tools:itemCount="3"
-      tools:listitem="@layout/home_coffe_item_list"
+      tools:listitem="@layout/available_coffee_item_list"
       />
+  <com.google.android.material.textfield.TextInputLayout
+      android:id="@+id/name"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="24dp"
+      android:layout_marginStart="24dp"
+      android:layout_marginTop="16dp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/coffe_toolbar_add_coffee"
+      app:boxCornerRadiusBottomEnd="10dp"
+      app:boxCornerRadiusBottomStart="10dp"
+      app:boxCornerRadiusTopEnd="10dp"
+      app:boxCornerRadiusTopStart="10dp"
+      style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+      >
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/put_name"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:autofillHints="search"
+        android:fontFamily="@font/nunito"
+        android:hint="Search"
+        android:padding="10dp"
+        android:singleLine="true"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:textSize="14dp"
+        />
+  </com.google.android.material.textfield.TextInputLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

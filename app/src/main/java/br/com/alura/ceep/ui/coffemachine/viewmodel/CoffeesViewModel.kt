@@ -25,6 +25,7 @@ class CoffeesViewModel(
   val list = MutableLiveData<List<Coffee>>()
   val listByUser = MutableLiveData<List<Coffee>>()
   val coffeeById = MutableLiveData<Coffee>()
+  var coffeeFilteredUser = MutableLiveData<List<Coffee>>()
   var coffeeFiltered = MutableLiveData<List<Coffee>>()
   val added = MutableLiveData(false)
   val error = MutableLiveData<Exception>()
@@ -39,6 +40,17 @@ class CoffeesViewModel(
         when (result) {
           is Res.Success -> list.postValue(result.items as List<Coffee>)
           is Res.Failure -> error.postValue(result.exception)
+        }
+      }
+    }
+  }
+
+  fun searchByNameUser(name: String) {
+    viewModelScope.launch {
+      coffeesRepository.searchByNameUser(name).collect { result ->
+        when (result) {
+          is Res.Success -> coffeeFilteredUser.postValue(result.items as List<Coffee>)
+          is Res.Failure -> errorByName.postValue(result.exception)
         }
       }
     }
