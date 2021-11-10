@@ -19,7 +19,6 @@ class CoffeesViewModel(
   private val sharedPref: SharedPref
 ) : ViewModel() {
 
-  // login
   val showLoader = MutableLiveData<Boolean>()
   val goToHome = MutableLiveData<Boolean>()
   val showError = MutableLiveData<Int>()
