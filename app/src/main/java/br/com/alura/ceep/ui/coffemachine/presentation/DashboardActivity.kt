@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import br.com.alura.ceep.ui.coffemachine.R
-import br.com.alura.ceep.ui.coffemachine.helpers.AppRater
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class DashboardActivity : AppCompatActivity(),
@@ -19,7 +18,6 @@ class DashboardActivity : AppCompatActivity(),
     setContentView(R.layout.dashboard_activity)
     nav.setOnNavigationItemSelectedListener(this)
     supportFragmentManager.beginTransaction().replace(R.id.frame, HomeFragment()).commit()
-    rater()
   }
 
   override fun onNavigationItemSelected(item: MenuItem): Boolean {
@@ -43,11 +41,6 @@ class DashboardActivity : AppCompatActivity(),
       }
     }
     return false;
-  }
-
-  fun rater() {
-    val raterApp = AppRater()
-    raterApp.app_launched(this)
   }
 }
 

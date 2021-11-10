@@ -38,13 +38,18 @@
           android:fontFamily="@font/nunito_extrabold"
           android:text="@string/drink_now"
           android:textAllCaps="false"
+          android:textAppearance="@style/Widget.AppCompat.Button.Colored"
           android:textColor="@color/black"
           android:textSize="18sp"
           app:layout_constraintBottom_toBottomOf="parent"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toBottomOf="@+id/quantity"
-          style="@style/Widget.AppCompat.Button.Borderless.Colored"
+          app:strokeColor="@color/green_100"
+          app:strokeWidth="2dp"
+          android:backgroundTint="@color/white"
+          app:cornerRadius="40dp"
+
           />
 
       <ImageView

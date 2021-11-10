@@ -19,7 +19,7 @@
   <string name="inventory">inventory</string>
   <string name="save">Save</string>
   <string name="available_capsules">Available capsules: </string>
-  <string name="available_coffees">Available coffees</string>
+  <string name="available_coffees">available coffees</string>
   <string name="drink_now">Drink now</string>
   <string name="drinked">drinked</string>
   <string name="capsules_example">10</string>

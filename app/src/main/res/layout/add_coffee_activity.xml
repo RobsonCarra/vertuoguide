@@ -207,6 +207,7 @@
           android:id="@+id/coffe_toolbar"
           android:layout_width="match_parent"
           android:layout_height="56dp"
+          android:layout_marginTop="18dp"
           android:elevation="2dp"
           android:theme="@style/ToolbarTheme"
           app:layout_constraintEnd_toEndOf="parent"
