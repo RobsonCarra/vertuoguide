@@ -22,21 +22,6 @@
         android:layout_height="match_parent"
         >
 
-      <TextView
-          android:id="@+id/perfil"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_marginStart="24dp"
-          android:layout_marginTop="24dp"
-          android:fontFamily="@font/nunito_extrabold"
-          android:text="@string/perfil"
-          android:textColor="@color/green_100"
-          android:textSize="28sp"
-          app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toTopOf="parent"
-          />
-
-
       <Button
           android:id="@+id/notifications"
           android:layout_width="wrap_content"
@@ -53,6 +38,8 @@
           app:layout_constraintTop_toBottomOf="@+id/perfil"
           style="@style/Widget.AppCompat.Button.Borderless"
           />
+
+
       <Button
           android:id="@+id/share"
           android:layout_width="0dp"
@@ -72,7 +59,6 @@
           app:layout_constraintTop_toBottomOf="@+id/notifications"
           style="@style/Widget.AppCompat.Button.Borderless"
           />
-
       <Button
           android:id="@+id/rate"
           android:layout_width="0dp"
@@ -88,24 +74,6 @@
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toBottomOf="@+id/share"
-          style="@style/Widget.AppCompat.Button.Borderless"
-          />
-
-      <TextView
-          android:id="@+id/terms_of_use"
-          android:layout_width="0dp"
-          android:layout_height="wrap_content"
-          android:layout_marginLeft="16dp"
-          android:layout_marginStart="16dp"
-          android:fontFamily="@font/nunito_extrabold"
-          android:gravity="center|start"
-          android:text="@string/politics_and_terms"
-          android:textAllCaps="false"
-          android:textColor="@color/black"
-          android:textSize="16sp"
-          app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toBottomOf="@+id/rate"
           style="@style/Widget.AppCompat.Button.Borderless"
           />
 
@@ -142,17 +110,7 @@
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toBottomOf="@+id/perfil"
           />
-      <de.hdodenhof.circleimageview.CircleImageView
-          android:id="@+id/camera_button"
-          android:layout_width="140dp"
-          android:layout_height="140dp"
-          android:layout_marginTop="40dp"
-          android:background="@drawable/round_button"
-          android:src="@drawable/photo_foreground"
-          app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toBottomOf="@+id/perfil"
-          ></de.hdodenhof.circleimageview.CircleImageView>
+
       <Switch
           android:id="@+id/notificationsSwitch"
           android:layout_width="wrap_content"
@@ -164,6 +122,48 @@
           app:layout_constraintStart_toEndOf="@+id/notifications"
           app:layout_constraintTop_toTopOf="@+id/notifications"
           />
+
+      <TextView
+          android:id="@+id/terms_of_use"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_marginLeft="16dp"
+          android:layout_marginStart="16dp"
+          android:fontFamily="@font/nunito_extrabold"
+          android:gravity="center|start"
+          android:text="@string/politics_and_terms"
+          android:textAllCaps="false"
+          android:textColor="@color/black"
+          android:textSize="16sp"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@+id/rate"
+          style="@style/Widget.AppCompat.Button.Borderless"
+          />
+      <TextView
+          android:id="@+id/perfil"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginStart="24dp"
+          android:layout_marginTop="24dp"
+          android:fontFamily="@font/nunito_extrabold"
+          android:text="@string/perfil"
+          android:textColor="@color/green_100"
+          android:textSize="28sp"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent"
+          />
+      <de.hdodenhof.circleimageview.CircleImageView
+          android:id="@+id/camera_button"
+          android:layout_width="140dp"
+          android:layout_height="140dp"
+          android:layout_marginTop="40dp"
+          android:background="@drawable/round_button"
+          android:src="@drawable/photo_foreground"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@+id/perfil"
+          ></de.hdodenhof.circleimageview.CircleImageView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
   </ScrollView>
