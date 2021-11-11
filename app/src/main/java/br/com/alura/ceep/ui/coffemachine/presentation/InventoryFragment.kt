@@ -76,8 +76,8 @@ class InventoryFragment : Fragment() {
 
   private fun onChangeCoffedata(selected: Coffee) {
     val bundle = Bundle()
-    bundle.putString("uid", selected.uid)
-    bundle.putString("capsules", selected.capsules.toString())
+    bundle.putString(UID, selected.uid)
+    bundle.putString(CAPSULES, selected.capsules.toString())
     val intent = Intent(context, AddActivity::class.java)
     intent.putExtras(bundle)
     context?.startActivity(intent)
@@ -206,6 +206,10 @@ class InventoryFragment : Fragment() {
     recyclerView.setHasFixedSize(true)
     recyclerView.layoutManager = LinearLayoutManager(requireContext())
     recyclerView.adapter = inventoryAdapter
+  }
+  companion object {
+    const val UID = "uid"
+    const val CAPSULES = "capsules"
   }
 }
 
