@@ -8,6 +8,7 @@ import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface CoffeeInterface {
 
@@ -20,11 +21,11 @@ interface CoffeeInterface {
   @GET(GET_BY_USER)
   fun getByUser(): Deferred<Response<List<Coffee>>>
 
-  @GET(SEARCH_BY_NAME_USER)
-  fun searchByNameUser(@Path(NAME) name: String): Deferred<Response<List<Coffee>>>
-
   @GET(SEARCH_BY_NAME)
-  fun searchByName(@Path(NAME) name: String): Deferred<Response<List<Coffee>>>
+  fun searchByName(
+    @Query(FIND) typed: String,
+    @Query(FILTER_BY_USER) filterByUser: Boolean = false
+  ): Deferred<Response<List<Coffee>>>
 
   @POST(SAVE)
   fun save(@Body coffeeUser: CoffeeUser): Deferred<Response<Void>>
@@ -33,10 +34,10 @@ interface CoffeeInterface {
     const val GET_ALL = "coffees"
     const val GET_BY_UID = "coffees/user/{uid}"
     const val GET_BY_USER = "coffees/user"
-    const val SEARCH_BY_NAME_USER = "coffees/search/{name}"
-    const val SEARCH_BY_NAME = "coffees/{name}"
+    const val SEARCH_BY_NAME = "/coffees/search"
     const val SAVE = "coffee"
     const val UID = "uid"
-    const val NAME = "name"
+    const val FIND = "find"
+    const val FILTER_BY_USER = "filterByUser"
   }
 }

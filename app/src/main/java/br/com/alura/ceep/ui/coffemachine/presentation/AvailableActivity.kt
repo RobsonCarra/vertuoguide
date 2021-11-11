@@ -114,7 +114,7 @@ class AvailableActivity : AppCompatActivity() {
         ).show()
       }
     }
-    viewModel.coffeeFilteredUser.observe(this) { list ->
+    viewModel.coffeeFiltered.observe(this) { list ->
       availableCoffeeAdapter.list.clear()
       availableCoffeeAdapter.list.addAll(list)
       availableCoffeeAdapter.notifyDataSetChanged()
@@ -125,7 +125,7 @@ class AvailableActivity : AppCompatActivity() {
     putName.doAfterTextChanged { typed ->
       typed?.let {
         if (it.count() >= 3) {
-          viewModel.searchByName(typed.toString())
+          viewModel.searchByName(typed.toString(), false)
         } else if (it.count() == 0) {
           viewModel.searchByUser()
         }
