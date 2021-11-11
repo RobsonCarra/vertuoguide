@@ -35,7 +35,6 @@ class HomeCoffeeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     size.text = coffee.quantity
     intensity.text = coffee.intensity
     capsules.text = coffee.capsules.toString()
-    Picasso.get().load(coffee.image)
-      .into(image)
+    Picasso.get().load(coffee.image).fit().centerCrop().into(image)
   }
 }

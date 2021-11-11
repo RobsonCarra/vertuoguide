@@ -34,7 +34,6 @@ class AvailableCoffeeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemVi
     name.text = coffee.name
     size.text = coffee.quantity
     intensity.text = coffee.intensity
-    Picasso.get().load(coffee.image)
-      .into(image)
+    Picasso.get().load(coffee.image).fit().centerCrop().into(image)
   }
 }

@@ -31,10 +31,10 @@ class AvailableCoffeeAdapter(
     holderHome.descriptionButton.setOnClickListener { v: View? ->
       if (holderHome.description.visibility == View.VISIBLE) {
         holderHome.description.visibility = View.GONE
-        holderHome.descriptionButton.setImageResource(R.drawable.down_arrow)
+        holderHome.descriptionButton.setBackgroundResource(R.drawable.down_arrow)
       } else {
         holderHome.description.visibility = View.VISIBLE
-        holderHome.descriptionButton.setImageResource(R.drawable.up_arrow)
+        holderHome.descriptionButton.setBackgroundResource(R.drawable.up_arrow)
       }
     }
   }
