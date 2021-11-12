@@ -11,6 +11,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import br.com.alura.ceep.ui.coffemachine.R
+import br.com.alura.ceep.ui.coffemachine.helpers.AnalyticsHelper
 import br.com.alura.ceep.ui.coffemachine.helpers.CoffeesRoomDataBase
 import br.com.alura.ceep.ui.coffemachine.helpers.RetrofitConfig
 import br.com.alura.ceep.ui.coffemachine.helpers.SharedPref
@@ -41,15 +42,19 @@ class LoginActivity : AppCompatActivity() {
     )
   }
 
+  private val analyticsHelper: AnalyticsHelper by lazy { AnalyticsHelper(this) }
+
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.login_activity)
     SharedPref(this).getString(SharedPref.TOKEN)?.let { token ->
       if (token.isNotEmpty()) {
+        analyticsHelper.log(AnalyticsHelper.LOGIN_LOGGED)
         val intent = Intent(this@LoginActivity, DashboardActivity::class.java)
         this.startActivity(intent)
       }
     }
+    analyticsHelper.log(AnalyticsHelper.LOGIN_OPENED)
     setup()
     listeners()
     observers()
@@ -77,9 +82,11 @@ class LoginActivity : AppCompatActivity() {
         showLoader(show)
       }
       viewModel.showError.observe(this@LoginActivity) { error ->
+        analyticsHelper.log(AnalyticsHelper.LOGIN_ERROR)
         Toast.makeText(this@LoginActivity, getString(error), Toast.LENGTH_SHORT).show()
       }
       viewModel.goToHome.observe(this@LoginActivity) {
+        analyticsHelper.log(AnalyticsHelper.LOGIN_SUCCESS)
         startActivity(Intent(this@LoginActivity, DashboardActivity::class.java))
       }
     }
@@ -95,6 +102,7 @@ class LoginActivity : AppCompatActivity() {
   }
 
   private fun login() {
+    analyticsHelper.log(AnalyticsHelper.LOGIN_CLICKED)
     val email = putEmail.text.toString()
     val password = putPassword.text.toString()
     if (email.isEmpty()) {
@@ -116,6 +124,7 @@ class LoginActivity : AppCompatActivity() {
   }
 
   private fun register() {
+    analyticsHelper.log(AnalyticsHelper.LOGIN_REGISTER)
     val intent = Intent(this@LoginActivity, RegisterActivity::class.java)
     this.startActivity(intent)
   }
