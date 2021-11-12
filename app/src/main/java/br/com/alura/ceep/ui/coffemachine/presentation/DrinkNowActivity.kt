@@ -20,6 +20,7 @@ import br.com.alura.ceep.ui.coffemachine.exceptions.BadGatewayException
 import br.com.alura.ceep.ui.coffemachine.exceptions.BadRequestException
 import br.com.alura.ceep.ui.coffemachine.exceptions.NoContentException
 import br.com.alura.ceep.ui.coffemachine.exceptions.NotFoundException
+import br.com.alura.ceep.ui.coffemachine.helpers.AnalyticsHelper
 import br.com.alura.ceep.ui.coffemachine.helpers.CoffeesRoomDataBase
 import br.com.alura.ceep.ui.coffemachine.helpers.RetrofitConfig
 import br.com.alura.ceep.ui.coffemachine.helpers.SharedPref
@@ -58,6 +59,9 @@ class DrinkNowActivity : AppCompatActivity() {
   private var uid: String? = null
   private var coffeName: String? = null
   private var coffeeCaps: String? = null
+  private val analyticsHelper: AnalyticsHelper by lazy {
+    AnalyticsHelper(this)
+  }
 
   public override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -76,6 +80,7 @@ class DrinkNowActivity : AppCompatActivity() {
         coffeeCaps = caps
       }
     }
+    analyticsHelper.log(AnalyticsHelper.DRINK_OPENED)
   }
 
   private fun setup() {
@@ -98,9 +103,11 @@ class DrinkNowActivity : AppCompatActivity() {
 
   private fun listeners() {
     coffeToolbar.setNavigationOnClickListener { arrow: View? ->
+      analyticsHelper.log(AnalyticsHelper.DRINK_RETURNED)
       onBackPressed()
     }
     drink_now_btn.setOnClickListener {
+      analyticsHelper.log(AnalyticsHelper.DRINK_CLICKED)
       progressBarDrinkNow.visibility = View.VISIBLE
       if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
         return@setOnClickListener
@@ -148,6 +155,7 @@ class DrinkNowActivity : AppCompatActivity() {
       layoutStart()
     }
     viewModel.added.observe(this) { saved ->
+      analyticsHelper.log(AnalyticsHelper.DRINK_DRINKED)
       if (saved) {
         val intent = Intent(this, DashboardActivity::class.java)
         this.startActivity(intent)
@@ -161,6 +169,7 @@ class DrinkNowActivity : AppCompatActivity() {
       progressBarDrinkNow.visibility = View.GONE
     }
     viewModel.errorById.observe(this) { exception ->
+      analyticsHelper.log(AnalyticsHelper.DRINK_ERROR)
       when (exception) {
         is NoContentException -> Toast.makeText(
           this,

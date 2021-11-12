@@ -19,6 +19,7 @@ import br.com.alura.ceep.ui.coffemachine.exceptions.BadGatewayException
 import br.com.alura.ceep.ui.coffemachine.exceptions.BadRequestException
 import br.com.alura.ceep.ui.coffemachine.exceptions.NoContentException
 import br.com.alura.ceep.ui.coffemachine.exceptions.NotFoundException
+import br.com.alura.ceep.ui.coffemachine.helpers.AnalyticsHelper
 import br.com.alura.ceep.ui.coffemachine.helpers.CoffeesRoomDataBase
 import br.com.alura.ceep.ui.coffemachine.helpers.RetrofitConfig
 import br.com.alura.ceep.ui.coffemachine.helpers.SharedPref
@@ -34,8 +35,12 @@ class HomeFragment() : Fragment() {
   private lateinit var progressBar: ProgressBar
   private lateinit var addCoffeesButton: Button
   private lateinit var addCoffeesMsg: TextView
+  private val analyticsHelper: AnalyticsHelper by lazy {
+    AnalyticsHelper(requireContext())
+  }
 
   private var homeCoffeeAdapter: HomeCoffeeAdapter = HomeCoffeeAdapter(selected = { coffee ->
+    analyticsHelper.log(AnalyticsHelper.HOME_ITEM_CLICKED)
     val bundle = Bundle()
     bundle.putString(UID, coffee.uid)
     bundle.putString(CAPSULES, coffee.capsules.toString())
@@ -55,6 +60,7 @@ class HomeFragment() : Fragment() {
     }
     viewModel.save(coffeeUser)
     viewModel.added.observe(this) { saved ->
+      analyticsHelper.log(AnalyticsHelper.HOME_COFFEE_DRINKED)
       if (saved) {
         Toast.makeText(
           requireContext(),
@@ -91,10 +97,12 @@ class HomeFragment() : Fragment() {
     listeners()
     viewModel.searchByUser()
     observers()
+    analyticsHelper.log(AnalyticsHelper.HOME_OPENED)
   }
 
   private fun listeners() {
     addCoffeesButton.setOnClickListener {
+      analyticsHelper.log(AnalyticsHelper.HOME_ADD_COFFEE_CLICKED)
       val intent = Intent(context, AvailableActivity::class.java)
       context?.startActivity(intent)
     }
@@ -117,14 +125,17 @@ class HomeFragment() : Fragment() {
         addCoffeesButton.visibility = View.GONE
         addCoffeesMsg.visibility = View.GONE
         recyclerView.visibility = View.VISIBLE
+        analyticsHelper.log(AnalyticsHelper.HOME_SUCCESS)
       } else {
         recyclerView.visibility = View.GONE
         progressBar.visibility = View.GONE
         addCoffeesButton.visibility = View.VISIBLE
         addCoffeesMsg.visibility = View.VISIBLE
+        analyticsHelper.log(AnalyticsHelper.HOME_EMPTY)
       }
     }
     viewModel.errorByUser.observe(requireActivity()) { exception ->
+      analyticsHelper.log(AnalyticsHelper.HOME_ERROR)
       when (exception) {
         is NoContentException -> {
           recyclerView.visibility = View.GONE

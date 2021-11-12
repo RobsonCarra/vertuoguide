@@ -20,6 +20,7 @@ import br.com.alura.ceep.ui.coffemachine.exceptions.BadGatewayException
 import br.com.alura.ceep.ui.coffemachine.exceptions.BadRequestException
 import br.com.alura.ceep.ui.coffemachine.exceptions.NoContentException
 import br.com.alura.ceep.ui.coffemachine.exceptions.NotFoundException
+import br.com.alura.ceep.ui.coffemachine.helpers.AnalyticsHelper
 import br.com.alura.ceep.ui.coffemachine.helpers.CoffeesRoomDataBase
 import br.com.alura.ceep.ui.coffemachine.helpers.RetrofitConfig
 import br.com.alura.ceep.ui.coffemachine.helpers.SharedPref
@@ -49,6 +50,9 @@ class InventoryFragment : Fragment() {
   private lateinit var recyclerView: RecyclerView
   private lateinit var progressBar: ProgressBar
   private lateinit var addCoffeesButton: Button
+  private val analyticsHelper: AnalyticsHelper by lazy {
+    AnalyticsHelper(requireContext())
+  }
 
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,
@@ -72,9 +76,11 @@ class InventoryFragment : Fragment() {
         // viewModel.getAll(viewLifecycleOwner, token)
       }
     }
+    analyticsHelper.log(AnalyticsHelper.INVENTORY_OPENED)
   }
 
   private fun onChangeCoffedata(selected: Coffee) {
+    analyticsHelper.log(AnalyticsHelper.INVENTORY_ATT_COFFEE_CLICKED)
     val bundle = Bundle()
     bundle.putString(UID, selected.uid)
     bundle.putString(CAPSULES, selected.capsules.toString())
@@ -94,10 +100,12 @@ class InventoryFragment : Fragment() {
 
   private fun listeners() {
     new.setOnClickListener { v: View? ->
+      analyticsHelper.log(AnalyticsHelper.INVENTORY_NEW_COFFEE_CLICKED)
       val intent = Intent(context, AvailableActivity::class.java)
       context?.startActivity(intent)
     }
     addCoffeesButton.setOnClickListener {
+      analyticsHelper.log(AnalyticsHelper.INVENTORY_ADD_COFFEE_CLICKED)
       val intent = Intent(context, AvailableActivity::class.java)
       context?.startActivity(intent)
     }
@@ -111,6 +119,7 @@ class InventoryFragment : Fragment() {
         inventoryAdapter.notifyDataSetChanged()
         progressBar.visibility = View.GONE
         recyclerView.visibility = View.VISIBLE
+        analyticsHelper.log(AnalyticsHelper.INVENTORY_SUCESS)
       } else {
         recyclerView.visibility = View.GONE
         progressBar.visibility = View.GONE
@@ -118,24 +127,13 @@ class InventoryFragment : Fragment() {
       }
     }
     viewModel.coffeeFiltered.observe(viewLifecycleOwner, { list ->
+      analyticsHelper.log(AnalyticsHelper.INVENTORY_FILTERED)
       inventoryAdapter.list.clear()
       inventoryAdapter.list.addAll(list)
       inventoryAdapter.notifyDataSetChanged()
     })
-    viewModel.added.observe(viewLifecycleOwner) { saved ->
-      if (saved) {
-        Toast.makeText(requireContext(), getString(R.string.saved), Toast.LENGTH_SHORT).show()
-      }
-      viewModel.searchByUser()
-      viewModel.errorByUser.observe(viewLifecycleOwner) { coffes ->
-        progressBar.visibility = View.GONE
-      }
-      val token = SharedPref(requireContext()).getString(SharedPref.TOKEN)
-      token?.let {
-        // viewModel.getAll(viewLifecycleOwner, token)
-      }
-    }
     viewModel.errorByUser.observe(requireActivity()) { exception ->
+      analyticsHelper.log(AnalyticsHelper.INVENTORY_ERROR_BY_USER)
       when (exception) {
         is NoContentException -> {
           recyclerView.visibility = View.GONE
@@ -160,6 +158,7 @@ class InventoryFragment : Fragment() {
       }
     }
     viewModel.errorByName.observe(requireActivity()) { exception ->
+      analyticsHelper.log(AnalyticsHelper.INVENTORY_ERROR_BY_NAME)
       when (exception) {
         is NoContentException -> Toast.makeText(
           requireContext(),
@@ -187,6 +186,7 @@ class InventoryFragment : Fragment() {
 
   private fun watchers() {
     putName.doAfterTextChanged { typed ->
+      analyticsHelper.log(AnalyticsHelper.INVENTORY_CLICKED)
       typed?.let {
         if (it.count() >= 3) {
           viewModel.searchByName(typed.toString(), true)
@@ -194,6 +194,7 @@ class InventoryFragment : Fragment() {
           viewModel.searchByUser()
         }
       }
+      analyticsHelper.log(AnalyticsHelper.INVENTORY_SEARCHED)
     }
   }
 
@@ -207,6 +208,7 @@ class InventoryFragment : Fragment() {
     recyclerView.layoutManager = LinearLayoutManager(requireContext())
     recyclerView.adapter = inventoryAdapter
   }
+
   companion object {
     const val UID = "uid"
     const val CAPSULES = "capsules"
