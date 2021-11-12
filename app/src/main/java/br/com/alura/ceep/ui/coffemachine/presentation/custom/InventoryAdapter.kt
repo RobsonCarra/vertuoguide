@@ -24,7 +24,7 @@ class InventoryAdapter(
 
   override fun onBindViewHolder(holder: InventoryViewHolder, position: Int) {
     holder.bind(list.get(position))
-    holder.itemView.setOnClickListener { v: View? ->
+    holder.itemView.setOnClickListener {
       selected(list.get(position))
     }
   }
