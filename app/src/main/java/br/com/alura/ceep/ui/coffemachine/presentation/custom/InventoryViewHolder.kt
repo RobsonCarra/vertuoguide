@@ -19,7 +19,6 @@ class InventoryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
   fun bind(coffee: Coffee) {
     name.text = coffee.name
     capsules.text = coffee.capsules.toString()
-    Picasso.get().load(coffee.image)
-      .into(image)
+    Picasso.get().load(coffee.image).into(image)
   }
 }

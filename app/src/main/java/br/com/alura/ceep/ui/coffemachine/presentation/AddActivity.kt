@@ -144,7 +144,6 @@ class AddActivity : AppCompatActivity() {
       capsules.text = coffeeCaps
       intensity.text = coffee.intensity
       Picasso.get().load(coffee.image)
-        .placeholder(R.drawable.ic_launcher_background)
         .into(image)
       layoutStart()
       progressBar.visibility = View.GONE
