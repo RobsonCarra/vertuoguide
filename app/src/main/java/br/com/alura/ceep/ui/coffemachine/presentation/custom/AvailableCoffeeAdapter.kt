@@ -25,10 +25,10 @@ class AvailableCoffeeAdapter(
 
   override fun onBindViewHolder(holderHome: AvailableCoffeeViewHolder, position: Int) {
     holderHome.bind(list.get(position))
-    holderHome.itemView.setOnClickListener { v: View? ->
+    holderHome.itemView.setOnClickListener {
       selected(list.get(position))
     }
-    holderHome.descriptionButton.setOnClickListener { v: View? ->
+    holderHome.descriptionButton.setOnClickListener {
       if (holderHome.description.visibility == View.VISIBLE) {
         holderHome.description.visibility = View.GONE
         holderHome.descriptionButton.setBackgroundResource(R.drawable.down_arrow)

@@ -49,7 +49,7 @@ class RegisterActivity : AppCompatActivity() {
   }
 
   private fun listeners() {
-    coffeToolbar.setNavigationOnClickListener { arrow: View? ->
+    coffeToolbar.setNavigationOnClickListener {
       onBackPressed()
     }
 
@@ -81,13 +81,11 @@ class RegisterActivity : AppCompatActivity() {
           .addOnCompleteListener(this) { task ->
             progressBar.visibility = View.INVISIBLE
             if (task.isSuccessful) {
-              val user = auth.currentUser
               Toast.makeText(
                 this@RegisterActivity,
                 getString(R.string.correctly_created_user),
                 Toast.LENGTH_SHORT
-              )
-                .show()
+              ).show()
               goToLoginActivity()
             } else {
               Toast.makeText(

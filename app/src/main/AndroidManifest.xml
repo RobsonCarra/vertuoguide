@@ -12,21 +12,34 @@
       android:supportsRtl="true"
       android:theme="@style/Theme.CoffeeMachine.Machine"
       android:usesCleartextTraffic="true">
-    <activity android:name=".presentation.DashboardActivity">
+    <activity
+        android:name=".presentation.DashboardActivity"
+        android:exported="true">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
         <!--                <category android:name="android.intent.category.LAUNCHER" />-->
         <action android:name="com.google.firebase.MESSAGING_EVENT" />
       </intent-filter>
     </activity>
-    <activity android:name=".presentation.RegisterActivity"></activity>
-    <activity android:name=".presentation.AvailableActivity"></activity>
-    <activity android:name=".presentation.DrinkNowActivity"></activity>
-    <activity android:name=".presentation.AddActivity"></activity>
-    <activity android:name=".presentation.Login.view.LoginActivity">
+    <activity
+        android:name=".presentation.RegisterActivity"
+        android:exported="true"></activity>
+    <activity
+        android:name=".presentation.AvailableActivity"
+        android:exported="true"></activity>
+    <activity
+        android:name=".presentation.DrinkNowActivity"
+        android:exported="true"></activity>
+    <activity
+        android:name=".presentation.AddActivity"
+        android:exported="true"></activity>
+    <activity
+        android:name=".presentation.Login.view.LoginActivity"
+        android:exported="true">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
         <action android:name="com.google.firebase.MESSAGING_EVENT" />
+
         <category android:name="android.intent.category.LAUNCHER" />
       </intent-filter>
     </activity>

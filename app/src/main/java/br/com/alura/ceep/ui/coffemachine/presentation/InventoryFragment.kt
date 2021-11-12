@@ -93,7 +93,7 @@ class InventoryFragment : Fragment() {
   }
 
   private fun listeners() {
-    new.setOnClickListener { v: View? ->
+    new.setOnClickListener {
       val intent = Intent(context, AvailableActivity::class.java)
       context?.startActivity(intent)
     }
@@ -127,7 +127,7 @@ class InventoryFragment : Fragment() {
         Toast.makeText(requireContext(), getString(R.string.saved), Toast.LENGTH_SHORT).show()
       }
       viewModel.searchByUser()
-      viewModel.errorByUser.observe(viewLifecycleOwner) { coffes ->
+      viewModel.errorByUser.observe(viewLifecycleOwner) {
         progressBar.visibility = View.GONE
       }
       val token = SharedPref(requireContext()).getString(SharedPref.TOKEN)

@@ -18,11 +18,9 @@ import br.com.alura.ceep.ui.coffemachine.exceptions.BadGatewayException
 import br.com.alura.ceep.ui.coffemachine.exceptions.BadRequestException
 import br.com.alura.ceep.ui.coffemachine.exceptions.NoContentException
 import br.com.alura.ceep.ui.coffemachine.exceptions.NotFoundException
-import br.com.alura.ceep.ui.coffemachine.helpers.CoffeesRoomDataBase
 import br.com.alura.ceep.ui.coffemachine.helpers.RetrofitConfig
 import br.com.alura.ceep.ui.coffemachine.helpers.SharedPref
 import br.com.alura.ceep.ui.coffemachine.presentation.custom.AvailableCoffeeAdapter
-import br.com.alura.ceep.ui.coffemachine.presentation.custom.HomeCoffeeAdapter
 import br.com.alura.ceep.ui.coffemachine.repository.CoffeesRepository
 import br.com.alura.ceep.ui.coffemachine.viewmodel.CoffeesViewModel
 import br.com.alura.ceep.ui.coffemachine.viewmodel.config.CoffesViewModelFactory
@@ -67,7 +65,7 @@ class AvailableActivity : AppCompatActivity() {
   }
 
   private fun listeners() {
-    coffeToolbar.setNavigationOnClickListener { arrow: View? ->
+    coffeToolbar.setNavigationOnClickListener {
       onBackPressed()
     }
   }

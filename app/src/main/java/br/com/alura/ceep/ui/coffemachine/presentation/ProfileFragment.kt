@@ -63,7 +63,7 @@ class ProfileFragment : Fragment() {
   }
 
   private fun listeners() {
-    camera.setOnClickListener { v: View? ->
+    camera.setOnClickListener {
       val intent = Intent()
       intent.action = MediaStore.ACTION_IMAGE_CAPTURE
       startActivityForResult(intent, REQUEST_CODE_PHOTO)

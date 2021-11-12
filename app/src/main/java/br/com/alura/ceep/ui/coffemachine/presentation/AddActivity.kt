@@ -100,9 +100,7 @@ class AddActivity : AppCompatActivity() {
   }
 
   private fun listeners() {
-    coffeToolbar.setNavigationOnClickListener { arrow: View? ->
-      onBackPressed()
-    }
+    coffeToolbar.setNavigationOnClickListener { onBackPressed() }
     save_btn.setOnClickListener {
       progressBarSaved.visibility = View.VISIBLE
       progressBar.visibility = View.VISIBLE
@@ -120,12 +118,7 @@ class AddActivity : AppCompatActivity() {
         uid?.let { uidNotNull ->
           coffeeUser.uid = uidNotNull
         }
-        val token = SharedPref(this).getString(SharedPref.TOKEN)
-        token?.let {
-          uid?.let { uid ->
-            viewModel.save(coffeeUser)
-          }
-        }
+        viewModel.save(coffeeUser)
       } else {
         putCapsules.error = getString(R.string.invalid_capsules)
         putCapsules.requestFocus()

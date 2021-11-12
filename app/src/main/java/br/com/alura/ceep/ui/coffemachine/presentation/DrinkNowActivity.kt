@@ -97,7 +97,7 @@ class DrinkNowActivity : AppCompatActivity() {
   }
 
   private fun listeners() {
-    coffeToolbar.setNavigationOnClickListener { arrow: View? ->
+    coffeToolbar.setNavigationOnClickListener {
       onBackPressed()
     }
     drink_now_btn.setOnClickListener {
@@ -116,19 +116,14 @@ class DrinkNowActivity : AppCompatActivity() {
       uid?.let { uidNotNull ->
         coffeeUser?.uid = uidNotNull
       }
-      val token = SharedPref(this).getString(SharedPref.TOKEN)
-      token?.let {
-        uid?.let { uid ->
-          if (coffeeUser != null) {
-            viewModel.save(coffeeUser)
-            Toast.makeText(
-              this,
-              coffeName + SPACE + getString(R.string.drinked),
-              Toast.LENGTH_SHORT
-            )
-              .show()
-          }
-        }
+      if (coffeeUser != null) {
+        viewModel.save(coffeeUser)
+        Toast.makeText(
+          this,
+          coffeName + SPACE + getString(R.string.drinked),
+          Toast.LENGTH_SHORT
+        )
+          .show()
       }
       progressBar.visibility = View.GONE
     }
