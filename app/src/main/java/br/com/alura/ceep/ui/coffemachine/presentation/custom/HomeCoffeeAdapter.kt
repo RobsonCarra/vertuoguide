@@ -25,10 +25,10 @@ class HomeCoffeeAdapter(
 
   override fun onBindViewHolder(holderHome: HomeCoffeeViewHolder, position: Int) {
     holderHome.bind(list.get(position))
-    holderHome.itemView.setOnClickListener { v: View? ->
+    holderHome.itemView.setOnClickListener {
       selected(list.get(position))
     }
-    holderHome.coffeeNow.setOnClickListener { v: View? ->
+    holderHome.coffeeNow.setOnClickListener {
       onCoffeeNow(list.get(position))
     }
   }

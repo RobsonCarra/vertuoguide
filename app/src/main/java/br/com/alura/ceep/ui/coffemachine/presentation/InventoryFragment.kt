@@ -99,8 +99,9 @@ class InventoryFragment : Fragment() {
   }
 
   private fun listeners() {
-    new.setOnClickListener { v: View? ->
+    new.setOnClickListener { 
       analyticsHelper.log(AnalyticsHelper.INVENTORY_NEW_COFFEE_CLICKED)
+
       val intent = Intent(context, AvailableActivity::class.java)
       context?.startActivity(intent)
     }

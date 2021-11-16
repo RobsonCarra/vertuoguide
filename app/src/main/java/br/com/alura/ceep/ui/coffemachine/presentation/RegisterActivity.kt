@@ -55,7 +55,7 @@ class RegisterActivity : AppCompatActivity() {
   }
 
   private fun listeners() {
-    coffeToolbar.setNavigationOnClickListener { arrow: View? ->
+    coffeToolbar.setNavigationOnClickListener {
       analyticsHelper.log(AnalyticsHelper.REGISTER_RETURNED)
       onBackPressed()
     }
@@ -89,7 +89,6 @@ class RegisterActivity : AppCompatActivity() {
           .addOnCompleteListener(this) { task ->
             progressBar.visibility = View.INVISIBLE
             if (task.isSuccessful) {
-              val user = auth.currentUser
               Toast.makeText(
                 this@RegisterActivity,
                 getString(R.string.correctly_created_user),
