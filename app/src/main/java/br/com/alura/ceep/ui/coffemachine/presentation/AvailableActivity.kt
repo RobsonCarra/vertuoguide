@@ -18,6 +18,8 @@ import br.com.alura.ceep.ui.coffemachine.exceptions.BadGatewayException
 import br.com.alura.ceep.ui.coffemachine.exceptions.BadRequestException
 import br.com.alura.ceep.ui.coffemachine.exceptions.NoContentException
 import br.com.alura.ceep.ui.coffemachine.exceptions.NotFoundException
+import br.com.alura.ceep.ui.coffemachine.helpers.AnalyticsHelper
+import br.com.alura.ceep.ui.coffemachine.helpers.CoffeesRoomDataBase
 import br.com.alura.ceep.ui.coffemachine.helpers.RetrofitConfig
 import br.com.alura.ceep.ui.coffemachine.helpers.SharedPref
 import br.com.alura.ceep.ui.coffemachine.presentation.custom.AvailableCoffeeAdapter
@@ -32,9 +34,13 @@ class AvailableActivity : AppCompatActivity() {
   private lateinit var progressBar: ProgressBar
   private lateinit var coffeToolbar: Toolbar
   private lateinit var putName: TextInputEditText
+  private val analyticsHelper: AnalyticsHelper by lazy {
+    AnalyticsHelper(this)
+  }
 
   private var availableCoffeeAdapter: AvailableCoffeeAdapter =
     AvailableCoffeeAdapter(selected = { coffee ->
+      analyticsHelper.log(AnalyticsHelper.AVAILABLE_ITEM_CLICKED)
       val bundle = Bundle()
       bundle.putString(UID, coffee.uid)
       val intent = Intent(this, AddActivity::class.java)
@@ -62,10 +68,12 @@ class AvailableActivity : AppCompatActivity() {
     viewModel.getAll()
     observers()
     watchers()
+    analyticsHelper.log(AnalyticsHelper.AVAILABLE_OPENED)
   }
 
   private fun listeners() {
-    coffeToolbar.setNavigationOnClickListener {
+    coffeToolbar.setNavigationOnClickListener { 
+      analyticsHelper.log(AnalyticsHelper.AVAILABLE_RETURNED)
       onBackPressed()
     }
   }
@@ -85,12 +93,14 @@ class AvailableActivity : AppCompatActivity() {
         availableCoffeeAdapter.list.addAll(coffee)
         availableCoffeeAdapter.notifyDataSetChanged()
         progressBar.visibility = View.GONE
+        analyticsHelper.log(AnalyticsHelper.AVAILABLE_SUCESS)
       } else {
         recyclerView.visibility = View.GONE
         progressBar.visibility = View.GONE
       }
     }
     viewModel.error.observe(this) { exception ->
+      analyticsHelper.log(AnalyticsHelper.AVAILABLE_ERROR)
       when (exception) {
         is NoContentException -> {
           recyclerView.visibility = View.GONE
@@ -113,6 +123,7 @@ class AvailableActivity : AppCompatActivity() {
       }
     }
     viewModel.coffeeFiltered.observe(this) { list ->
+      analyticsHelper.log(AnalyticsHelper.AVAILABLE_FILTERED)
       availableCoffeeAdapter.list.clear()
       availableCoffeeAdapter.list.addAll(list)
       availableCoffeeAdapter.notifyDataSetChanged()
@@ -121,6 +132,7 @@ class AvailableActivity : AppCompatActivity() {
 
   private fun watchers() {
     putName.doAfterTextChanged { typed ->
+      analyticsHelper.log(AnalyticsHelper.AVAILABLE_CLICKED)
       typed?.let {
         if (it.count() >= 3) {
           viewModel.searchByName(typed.toString(), false)
@@ -128,6 +140,7 @@ class AvailableActivity : AppCompatActivity() {
           viewModel.searchByUser()
         }
       }
+      analyticsHelper.log(AnalyticsHelper.AVAILABLE_SEARCHED)
     }
   }
 

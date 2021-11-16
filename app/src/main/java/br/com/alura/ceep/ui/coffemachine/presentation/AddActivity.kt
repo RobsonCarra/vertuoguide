@@ -20,6 +20,7 @@ import br.com.alura.ceep.ui.coffemachine.exceptions.BadGatewayException
 import br.com.alura.ceep.ui.coffemachine.exceptions.BadRequestException
 import br.com.alura.ceep.ui.coffemachine.exceptions.NoContentException
 import br.com.alura.ceep.ui.coffemachine.exceptions.NotFoundException
+import br.com.alura.ceep.ui.coffemachine.helpers.AnalyticsHelper
 import br.com.alura.ceep.ui.coffemachine.helpers.CoffeesRoomDataBase
 import br.com.alura.ceep.ui.coffemachine.helpers.RetrofitConfig
 import br.com.alura.ceep.ui.coffemachine.helpers.SharedPref
@@ -59,6 +60,9 @@ class AddActivity : AppCompatActivity() {
   private lateinit var save_btn: Button
   private var uid: String? = null
   private var coffeeCaps: String? = null
+  private val analyticsHelper: AnalyticsHelper by lazy {
+    AnalyticsHelper(this)
+  }
 
   @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
   public override fun onCreate(savedInstanceState: Bundle?) {
@@ -78,6 +82,7 @@ class AddActivity : AppCompatActivity() {
         coffeeCaps = caps
       }
     }
+    analyticsHelper.log(AnalyticsHelper.ADD_OPENED)
   }
 
   private fun setup() {
@@ -102,6 +107,7 @@ class AddActivity : AppCompatActivity() {
   private fun listeners() {
     coffeToolbar.setNavigationOnClickListener { onBackPressed() }
     save_btn.setOnClickListener {
+      analyticsHelper.log(AnalyticsHelper.ADD_CLICKED)
       progressBarSaved.visibility = View.VISIBLE
       progressBar.visibility = View.VISIBLE
       if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
@@ -143,6 +149,7 @@ class AddActivity : AppCompatActivity() {
     }
 
     viewModel.errorById.observe(this) { exception ->
+      analyticsHelper.log(AnalyticsHelper.ADD_ERROR)
       when (exception) {
         is NoContentException -> Toast.makeText(
           this,
@@ -168,6 +175,7 @@ class AddActivity : AppCompatActivity() {
     }
 
     viewModel.added.observe(this) { saved ->
+      analyticsHelper.log(AnalyticsHelper.ADD_ADDED)
       if (saved) {
         Toast.makeText(this, getString(R.string.saved), Toast.LENGTH_SHORT).show()
         val intent = Intent(this, DashboardActivity::class.java)

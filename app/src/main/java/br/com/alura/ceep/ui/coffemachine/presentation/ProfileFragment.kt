@@ -17,6 +17,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import br.com.alura.ceep.ui.coffemachine.BuildConfig
 import br.com.alura.ceep.ui.coffemachine.R
+import br.com.alura.ceep.ui.coffemachine.helpers.AnalyticsHelper
 import br.com.alura.ceep.ui.coffemachine.helpers.PhotoHelper
 import br.com.alura.ceep.ui.coffemachine.helpers.SharedPref
 import br.com.alura.ceep.ui.coffemachine.helpers.toByteArray
@@ -36,6 +37,9 @@ class ProfileFragment : Fragment() {
   private lateinit var exit: TextView
   private lateinit var progressBar: ProgressBar
   private val REQUEST_CODE_PHOTO = 10
+  private val analyticsHelper: AnalyticsHelper by lazy {
+    AnalyticsHelper(requireContext())
+  }
 
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,
@@ -50,6 +54,7 @@ class ProfileFragment : Fragment() {
     cameraInvisible()
     loadPerfilPhoto()
     listeners()
+    analyticsHelper.log(AnalyticsHelper.PROFILE_OPENED)
   }
 
   private fun setup(view: View) {
@@ -64,12 +69,14 @@ class ProfileFragment : Fragment() {
 
   private fun listeners() {
     camera.setOnClickListener {
+      analyticsHelper.log(AnalyticsHelper.PROFILE_CAMERA_CLICKED)
       val intent = Intent()
       intent.action = MediaStore.ACTION_IMAGE_CAPTURE
       startActivityForResult(intent, REQUEST_CODE_PHOTO)
       intent.type = "image/*"
     }
     rate.setOnClickListener {
+      analyticsHelper.log(AnalyticsHelper.PROFILE_RATE_CLICKED)
       val reviewManager = ReviewManagerFactory.create(requireContext())
       val requestReviewTask = reviewManager.requestReviewFlow()
       requestReviewTask.addOnCompleteListener { request ->
@@ -88,6 +95,7 @@ class ProfileFragment : Fragment() {
       }
     }
     share.setOnClickListener {
+      analyticsHelper.log(AnalyticsHelper.PROFILE_SHARE_CLICKED)
       val sendIntent = Intent()
       sendIntent.action = Intent.ACTION_SEND
       sendIntent.putExtra(
@@ -98,12 +106,14 @@ class ProfileFragment : Fragment() {
       startActivity(sendIntent)
     }
     terms.setOnClickListener {
+      analyticsHelper.log(AnalyticsHelper.PROFILE_TERMS_CLICKED)
       val url = "http://www.google.com"
       val i = Intent(Intent.ACTION_VIEW)
       i.data = Uri.parse(url)
       startActivity(i)
     }
     exit.setOnClickListener {
+      analyticsHelper.log(AnalyticsHelper.PROFILE_EXIT_CLICKED)
       SharedPref(requireContext()).clear()
       val intent = Intent(context, LoginActivity::class.java)
       context?.startActivity(intent)
@@ -124,6 +134,7 @@ class ProfileFragment : Fragment() {
   }
 
   private fun photoHandler(data: Bundle) {
+    analyticsHelper.log(AnalyticsHelper.PROFILE_PHOTO_HANDLER)
     val bitmap = data.get(DATA) as Bitmap
     camera.setImageBitmap(bitmap)
     PhotoHelper.save(
@@ -137,6 +148,7 @@ class ProfileFragment : Fragment() {
   }
 
   private fun loadPerfilPhoto() {
+    analyticsHelper.log(AnalyticsHelper.PROFILE_LOAD_PHOTO)
     progressBar.visibility = View.VISIBLE
     PhotoHelper.loadStorageImage(COLLECTION, JPG, loaded = { image ->
       if (image != "") {

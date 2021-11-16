@@ -31,7 +31,9 @@ class LoginActivity : AppCompatActivity() {
   private lateinit var loginButton: Button
   private lateinit var createAccount: Button
   private lateinit var progressBar: ProgressBar
-
+  private val analyticsHelper: AnalyticsHelper by lazy {
+    AnalyticsHelper(this)
+  }
   private val viewModel: CoffeesViewModel by viewModels {
     CoffesViewModelFactory(
       CoffeesRepository(
@@ -41,8 +43,6 @@ class LoginActivity : AppCompatActivity() {
       SharedPref(this)
     )
   }
-
-  private val analyticsHelper: AnalyticsHelper by lazy { AnalyticsHelper(this) }
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)

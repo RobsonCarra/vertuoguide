@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import br.com.alura.ceep.ui.coffemachine.R
+import br.com.alura.ceep.ui.coffemachine.helpers.AnalyticsHelper
 import br.com.alura.ceep.ui.coffemachine.presentation.Login.view.LoginActivity
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
@@ -23,6 +24,9 @@ class RegisterActivity : AppCompatActivity() {
   private lateinit var auth: FirebaseAuth
   private lateinit var createAccount: Button
   private lateinit var progressBar: ProgressBar
+  private val analyticsHelper: AnalyticsHelper by lazy {
+    AnalyticsHelper(this)
+  }
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -30,6 +34,7 @@ class RegisterActivity : AppCompatActivity() {
     setup()
     auth = FirebaseAuth.getInstance()
     listeners()
+    analyticsHelper.log(AnalyticsHelper.REGISTER_OPENED)
   }
 
   private fun setup() {
@@ -44,16 +49,19 @@ class RegisterActivity : AppCompatActivity() {
   }
 
   private fun goToLoginActivity() {
+    analyticsHelper.log(AnalyticsHelper.REGISTER_GO_TO_LOGIN)
     val intent = Intent(this, LoginActivity::class.java)
     this.startActivity(intent)
   }
 
   private fun listeners() {
     coffeToolbar.setNavigationOnClickListener {
+      analyticsHelper.log(AnalyticsHelper.REGISTER_RETURNED)
       onBackPressed()
     }
 
     createAccount.setOnClickListener {
+      analyticsHelper.log(AnalyticsHelper.REGISTER_CREATE_ACCOUNT)
       val email = putEmail.text.toString()
       val password = putPassword.text.toString()
       val confirmPassword = putConfirmPassword.text.toString()
@@ -85,15 +93,17 @@ class RegisterActivity : AppCompatActivity() {
                 this@RegisterActivity,
                 getString(R.string.correctly_created_user),
                 Toast.LENGTH_SHORT
-              ).show()
+              )
+                .show()
+              analyticsHelper.log(AnalyticsHelper.REGISTER_CREATE_ACCOUNT_SUCESS)
               goToLoginActivity()
             } else {
               Toast.makeText(
                 this@RegisterActivity,
                 getString(R.string.unauthorized),
                 Toast.LENGTH_SHORT
-              )
-                .show()
+              ).show()
+              analyticsHelper.log(AnalyticsHelper.REGISTER_CREATE_ACCOUNT_ERROR)
             }
           }
       } else {
