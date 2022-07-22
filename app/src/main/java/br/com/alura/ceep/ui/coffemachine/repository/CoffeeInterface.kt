@@ -2,6 +2,8 @@ package br.com.alura.ceep.ui.coffemachine.repository
 
 import br.com.alura.ceep.ui.coffemachine.domain.Coffee
 import br.com.alura.ceep.ui.coffemachine.domain.CoffeeUser
+import br.com.alura.ceep.ui.coffemachine.domain.Experience
+import br.com.alura.ceep.ui.coffemachine.repository.CoffeeInterface.Companion.SAVE_EXPERIENCE
 import kotlinx.coroutines.Deferred
 import retrofit2.Response
 import retrofit2.http.Body
@@ -30,6 +32,12 @@ interface CoffeeInterface {
   @POST(SAVE)
   fun save(@Body coffeeUser: CoffeeUser): Deferred<Response<Void>>
 
+  @POST(SAVE_EXPERIENCE)
+  fun saveExperience(@Body experience: Experience): Deferred<Response<Void>>
+
+  @GET(GET_ALL_EXPERIENCES)
+  fun getAllExperiences(): Deferred<Response<List<Experience>>>
+
   companion object {
     const val GET_ALL = "coffees"
     const val GET_BY_UID = "coffees/user/{uid}"
@@ -39,5 +47,7 @@ interface CoffeeInterface {
     const val UID = "uid"
     const val FIND = "find"
     const val FILTER_BY_USER = "filterByUser"
+    const val SAVE_EXPERIENCE = "saveExperience"
+    const val GET_ALL_EXPERIENCES = "experiences"
   }
 }

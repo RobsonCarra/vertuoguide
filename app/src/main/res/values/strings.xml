@@ -43,5 +43,6 @@
   <string name="enter_correct_email">Por favor, digite um e-mail válido</string>
   <string name="correctly_created_user">Usuário criado corretamente</string>
   <string name="passwords_different">As senhas estão diferentes, coloque uma correta</string>
-
+  <string name="to_do_list" translatable="false">To Do List</string>
+  <string name="put_task_empty" translatable="false">Digite o nome da sua Tarefa</string>
 </resources>

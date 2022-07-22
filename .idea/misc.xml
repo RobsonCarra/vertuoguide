@@ -5,16 +5,21 @@
       <map>
         <entry key="app/src/main/res/drawable/ic_baseline_arrow_back_24.xml" value="0.259375" />
         <entry key="app/src/main/res/layout/add_coffee_activity.xml" value="0.24322916666666666" />
+        <entry key="app/src/main/res/layout/add_task.xml" value="0.17465753424657535" />
         <entry key="app/src/main/res/layout/available_coffee_activity.xml" value="0.375" />
         <entry key="app/src/main/res/layout/available_coffee_item_list.xml" value="0.48494288681204567" />
         <entry key="app/src/main/res/layout/dashboard_activity.xml" value="0.24270833333333333" />
         <entry key="app/src/main/res/layout/drink_now_activity.xml" value="0.375" />
-        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.48541666666666666" />
+        <entry key="app/src/main/res/layout/experience_item_list.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/experience_list_activity.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.335" />
         <entry key="app/src/main/res/layout/home_coffe_item_list.xml" value="0.44029850746268656" />
         <entry key="app/src/main/res/layout/home_fragment.xml" value="0.24322916666666666" />
-        <entry key="app/src/main/res/layout/inventory_fragment.xml" value="0.55" />
+        <entry key="app/src/main/res/layout/inventory_fragment.xml" value="0.3013048635824436" />
         <entry key="app/src/main/res/layout/inventory_item_list.xml" value="0.5" />
         <entry key="app/src/main/res/layout/login_activity.xml" value="0.24322916666666666" />
+        <entry key="app/src/main/res/layout/register_activity.xml" value="0.1743659420289855" />
+        <entry key="app/src/main/res/layout/to_do_list_activity.xml" value="0.3707250341997264" />
       </map>
     </option>
   </component>

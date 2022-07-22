@@ -35,19 +35,18 @@ class ProfileFragment : Fragment() {
   private lateinit var rate: TextView
   private lateinit var terms: TextView
   private lateinit var exit: TextView
+  private lateinit var todolist:TextView
   private lateinit var progressBar: ProgressBar
   private val REQUEST_CODE_PHOTO = 10
   private val analyticsHelper: AnalyticsHelper by lazy {
     AnalyticsHelper(requireContext())
   }
-
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,
     savedInstanceState: Bundle?
   ): View? {
     return inflater.inflate(R.layout.fragment_profile, container, false)
   }
-
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     setup(view)
@@ -65,6 +64,7 @@ class ProfileFragment : Fragment() {
     terms = view.findViewById(R.id.terms_of_use)
     exit = view.findViewById(R.id.exit)
     progressBar = view.findViewById(R.id.progress_bar_perfil_fragment)
+    todolist = view.findViewById(R.id.to_do_list_button)
   }
 
   private fun listeners() {
@@ -93,6 +93,11 @@ class ProfileFragment : Fragment() {
           // Request failed
         }
       }
+    }
+    todolist.setOnClickListener {
+      SharedPref(requireContext()).clear()
+      val intent = Intent(context, ExperienceCoffee::class.java)
+      context?.startActivity(intent)
     }
     share.setOnClickListener {
       analyticsHelper.log(AnalyticsHelper.PROFILE_SHARE_CLICKED)
@@ -166,7 +171,6 @@ class ProfileFragment : Fragment() {
     const val CANCELED = "canceled"
     const val DATA = "data"
   }
-
   fun cameraInvisible() {
     camera.visibility = View.GONE
   }

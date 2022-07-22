@@ -23,9 +23,7 @@ import br.com.alura.ceep.ui.coffemachine.viewmodel.config.CoffesViewModelFactory
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.launch
-
 class LoginActivity : AppCompatActivity() {
-
   private lateinit var putPassword: TextInputEditText
   private lateinit var putEmail: TextInputEditText
   private lateinit var loginButton: Button
@@ -43,7 +41,6 @@ class LoginActivity : AppCompatActivity() {
       SharedPref(this)
     )
   }
-
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.login_activity)
@@ -91,7 +88,6 @@ class LoginActivity : AppCompatActivity() {
       }
     }
   }
-
   private fun listeners() {
     loginButton.setOnClickListener {
       login()
@@ -100,7 +96,6 @@ class LoginActivity : AppCompatActivity() {
       register()
     }
   }
-
   private fun login() {
     analyticsHelper.log(AnalyticsHelper.LOGIN_CLICKED)
     val email = putEmail.text.toString()
@@ -122,7 +117,6 @@ class LoginActivity : AppCompatActivity() {
     progressBar.visibility = View.VISIBLE
     viewModel.signIn(email, password)
   }
-
   private fun register() {
     analyticsHelper.log(AnalyticsHelper.LOGIN_REGISTER)
     val intent = Intent(this@LoginActivity, RegisterActivity::class.java)

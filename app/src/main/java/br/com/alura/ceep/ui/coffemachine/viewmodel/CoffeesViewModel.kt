@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import br.com.alura.ceep.ui.coffemachine.R
 import br.com.alura.ceep.ui.coffemachine.domain.Coffee
 import br.com.alura.ceep.ui.coffemachine.domain.CoffeeUser
+import br.com.alura.ceep.ui.coffemachine.domain.Experience
 import br.com.alura.ceep.ui.coffemachine.helpers.Res
 import br.com.alura.ceep.ui.coffemachine.helpers.SharedPref
 import br.com.alura.ceep.ui.coffemachine.repository.CoffeesRepository
@@ -23,6 +24,7 @@ class CoffeesViewModel(
   val goToHome = MutableLiveData<Boolean>()
   val showError = MutableLiveData<Int>()
   val list = MutableLiveData<List<Coffee>>()
+  val listExperience = MutableLiveData<List<Experience>>()
   val listByUser = MutableLiveData<List<Coffee>>()
   val coffeeById = MutableLiveData<Coffee>()
   var coffeeFiltered = MutableLiveData<List<Coffee>>()
@@ -38,6 +40,17 @@ class CoffeesViewModel(
       coffeesRepository.getAll().collect { result ->
         when (result) {
           is Res.Success -> list.postValue(result.items as List<Coffee>)
+          is Res.Failure -> error.postValue(result.exception)
+        }
+      }
+    }
+  }
+
+  fun getAllExperiences(){
+    viewModelScope.launch {
+      coffeesRepository.getExperiences().collect { result ->
+        when (result) {
+          is Res.Success -> listExperience.postValue(result.items as List<Experience>)
           is Res.Failure -> error.postValue(result.exception)
         }
       }
@@ -91,6 +104,17 @@ class CoffeesViewModel(
   fun save(coffeeUser: CoffeeUser) {
     viewModelScope.launch {
       coffeesRepository.save(coffeeUser).collect { saved ->
+        when (saved) {
+          is Res.Success -> added.postValue(saved.items as Boolean)
+          is Res.Failure -> errorSave.postValue(saved.exception)
+        }
+      }
+    }
+  }
+
+  fun saveExperience(experience: Experience) {
+    viewModelScope.launch {
+      coffeesRepository.saveExperience(experience).collect { saved ->
         when (saved) {
           is Res.Success -> added.postValue(saved.items as Boolean)
           is Res.Failure -> errorSave.postValue(saved.exception)

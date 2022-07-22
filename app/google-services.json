@@ -8,41 +8,20 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:413438418089:android:49f276816f93b246051db8",
-        "android_client_info": {
-          "package_name": "br.com.alura.ceep.ui.coffemachine"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "413438418089-je0r4ivo2afcf4911vlqk0qtm5hg12ab.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyD1ubdG0aMb1mq_gl5WdJys9peHi9fCVHA"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "413438418089-je0r4ivo2afcf4911vlqk0qtm5hg12ab.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:413438418089:android:fd805f6346393fe9051db8",
+        "mobilesdk_app_id": "1:413438418089:android:3e8b0b101d2d499a051db8",
         "android_client_info": {
           "package_name": "com.vertuoguide.app"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "413438418089-5odpsjh8nqogqv5p1na6pvuhd1v2fo09.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.vertuoguide.app",
+            "certificate_hash": "d025966057fa53cf27a5cf1cc037bbc4b7fc8476"
+          }
+        },
         {
           "client_id": "413438418089-je0r4ivo2afcf4911vlqk0qtm5hg12ab.apps.googleusercontent.com",
           "client_type": 3
