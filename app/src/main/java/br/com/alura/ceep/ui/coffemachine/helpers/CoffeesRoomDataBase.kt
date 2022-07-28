@@ -10,7 +10,6 @@ import br.com.alura.ceep.ui.coffemachine.repository.CoffeesDao
 @Database(entities = [Coffee::class], version = 3, exportSchema = false)
 
 abstract class CoffeesRoomDataBase : RoomDatabase() {
-
     abstract fun coffesDao(): CoffeesDao
     private class CoffesRoomDataBaseCallBack() : RoomDatabase.Callback() {
     }

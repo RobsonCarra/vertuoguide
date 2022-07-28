@@ -18,6 +18,9 @@ import br.com.alura.ceep.ui.coffemachine.viewmodel.CoffeesViewModel
 import br.com.alura.ceep.ui.coffemachine.viewmodel.config.CoffesViewModelFactory
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.ktx.Firebase
 
 class ExperienceCoffee: AppCompatActivity() {
 
@@ -61,13 +64,15 @@ class ExperienceCoffee: AppCompatActivity() {
   }
 
   private fun listeners(){
-    val coffeeName = putTaskName.text.toString()
-    val putTaskDescription = putTaskDescription.text.toString()
+
+
     registerButton.setOnClickListener {
+      val coffeeName = putTaskName.text.toString()
+      val putTaskDescription = putTaskDescription.text.toString()
       val experience = Experience (
         coffeeName = coffeeName,
         experienceDescription = putTaskDescription
-        )
+      )
       viewModel.saveExperience(experience)
       SharedPref(this).clear()
       val intent = Intent(this, ExperiencesListActivity::class.java)

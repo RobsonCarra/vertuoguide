@@ -50,6 +50,7 @@ class ExperiencesListActivity: AppCompatActivity() {
   private lateinit var recyclerView: RecyclerView
   private lateinit var progressBar: ProgressBar
   private lateinit var addCoffeesButton: Button
+
   private val analyticsHelper: AnalyticsHelper by lazy {
     AnalyticsHelper(this)
   }

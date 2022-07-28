@@ -41,12 +41,14 @@ class ProfileFragment : Fragment() {
   private val analyticsHelper: AnalyticsHelper by lazy {
     AnalyticsHelper(requireContext())
   }
+
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,
     savedInstanceState: Bundle?
   ): View? {
     return inflater.inflate(R.layout.fragment_profile, container, false)
   }
+
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     setup(view)
@@ -94,11 +96,13 @@ class ProfileFragment : Fragment() {
         }
       }
     }
+
     todolist.setOnClickListener {
       SharedPref(requireContext()).clear()
       val intent = Intent(context, ExperienceCoffee::class.java)
       context?.startActivity(intent)
     }
+
     share.setOnClickListener {
       analyticsHelper.log(AnalyticsHelper.PROFILE_SHARE_CLICKED)
       val sendIntent = Intent()
@@ -110,6 +114,7 @@ class ProfileFragment : Fragment() {
       sendIntent.type = "text/plain"
       startActivity(sendIntent)
     }
+
     terms.setOnClickListener {
       analyticsHelper.log(AnalyticsHelper.PROFILE_TERMS_CLICKED)
       val url = "http://www.google.com"
@@ -117,6 +122,7 @@ class ProfileFragment : Fragment() {
       i.data = Uri.parse(url)
       startActivity(i)
     }
+
     exit.setOnClickListener {
       analyticsHelper.log(AnalyticsHelper.PROFILE_EXIT_CLICKED)
       SharedPref(requireContext()).clear()

@@ -11,6 +11,7 @@ import br.com.alura.ceep.ui.coffemachine.helpers.Res
 import br.com.alura.ceep.ui.coffemachine.helpers.SharedPref
 import br.com.alura.ceep.ui.coffemachine.repository.CoffeesRepository
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
@@ -20,6 +21,7 @@ class CoffeesViewModel(
   private val sharedPref: SharedPref
 ) : ViewModel() {
 
+  private lateinit var firestore: FirebaseFirestore
   val showLoader = MutableLiveData<Boolean>()
   val goToHome = MutableLiveData<Boolean>()
   val showError = MutableLiveData<Int>()
@@ -35,6 +37,12 @@ class CoffeesViewModel(
   val errorSave = MutableLiveData<Exception>()
   val errorByName = MutableLiveData<Exception>()
 
+
+  init {
+    firestore = FirebaseFirestore.getInstance()
+    firestore.firestoreSettings
+  }
+
   fun getAll() {
     viewModelScope.launch {
       coffeesRepository.getAll().collect { result ->
@@ -45,7 +53,6 @@ class CoffeesViewModel(
       }
     }
   }
-
   fun getAllExperiences(){
     viewModelScope.launch {
       coffeesRepository.getExperiences().collect { result ->
@@ -113,15 +120,18 @@ class CoffeesViewModel(
   }
 
   fun saveExperience(experience: Experience) {
-    viewModelScope.launch {
-      coffeesRepository.saveExperience(experience).collect { saved ->
-        when (saved) {
-          is Res.Success -> added.postValue(saved.items as Boolean)
-          is Res.Failure -> errorSave.postValue(saved.exception)
+
+    firestore.collection("experience").document().set(experience)
+    // viewModelScope.launch {
+    //   coffeesRepository.saveExperience(experience).collect { saved ->
+    //     when (saved) {
+    //       is Res.Success -> added.postValue(saved.items as Boolean)
+    //       is Res.Failure -> errorSave.postValue(saved.exception)
+
         }
-      }
-    }
-  }
+      // }
+    // }
+  // }
 
   fun signIn(email: String, password: String) {
     showLoader.postValue(true)

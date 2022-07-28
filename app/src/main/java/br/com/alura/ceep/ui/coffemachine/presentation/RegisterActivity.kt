@@ -17,6 +17,7 @@ import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 
 class RegisterActivity : AppCompatActivity() {
+
   private lateinit var coffeToolbar: Toolbar
   private lateinit var putPassword: TextInputEditText
   private lateinit var putConfirmPassword: TextInputEditText

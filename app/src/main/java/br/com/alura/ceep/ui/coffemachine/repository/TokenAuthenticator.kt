@@ -12,7 +12,6 @@ class TokenAuthenticator : Authenticator {
     val renewed = renewToken()
     return response.request().newBuilder().header(AUTHORIZATION, renewed).build()
   }
-
   private fun renewToken(): String {
     val task = FirebaseAuth.getInstance().currentUser?.getIdToken(true)
     if (task == null) {

@@ -15,7 +15,6 @@ class AuthInterceptor(val context: Context) : Interceptor {
     } ?: request.newBuilder().addHeader(AUTHORIZATION, INVALID).build()
     return chain.proceed(request)
   }
-
   companion object {
     const val AUTHORIZATION = "Authorization"
     const val INVALID = "Invalid"
