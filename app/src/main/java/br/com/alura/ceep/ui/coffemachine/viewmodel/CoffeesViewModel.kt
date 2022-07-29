@@ -21,7 +21,7 @@ class CoffeesViewModel(
   private val sharedPref: SharedPref
 ) : ViewModel() {
 
-  private lateinit var firestore: FirebaseFirestore
+  private var firestore: FirebaseFirestore
   val showLoader = MutableLiveData<Boolean>()
   val goToHome = MutableLiveData<Boolean>()
   val showError = MutableLiveData<Int>()
@@ -127,8 +127,7 @@ class CoffeesViewModel(
     //     when (saved) {
     //       is Res.Success -> added.postValue(saved.items as Boolean)
     //       is Res.Failure -> errorSave.postValue(saved.exception)
-
-        }
+  }
       // }
     // }
   // }
