@@ -6,14 +6,12 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import br.com.alura.ceep.ui.coffemachine.R
 import br.com.alura.ceep.ui.coffemachine.domain.Coffee
-import br.com.alura.ceep.ui.coffemachine.helpers.PhotoHelper
 import com.squareup.picasso.Picasso
-import org.w3c.dom.Text
 
 class InventoryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-  var image: ImageView = itemView.findViewById(R.id.circular_image)
-  var name: TextView = itemView.findViewById(R.id.name)
+  var image: ImageView = itemView.findViewById(R.id.circular_experience_coffee)
+  var name: TextView = itemView.findViewById(R.id.name_coffee)
   var capsules: TextView = itemView.findViewById(R.id.capsules)
 
   fun bind(coffee: Coffee) {

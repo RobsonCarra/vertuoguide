@@ -21,7 +21,6 @@ import br.com.alura.ceep.ui.coffemachine.exceptions.BadRequestException
 import br.com.alura.ceep.ui.coffemachine.exceptions.NoContentException
 import br.com.alura.ceep.ui.coffemachine.exceptions.NotFoundException
 import br.com.alura.ceep.ui.coffemachine.helpers.AnalyticsHelper
-import br.com.alura.ceep.ui.coffemachine.helpers.CoffeesRoomDataBase
 import br.com.alura.ceep.ui.coffemachine.helpers.RetrofitConfig
 import br.com.alura.ceep.ui.coffemachine.helpers.SharedPref
 import br.com.alura.ceep.ui.coffemachine.repository.CoffeesRepository
@@ -86,7 +85,7 @@ class AddActivity : AppCompatActivity() {
   }
 
   private fun setup() {
-    name = findViewById(R.id.name)
+    name = findViewById(R.id.name_coffee)
     description = findViewById(R.id.description)
     intensity = findViewById(R.id.intensity)
     size = findViewById(R.id.size)

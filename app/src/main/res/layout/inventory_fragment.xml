@@ -55,7 +55,7 @@
       app:layout_constraintBottom_toBottomOf="@+id/coffe_recyclerview_inventory"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/name"
+      app:layout_constraintTop_toBottomOf="@+id/name_coffee"
       />
 
   <TextView
@@ -85,12 +85,12 @@
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintHorizontal_bias="0.0"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/name"
+      app:layout_constraintTop_toBottomOf="@+id/name_coffee"
       tools:itemCount="3"
       tools:listitem="@layout/inventory_item_list"
       />
   <com.google.android.material.textfield.TextInputLayout
-      android:id="@+id/name"
+      android:id="@+id/name_coffee"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_marginEnd="24dp"

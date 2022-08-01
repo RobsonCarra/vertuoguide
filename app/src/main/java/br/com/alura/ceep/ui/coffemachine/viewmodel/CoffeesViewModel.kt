@@ -1,5 +1,7 @@
 package br.com.alura.ceep.ui.coffemachine.viewmodel
 
+import android.content.ContentValues.TAG
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -37,7 +39,6 @@ class CoffeesViewModel(
   val errorSave = MutableLiveData<Exception>()
   val errorByName = MutableLiveData<Exception>()
 
-
   init {
     firestore = FirebaseFirestore.getInstance()
     firestore.firestoreSettings
@@ -54,16 +55,26 @@ class CoffeesViewModel(
     }
   }
   fun getAllExperiences(){
-    viewModelScope.launch {
-      coffeesRepository.getExperiences().collect { result ->
-        when (result) {
-          is Res.Success -> listExperience.postValue(result.items as List<Experience>)
-          is Res.Failure -> error.postValue(result.exception)
+    firestore.collection("experience")
+      .get()
+      .addOnSuccessListener { result ->
+        for (document in result) {
+          Log.d(TAG, "${document.id} => ${document.data}")
+          listExperience.postValue(document.data as List<Experience>)
         }
       }
-    }
+      .addOnFailureListener { exception ->
+        Log.d(TAG, "Error getting documents: ", exception)
+      }
+    // viewModelScope.launch {
+    //   coffeesRepository.getExperiences().collect { result ->
+    //     when (result) {
+    //       is Res.Success -> listExperience.postValue(result.items as List<Experience>)
+    //       is Res.Failure -> error.postValue(result.exception)
+    //     }
+    //   }
+    // }
   }
-
   // fun searchByNameUser(name: String) {
   //   viewModelScope.launch {
   //     coffeesRepository.searchByNameUser(name).collect { result ->

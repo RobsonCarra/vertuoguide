@@ -1,0 +1,4 @@
+br/com/alura/ceep/ui/coffemachine/BuildConfig.java
+ br.com.alura.ceep.ui.coffemachine.BuildConfig
+br/com/alura/ceep/ui/coffemachine/MainActivity.java
+ br.com.alura.ceep.ui.coffemachine.MainActivity

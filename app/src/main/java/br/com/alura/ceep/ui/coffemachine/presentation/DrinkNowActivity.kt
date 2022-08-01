@@ -1,7 +1,6 @@
 package br.com.alura.ceep.ui.coffemachine.presentation
 
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import android.os.SystemClock
 import android.view.View
@@ -11,7 +10,6 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import br.com.alura.ceep.ui.coffemachine.R
@@ -21,7 +19,6 @@ import br.com.alura.ceep.ui.coffemachine.exceptions.BadRequestException
 import br.com.alura.ceep.ui.coffemachine.exceptions.NoContentException
 import br.com.alura.ceep.ui.coffemachine.exceptions.NotFoundException
 import br.com.alura.ceep.ui.coffemachine.helpers.AnalyticsHelper
-import br.com.alura.ceep.ui.coffemachine.helpers.CoffeesRoomDataBase
 import br.com.alura.ceep.ui.coffemachine.helpers.RetrofitConfig
 import br.com.alura.ceep.ui.coffemachine.helpers.SharedPref
 import br.com.alura.ceep.ui.coffemachine.repository.CoffeesRepository
@@ -84,7 +81,7 @@ class DrinkNowActivity : AppCompatActivity() {
   }
 
   private fun setup() {
-    name = findViewById(R.id.name)
+    name = findViewById(R.id.name_coffee)
     description = findViewById(R.id.description)
     intensity = findViewById(R.id.intensity)
     size = findViewById(R.id.size)

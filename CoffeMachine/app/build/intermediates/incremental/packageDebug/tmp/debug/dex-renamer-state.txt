@@ -1,0 +1,4 @@
+#Thu Jul 14 16:34:24 BRT 2022
+base.0=/Users/robsonsimionatocarra/AndroidStudioProjects/vertuoguide/CoffeMachine/app/build/intermediates/dex/debug/mergeDexDebug/classes.dex
+renamed.0=classes.dex
+path.0=classes.dex

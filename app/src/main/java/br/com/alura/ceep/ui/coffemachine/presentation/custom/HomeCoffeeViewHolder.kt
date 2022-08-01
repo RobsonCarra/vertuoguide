@@ -6,7 +6,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import br.com.alura.ceep.ui.coffemachine.R
 import br.com.alura.ceep.ui.coffemachine.domain.Coffee
-import br.com.alura.ceep.ui.coffemachine.helpers.PhotoHelper
 import com.squareup.picasso.Picasso
 
 class HomeCoffeeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -22,7 +21,7 @@ class HomeCoffeeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
   init {
     image = itemView.findViewById(R.id.image_coffe)
     description = itemView.findViewById(R.id.description)
-    name = itemView.findViewById(R.id.name)
+    name = itemView.findViewById(R.id.name_coffee)
     size = itemView.findViewById(R.id.size)
     intensity = itemView.findViewById(R.id.intensity)
     capsules = itemView.findViewById(R.id.capsules)
