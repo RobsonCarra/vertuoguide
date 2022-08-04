@@ -2,6 +2,7 @@ package br.com.alura.ceep.ui.coffemachine.viewmodel
 
 import android.content.ContentValues.TAG
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -14,6 +15,7 @@ import br.com.alura.ceep.ui.coffemachine.helpers.SharedPref
 import br.com.alura.ceep.ui.coffemachine.repository.CoffeesRepository
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.toObject
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
@@ -54,37 +56,49 @@ class CoffeesViewModel(
       }
     }
   }
-  fun getAllExperiences(){
+
+  fun getAllExperiences() {
+    val exp = mutableListOf<Experience>()
     firestore.collection("experience")
       .get()
       .addOnSuccessListener { result ->
-        for (document in result) {
-          Log.d(TAG, "${document.id} => ${document.data}")
-          listExperience.postValue(document.data as List<Experience>)
+        result?.documents?.forEach() { document ->
+          val experience = document.toObject<Experience>()
+          experience?.let {
+            exp.add(it)
+          }
         }
+        // Log.d(TAG, "${document.id} => ${document.data}")
+        listExperience.postValue(exp)
       }
       .addOnFailureListener { exception ->
         Log.d(TAG, "Error getting documents: ", exception)
       }
-    // viewModelScope.launch {
-    //   coffeesRepository.getExperiences().collect { result ->
-    //     when (result) {
-    //       is Res.Success -> listExperience.postValue(result.items as List<Experience>)
-    //       is Res.Failure -> error.postValue(result.exception)
-    //     }
-    //   }
+    // for (document in task.result) {
+    //   val name = document.data["name"].toString()
+    //   places.add(name)
     // }
   }
-  // fun searchByNameUser(name: String) {
-  //   viewModelScope.launch {
-  //     coffeesRepository.searchByNameUser(name).collect { result ->
-  //       when (result) {
-  //         is Res.Success -> coffeeFilteredUser.postValue(result.items as List<Coffee>)
-  //         is Res.Failure -> errorByName.postValue(result.exception)
-  //       }
+
+  // viewModelScope.launch {
+  //   coffeesRepository.getExperiences().collect { result ->
+  //     when (result) {
+  //       is Res.Success -> listExperience.postValue(result.items as List<Experience>)
+  //       is Res.Failure -> error.postValue(result.exception)
   //     }
   //   }
   // }
+
+// fun searchByNameUser(name: String) {
+//   viewModelScope.launch {
+//     coffeesRepository.searchByNameUser(name).collect { result ->
+//       when (result) {
+//         is Res.Success -> coffeeFilteredUser.postValue(result.items as List<Coffee>)
+//         is Res.Failure -> errorByName.postValue(result.exception)
+//       }
+//     }
+//   }
+// }
 
   fun searchByName(typed: String, boolean: Boolean) {
     viewModelScope.launch {
@@ -139,9 +153,9 @@ class CoffeesViewModel(
     //       is Res.Success -> added.postValue(saved.items as Boolean)
     //       is Res.Failure -> errorSave.postValue(saved.exception)
   }
-      // }
-    // }
-  // }
+// }
+// }
+// }
 
   fun signIn(email: String, password: String) {
     showLoader.postValue(true)

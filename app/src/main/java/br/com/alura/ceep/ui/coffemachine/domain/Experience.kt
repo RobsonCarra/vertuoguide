@@ -5,5 +5,5 @@ import android.media.Image
 class Experience(
   var coffeeName: String = "",
   var experienceDescription: String = "",
-  var coffee_image: Image
+  // var coffee_image: Image
 )

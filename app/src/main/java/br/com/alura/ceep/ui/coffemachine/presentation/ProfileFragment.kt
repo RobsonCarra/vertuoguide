@@ -77,6 +77,7 @@ class ProfileFragment : Fragment() {
       startActivityForResult(intent, REQUEST_CODE_PHOTO)
       intent.type = "image/*"
     }
+
     rate.setOnClickListener {
       analyticsHelper.log(AnalyticsHelper.PROFILE_RATE_CLICKED)
       val reviewManager = ReviewManagerFactory.create(requireContext())

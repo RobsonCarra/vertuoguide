@@ -21,7 +21,6 @@ import br.com.alura.ceep.ui.coffemachine.exceptions.BadRequestException
 import br.com.alura.ceep.ui.coffemachine.exceptions.NoContentException
 import br.com.alura.ceep.ui.coffemachine.exceptions.NotFoundException
 import br.com.alura.ceep.ui.coffemachine.helpers.AnalyticsHelper
-import br.com.alura.ceep.ui.coffemachine.helpers.CoffeesRoomDataBase
 import br.com.alura.ceep.ui.coffemachine.helpers.RetrofitConfig
 import br.com.alura.ceep.ui.coffemachine.helpers.SharedPref
 import br.com.alura.ceep.ui.coffemachine.presentation.custom.InventoryAdapter
@@ -92,7 +91,7 @@ class InventoryFragment : Fragment() {
   private fun setup(view: View) {
     putName = view.findViewById(R.id.confirm_password)
     new = view.findViewById(R.id.new_coffee_inventory_btn)
-    recyclerView = view.findViewById(R.id.coffe_recyclerview_inventory)
+    recyclerView = view.findViewById(R.id.coffe_recyclerview_experiences)
     progressBar = view.findViewById(R.id.progress_bar_inventory)
     addCoffeesButton = view.findViewById(R.id.add_coffees_inventory_btn)
     addCoffeesButton.visibility = View.GONE
@@ -127,12 +126,14 @@ class InventoryFragment : Fragment() {
         addCoffeesButton.visibility = View.VISIBLE
       }
     }
+
     viewModel.coffeeFiltered.observe(viewLifecycleOwner, { list ->
       analyticsHelper.log(AnalyticsHelper.INVENTORY_FILTERED)
       inventoryAdapter.list.clear()
       inventoryAdapter.list.addAll(list)
       inventoryAdapter.notifyDataSetChanged()
     })
+
     viewModel.errorByUser.observe(requireActivity()) { exception ->
       analyticsHelper.log(AnalyticsHelper.INVENTORY_ERROR_BY_USER)
       when (exception) {
@@ -158,6 +159,7 @@ class InventoryFragment : Fragment() {
         ).show()
       }
     }
+
     viewModel.errorByName.observe(requireActivity()) { exception ->
       analyticsHelper.log(AnalyticsHelper.INVENTORY_ERROR_BY_NAME)
       when (exception) {
