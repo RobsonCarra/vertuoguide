@@ -1,6 +1,6 @@
 vertuoguide
 ===
-This project aims to implement Android best practices. As this is an approach for beginners, the evolution will be gradual.
+This project aims to implement Android best practices.
 
 The project theme is a catalog for the new Nespresso machine, Vertuo Next. The intention is to help organize inventory and understand the peculiarities of each coffee.
 
